@@ -105,7 +105,7 @@ const LogoComponent = ({ setView }) => {
             <img
                 src={logoUrl}
                 alt="Plus Sim"
-                className="h-10 md:h-12 w-auto object-contain"
+                className="h-32 w-auto object-contain"
             />
         </div>
     );
@@ -212,7 +212,7 @@ export default function App() {
             </div>
 
             {/* CABEÇALHO (BARRA DE MENU BRANCA) */}
-            <nav className="sticky top-0 z-50 bg-white shadow-md py-4">
+            <nav className="sticky top-0 z-50 bg-white shadow-md py-1">
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     <LogoComponent setView={setView} />
                     <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
