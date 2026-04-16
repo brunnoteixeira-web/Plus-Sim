@@ -1,0 +1,463 @@
+import React, { useState, useEffect } from 'react';
+import {
+    Globe,
+    Zap,
+    ShieldCheck,
+    ChevronRight,
+    ChevronLeft,
+    ShoppingCart,
+    Search,
+    Menu,
+    X,
+    Smartphone,
+    Wifi,
+    QrCode,
+    Check,
+    CreditCard,
+    Clock,
+    MapPin,
+    Send,
+    Circle,
+    Star,
+    Facebook,
+    Instagram,
+    MessageCircle,
+    Phone,
+    Mail,
+    Calendar,
+    Minus,
+    Plus,
+    Heart,
+    Award,
+    Users,
+    CheckCircle,
+    Cpu,
+    Package,
+    ArrowRight
+} from 'lucide-react';
+
+// --- CONSTANTES E DADOS ---
+
+const logoUrl = "https://images.canvas.com/2bb7b0af-ecc8-4852-9767-b61eca9a66b9/Plus%20Sim%20para%20site%20PNG.png";
+
+const allProducts = [
+    { id: 1, country: 'Estados Unidos', price: '259', promo: 'Mais vendido', type: 'USA', category: 'eSIM', features: ['Internet ilimitada', 'Ativação automática', '100% Digital via QR', 'Cobertura nacional 5G'] },
+    { id: 2, country: 'Europa', price: '329', promo: null, type: 'EUROPE', category: 'eSIM', features: ['+40 países cobertos', 'Ativação automática', 'eSIM Instantâneo', 'Dados de alta velocidade'] },
+    { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['Cobertura regional', 'Ativação automática', 'Sem troca de chip', 'Ideal para múltiplos países'] },
+    { id: 4, country: 'Mundo', price: '349', promo: 'Global Pass', type: 'WORLD', category: 'eSIM', features: ['+200 países', 'Ativação automática', 'Acesso Global', 'A melhor cobertura'] },
+    { id: 5, country: 'Estados Unidos', price: '299', promo: 'Tradicional', type: 'USA', category: 'Chip Físico', features: ['Internet ilimitada', 'Receba em casa', 'Chip com ligações', 'Cobertura 5G/4G LTE'] },
+    { id: 6, country: 'Europa', price: '369', promo: null, type: 'EUROPE', category: 'Chip Físico', features: ['Vários destinos', 'Entrega via Sedex', 'Chip pronto p/ uso', 'Suporte total'] },
+    { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['Países vizinhos', 'Envio imediato', 'Mantenha o WhatsApp', 'Fácil instalação'] },
+    { id: 8, country: 'Mundo', price: '399', promo: 'Premium', type: 'WORLD', category: 'Chip Físico', features: ['Global tradicional', 'Cobertura em cruzeiros', 'Chip multirrede', 'Máxima estabilidade'] }
+];
+
+const benefits = [
+    { icon: <Package className="w-8 h-8 text-[#A64DFF]" />, title: 'Receba em casa', desc: 'Chip Físico entregue em todo o Brasil antes da sua viagem', badge: 'Entrega padrão gratuita' },
+    { icon: <Smartphone className="w-8 h-8 text-[#00D1FF]" />, title: 'eSIM em 2 horas', desc: 'Receba o QR Code por WhatsApp e ative diretamente no celular', badge: '100% digital' },
+    { icon: <Globe className="w-8 h-8 text-green-500" />, title: '+200 destinos', desc: 'Internet de alta velocidade em praticamente todo o mundo!', badge: '8 anos no mercado' },
+    { icon: <Zap className="w-8 h-8 text-yellow-500" />, title: 'Ativação automática', desc: 'Planos programados para o período da viagem', badge: 'Zero Complicações' },
+    { icon: <CreditCard className="w-8 h-8 text-[#2E5BFF]" />, title: 'Pague em reais', desc: 'PIX com 5% de desconto ou parcele em 12x. Sem IOF.', badge: 'Sem taxa extra' },
+    { icon: <MessageCircle className="w-8 h-8 text-[#00D1FF]" />, title: 'Suporte em português', desc: 'Atendimento pelo WhatsApp 24h por dia.', badge: 'Atendimento humano' }
+];
+
+const testimonials = [
+    { id: 1, name: 'Bárbara Luiza C.', text: 'Chip entregue em casa, meus pais chegaram nos EUA já conectados. Suporte incrível do começo ao fim!', location: 'Estados Unidos' },
+    { id: 2, name: 'André Maciel', text: 'Funcionou perfeitamente em 5 países europeus. Já comprei para a próxima viagem sem pensar duas vezes.', location: 'Europa' },
+    { id: 3, name: 'Naiane Lopes', text: 'Conectei assim que pousou na Argentina. Tirei dúvida pelo WhatsApp e fui atendida na hora. Nota 10!', location: 'América do Sul' },
+    { id: 4, name: 'Carlos Eduardo', text: 'O plano Global Pass salvou minha viagem de negócios por 3 continentes. Conexão estável em todo lado.', location: 'Mundo' },
+    { id: 5, name: 'Juliana Silveira', text: 'Instalei o eSIM em minutos pelo WhatsApp. Cheguei em Orlando já pedindo o Uber. Praticidade nota mil!', location: 'Estados Unidos' },
+    { id: 6, name: 'Ricardo M.', text: 'Melhor cobertura que já tive na Europa. Passei por Portugal, Espanha e França sem perder o sinal.', location: 'Europa' }
+];
+
+const faqItems = [
+    { q: "O meu telemóvel é compatível com eSIM?", a: "A maioria dos smartphones lançados após 2019 (iPhone 11+, Samsung S20+, etc.) são compatíveis." },
+    { q: "Como faço para ativar o plano?", a: "Basta escanear o QR Code que enviamos para o seu WhatsApp e ativar o roaming de dados." },
+    { q: "Posso manter o meu número de WhatsApp?", a: "Sim! O eSIM funciona apenas para dados, o seu WhatsApp e apps continuam vinculados ao seu número original." },
+    { q: "Preciso de internet para instalar o eSIM?", a: "Sim, recomendamos fazer a instalação ainda no Brasil ou via Wi-Fi no hotel para garantir a ativação." },
+    { q: "Quanto tempo demora a entrega do chip físico?", a: "A entrega padrão é gratuita e o prazo varia conforme a sua região, geralmente entre 3 a 7 dias úteis." },
+    { q: "O plano de internet é realmente ilimitado?", a: "Sim, nossos planos para os principais destinos oferecem dados ilimitados para que você use sem preocupações." }
+];
+
+// --- COMPONENTES AUXILIARES ---
+
+const DestinationIcon = ({ type }) => {
+    switch (type) {
+        case 'USA':
+            return (
+                <div className="w-10 h-10 rounded-full overflow-hidden shadow-sm border border-slate-100">
+                    <svg viewBox="0 0 741 390">
+                        <rect width="741" height="390" fill="#bf0a30" /><path d="M0 30h741M0 90h741M0 150h741M0 210h741M0 270h741M0 330h741" stroke="#fff" strokeWidth="30" /><rect width="296.4" height="210" fill="#002868" />
+                        <g fill="#fff"><g id="s18"><g id="s9"><g id="s5"><g id="s1"><path id="star" d="M0-16.5l4.5 14h14.5l-12 8.5 4.5 14-11.5-8.5-11.5 8.5 4.5-14-12-8.5h14.5z" transform="scale(.6)" /></g><use href="#star" x="59.28" /><use href="#star" x="118.56" /><use href="#star" x="177.84" /><use href="#star" x="237.12" /></g><use href="#s5" x="-29.64" y="21" /></g><use href="#s9" y="42" /></g><use href="#s18" y="84" /><use href="#s9" y="168" /></g>
+                    </svg>
+                </div>
+            );
+        case 'EUROPE': return <div className="w-10 h-10 rounded-full bg-[#003399] flex items-center justify-center text-white border border-slate-100 shadow-sm"><Globe size={20} /></div>;
+        case 'SA': return <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center shadow-sm text-white"><Globe size={20} /></div>;
+        case 'WORLD': return <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center shadow-sm text-white"><Globe size={20} /></div>;
+        default: return <Globe size={20} className="text-[#1A2B6D]" />;
+    }
+};
+
+const LogoComponent = ({ setView }) => {
+    return (
+        <div
+            className="flex items-center cursor-pointer"
+            onClick={() => { setView('home'); window.scrollTo(0, 0); }}
+        >
+            <img
+                src={logoUrl}
+                alt="Plus Sim"
+                className="h-10 md:h-12 w-auto object-contain"
+                onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<span class="text-2xl font-black text-[#1A2B6D]">PLUS<span class="text-[#A64DFF]">SIM</span></span>';
+                }}
+            />
+        </div>
+    );
+};
+
+const ProductPage = ({ setView }) => {
+    const [quantity, setQuantity] = useState(1);
+    const [planType, setPlanType] = useState('eSIM');
+    const [days, setDays] = useState('5');
+
+    return (
+        <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500">
+            <div className="max-w-6xl mx-auto px-6">
+                <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Home</span>
+                    <ChevronRight size={12} />
+                    <span className="cursor-pointer hover:text-[#2E5BFF]">Planos Internacionais</span>
+                    <ChevronRight size={12} />
+                    <span className="text-[#1A2B6D]">Estados Unidos</span>
+                </nav>
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                    <div className="lg:sticky lg:top-32">
+                        <div className="relative aspect-[4/3] max-w-md mx-auto lg:mx-0 rounded-[32px] overflow-hidden shadow-xl border border-slate-50 group">
+                            <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&q=80&w=1200" alt="Destino EUA" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <div className="absolute top-4 left-4">
+                                <div className="px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-xl shadow-md flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                    <span className="text-[10px] font-black text-[#1A2B6D]">COBERTURA 5G</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col">
+                        <div className="mb-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F3E8FF] text-[#A64DFF] rounded-full text-[9px] font-black uppercase tracking-widest mb-3"><Zap size={12} fill="currentColor" /> Recomendado para Viagens Curtas</div>
+                            <h1 className="text-3xl md:text-4xl font-black text-[#1A2B6D] mb-4 tracking-tight leading-tight">Plano Estados Unidos</h1>
+                            <p className="text-slate-500 font-medium text-base leading-relaxed mb-6 max-w-lg">O melhor chip internacional para quem viaja para os Estados Unidos. Tenha internet ilimitada com tecnologia 5G em todos os estados americanos.</p>
+                            <div className="flex items-baseline gap-2"><span className="text-slate-400 text-base font-bold">R$</span><span className="text-4xl font-black text-[#1A2B6D] tracking-tighter">259,90</span></div>
+                        </div>
+                        <div className="space-y-4 mb-6 p-6 bg-slate-50 rounded-[28px] border border-slate-100 shadow-sm">
+                            <div><label className="block text-[10px] font-black text-[#1A2B6D] uppercase tracking-widest mb-2">Data de Ativação</label><div className="relative"><Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#2E5BFF]" size={16} /><input type="date" className="w-full bg-white border border-slate-200 rounded-xl py-3 pl-11 pr-4 font-bold text-sm text-[#1A2B6D] outline-none" /></div></div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div><label className="block text-[10px] font-black text-[#1A2B6D] uppercase tracking-widest mb-2">Duração (Dias)</label><div className="relative"><select value={days} onChange={(e) => setDays(e.target.value)} className="w-full bg-white border border-slate-200 rounded-xl py-3 px-3 font-bold text-sm text-[#1A2B6D] outline-none appearance-none"><option value="5">5 Dias</option><option value="10">10 Dias</option><option value="15">15 Dias</option><option value="30">30 Dias</option></select><ChevronRight size={14} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 text-slate-300" /></div></div>
+                                <div><label className="block text-[10px] font-black text-[#1A2B6D] uppercase tracking-widest mb-2">Tipo de Plano</label><div className="relative"><select value={planType} onChange={(e) => setPlanType(e.target.value)} className="w-full bg-white border border-slate-200 rounded-xl py-3 px-3 font-bold text-sm text-[#1A2B6D] outline-none appearance-none"><option value="eSIM">eSIM (Digital)</option><option value="Fisico">Chip Físico</option></select><ChevronRight size={14} className="absolute right-3 top-1/2 -translate-y-1/2 rotate-90 text-slate-300" /></div></div>
+                            </div>
+                            <div><label className="block text-[10px] font-black text-[#1A2B6D] uppercase tracking-widest mb-2">Quantidade</label><div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-1.5 w-fit"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"><Minus size={14} /></button><span className="font-black text-base w-6 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"><Plus size={14} /></button></div></div>
+                        </div>
+                        <div className="mb-8"><button className="w-full max-w-sm bg-[#1A2B6D] hover:bg-[#2E5BFF] text-white py-3.5 rounded-2xl font-black text-sm shadow-lg transition-all flex items-center justify-center gap-3 active:scale-95"><ShoppingCart size={18} /> ADICIONAR AO CARRINHO</button></div>
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 py-6 border-y border-slate-50"><div className="flex items-center gap-2 text-[9px] font-black uppercase text-slate-400"><ShieldCheck size={12} className="text-green-500" /> Compra Segura</div><div className="flex items-center gap-2 text-[9px] font-black uppercase text-slate-400"><CreditCard size={12} className="text-[#2E5BFF]" /> Parcele em 12x</div><div className="flex items-center gap-2 text-[9px] font-black uppercase text-slate-400"><Zap size={12} className="text-[#A64DFF]" /> PIX -5%</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// --- COMPONENTE PRINCIPAL ---
+
+export default function App() {
+    const [view, setView] = useState('home');
+    const [activeCategory, setActiveCategory] = useState('eSIM');
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+    useEffect(() => {
+        // Injeção de estilos customizados para animações
+        const style = document.createElement('style');
+        style.innerHTML = `
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      @keyframes floating {
+        0% { transform: translateY(0px) rotate(1deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+        100% { transform: translateY(0px) rotate(1deg); }
+      }
+      .animate-floating {
+        animation: floating 4s ease-in-out infinite;
+      }
+    `;
+        document.head.appendChild(style);
+
+        return () => {
+            document.head.removeChild(style);
+        };
+    }, []);
+
+    const nextTestimonial = () => {
+        setTestimonialIndex((prev) => (prev + 1) % 4);
+    };
+
+    const prevTestimonial = () => {
+        setTestimonialIndex((prev) => (prev - 1 + 4) % 4);
+    };
+
+    return (
+        <div className="min-h-screen font-sans text-[#1A2B6D]" style={{ backgroundColor: '#F9F5FF' }}>
+
+            {/* BARRA DE VANTAGENS */}
+            <div className="bg-[#1A2B6D] text-white py-2.5 px-4 text-center text-[10px] md:text-xs font-bold tracking-wider relative z-[60]">
+                <div className="max-w-7xl mx-auto flex justify-center items-center gap-6 md:gap-12 overflow-x-auto whitespace-nowrap no-scrollbar">
+                    <span className="flex items-center gap-2"><Zap size={14} className="text-[#A64DFF]" /> PIX COM 5% DE DESCONTO</span>
+                    <span className="flex items-center gap-2"><CreditCard size={14} className="text-[#00D1FF]" /> PARCELE EM ATÉ 12X</span>
+                    <span className="flex items-center gap-2"><Clock size={14} className="text-green-400" /> SUPORTE 24H</span>
+                </div>
+            </div>
+
+            {/* CABEÇALHO (BARRA DE MENU BRANCA) */}
+            <nav className="sticky top-0 z-50 bg-white shadow-md py-4">
+                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                    <LogoComponent setView={setView} />
+                    <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
+                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('eSIM'); setView('home'); }}>Planos eSIM</button>
+                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('Chip Físico'); setView('home'); }}>Planos Chip Físico</button>
+                        <a href="#" className="hover:text-[#2E5BFF] transition-colors">Blog</a>
+                        <div className="h-6 w-px bg-slate-200"></div>
+                        <button className="relative p-2 hover:bg-slate-100 rounded-full text-[#1A2B6D]"><ShoppingCart size={22} /><span className="absolute top-0 right-0 w-4 h-4 bg-[#A64DFF] text-white text-[10px] rounded-full flex items-center justify-center font-bold">0</span></button>
+                    </div>
+                    <button className="md:hidden text-[#1A2B6D]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}</button>
+                </div>
+                {mobileMenuOpen && (
+                    <div className="md:hidden bg-white border-t border-slate-100 absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-2">
+                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('eSIM'); setMobileMenuOpen(false); setView('home'); }}>Planos eSIM</button>
+                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('Chip Físico'); setMobileMenuOpen(false); setView('home'); }}>Planos Chip Físico</button>
+                        <a href="#" className="font-bold text-[#1A2B6D]">Blog</a>
+                    </div>
+                )}
+            </nav>
+
+            {view === 'home' ? (
+                <>
+                    {/* BANNER PRINCIPAL COM NOVA IMAGEM E SEM BOTÕES */}
+                    <section className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden">
+                        <div className="absolute inset-0 z-0">
+                            <img
+                                src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f5?q=80&w=2074&auto=format&fit=crop"
+                                alt="Airplane Background"
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#3D1E93]/85 via-[#3D1E93]/70 to-transparent"></div>
+                        </div>
+
+                        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-10 text-white w-full">
+                            <div className="md:col-span-7 text-center md:text-left">
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6 text-xs font-bold uppercase tracking-widest">
+                                    <Check size={14} className="text-[#00D1FF]" /> Viaje Conectado
+                                </div>
+
+                                <h1 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 tracking-tighter">
+                                    Sua internet <br /> global <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D1FF] via-[#2E5BFF] to-[#A64DFF]">sem fronteiras.</span>
+                                </h1>
+
+                                <p className="text-lg md:text-xl text-white/90 mb-6 max-w-xl font-medium leading-relaxed">
+                                    Chegue ao seu destino conectado! Internet 5G ilimitada nos EUA, Europa, Ásia e em mais 200 destinos.
+                                </p>
+                            </div>
+
+                            {/* CARD DE STATUS */}
+                            <div className="md:col-span-5 flex justify-center md:justify-end">
+                                <div className="relative w-full max-w-[340px] aspect-square bg-white/15 backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 flex flex-col justify-between shadow-2xl animate-floating transform md:rotate-1">
+                                    <div className="flex justify-between items-start">
+                                        <Wifi size={32} className="text-white/80" strokeWidth={1.5} />
+                                        <div className="flex items-center gap-2 px-3 py-1 bg-[#4ADE80]/20 text-[#4ADE80] rounded-full text-[10px] font-black uppercase tracking-widest border border-[#4ADE80]/30 backdrop-blur-md">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-pulse"></div> ONLINE
+                                        </div>
+                                    </div>
+
+                                    <div className="py-8">
+                                        <div className="text-7xl font-black tracking-tighter mb-1">5G</div>
+                                        <div className="text-xs font-bold uppercase tracking-[0.2em] opacity-80 text-[#00D1FF]">Ultra Velocidade</div>
+                                    </div>
+
+                                    <div className="flex items-center gap-5 pt-8 border-t border-white/10">
+                                        <div className="w-14 h-10 bg-gradient-to-br from-[#E2B04E] via-[#FFD700] to-[#B8860B] rounded-lg shadow-lg relative overflow-hidden flex-shrink-0 border border-black/10">
+                                            <div className="absolute inset-1.5 border border-black/10 rounded-sm opacity-40">
+                                                <div className="absolute top-0 bottom-0 left-1/2 w-px bg-black/40"></div>
+                                                <div className="absolute left-0 right-0 top-1/2 h-px bg-black/40"></div>
+                                            </div>
+                                            <div className="absolute -top-10 -left-10 w-20 h-40 bg-white/20 rotate-45 pointer-events-none"></div>
+                                        </div>
+                                        <div>
+                                            <div className="text-[10px] font-bold uppercase opacity-60 tracking-widest mb-0.5">Status do SIM</div>
+                                            <div className="text-sm font-black uppercase tracking-tight text-white">Pronto para uso</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* DESTINOS */}
+                    <section className="py-24 bg-white relative overflow-hidden">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="flex flex-col items-center mb-16 gap-6">
+                                <h2 className="text-4xl md:text-5xl font-black text-[#1A2B6D] tracking-tighter text-center">Escolha o seu Destino</h2>
+                                <div className="flex bg-slate-50 p-1.5 rounded-[22px] border border-slate-100 shadow-inner">
+                                    <button onClick={() => setActiveCategory('eSIM')} className={`px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center gap-2 ${activeCategory === 'eSIM' ? 'bg-white text-[#2E5BFF] shadow-lg' : 'text-slate-400'}`}><QrCode size={16} /> eSIM</button>
+                                    <button onClick={() => setActiveCategory('Chip Físico')} className={`px-8 py-3.5 rounded-xl font-black text-xs uppercase transition-all flex items-center gap-2 ${activeCategory === 'Chip Físico' ? 'bg-white text-[#2E5BFF] shadow-lg' : 'text-slate-400'}`}><Smartphone size={16} /> Chip Físico</button>
+                                </div>
+                            </div>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                {allProducts.filter(p => p.category === activeCategory).map((p) => {
+                                    const isPromo = p.promo === 'Mais vendido';
+                                    return (
+                                        <div key={p.id} onClick={() => { setView('product'); window.scrollTo(0, 0); }} className="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-200 hover:shadow-2xl">
+                                            <div className="flex justify-between items-start mb-6"><DestinationIcon type={p.type} />{p.promo && <div className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm ${isPromo ? 'bg-[#00D1FF]/10 text-[#00D1FF]' : 'bg-[#A64DFF]/10 text-[#A64DFF]'}`}>{p.promo}</div>}</div>
+                                            <div className="mb-6"><h3 className="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{p.country}</h3><p className="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span className="text-[#1A2B6D] font-black text-xl">R${p.price}</span></p></div>
+                                            <ul className="space-y-4 mb-10 flex-grow">{p.features.map((f, i) => (<li key={i} className="flex items-start gap-3"><Check size={18} className="text-[#00D1FF]" /><span className="text-slate-600 text-sm font-medium">{f}</span></li>))}</ul>
+                                            <button className="w-full py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</button>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* BENEFÍCIOS */}
+                    <section className="py-24 bg-[#0B1221] text-white text-center">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="mb-20">
+                                <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">Por que escolher a PlusSim?</h2>
+                                <p className="text-slate-400 text-lg font-medium">
+                                    Não somos apenas um plano de internet. Somos o seu parceiro de viagem!
+                                </p>
+                            </div>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">{benefits.map((b, i) => (<div key={i} className="bg-[#151F32] p-10 rounded-[40px] border border-white/5 transition-all group hover:border-[#00D1FF]/30 hover:bg-[#1a263a]"><div className="mb-6">{b.icon}</div><h4 className="text-2xl font-black mb-4 tracking-tight">{b.title}</h4><p className="text-slate-400 font-medium leading-relaxed mb-8">{b.desc}</p><div className="inline-block px-4 py-1.5 bg-[#00D1FF]/10 text-[#00D1FF] rounded-full text-[10px] font-black uppercase tracking-widest border border-[#00D1FF]/20">{b.badge}</div></div>))}</div>
+                        </div>
+                    </section>
+
+                    {/* DEPOIMENTOS */}
+                    <section className="py-24 bg-white text-center relative overflow-hidden">
+                        <div className="max-w-7xl mx-auto px-6 relative">
+                            <div className="mb-16 flex flex-col md:flex-row md:justify-between items-center gap-6">
+                                <div className="text-center md:text-left"><h2 className="text-4xl md:text-5xl font-black text-[#1A2B6D] mb-4 tracking-tighter">O que nossos clientes dizem</h2><p className="text-slate-500 text-lg font-medium opacity-70">Mais de 8 anos conectando brasileiros ao redor do mundo</p></div>
+                                <div className="flex gap-3 relative z-20">
+                                    <button onClick={prevTestimonial} className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all shadow-md active:scale-90"><ChevronLeft size={24} strokeWidth={3} /></button>
+                                    <button onClick={nextTestimonial} className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all shadow-md active:scale-90"><ChevronRight size={24} strokeWidth={3} /></button>
+                                </div>
+                            </div>
+                            <div className="relative overflow-hidden px-1 py-4">
+                                <div className="flex transition-transform duration-500 ease-out gap-6" style={{ transform: `translateX(-${testimonialIndex * (100 / (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 3))}%)` }}>
+                                    {testimonials.map((t) => (
+                                        <div key={t.id} className="min-w-full md:min-w-[calc(33.333%-16px)] bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-md transition-all flex flex-col text-left h-full">
+                                            <div className="flex text-yellow-400 gap-0.5 mb-6"><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /></div>
+                                            <p className="text-[#1A2B6D] font-medium leading-relaxed mb-8 flex-grow italic text-sm md:text-base">"{t.text}"</p>
+                                            <div><h5 className="font-black text-[#1A2B6D] text-base mb-2">{t.name}</h5><div className="inline-block px-3 py-1 bg-[#F3E8FF] text-[#A64DFF] rounded-full text-[10px] font-black uppercase tracking-widest">{t.location}</div></div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="mt-10 flex justify-center gap-2">
+                                {[0, 1, 2, 3].map((dot) => (<button key={dot} onClick={() => setTestimonialIndex(dot)} className={`h-2 rounded-full transition-all duration-300 ${testimonialIndex === dot ? 'w-8 bg-[#A64DFF]' : 'w-2 bg-slate-200 hover:bg-slate-300'}`} />))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* FAQ */}
+                    <section className="py-24 bg-[#F9F5FF] text-center">
+                        <div className="max-w-4xl mx-auto px-6">
+                            <div className="mb-12"><h2 className="text-4xl font-black text-[#1A2B6D] mb-4 tracking-tighter text-center">Dúvidas Frequentes</h2><p className="text-slate-500 font-medium">Tudo o que você precisa saber sobre os planos internacionais da PlusSim</p></div>
+                            <div className="grid gap-3 text-left">
+                                {faqItems.map((f, i) => (
+                                    <div key={i} className="bg-white p-5 rounded-2xl border border-[#E0D4FF] hover:border-[#A64DFF] transition-all cursor-pointer group shadow-sm">
+                                        <div className="flex justify-between items-center"><span className="font-bold text-[#1A2B6D] text-base md:text-lg leading-tight">{f.q}</span><div className="w-6 h-6 rounded-full bg-[#F3E8FF] text-[#A64DFF] group-hover:bg-[#A64DFF] group-hover:text-white transition-all flex-shrink-0 flex items-center justify-center"><ChevronRight size={16} /></div></div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="mt-16 p-10 bg-white rounded-[40px] border border-[#E0D4FF] shadow-xl flex flex-col items-center gap-6">
+                                <h3 className="text-2xl font-black text-[#1A2B6D]">Ainda com dúvidas?</h3>
+                                <p className="text-slate-500 font-medium -mt-2 text-center">Nossa equipe está pronta para te ajudar em tempo real.</p>
+                                <a href="#" className="bg-[#25D366] hover:bg-[#128C7E] text-white px-10 py-4 rounded-2xl font-black text-lg flex items-center gap-3 shadow-lg transition-all hover:scale-105 active:scale-95"><MessageCircle size={24} fill="currentColor" /> Fale Conosco</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* SOBRE NÓS */}
+                    <section className="py-24 bg-white relative overflow-hidden border-t border-slate-100">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid lg:grid-cols-2 gap-16 items-center">
+                                <div className="order-2 lg:order-1">
+                                    <h2 className="text-4xl md:text-5xl font-black text-[#1A2B6D] mb-8 tracking-tighter">Sobre nós</h2>
+                                    <div className="space-y-6 text-slate-500 text-lg leading-relaxed font-medium">
+                                        <p className="text-[#1A2B6D] font-bold text-xl leading-relaxed">Viajar é descobrir o novo; e sabemos que estar conectado traz a segurança necessária para explorar o mundo com liberdade!</p>
+                                        <p>A <span className="text-[#A64DFF] font-black">Plus Sim</span> está há mais de 8 anos acompanhando e conectando pessoas ao redor do mundo, em mais de 200 destinos, unindo a melhor cobertura de internet a um suporte que fala a sua língua.</p>
+                                        <p>Não entregamos apenas um chip ou um eSIM; entregamos a tranquilidade de saber que desde o primeiro contato e até o fim da sua viagem, a Plus Sim estará ao seu lado.</p>
+                                    </div>
+                                    <div className="mt-12 bg-slate-50 p-6 md:p-8 rounded-[32px] border border-slate-100 shadow-sm">
+                                        {/* GRID DE ESTATÍSTICAS AJUSTADO COM whitespace-nowrap E flex-row */}
+                                        <div className="grid grid-cols-3 items-center">
+                                            <div className="flex items-center gap-2 md:gap-3 text-left px-2 md:px-4">
+                                                <div className="w-10 h-10 bg-[#F3E8FF] rounded-xl flex items-center justify-center text-[#A64DFF] shadow-sm flex-shrink-0"><Award size={20} /></div>
+                                                <div>
+                                                    <div className="text-sm md:text-lg font-black text-[#1A2B6D] leading-tight whitespace-nowrap">8+ Anos</div>
+                                                    <div className="text-[8px] md:text-[10px] font-bold uppercase text-slate-400 tracking-wider">Existência</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2 md:gap-3 text-left px-2 md:px-4 border-l border-slate-200">
+                                                <div className="w-10 h-10 bg-[#DCFCE7] rounded-xl flex items-center justify-center text-green-600 shadow-sm flex-shrink-0"><Users size={20} /></div>
+                                                <div>
+                                                    <div className="text-sm md:text-lg font-black text-[#1A2B6D] leading-tight whitespace-nowrap">100.000+</div>
+                                                    <div className="text-[8px] md:text-[10px] font-bold uppercase text-slate-400 tracking-wider">Clientes</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2 md:gap-3 text-left px-2 md:px-4 border-l border-slate-200">
+                                                <div className="w-10 h-10 bg-[#E0F2FE] rounded-xl flex items-center justify-center text-[#2E5BFF] shadow-sm flex-shrink-0"><Globe size={20} /></div>
+                                                <div>
+                                                    <div className="text-sm md:text-lg font-black text-[#1A2B6D] leading-tight whitespace-nowrap">200+</div>
+                                                    <div className="text-[8px] md:text-[10px] font-bold uppercase text-slate-400 tracking-wider">Destinos</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="order-1 lg:order-2">
+                                    <div className="relative">
+                                        <div className="absolute -inset-4 bg-gradient-to-br from-[#00D1FF] to-[#A64DFF] rounded-[50px] blur-2xl opacity-10"></div>
+                                        <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
+                                            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=80&w=1200" alt="Viajantes felizes" className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A2B6D]/60 to-transparent"></div>
+                                            <div className="absolute bottom-8 left-8 right-8 text-white">
+                                                <div className="flex items-center gap-2 mb-2"><CheckCircle size={20} className="text-[#00D1FF]" /><span className="text-xs font-black uppercase tracking-[0.2em]">Nossa Missão</span></div>
+                                                <div className="text-xl font-black text-white">Conectar você à liberdade em qualquer lugar do mundo.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </>
+            ) : (
+                <ProductPage setView={setView} />
+            )}
+
+            {/* RODAPÉ */}
+            <footer className="bg-[#1A2B6D] text-slate-400 py-16 mt-auto">
+                <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <div className="mb-6"><LogoComponent setView={setView} /></div>
+                        <p className="text-sm leading-relaxed font-medium mb-6 max-w-xs">Conectividade em alta velocidade para viajantes brasileiros. Sem fronteiras, sem complicações.</p>
+                        <div className="flex gap-4"><a href="#" className="hover:text-white transition-all"><Facebook size={20} /></a><a href="#" className="hover:text-white transition-all"><Instagram size={20} /></a></div>
+                    </div>
+                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setActiveCategory('eSIM'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setActiveCategory('Chip Físico'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Termos e Condições</a></li><li><a href="#" className="hover:text-[#00D1FF]">Privacidade</a></li></ul></div>
+                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Contato</h5><ul className="space-y-4 text-sm font-bold"><li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={18} className="text-[#00D1FF]" /> <span>(11) 99999-9999</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Phone size={18} className="text-[#00D1FF] font-bold" /> <span>(11) 4004-0000</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Mail size={18} className="text-[#00D1FF]" /> <span>contato@plussim.com.br</span></li><li className="flex items-start justify-center md:justify-start gap-3 leading-tight"><MapPin size={18} className="text-[#00D1FF] flex-shrink-0" /> <span className="text-white/70 text-xs">Av. Paulista, 1000 - Bela Vista, SP</span></li></ul></div>
+                </div>
+                <div className="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-white/5 text-center text-[9px] uppercase tracking-[0.3em] font-black opacity-30">© 2024 PLUS SIM - TECNOLOGIA ESIM GLOBAL</div>
+            </footer>
+        </div>
+    );
+}
