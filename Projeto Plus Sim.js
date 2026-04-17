@@ -107,7 +107,7 @@ const LogoComponent = ({ setView }) => {
             <img
                 src={logoUrl}
                 alt="Plus Sim"
-                className="h-10 md:h-12 w-auto object-contain"
+                className="h-16 md:h-32 w-auto object-contain"
                 onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.parentElement.innerHTML = '<span class="text-2xl font-black text-[#1A2B6D]">PLUS<span class="text-[#A64DFF]">SIM</span></span>';
@@ -218,12 +218,13 @@ export default function App() {
             </div>
 
             {/* CABEÇALHO (BARRA DE MENU BRANCA) */}
-            <nav className="sticky top-0 z-50 bg-white shadow-md py-4">
+            <nav className="sticky top-0 z-50 bg-white shadow-md py-1">
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     <LogoComponent setView={setView} />
                     <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('eSIM'); setView('home'); }}>Planos eSIM</button>
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('Chip Físico'); setView('home'); }}>Planos Chip Físico</button>
+                        <a href="#" className="hover:text-[#2E5BFF] transition-colors">Compatibilidade eSIM</a>
                         <a href="#" className="hover:text-[#2E5BFF] transition-colors">Blog</a>
                         <div className="h-6 w-px bg-slate-200"></div>
                         <button className="relative p-2 hover:bg-slate-100 rounded-full text-[#1A2B6D]"><ShoppingCart size={22} /><span className="absolute top-0 right-0 w-4 h-4 bg-[#A64DFF] text-white text-[10px] rounded-full flex items-center justify-center font-bold">0</span></button>
@@ -234,6 +235,7 @@ export default function App() {
                     <div className="md:hidden bg-white border-t border-slate-100 absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-2">
                         <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('eSIM'); setMobileMenuOpen(false); setView('home'); }}>Planos eSIM</button>
                         <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('Chip Físico'); setMobileMenuOpen(false); setView('home'); }}>Planos Chip Físico</button>
+                        <a href="#" className="font-bold text-[#1A2B6D]">Compatibilidade eSIM</a>
                         <a href="#" className="font-bold text-[#1A2B6D]">Blog</a>
                     </div>
                 )}

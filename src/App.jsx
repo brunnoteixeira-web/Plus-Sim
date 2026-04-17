@@ -19,6 +19,8 @@ import {
     Send,
     Circle,
     Star,
+    Facebook,
+    Instagram,
     MessageCircle,
     Phone,
     Mail,
@@ -36,7 +38,7 @@ import {
 
 // --- CONSTANTES E DADOS ---
 
-const logoUrl = "/logo.png";
+const logoUrl = "https://images.canvas.com/2bb7b0af-ecc8-4852-9767-b61eca9a66b9/Plus%20Sim%20para%20site%20PNG.png";
 
 const allProducts = [
     { id: 1, country: 'Estados Unidos', price: '259', promo: 'Mais vendido', type: 'USA', category: 'eSIM', features: ['Internet ilimitada', 'Ativação automática', '100% Digital via QR', 'Cobertura nacional 5G'] },
@@ -105,7 +107,11 @@ const LogoComponent = ({ setView }) => {
             <img
                 src={logoUrl}
                 alt="Plus Sim"
-                className="h-32 w-auto object-contain"
+                className="h-16 md:h-32 w-auto object-contain"
+                onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<span class="text-2xl font-black text-[#1A2B6D]">PLUS<span class="text-[#A64DFF]">SIM</span></span>';
+                }}
             />
         </div>
     );
@@ -218,6 +224,7 @@ export default function App() {
                     <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('eSIM'); setView('home'); }}>Planos eSIM</button>
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('Chip Físico'); setView('home'); }}>Planos Chip Físico</button>
+                        <a href="#" className="hover:text-[#2E5BFF] transition-colors">Compatibilidade eSIM</a>
                         <a href="#" className="hover:text-[#2E5BFF] transition-colors">Blog</a>
                         <div className="h-6 w-px bg-slate-200"></div>
                         <button className="relative p-2 hover:bg-slate-100 rounded-full text-[#1A2B6D]"><ShoppingCart size={22} /><span className="absolute top-0 right-0 w-4 h-4 bg-[#A64DFF] text-white text-[10px] rounded-full flex items-center justify-center font-bold">0</span></button>
@@ -228,6 +235,7 @@ export default function App() {
                     <div className="md:hidden bg-white border-t border-slate-100 absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-2">
                         <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('eSIM'); setMobileMenuOpen(false); setView('home'); }}>Planos eSIM</button>
                         <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('Chip Físico'); setMobileMenuOpen(false); setView('home'); }}>Planos Chip Físico</button>
+                        <a href="#" className="font-bold text-[#1A2B6D]">Compatibilidade eSIM</a>
                         <a href="#" className="font-bold text-[#1A2B6D]">Blog</a>
                     </div>
                 )}
@@ -445,7 +453,7 @@ export default function App() {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="mb-6"><LogoComponent setView={setView} /></div>
                         <p className="text-sm leading-relaxed font-medium mb-6 max-w-xs">Conectividade em alta velocidade para viajantes brasileiros. Sem fronteiras, sem complicações.</p>
-                        <div className="flex gap-4"><a href="#" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="#" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a></div>
+                        <div className="flex gap-4"><a href="#" className="hover:text-white transition-all"><Facebook size={20} /></a><a href="#" className="hover:text-white transition-all"><Instagram size={20} /></a></div>
                     </div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setActiveCategory('eSIM'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setActiveCategory('Chip Físico'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Termos e Condições</a></li><li><a href="#" className="hover:text-[#00D1FF]">Privacidade</a></li></ul></div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Contato</h5><ul className="space-y-4 text-sm font-bold"><li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={18} className="text-[#00D1FF]" /> <span>(11) 99999-9999</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Phone size={18} className="text-[#00D1FF] font-bold" /> <span>(11) 4004-0000</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Mail size={18} className="text-[#00D1FF]" /> <span>contato@plussim.com.br</span></li><li className="flex items-start justify-center md:justify-start gap-3 leading-tight"><MapPin size={18} className="text-[#00D1FF] flex-shrink-0" /> <span className="text-white/70 text-xs">Av. Paulista, 1000 - Bela Vista, SP</span></li></ul></div>
