@@ -19,8 +19,6 @@ import {
     Send,
     Circle,
     Star,
-    Facebook,
-    Instagram,
     MessageCircle,
     Phone,
     Mail,
@@ -38,7 +36,7 @@ import {
 
 // --- CONSTANTES E DADOS ---
 
-const logoUrl = "https://images.canvas.com/2bb7b0af-ecc8-4852-9767-b61eca9a66b9/Plus%20Sim%20para%20site%20PNG.png";
+const logoUrl = "/logo.png";
 
 const allProducts = [
     { id: 1, country: 'Estados Unidos', price: '259', promo: 'Mais vendido', type: 'USA', category: 'eSIM', features: ['Internet ilimitada', 'Ativação automática', '100% Digital via QR', 'Cobertura nacional 5G'] },
@@ -107,7 +105,7 @@ const LogoComponent = ({ setView }) => {
             <img
                 src={logoUrl}
                 alt="Plus Sim"
-                className="h-16 md:h-32 w-auto object-contain"
+                className="h-[80px] md:h-[120px] w-auto object-contain"
                 onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.parentElement.innerHTML = '<span class="text-2xl font-black text-[#1A2B6D]">PLUS<span class="text-[#A64DFF]">SIM</span></span>';
@@ -218,8 +216,8 @@ export default function App() {
             </div>
 
             {/* CABEÇALHO (BARRA DE MENU BRANCA) */}
-            <nav className="sticky top-0 z-50 bg-white shadow-md py-1">
-                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <nav className="sticky top-0 z-50 bg-white shadow-md py-0">
+                <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
                     <LogoComponent setView={setView} />
                     <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('eSIM'); setView('home'); }}>Planos eSIM</button>
@@ -247,11 +245,11 @@ export default function App() {
                     <section className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden">
                         <div className="absolute inset-0 z-0">
                             <img
-                                src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f5?q=80&w=2074&auto=format&fit=crop"
+                                src="/airplane background.jpg"
                                 alt="Airplane Background"
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#3D1E93]/85 via-[#3D1E93]/70 to-transparent"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#4b209c] via-[#5A2B99]/80 to-[#6E3BB2]/20 backdrop-blur-[2px]"></div>
                         </div>
 
                         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-10 text-white w-full">
@@ -262,7 +260,7 @@ export default function App() {
 
                                 <h1 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 tracking-tighter">
                                     Sua internet <br /> global <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D1FF] via-[#2E5BFF] to-[#A64DFF]">sem fronteiras.</span>
+                                    <span className="text-[#93C5FD]">sem fronteiras.</span>
                                 </h1>
 
                                 <p className="text-lg md:text-xl text-white/90 mb-6 max-w-xl font-medium leading-relaxed">
@@ -272,7 +270,7 @@ export default function App() {
 
                             {/* CARD DE STATUS */}
                             <div className="md:col-span-5 flex justify-center md:justify-end">
-                                <div className="relative w-full max-w-[340px] aspect-square bg-white/15 backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 flex flex-col justify-between shadow-2xl animate-floating transform md:rotate-1">
+                                <div className="relative w-full max-w-[340px] aspect-square bg-[#A66DFF]/20 backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 flex flex-col justify-between shadow-2xl animate-floating">
                                     <div className="flex justify-between items-start">
                                         <Wifi size={32} className="text-white/80" strokeWidth={1.5} />
                                         <div className="flex items-center gap-2 px-3 py-1 bg-[#4ADE80]/20 text-[#4ADE80] rounded-full text-[10px] font-black uppercase tracking-widest border border-[#4ADE80]/30 backdrop-blur-md">
@@ -453,7 +451,7 @@ export default function App() {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="mb-6"><LogoComponent setView={setView} /></div>
                         <p className="text-sm leading-relaxed font-medium mb-6 max-w-xs">Conectividade em alta velocidade para viajantes brasileiros. Sem fronteiras, sem complicações.</p>
-                        <div className="flex gap-4"><a href="#" className="hover:text-white transition-all"><Facebook size={20} /></a><a href="#" className="hover:text-white transition-all"><Instagram size={20} /></a></div>
+                        <div className="flex gap-4"><a href="#" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="#" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a></div>
                     </div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setActiveCategory('eSIM'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setActiveCategory('Chip Físico'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Termos e Condições</a></li><li><a href="#" className="hover:text-[#00D1FF]">Privacidade</a></li></ul></div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Contato</h5><ul className="space-y-4 text-sm font-bold"><li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={18} className="text-[#00D1FF]" /> <span>(11) 99999-9999</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Phone size={18} className="text-[#00D1FF] font-bold" /> <span>(11) 4004-0000</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Mail size={18} className="text-[#00D1FF]" /> <span>contato@plussim.com.br</span></li><li className="flex items-start justify-center md:justify-start gap-3 leading-tight"><MapPin size={18} className="text-[#00D1FF] flex-shrink-0" /> <span className="text-white/70 text-xs">Av. Paulista, 1000 - Bela Vista, SP</span></li></ul></div>
