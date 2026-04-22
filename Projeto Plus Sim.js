@@ -79,20 +79,61 @@ const faqItems = [
 // --- COMPONENTES AUXILIARES ---
 
 const DestinationIcon = ({ type }) => {
+    const iconClass = "w-6 h-6 transition-all duration-500 scale-110 drop-shadow-sm";
+    const wrapperClass = "w-12 h-12 rounded-full shadow-sm border border-[#2E5BFF]/20 flex items-center justify-center bg-[#F9F5FF] text-[#2E5BFF] flex-shrink-0 transition-all duration-500 group-hover:bg-[#2E5BFF] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(46,91,255,0.4)]";
+
     switch (type) {
         case 'USA':
             return (
-                <div className="w-10 h-10 rounded-full overflow-hidden shadow-sm border border-slate-100">
-                    <svg viewBox="0 0 741 390">
-                        <rect width="741" height="390" fill="#bf0a30" /><path d="M0 30h741M0 90h741M0 150h741M0 210h741M0 270h741M0 330h741" stroke="#fff" strokeWidth="30" /><rect width="296.4" height="210" fill="#002868" />
-                        <g fill="#fff"><g id="s18"><g id="s9"><g id="s5"><g id="s1"><path id="star" d="M0-16.5l4.5 14h14.5l-12 8.5 4.5 14-11.5-8.5-11.5 8.5 4.5-14-12-8.5h14.5z" transform="scale(.6)" /></g><use href="#star" x="59.28" /><use href="#star" x="118.56" /><use href="#star" x="177.84" /><use href="#star" x="237.12" /></g><use href="#s5" x="-29.64" y="21" /></g><use href="#s9" y="42" /></g><use href="#s18" y="84" /><use href="#s9" y="168" /></g>
+                <div className={wrapperClass}>
+                    <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
+                        <path d="M 12 34 L 28 35 L 36 38 L 48 37 L 62 39 L 78 34 L 88 40 L 85 56 L 81 64 L 79 72 L 85 85 L 80 88 L 74 76 L 62 76 L 50 82 L 40 85 L 35 88 L 25 86 L 15 88 L 10 75 L 12 60 L 8 45 Z" />
                     </svg>
                 </div>
             );
-        case 'EUROPE': return <div className="w-10 h-10 rounded-full bg-[#003399] flex items-center justify-center text-white border border-slate-100 shadow-sm"><Globe size={20} /></div>;
-        case 'SA': return <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center shadow-sm text-white"><Globe size={20} /></div>;
-        case 'WORLD': return <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center shadow-sm text-white"><Globe size={20} /></div>;
-        default: return <Globe size={20} className="text-[#1A2B6D]" />;
+        case 'EUROPE':
+            return (
+                <div className={wrapperClass}>
+                    <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
+                        <path d="M 30 85 L 20 70 L 25 50 L 40 45 L 35 30 L 45 25 L 55 10 L 65 10 C 65 10, 60 25, 55 35 L 55 45 L 75 40 L 95 50 L 90 70 C 90 70, 75 75, 70 70 L 80 85 L 75 90 C 75 90, 65 80, 60 80 L 50 95 L 40 95 Z" />
+                        <path d="M 20 40 L 28 30 L 30 45 Z" />
+                    </svg>
+                </div>
+            );
+        case 'SA':
+            return (
+                <div className={wrapperClass}>
+                    <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
+                        <path d="M 35 15 C 45 10 55 12 65 18 L 85 45 C 80 50 78 65 65 75 L 45 95 C 42 90 38 75 35 60 L 25 40 C 22 30 25 20 35 15 Z" />
+                    </svg>
+                </div>
+            );
+        case 'WORLD':
+            return (
+                <div className={wrapperClass}>
+                    <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" className={iconClass}>
+                        {/* North America */}
+                        <path d="M 12 28 L 22 20 L 32 22 L 35 30 L 28 42 L 18 38 L 12 28 Z" />
+                        <path d="M 28 44 L 33 45 L 30 50 L 25 50 Z" />
+                        {/* South America */}
+                        <path d="M 30 53 L 40 53 L 36 78 L 28 65 Z" />
+                        {/* Europe */}
+                        <path d="M 42 30 L 52 24 L 58 24 L 56 34 L 46 36 L 42 30 Z" />
+                        {/* Africa */}
+                        <path d="M 45 42 L 58 40 L 64 52 L 54 75 L 44 60 L 45 42 Z" />
+                        {/* Asia */}
+                        <path d="M 58 22 L 75 18 L 88 28 L 82 45 L 72 45 L 68 35 L 56 32 Z" />
+                        {/* Oceania */}
+                        <path d="M 78 60 L 92 64 L 88 74 L 75 70 Z" />
+                        {/* Pontos de ilhas (Japão, Indonésia, Caribe/Groenlândia) para detalhe premium */}
+                        <circle cx="85" cy="35" r="1" />
+                        <circle cx="72" cy="54" r="1" />
+                        <circle cx="36" cy="38" r="1.5" />
+                        <circle cx="28" cy="15" r="1.5" />
+                    </svg>
+                </div>
+            );
+        default: return <div className={wrapperClass}><Globe size={24} /></div>;
     }
 };
 
@@ -306,9 +347,9 @@ export default function App() {
                         <div className="max-w-7xl mx-auto px-6">
                             <div className="flex flex-col items-center mb-16 gap-6">
                                 <h2 className="text-4xl md:text-5xl font-black text-[#1A2B6D] tracking-tighter text-center">Escolha o seu Destino</h2>
-                                <div className="flex bg-slate-50 p-1.5 rounded-[22px] border border-slate-100 shadow-inner">
-                                    <button onClick={() => setActiveCategory('eSIM')} className={`px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center gap-2 ${activeCategory === 'eSIM' ? 'bg-white text-[#2E5BFF] shadow-lg' : 'text-slate-400'}`}><QrCode size={16} /> eSIM</button>
-                                    <button onClick={() => setActiveCategory('Chip Físico')} className={`px-8 py-3.5 rounded-xl font-black text-xs uppercase transition-all flex items-center gap-2 ${activeCategory === 'Chip Físico' ? 'bg-white text-[#2E5BFF] shadow-lg' : 'text-slate-400'}`}><Smartphone size={16} /> Chip Físico</button>
+                                <div className="flex bg-slate-100 p-2 rounded-[24px] border border-slate-200 shadow-inner">
+                                    <button onClick={() => setActiveCategory('eSIM')} className={`px-8 py-3.5 rounded-[18px] font-black text-xs uppercase tracking-widest transition-all flex items-center gap-2 ${activeCategory === 'eSIM' ? 'bg-[#2E5BFF] text-white shadow-lg shadow-[#2E5BFF]/30' : 'text-slate-500 hover:text-slate-800'}`}><QrCode size={16} /> eSIM</button>
+                                    <button onClick={() => setActiveCategory('Chip Físico')} className={`px-8 py-3.5 rounded-[18px] font-black text-xs uppercase transition-all flex items-center gap-2 ${activeCategory === 'Chip Físico' ? 'bg-[#2E5BFF] text-white shadow-lg shadow-[#2E5BFF]/30' : 'text-slate-500 hover:text-slate-800'}`}><Smartphone size={16} /> Chip Físico</button>
                                 </div>
                             </div>
                             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
