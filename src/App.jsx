@@ -39,14 +39,14 @@ import {
 const logoUrl = "/logo.png";
 
 const allProducts = [
-    { id: 1, country: 'Estados Unidos', price: '259', promo: 'Mais vendido', type: 'USA', category: 'eSIM', features: ['Internet ilimitada', 'Ativação automática', '100% Digital via QR', 'Cobertura nacional 5G'] },
-    { id: 2, country: 'Europa', price: '329', promo: null, type: 'EUROPE', category: 'eSIM', features: ['+40 países cobertos', 'Ativação automática', 'eSIM Instantâneo', 'Dados de alta velocidade'] },
-    { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['Cobertura regional', 'Ativação automática', 'Sem troca de chip', 'Ideal para múltiplos países'] },
-    { id: 4, country: 'Mundo', price: '349', promo: 'Global Pass', type: 'WORLD', category: 'eSIM', features: ['+200 países', 'Ativação automática', 'Acesso Global', 'A melhor cobertura'] },
-    { id: 5, country: 'Estados Unidos', price: '299', promo: 'Tradicional', type: 'USA', category: 'Chip Físico', features: ['Internet ilimitada', 'Receba em casa', 'Chip com ligações', 'Cobertura 5G/4G LTE'] },
-    { id: 6, country: 'Europa', price: '369', promo: null, type: 'EUROPE', category: 'Chip Físico', features: ['Vários destinos', 'Entrega via Sedex', 'Chip pronto p/ uso', 'Suporte total'] },
-    { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['Países vizinhos', 'Envio imediato', 'Mantenha o WhatsApp', 'Fácil instalação'] },
-    { id: 8, country: 'Mundo', price: '399', promo: 'Premium', type: 'WORLD', category: 'Chip Físico', features: ['Global tradicional', 'Cobertura em cruzeiros', 'Chip multirrede', 'Máxima estabilidade'] }
+    { id: 1, country: 'Estados Unidos', price: '259', promo: null, type: 'USA', category: 'eSIM', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Ativação imediata, 100% digital'] },
+    { id: 2, country: 'Europa', price: '329', promo: null, type: 'EUROPE', category: 'eSIM', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
+    { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
+    { id: 4, country: 'Mundo', price: '349', promo: null, type: 'WORLD', category: 'eSIM', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] },
+    { id: 5, country: 'Estados Unidos', price: '299', promo: null, type: 'USA', category: 'Chip Físico', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Receba diretamente em casa'] },
+    { id: 6, country: 'Europa', price: '369', promo: null, type: 'EUROPE', category: 'Chip Físico', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
+    { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
+    { id: 8, country: 'Mundo', price: '399', promo: null, type: 'WORLD', category: 'Chip Físico', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] }
 ];
 
 const benefits = [
@@ -356,7 +356,7 @@ export default function App() {
                                 {allProducts.filter(p => p.category === activeCategory).map((p) => {
                                     const isPromo = p.promo === 'Mais vendido';
                                     return (
-                                        <div key={p.id} onClick={() => { setView('product'); window.scrollTo(0, 0); }} className="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-200 hover:shadow-2xl">
+                                        <div key={p.id} onClick={() => { setView('product'); window.scrollTo(0, 0); }} className="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)]">
                                             <div className="flex justify-between items-start mb-6"><DestinationIcon type={p.type} />{p.promo && <div className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm ${isPromo ? 'bg-[#00D1FF]/10 text-[#00D1FF]' : 'bg-[#A64DFF]/10 text-[#A64DFF]'}`}>{p.promo}</div>}</div>
                                             <div className="mb-6"><h3 className="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{p.country}</h3><p className="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span className="text-[#1A2B6D] font-black text-xl">R${p.price}</span></p></div>
                                             <ul className="space-y-4 mb-10 flex-grow">{p.features.map((f, i) => (<li key={i} className="flex items-start gap-3"><Check size={18} className="text-[#00D1FF]" /><span className="text-slate-600 text-sm font-medium">{f}</span></li>))}</ul>
