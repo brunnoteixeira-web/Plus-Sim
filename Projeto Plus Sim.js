@@ -50,21 +50,21 @@ const allProducts = [
 ];
 
 const benefits = [
-    { icon: <Package className="w-8 h-8 text-[#A64DFF]" />, title: 'Receba em casa', desc: 'Chip Físico entregue em todo o Brasil antes da sua viagem', badge: 'Entrega padrão gratuita' },
-    { icon: <Smartphone className="w-8 h-8 text-[#00D1FF]" />, title: 'eSIM em 2 horas', desc: 'Receba o QR Code por WhatsApp e ative diretamente no celular', badge: '100% digital' },
-    { icon: <Globe className="w-8 h-8 text-green-500" />, title: '+200 destinos', desc: 'Internet de alta velocidade em praticamente todo o mundo', badge: '8 anos no mercado' },
-    { icon: <Zap className="w-8 h-8 text-yellow-500" />, title: 'Ativação automática', desc: 'Planos programados para o período da viagem', badge: 'Zero Complicações' },
-    { icon: <CreditCard className="w-8 h-8 text-[#2E5BFF]" />, title: 'Pague em reais', desc: 'PIX com 5% de desconto ou parcele em 12x. Sem IOF', badge: 'Sem taxa extra' },
-    { icon: <MessageCircle className="w-8 h-8 text-[#00D1FF]" />, title: 'Suporte em português', desc: 'Atendimento especializado pelo WhatsApp 24h por dia', badge: 'Atendimento humano' }
+    { icon: <Package className="w-8 h-8 text-[#A64DFF]" />, title: 'Receba em casa', desc: 'Chip Físico entregue em todo o Brasil antes da sua viagem.', badge: 'Entrega padrão gratuita' },
+    { icon: <Smartphone className="w-8 h-8 text-[#00D1FF]" />, title: 'eSIM em 2 horas', desc: 'Receba o QR Code por WhatsApp e ative diretamente no celular.', badge: '100% digital' },
+    { icon: <Globe className="w-8 h-8 text-green-500" />, title: '+200 destinos', desc: 'Internet de alta velocidade em praticamente todo o mundo.', badge: '8 anos no mercado' },
+    { icon: <Zap className="w-8 h-8 text-yellow-500" />, title: 'Ativação automática', desc: 'Planos programados para o período da viagem.', badge: 'Zero Complicações' },
+    { icon: <CreditCard className="w-8 h-8 text-[#2E5BFF]" />, title: 'Pague em reais', desc: 'PIX com 5% de desconto ou parcele em 12x. Sem IOF.', badge: 'Sem taxa extra' },
+    { icon: <MessageCircle className="w-8 h-8 text-[#00D1FF]" />, title: 'Suporte em português', desc: 'Atendimento especializado pelo WhatsApp 24h por dia.', badge: 'Atendimento humano' }
 ];
 
 const testimonials = [
-    { id: 1, name: 'Bárbara Luiza C.', text: 'Chip entregue em casa, meus pais chegaram nos EUA já conectados. Suporte incrível do começo ao fim!', location: 'Estados Unidos' },
-    { id: 2, name: 'André Maciel', text: 'Funcionou perfeitamente em 5 países europeus. Já comprei para a próxima viagem sem pensar duas vezes.', location: 'Europa' },
-    { id: 3, name: 'Naiane Lopes', text: 'Conectei assim que pousou na Argentina. Tirei dúvida pelo WhatsApp e fui atendida na hora. Nota 10!', location: 'América do Sul' },
-    { id: 4, name: 'Carlos Eduardo', text: 'O plano Global Pass salvou minha viagem de negócios por 3 continentes. Conexão estável em todo lado.', location: 'Mundo' },
-    { id: 5, name: 'Juliana Silveira', text: 'Instalei o eSIM em minutos pelo WhatsApp. Cheguei em Orlando já pedindo o Uber. Praticidade nota mil!', location: 'Estados Unidos' },
-    { id: 6, name: 'Ricardo M.', text: 'Melhor cobertura que já tive na Europa. Passei por Portugal, Espanha e França sem perder o sinal.', location: 'Europa' }
+    { id: 1, name: 'Bárbara Luiza Cardoso', text: 'A melhor de todas as empresas, principalmente no pós venda!! Meus pais vem sempre nos visitar e as meninas da PlusSim entregam o chip na casa deles no Brasil e eles chegam aqui nos EUA conectados e eu super aliviada de já poder falar com eles desde o primeiro momento.', location: 'Estados Unidos' },
+    { id: 2, name: 'Merinson Scaranello', text: 'Excelente chip... usei nos USA... precisei tirar algumas dúvidas enquanto estava lá e fui prontamente atendido via WhatsApp... Obrigado.. utilizarei novamente com certeza.', location: 'Estados Unidos' },
+    { id: 3, name: 'Naiane Lopes', text: 'Excelente...usei para viagem na america do sul argentina, chegando no aeroporto o chip ja conectou em poucos minutos, consegui compartilhar com cel e notebook...e usei mto para chamar uber e mapas. Chamei no whats a equipe pra tirar uma dúvida e fui rapidamente atendida. obg ate a próxima viagem!!!', location: 'América do Sul' },
+    { id: 4, name: 'André Maciel', text: 'Chip ótimo! Passei por 5 países e funcionou perfeitamente em todos. Recomendo !', location: 'Europa' },
+    { id: 5, name: 'Marcia Palmer Irffi', text: 'Recomendo muito!Funcionou super bem na Alemanha, Escócia e Islândia!Vou comprar na próxima viagem!', location: 'Europa' },
+    { id: 6, name: 'Brenna', text: 'Super atenciosos. Sempre que viajo compro com eles, excelente internet e o melhor preço.', location: 'Global' }
 ];
 
 const faqItems = [
