@@ -42,20 +42,22 @@ const allProducts = [
     { id: 1, country: 'Estados Unidos', price: '259', promo: null, type: 'USA', category: 'eSIM', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Ativação imediata, 100% digital'] },
     { id: 2, country: 'Europa', price: '329', promo: null, type: 'EUROPE', category: 'eSIM', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
+    { id: 9, country: 'Ásia', price: '289', promo: null, type: 'ASIA', category: 'eSIM', features: ['Internet ilimitada', 'VPN Incluído', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 4, country: 'Mundo', price: '349', promo: null, type: 'WORLD', category: 'eSIM', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] },
     { id: 5, country: 'Estados Unidos', price: '299', promo: null, type: 'USA', category: 'Chip Físico', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Receba diretamente em casa'] },
     { id: 6, country: 'Europa', price: '369', promo: null, type: 'EUROPE', category: 'Chip Físico', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
+    { id: 10, country: 'Ásia', price: '319', promo: null, type: 'ASIA', category: 'Chip Físico', features: ['Internet ilimitada', 'VPN Incluído', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 8, country: 'Mundo', price: '399', promo: null, type: 'WORLD', category: 'Chip Físico', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] }
 ];
 
 const benefits = [
-    { icon: <Package className="w-8 h-8 text-[#A64DFF]" />, title: 'Receba em casa', desc: 'Chip Físico entregue em todo o Brasil antes da sua viagem.', badge: 'Entrega padrão gratuita' },
+    { icon: <MessageCircle className="w-8 h-8 text-[#00D1FF]" />, title: 'Suporte em português', desc: 'Atendimento especializado pelo WhatsApp 24h por dia.', badge: 'Atendimento humano' },
     { icon: <Smartphone className="w-8 h-8 text-[#00D1FF]" />, title: 'eSIM em 2 horas', desc: 'Receba o QR Code por WhatsApp e ative diretamente no celular.', badge: '100% digital' },
     { icon: <Globe className="w-8 h-8 text-green-500" />, title: '+200 destinos', desc: 'Internet de alta velocidade em praticamente todo o mundo.', badge: '8 anos no mercado' },
     { icon: <Zap className="w-8 h-8 text-yellow-500" />, title: 'Ativação automática', desc: 'Planos programados para o período da viagem.', badge: 'Zero Complicações' },
     { icon: <CreditCard className="w-8 h-8 text-[#2E5BFF]" />, title: 'Pague em reais', desc: 'PIX com 5% de desconto ou parcele em 12x. Sem IOF.', badge: 'Sem taxa extra' },
-    { icon: <MessageCircle className="w-8 h-8 text-[#00D1FF]" />, title: 'Suporte em português', desc: 'Atendimento especializado pelo WhatsApp 24h por dia.', badge: 'Atendimento humano' }
+    { icon: <Package className="w-8 h-8 text-[#A64DFF]" />, title: 'Receba em casa', desc: 'Chip Físico entregue em todo o Brasil antes da sua viagem.', badge: 'Entrega Gratuita' }
 ];
 
 const testimonials = [
@@ -105,6 +107,17 @@ const DestinationIcon = ({ type }) => {
                 <div className={wrapperClass}>
                     <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
                         <path d="M 35 15 C 45 10 55 12 65 18 L 85 45 C 80 50 78 65 65 75 L 45 95 C 42 90 38 75 35 60 L 25 40 C 22 30 25 20 35 15 Z" />
+                    </svg>
+                </div>
+            );
+        case 'ASIA':
+            return (
+                <div className={wrapperClass}>
+                    <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
+                        {/* Massa continental Ásia + Oriente Médio */}
+                        <path d="M 25 20 C 40 15 60 15 75 10 C 85 20 90 40 85 50 C 80 60 75 75 70 70 C 65 65 60 60 55 60 C 50 70 45 85 45 85 C 40 80 40 70 35 60 C 25 65 15 70 15 65 C 10 50 15 45 25 40 C 25 30 20 25 25 20 Z" />
+                        {/* Ilhas (ex: Japão) */}
+                        <path d="M 88 35 C 92 38 95 45 90 48" strokeWidth="3" opacity="0.8" />
                     </svg>
                 </div>
             );
