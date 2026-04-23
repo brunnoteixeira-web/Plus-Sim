@@ -199,7 +199,7 @@ const ProductPage = ({ setView }) => {
         <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500">
             <div className="max-w-6xl mx-auto px-6">
                 <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
-                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Home</span>
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Início</span>
                     <ChevronRight size={12} />
                     <span className="cursor-pointer hover:text-[#2E5BFF]">Planos Internacionais</span>
                     <ChevronRight size={12} />
@@ -248,7 +248,7 @@ const TermsPage = ({ setView }) => {
         <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500">
             <div className="max-w-4xl mx-auto px-6">
                 <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
-                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Home</span>
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Início</span>
                     <ChevronRight size={12} />
                     <span className="text-[#1A2B6D]">Termos e Condições</span>
                 </nav>
@@ -297,7 +297,7 @@ const PrivacyPage = ({ setView }) => {
         <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500">
             <div className="max-w-4xl mx-auto px-6">
                 <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
-                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Home</span>
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Início</span>
                     <ChevronRight size={12} />
                     <span className="text-[#1A2B6D]">Política de Privacidade</span>
                 </nav>
