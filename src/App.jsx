@@ -272,10 +272,10 @@ export default function App() {
 
             {/* BARRA DE VANTAGENS */}
             <div className="bg-[#1A2B6D] text-white py-2.5 px-4 text-center text-[10px] md:text-xs font-bold tracking-wider relative z-[60]">
-                <div className="max-w-7xl mx-auto flex justify-center items-center gap-6 md:gap-12 overflow-x-auto whitespace-nowrap no-scrollbar">
-                    <span className="flex items-center gap-2"><Zap size={14} className="text-[#A64DFF]" /> PIX COM 5% DE DESCONTO</span>
-                    <span className="flex items-center gap-2"><CreditCard size={14} className="text-[#00D1FF]" /> PARCELE EM ATÉ 12X</span>
-                    <span className="flex items-center gap-2"><Clock size={14} className="text-green-400" /> SUPORTE 24H</span>
+                <div className="max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-x-4 gap-y-2 md:gap-12">
+                    <span className="flex items-center gap-2 whitespace-nowrap"><Zap size={14} className="text-[#A64DFF]" /> PIX COM 5% DE DESCONTO</span>
+                    <span className="flex items-center gap-2 whitespace-nowrap"><CreditCard size={14} className="text-[#00D1FF]" /> PARCELE EM ATÉ 12X</span>
+                    <span className="flex items-center gap-2 whitespace-nowrap"><Clock size={14} className="text-green-400" /> SUPORTE 24H</span>
                 </div>
             </div>
 
