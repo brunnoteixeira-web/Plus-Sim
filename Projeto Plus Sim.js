@@ -40,11 +40,13 @@ const logoUrl = "/logo.png";
 
 const allProducts = [
     { id: 1, country: 'Estados Unidos', price: '259', promo: null, type: 'USA', category: 'eSIM', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Ativação imediata, 100% digital'] },
+    { id: 11, country: 'América do Norte', price: '289', promo: null, type: 'NA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 2, country: 'Europa', price: '329', promo: null, type: 'EUROPE', category: 'eSIM', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 9, country: 'Ásia', price: '289', promo: null, type: 'ASIA', category: 'eSIM', features: ['Internet ilimitada', 'VPN Incluído', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 4, country: 'Mundo', price: '349', promo: null, type: 'WORLD', category: 'eSIM', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] },
     { id: 5, country: 'Estados Unidos', price: '299', promo: null, type: 'USA', category: 'Chip Físico', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Receba diretamente em casa'] },
+    { id: 12, country: 'América do Norte', price: '319', promo: null, type: 'NA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 6, country: 'Europa', price: '369', promo: null, type: 'EUROPE', category: 'Chip Físico', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 10, country: 'Ásia', price: '319', promo: null, type: 'ASIA', category: 'Chip Físico', features: ['Internet ilimitada', 'VPN Incluído', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
@@ -107,6 +109,14 @@ const DestinationIcon = ({ type }) => {
                 <div className={wrapperClass}>
                     <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
                         <path d="M 35 15 C 45 10 55 12 65 18 L 85 45 C 80 50 78 65 65 75 L 45 95 C 42 90 38 75 35 60 L 25 40 C 22 30 25 20 35 15 Z" />
+                    </svg>
+                </div>
+            );
+        case 'NA':
+            return (
+                <div className={wrapperClass}>
+                    <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={iconClass}>
+                        <path d="M 20 25 C 40 10 70 15 80 30 C 90 45 75 65 65 60 C 55 55 45 85 35 85 C 25 85 30 65 25 55 C 15 50 10 35 20 25 Z" />
                     </svg>
                 </div>
             );
@@ -365,7 +375,7 @@ export default function App() {
                                     <button onClick={() => setActiveCategory('Chip Físico')} className={`px-8 py-3.5 rounded-[18px] font-black text-xs uppercase transition-all flex items-center gap-2 ${activeCategory === 'Chip Físico' ? 'bg-[#2E5BFF] text-white shadow-lg shadow-[#2E5BFF]/30' : 'text-slate-500 hover:text-slate-800'}`}><Smartphone size={16} /> Chip Físico</button>
                                 </div>
                             </div>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {allProducts.filter(p => p.category === activeCategory).map((p) => {
                                     const isPromo = p.promo === 'Mais vendido';
                                     return (
