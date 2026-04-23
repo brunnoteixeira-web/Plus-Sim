@@ -385,7 +385,7 @@ const CategoryPage = ({ category, setView }) => {
                     <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">
                         {category === 'eSIM'
                             ? 'Conectividade instantânea sem precisar de um chip físico. Escaneie o QR code e navegue em alta velocidade no mundo todo.'
-                            : 'Receba o chip no conforto da sua casa, antes da viagem. Ideal para aparelhos que ainda não suportam a tecnologia eSIM.'}
+                            : <span>Receba o chip no conforto da sua casa, antes da viagem.<br/>Ideal para aparelhos que ainda não suportam a tecnologia eSIM.</span>}
                     </p>
                 </div>
 
