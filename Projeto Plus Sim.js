@@ -366,6 +366,47 @@ const PrivacyPage = ({ setView }) => {
     );
 };
 
+// --- COMPONENTES DE PÁGINAS DE CATEGORIA ---
+
+const CategoryPage = ({ category, setView }) => {
+    return (
+        <div className="pt-8 pb-20 bg-slate-50 animate-in fade-in duration-500 min-h-screen">
+            <div className="max-w-7xl mx-auto px-6">
+                <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-12">
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Início</span>
+                    <ChevronRight size={12} />
+                    <span className="text-[#1A2B6D]">Planos {category}</span>
+                </nav>
+
+                <div className="text-center mb-16">
+                    <h1 className="text-4xl md:text-6xl font-black text-[#1A2B6D] mb-6 tracking-tighter">
+                        {category === 'eSIM' ? 'Planos eSIM (Chip Virtual)' : 'Planos Chip Físico'}
+                    </h1>
+                    <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">
+                        {category === 'eSIM'
+                            ? 'Conectividade instantânea sem precisar de um chip físico. Escaneie o QR code e navegue em alta velocidade no mundo todo.'
+                            : 'Receba o chip no conforto da sua casa, antes da viagem. Ideal para aparelhos que ainda não suportam a tecnologia eSIM.'}
+                    </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {allProducts.filter(p => p.category === category).map((p) => {
+                        const isPromo = p.promo === 'Mais vendido';
+                        return (
+                            <div key={p.id} onClick={() => { setView('product'); window.scrollTo(0, 0); }} className="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)]">
+                                <div className="flex justify-between items-start mb-6"><DestinationIcon type={p.type} />{p.promo && <div className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm ${isPromo ? 'bg-[#00D1FF]/10 text-[#00D1FF]' : 'bg-[#A64DFF]/10 text-[#A64DFF]'}`}>{p.promo}</div>}</div>
+                                <div className="mb-6"><h3 className="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{p.country}</h3><p className="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span className="text-[#1A2B6D] font-black text-xl">R${p.price}</span></p></div>
+                                <ul className="space-y-4 mb-10 flex-grow">{p.features.map((f, i) => (<li key={i} className="flex items-start gap-3"><Check size={18} className="text-[#00D1FF]" /><span className="text-slate-600 text-sm font-medium">{f}</span></li>))}</ul>
+                                <button className="w-full py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</button>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- COMPONENTE PRINCIPAL ---
 
 export default function App() {
@@ -422,8 +463,8 @@ export default function App() {
                 <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
                     <LogoComponent setView={setView} />
                     <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
-                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('eSIM'); setView('home'); }}>Planos eSIM</button>
-                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setActiveCategory('Chip Físico'); setView('home'); }}>Planos Chip Físico</button>
+                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setView('category-esim'); window.scrollTo(0, 0); }}>Planos eSIM</button>
+                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setView('category-physical'); window.scrollTo(0, 0); }}>Planos Chip Físico</button>
                         <a href="#" className="hover:text-[#2E5BFF] transition-colors">Compatibilidade eSIM</a>
                         <a href="#" className="hover:text-[#2E5BFF] transition-colors">Blog</a>
                         <div className="h-6 w-px bg-slate-200"></div>
@@ -433,8 +474,8 @@ export default function App() {
                 </div>
                 {mobileMenuOpen && (
                     <div className="md:hidden bg-white border-t border-slate-100 absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-2">
-                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('eSIM'); setMobileMenuOpen(false); setView('home'); }}>Planos eSIM</button>
-                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setActiveCategory('Chip Físico'); setMobileMenuOpen(false); setView('home'); }}>Planos Chip Físico</button>
+                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setMobileMenuOpen(false); setView('category-esim'); window.scrollTo(0, 0); }}>Planos eSIM</button>
+                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setMobileMenuOpen(false); setView('category-physical'); window.scrollTo(0, 0); }}>Planos Chip Físico</button>
                         <a href="#" className="font-bold text-[#1A2B6D]">Compatibilidade eSIM</a>
                         <a href="#" className="font-bold text-[#1A2B6D]">Blog</a>
                     </div>
@@ -662,6 +703,12 @@ export default function App() {
             {view === 'product' && (
                 <ProductPage setView={setView} />
             )}
+            {view === 'category-esim' && (
+                <CategoryPage category="eSIM" setView={setView} />
+            )}
+            {view === 'category-physical' && (
+                <CategoryPage category="Chip Físico" setView={setView} />
+            )}
             {view === 'terms' && (
                 <TermsPage setView={setView} />
             )}
@@ -677,7 +724,7 @@ export default function App() {
                         <p className="text-sm leading-relaxed font-medium mb-6 max-w-xs">Conectividade em alta velocidade para viajantes brasileiros. Sem fronteiras, sem complicações.</p>
                         <div className="flex gap-4"><a href="https://facebook.com/plussimtravel" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="https://instagram.com/plussim_travel" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a><a href="https://wa.me/13213104764" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a></div>
                     </div>
-                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setActiveCategory('eSIM'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setActiveCategory('Chip Físico'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Seja Nosso Parceiro</a></li><li><button onClick={() => { setView('terms'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Termos e Condições</button></li><li><button onClick={() => { setView('privacy'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Privacidade</button></li></ul></div>
+                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setView('category-esim'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setView('category-physical'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Seja Nosso Parceiro</a></li><li><button onClick={() => { setView('terms'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Termos e Condições</button></li><li><button onClick={() => { setView('privacy'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Privacidade</button></li></ul></div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Contato</h5><ul className="space-y-4 text-sm font-bold"><li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={18} className="text-[#00D1FF]" /> <span>+1(321)310-4764</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Phone size={18} className="text-[#00D1FF] font-bold" /> <span>+55(11)4680-6732</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Mail size={18} className="text-[#00D1FF]" /> <span>info@plussim.com</span></li><li className="flex items-start justify-center md:justify-start gap-3 leading-tight"><MapPin size={18} className="text-[#00D1FF] flex-shrink-0" /> <span className="text-white/70 text-xs text-left">4700 Millenia Blvd, Suite 175<br/>Orlando/FL - 32839</span></li></ul></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-white/5 text-center text-[9px] uppercase tracking-[0.3em] font-black opacity-30">© 2026 PLUS SIM LLC - CONECTANDO VOCÊ AO MUNDO</div>
