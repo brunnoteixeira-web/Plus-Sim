@@ -72,12 +72,23 @@ const testimonials = [
 ];
 
 const faqItems = [
-    { q: "O meu telemóvel é compatível com eSIM?", a: "A maioria dos smartphones lançados após 2019 (iPhone 11+, Samsung S20+, etc.) são compatíveis." },
-    { q: "Como faço para ativar o plano?", a: "Basta escanear o QR Code que enviamos para o seu WhatsApp e ativar o roaming de dados." },
-    { q: "Posso manter o meu número de WhatsApp?", a: "Sim! O eSIM funciona apenas para dados, o seu WhatsApp e apps continuam vinculados ao seu número original." },
-    { q: "Preciso de internet para instalar o eSIM?", a: "Sim, recomendamos fazer a instalação ainda no Brasil ou via Wi-Fi no hotel para garantir a ativação." },
-    { q: "Quanto tempo demora a entrega do chip físico?", a: "A entrega padrão é gratuita e o prazo varia conforme a sua região, geralmente entre 3 a 7 dias úteis." },
-    { q: "O plano de internet é realmente ilimitado?", a: "Sim, nossos planos para os principais destinos oferecem dados ilimitados para que você use sem preocupações." }
+    { q: "Qual a diferença entre o chip físico e o eSIM?", a: "O chip físico é um cartão SIM tradicional que você insere no aparelho. Já o eSIM é um chip virtual, ativado por QR Code, sem a necessidade de inserir nenhum item físico no celular." },
+    { q: "Meu celular é compatível com eSIM?", a: "Para saber se seu celular é compatível com eSIM, basta digitar *#06# na tela em que você faz ligações (como se fosse ligar para alguém). Algumas informações vão aparecer na tela. Caso tenha o código EID, seu celular é compatível com eSIM. Em caso de dúvidas, entre em contato conosco que auxiliamos na verificação." },
+    { q: "Em quais países a internet funciona?", a: "Nossos chips internacionais funcionam em mais de 200 destinos. Você pode verificar a lista completa de destinos na página de cada produto." },
+    { q: "Qual a velocidade da internet?", a: "A velocidade varia conforme o país e a rede local, podendo atingir 5G ou 4G. Garantimos conexão rápida e estável com operadoras locais confiáveis." },
+    { q: "Como ativar o chip quando chegar ao destino?", a: "Chips físicos: Insira o chip no celular ao chegar ao destino e ative o roaming de dados. eSIMs: escaneie o QR Code antes da viagem para configurar o plano em seu celular. Ative a linha e o roaming de dados assim que chegar ao destino. Instruções detalhadas são enviadas por Whatsapp até um dia antes da viagem." },
+    { q: "Posso compartilhar internet com outros dispositivos?", a: "Sim! Nossos planos permitem o compartilhamento de internet." },
+    { q: "Posso comprar o eSIM mesmo estando fora do Brasil?", a: "Sim! Você pode adquirir o eSIM estando em qualquer lugar do mundo!" },
+    { q: "Em quanto tempo recebo o chip ou o eSIM após a compra?", a: "O prazo de entrega varia conforme sua localidade. Chips físicos são entregues em até 7 dias úteis gratuitamente. Caso precise de uma entrega mais rápida, enviamos a cotação do SEDEX. O eSIM é enviado por Whatsapp até 2 horas após a compra." },
+    { q: "O chip funciona assim que eu aterrissar no país de destino?", a: "Sim! Basta inserir o chip ou ativar o eSIM e habilitar o roaming de dados. A conexão será estabelecida automaticamente." },
+    { q: "O chip funciona em cruzeiros ou apenas em terra firme?", a: "Os chips funcionam em terra firme, conectados às redes móveis locais. Durante a navegação do cruzeiro, em alto mar, não há conexão por não haver infraestrutura de operadoras de telefonia. Em navegação, apenas a rede WIFI do navio, que é por satélite, funciona." },
+    { q: "Posso manter meu número brasileiro no Whatsapp enquanto uso o chip internacional?", a: "Sim, seu número de Whatsapp não muda quando você passa a usar o chip internacional. O WhatsApp funciona normalmente." },
+    { q: "É possível transferir o plano do Chip Físico para eSIM caso eu troque de celular na viagem?", a: "Não é possível. Caso você tenha a intenção de trocar de celular durante a viagem, recomendamos que verifique a compatibilidade para chip físico e eSIM do novo celular, e adquira o plano diretamente para o celular novo." },
+    { q: "É possível transferir o eSIM de um celular para o outro?", a: "Não é possível. Uma vez que o eSIM é instalado em um celular, não há como transferir para um novo aparelho." },
+    { q: "O que faço se meu chip não funcionar?", a: "Entre em contato com nosso suporte por Whatsapp imediatamente: +1(321)310-4764. Estamos disponíveis 24h para te ajudar com qualquer dúvida ou problema técnico." },
+    { q: "Como entro em contato com o suporte?", a: "Você pode nos contatar via WhatsApp, através do número: +1(321)310-4764" },
+    { q: "Quais formas de pagamento são aceitas?", a: "Aceitamos cartões de débito e crédito e PIX." },
+    { q: "Posso parcelar minha compra?", a: "Sim, compras com cartão de crédito podem ser parceladas em até 12x. O parcelamento possui juros, que podem ser visualizados no momento da compra." }
 ];
 
 // --- COMPONENTES AUXILIARES ---
@@ -237,6 +248,8 @@ export default function App() {
     const [activeCategory, setActiveCategory] = useState('eSIM');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [testimonialIndex, setTestimonialIndex] = useState(0);
+    const [showAllFaqs, setShowAllFaqs] = useState(false);
+    const [openFaq, setOpenFaq] = useState(null);
 
     useEffect(() => {
         // Injeção de estilos customizados para animações
@@ -436,12 +449,27 @@ export default function App() {
                         <div className="max-w-4xl mx-auto px-6">
                             <div className="mb-12"><h2 className="text-4xl font-black text-[#1A2B6D] mb-4 tracking-tighter text-center">Dúvidas Frequentes</h2><p className="text-slate-500 font-medium">Tudo o que você precisa saber sobre os planos internacionais da Plus Sim</p></div>
                             <div className="grid gap-3 text-left">
-                                {faqItems.map((f, i) => (
-                                    <div key={i} className="bg-white p-5 rounded-2xl border border-[#E0D4FF] hover:border-[#A64DFF] transition-all cursor-pointer group shadow-sm">
-                                        <div className="flex justify-between items-center"><span className="font-bold text-[#1A2B6D] text-base md:text-lg leading-tight">{f.q}</span><div className="w-6 h-6 rounded-full bg-[#F3E8FF] text-[#A64DFF] group-hover:bg-[#A64DFF] group-hover:text-white transition-all flex-shrink-0 flex items-center justify-center"><ChevronRight size={16} /></div></div>
+                                {(showAllFaqs ? faqItems : faqItems.slice(0, 8)).map((f, i) => (
+                                    <div key={i} onClick={() => setOpenFaq(openFaq === i ? null : i)} className={`bg-white p-5 rounded-2xl border transition-all cursor-pointer shadow-sm ${openFaq === i ? 'border-[#A64DFF]' : 'border-[#E0D4FF] hover:border-[#A64DFF] group'}`}>
+                                        <div className="flex justify-between items-center">
+                                            <span className="font-bold text-[#1A2B6D] text-base md:text-lg leading-tight">{f.q}</span>
+                                            <div className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${openFaq === i ? 'bg-[#A64DFF] text-white rotate-90' : 'bg-[#F3E8FF] text-[#A64DFF] group-hover:bg-[#A64DFF] group-hover:text-white'}`}><ChevronRight size={16} /></div>
+                                        </div>
+                                        {openFaq === i && (
+                                            <div className="mt-4 text-slate-500 font-medium leading-relaxed animate-in slide-in-from-top-2">
+                                                {f.a}
+                                            </div>
+                                        )}
                                     </div>
                                 ))}
                             </div>
+                            {!showAllFaqs && (
+                                <div className="mt-8">
+                                    <button onClick={() => setShowAllFaqs(true)} className="px-8 py-3.5 bg-slate-100 hover:bg-slate-200 text-[#1A2B6D] font-black rounded-xl transition-all uppercase tracking-wider text-sm border border-slate-200">
+                                        Ver Mais
+                                    </button>
+                                </div>
+                            )}
                             <div className="mt-16 p-10 bg-white rounded-[40px] border border-[#E0D4FF] shadow-xl flex flex-col items-center gap-6">
                                 <h3 className="text-2xl font-black text-[#1A2B6D]">Ainda com dúvidas?</h3>
                                 <p className="text-slate-500 font-medium -mt-2 text-center">Nossa equipe está pronta para te ajudar.</p>
