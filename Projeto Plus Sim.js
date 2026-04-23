@@ -40,17 +40,17 @@ const logoUrl = "/logo.png";
 
 const allProducts = [
     { id: 1, country: 'Estados Unidos', price: '259', promo: null, type: 'USA', category: 'eSIM', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Ativação imediata, 100% digital'] },
-    { id: 11, country: 'América do Norte', price: '289', promo: null, type: 'NA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 2, country: 'Europa', price: '329', promo: null, type: 'EUROPE', category: 'eSIM', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
-    { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 9, country: 'Ásia', price: '289', promo: null, type: 'ASIA', category: 'eSIM', features: ['Internet ilimitada', 'VPN Incluído', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
     { id: 4, country: 'Mundo', price: '349', promo: null, type: 'WORLD', category: 'eSIM', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] },
+    { id: 3, country: 'América do Sul', price: '289', promo: null, type: 'SA', category: 'eSIM', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
+    { id: 11, country: 'América do Norte', price: '289', promo: null, type: 'NA', category: 'eSIM', features: ['3 Países Cobertos', '10Gb de Franquia de dados', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 5, country: 'Estados Unidos', price: '299', promo: null, type: 'USA', category: 'Chip Físico', features: ['Internet Ilimitada', 'Velocidade 5G/4G', 'Mantenha seu número de WhatsApp', 'Receba diretamente em casa'] },
-    { id: 12, country: 'América do Norte', price: '319', promo: null, type: 'NA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 6, country: 'Europa', price: '369', promo: null, type: 'EUROPE', category: 'Chip Físico', features: ['28 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
-    { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
     { id: 10, country: 'Ásia', price: '319', promo: null, type: 'ASIA', category: 'Chip Físico', features: ['Internet ilimitada', 'VPN Incluído', 'Mantenha seu número de WhatsApp', 'Velocidade 5G/4G'] },
-    { id: 8, country: 'Mundo', price: '399', promo: null, type: 'WORLD', category: 'Chip Físico', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] }
+    { id: 8, country: 'Mundo', price: '399', promo: null, type: 'WORLD', category: 'Chip Físico', features: ['+200 Destinos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Ideal para múltiplos países'] },
+    { id: 7, country: 'América do Sul', price: '319', promo: null, type: 'SA', category: 'Chip Físico', features: ['8 Países Cobertos', 'Internet Ilimitada', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] },
+    { id: 12, country: 'América do Norte', price: '319', promo: null, type: 'NA', category: 'Chip Físico', features: ['3 Países Cobertos', '10Gb de Franquia de dados', 'Mantenha seu número de WhatsApp', 'Dados em alta velocidade'] }
 ];
 
 const benefits = [
