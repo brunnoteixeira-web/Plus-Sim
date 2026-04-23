@@ -241,6 +241,131 @@ const ProductPage = ({ setView }) => {
     );
 };
 
+// --- COMPONENTES DE PÁGINAS LEGAIS ---
+
+const TermsPage = ({ setView }) => {
+    return (
+        <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500">
+            <div className="max-w-4xl mx-auto px-6">
+                <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Home</span>
+                    <ChevronRight size={12} />
+                    <span className="text-[#1A2B6D]">Termos e Condições</span>
+                </nav>
+                <div className="bg-white rounded-[32px] p-8 md:p-12 border border-slate-100 shadow-xl prose prose-slate max-w-none prose-headings:text-[#1A2B6D] prose-headings:font-black prose-p:font-medium prose-p:text-slate-500 prose-p:leading-relaxed prose-p:text-justify">
+                    <h1 className="text-3xl md:text-5xl font-black text-[#1A2B6D] mb-8 tracking-tighter border-b border-slate-100 pb-8 text-center">Termos e Condições de Uso</h1>
+                    <p className="text-justify">Ao acessar o site www.plussim.com e contratar nossos serviços, você concorda em cumprir e estar vinculado aos seguintes Termos e Condições. Recomendamos a leitura atenta antes de finalizar qualquer compra.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">1. Objeto e Serviços</h3>
+                    <p className="text-justify">A Plus Sim atua na comercialização de soluções de conectividade internacional, oferecendo Chips Físicos (SIM Cards) e Chips Virtuais (eSIMs) para uso em viagens ao exterior. Nossos serviços permitem o acesso a dados móveis e, em planos específicos, serviços de voz e SMS, operados através de operadoras de telefonia internacionais.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">2. Processo de Compra e Entrega</h3>
+                    <p className="text-justify"><strong>2.1. Chip Físico:</strong> A entrega é realizada via transportadoras ou Correios. O prazo de entrega varia conforme o endereço e a modalidade de frete escolhida pelo cliente. A Plus SIM não se responsabiliza por atrasos decorrentes de greves, desastres naturais ou erros de endereçamento fornecidos pelo comprador.</p>
+                    <p className="text-justify"><strong>2.2. eSIM (Chip Virtual):</strong> A entrega é realizada de forma digital via e-mail ou WhatsApp, através de um QR Code, após a confirmação do pagamento. É responsabilidade do cliente garantir que os dados informados no momento da compra estejam corretos.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">3. Compatibilidade do Aparelho</h3>
+                    <p className="text-justify">É de total responsabilidade do cliente verificar, antes da compra, se o seu aparelho celular é desbloqueado para qualquer operadora e se possui compatibilidade com a tecnologia contratada, especialmente no caso do eSIM. Aparelhos bloqueados por operadoras de origem ou que não suportam eSIM não terão direito a reembolso por falha de compatibilidade após a emissão do produto.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">4. Ativação e Vigência</h3>
+                    <p className="text-justify">Os planos são ativados na data informada pelo cliente no momento da compra. O período de validade do plano começa a contar a partir da data de ativação solicitada, independentemente do início efetivo do uso pelo cliente. Alterações na data de viagem devem ser comunicadas com no mínimo 48 horas de antecedência.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">5. Política de Uso Justo (Fair Use Policy)</h3>
+                    <p className="text-justify">Para garantir a qualidade da rede para todos os usuários, os planos "ilimitados" estão sujeitos a uma Política de Uso Justo. Caso o consumo de dados exceda padrões considerados abusivos em um curto período, a operadora local parceira reserva-se o direito de reduzir temporariamente a velocidade da conexão ou até mesmo interromper o serviço, sem direito a reembolso.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">6. Cobertura e Qualidade do Sinal</h3>
+                    <p className="text-justify">A Plus SIM utiliza redes de operadoras locais nos países de destino (ex: T-Mobile, AT&amp;T, Vodafone, Orange). A qualidade do sinal, velocidade de conexão (4G/5G) e cobertura dependem da infraestrutura da operadora local e de fatores externos como geografia, clima e congestionamento de rede, sobre os quais a Plus SIM não possui controle direto.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">7. Cancelamento e Reembolso</h3>
+                    <p className="text-justify"><strong>7.1. Direito de Arrependimento:</strong> De acordo com o Artigo 49 do Código de Defesa do Consumidor (CDC), o cliente tem o prazo de 7 (sete) dias corridos a partir da compra para solicitar o cancelamento e estorno integral, desde que o chip físico não tenha sido destacado/usado ou o eSIM não tenha sido ativado/instalado.</p>
+                    <p className="text-justify"><strong>7.2. Falha Técnica:</strong> Caso o serviço apresente falha técnica comprovada que impossibilite o uso, o cliente deve entrar em contato imediato com nosso suporte técnico ainda em viagem. O reembolso total ou parcial será analisado caso o problema não possa ser resolvido remotamente.</p>
+                    <p className="text-justify"><strong>7.3. Exclusões:</strong> Não haverá reembolso em casos de: aparelho incompatível, aparelho bloqueado, erro na configuração por parte do usuário sem consulta ao suporte, ou desistência após o início da vigência do plano.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">8. Proteção de Dados (LGPD)</h3>
+                    <p className="text-justify">A Plus SIM respeita a privacidade de seus usuários e processa dados pessoais apenas para a finalidade de processamento de pedidos e suporte, em conformidade com a Lei Geral de Proteção de Dados (LGPD). Seus dados não serão compartilhados com terceiros para fins de marketing sem consentimento expresso.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">9. Disposições Finais</h3>
+                    <p className="text-justify">A Plus SIM reserva-se o direito de alterar estes termos a qualquer momento, visando a melhoria do serviço.</p>
+                    <p className="mt-8 font-bold border-t border-slate-100 pt-8">Plus SIM - Conectando sua viagem ao mundo.<br/>www.plussim.com | info@plussim.com</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const PrivacyPage = ({ setView }) => {
+    return (
+        <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500">
+            <div className="max-w-4xl mx-auto px-6">
+                <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Home</span>
+                    <ChevronRight size={12} />
+                    <span className="text-[#1A2B6D]">Política de Privacidade</span>
+                </nav>
+                <div className="bg-white rounded-[32px] p-8 md:p-12 border border-slate-100 shadow-xl prose prose-slate max-w-none prose-headings:text-[#1A2B6D] prose-headings:font-black prose-p:font-medium prose-p:text-slate-500 prose-p:leading-relaxed prose-li:font-medium prose-li:text-slate-500">
+                    <h1 className="text-3xl md:text-5xl font-black text-[#1A2B6D] mb-8 tracking-tighter border-b border-slate-100 pb-8 text-center">Política de Privacidade</h1>
+                    <p className="text-justify">A Plus Sim (www.plussim.com) valoriza a privacidade dos seus usuários. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos seus dados pessoais em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">1. Coleta de Dados Pessoais</h3>
+                    <p className="text-justify">Coletamos informações que você nos fornece diretamente ao realizar uma compra ou se cadastrar em nosso site, tais como:</p>
+                    <ul>
+                        <li>Nome completo e CPF;</li>
+                        <li>Endereço de e-mail e número de telefone;</li>
+                        <li>Endereço de entrega e cobrança;</li>
+                        <li>Dados de viagem (datas e destinos) para ativação do chip.</li>
+                    </ul>
+                    
+                    <h3 className="text-xl mt-8 mb-4">2. Finalidade do Tratamento de Dados</h3>
+                    <p className="text-justify">Os dados coletados são utilizados para:</p>
+                    <ul>
+                        <li>Processar e entregar seus pedidos (chips físicos ou eSIMs);</li>
+                        <li>Autenticar sua identidade e prevenir fraudes;</li>
+                        <li>Prestar suporte técnico durante sua viagem;</li>
+                        <li>Enviar comunicações transacionais (confirmação de pedido, status de entrega);</li>
+                        <li>Enviar ofertas e novidades (apenas mediante seu consentimento).</li>
+                    </ul>
+                    
+                    <h3 className="text-xl mt-8 mb-4">3. Pagamentos e Segurança</h3>
+                    <p className="text-justify">As transações de pagamento são processadas por parceiros especializados (PagBrasil / Paypal). A Plus SIM não armazena dados sensíveis de cartões de crédito em seus servidores. Todo o tráfego de dados é protegido por criptografia SSL (Secure Socket Layer).</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">4. Compartilhamento de Dados</h3>
+                    <p className="text-justify">Seus dados podem ser compartilhados com terceiros apenas quando estritamente necessário para a execução do serviço, como:</p>
+                    <ul>
+                        <li>Empresas de logística e Correios para entrega do chip físico;</li>
+                        <li>Operadoras de telefonia parceiras para ativação do serviço no exterior;</li>
+                        <li>Autoridades judiciais, quando houver obrigação legal.</li>
+                    </ul>
+                    
+                    <h3 className="text-xl mt-8 mb-4">5. Política de Cookies</h3>
+                    <p className="text-justify">Utilizamos cookies para melhorar sua experiência de navegação:</p>
+                    <ul>
+                        <li><strong>Cookies Essenciais:</strong> Necessários para o funcionamento do carrinho de compras.</li>
+                        <li><strong>Cookies de Desempenho:</strong> Ajudam-nos a entender como os usuários interagem com o site (Google Analytics).</li>
+                        <li><strong>Cookies de Marketing:</strong> Utilizados para exibir anúncios relevantes baseados no seu interesse.</li>
+                    </ul>
+                    
+                    <h3 className="text-xl mt-8 mb-4">6. Direitos do Titular (LGPD)</h3>
+                    <p className="text-justify">Em conformidade com a LGPD, você tem o direito de:</p>
+                    <ul>
+                        <li>Confirmar a existência de tratamento de seus dados;</li>
+                        <li>Acessar, corrigir ou anonimizar seus dados;</li>
+                        <li>Solicitar a exclusão de seus dados pessoais (salvo quando a guarda for necessária por lei);</li>
+                        <li>Revogar o consentimento para fins de marketing a qualquer momento.</li>
+                    </ul>
+                    
+                    <h3 className="text-xl mt-8 mb-4">7. Retenção de Dados</h3>
+                    <p>Mantemos seus dados apenas pelo tempo necessário para cumprir as finalidades descritas nesta política ou para cumprir obrigações legais de guarda de registros.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">8. Alterações nesta Política</h3>
+                    <p>Reservamo-nos o direito de modificar esta política a qualquer momento. Alterações entrarão em vigor imediatamente após a publicação no site.</p>
+                    
+                    <h3 className="text-xl mt-8 mb-4">9. Contato</h3>
+                    <p>Para dúvidas sobre sua privacidade ou para exercer seus direitos, entre em contato conosco através do e-mail: info@plussim.com</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- COMPONENTE PRINCIPAL ---
 
 export default function App() {
@@ -316,7 +441,7 @@ export default function App() {
                 )}
             </nav>
 
-            {view === 'home' ? (
+            {view === 'home' && (
                 <>
                     {/* BANNER PRINCIPAL COM NOVA IMAGEM E SEM BOTÕES */}
                     <section className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden">
@@ -533,8 +658,15 @@ export default function App() {
                         </div>
                     </section>
                 </>
-            ) : (
+            )}
+            {view === 'product' && (
                 <ProductPage setView={setView} />
+            )}
+            {view === 'terms' && (
+                <TermsPage setView={setView} />
+            )}
+            {view === 'privacy' && (
+                <PrivacyPage setView={setView} />
             )}
 
             {/* RODAPÉ */}
@@ -545,7 +677,7 @@ export default function App() {
                         <p className="text-sm leading-relaxed font-medium mb-6 max-w-xs">Conectividade em alta velocidade para viajantes brasileiros. Sem fronteiras, sem complicações.</p>
                         <div className="flex gap-4"><a href="https://facebook.com/plussimtravel" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="https://instagram.com/plussim_travel" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a><a href="https://wa.me/13213104764" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a></div>
                     </div>
-                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setActiveCategory('eSIM'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setActiveCategory('Chip Físico'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Seja Nosso Parceiro</a></li><li><a href="#" className="hover:text-[#00D1FF]">Termos e Condições</a></li><li><a href="#" className="hover:text-[#00D1FF]">Privacidade</a></li></ul></div>
+                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setActiveCategory('eSIM'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setActiveCategory('Chip Físico'); setView('home'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Seja Nosso Parceiro</a></li><li><button onClick={() => { setView('terms'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Termos e Condições</button></li><li><button onClick={() => { setView('privacy'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Privacidade</button></li></ul></div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Contato</h5><ul className="space-y-4 text-sm font-bold"><li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={18} className="text-[#00D1FF]" /> <span>+1(321)310-4764</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Phone size={18} className="text-[#00D1FF] font-bold" /> <span>+55(11)4680-6732</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Mail size={18} className="text-[#00D1FF]" /> <span>info@plussim.com</span></li><li className="flex items-start justify-center md:justify-start gap-3 leading-tight"><MapPin size={18} className="text-[#00D1FF] flex-shrink-0" /> <span className="text-white/70 text-xs text-left">4700 Millenia Blvd, Suite 175<br/>Orlando/FL - 32839</span></li></ul></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-white/5 text-center text-[9px] uppercase tracking-[0.3em] font-black opacity-30">© 2024 PLUS SIM - TECNOLOGIA ESIM GLOBAL</div>

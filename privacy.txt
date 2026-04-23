@@ -1,0 +1,21 @@
+﻿
+Política de Privacidade - Plus SIM
+A Plus Sim (www.plussim.com) valoriza a privacidade dos seus usuários. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos seus dados pessoais em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
+1. Coleta de Dados Pessoais
+Coletamos informações que você nos fornece diretamente ao realizar uma compra ou se cadastrar em nosso site, tais como:• Nome completo e CPF;• Endereço de e-mail e número de telefone;• Endereço de entrega e cobrança;• Dados de viagem (datas e destinos) para ativação do chip.
+2. Finalidade do Tratamento de Dados
+Os dados coletados são utilizados para:• Processar e entregar seus pedidos (chips físicos ou eSIMs);• Autenticar sua identidade e prevenir fraudes;• Prestar suporte técnico durante sua viagem;• Enviar comunicações transacionais (confirmação de pedido, status de entrega);• Enviar ofertas e novidades (apenas mediante seu consentimento).
+3. Pagamentos e Segurança
+As transações de pagamento são processadas por parceiros especializados (PagBrasil / Paypal). A Plus SIM não armazena dados sensíveis de cartões de crédito em seus servidores. Todo o tráfego de dados é protegido por criptografia SSL (Secure Socket Layer).
+4. Compartilhamento de Dados
+Seus dados podem ser compartilhados com terceiros apenas quando estritamente necessário para a execução do serviço, como:• Empresas de logística e Correios para entrega do chip físico;• Operadoras de telefonia parceiras para ativação do serviço no exterior;• Autoridades judiciais, quando houver obrigação legal.
+5. Política de Cookies
+Utilizamos cookies para melhorar sua experiência de navegação:• Cookies Essenciais: Necessários para o funcionamento do carrinho de compras.• Cookies de Desempenho: Ajudam-nos a entender como os usuários interagem com o site (Google Analytics).• Cookies de Marketing: Utilizados para exibir anúncios relevantes baseados no seu interesse.
+6. Direitos do Titular (LGPD)
+Em conformidade com a LGPD, você tem o direito de:• Confirmar a existência de tratamento de seus dados;• Acessar, corrigir ou anonimizar seus dados;• Solicitar a exclusão de seus dados pessoais (salvo quando a guarda for necessária por lei);• Revogar o consentimento para fins de marketing a qualquer momento.
+7. Retenção de Dados
+Mantemos seus dados apenas pelo tempo necessário para cumprir as finalidades descritas nesta política ou para cumprir obrigações legais de guarda de registros.
+8. Alterações nesta Política
+Reservamo-nos o direito de modificar esta política a qualquer momento. Alterações entrarão em vigor imediatamente após a publicação no site.
+9. Contato
+Para dúvidas sobre sua privacidade ou para exercer seus direitos, entre em contato conosco através do e-mail: info@plussim.com
