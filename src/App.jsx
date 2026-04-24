@@ -241,7 +241,96 @@ const ProductPage = ({ setView }) => {
     );
 };
 
-// --- COMPONENTES DE PÁGINAS LEGAIS ---
+// --- COMPONENTES DE PÁGINAS LEGAIS E INFORMATIVAS ---
+
+const CompatibilityPage = ({ setView }) => {
+    return (
+        <div className="pt-8 pb-20 bg-white animate-in fade-in duration-500 min-h-screen">
+            <div className="max-w-4xl mx-auto px-6">
+                <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
+                    <span className="cursor-pointer hover:text-[#2E5BFF]" onClick={() => setView('home')}>Início</span>
+                    <ChevronRight size={12} />
+                    <span className="text-[#1A2B6D]">Compatibilidade eSIM</span>
+                </nav>
+                
+                <div className="bg-white rounded-[32px] p-8 md:p-12 border border-slate-100 shadow-xl">
+                    <div className="text-center mb-12">
+                        <h1 className="text-3xl md:text-5xl font-black text-[#1A2B6D] mb-4 tracking-tighter">Compatibilidade eSIM</h1>
+                        <p className="text-slate-500 font-medium text-lg">Verifique se seu celular é compatível com a tecnologia eSIM em poucos passos.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8 mb-12">
+                        <div className="bg-[#F9F5FF] p-8 rounded-[24px] border border-[#E0D4FF]">
+                            <h3 className="text-xl font-black text-[#1A2B6D] mb-4 flex items-center gap-2"><Smartphone className="text-[#A64DFF]" size={24}/> Método 1</h3>
+                            <p className="text-slate-600 font-medium text-justify">Digite <strong className="text-[#1A2B6D]">*#06#</strong> no discador de seu celular. Se aparecer o código <strong className="text-[#1A2B6D]">EID</strong>, o celular é compatível com eSIM.</p>
+                        </div>
+                        <div className="bg-[#F0F9FF] p-8 rounded-[24px] border border-[#BAE6FD]">
+                            <h3 className="text-xl font-black text-[#1A2B6D] mb-4 flex items-center gap-2"><Search className="text-[#00D1FF]" size={24}/> Método 2</h3>
+                            <p className="text-slate-600 font-medium mb-4 text-justify">Confira nas configurações do seu celular se há a opção "adicionar eSIM":</p>
+                            <ul className="space-y-3">
+                                <li className="flex items-start gap-2"><Check size={18} className="text-[#00D1FF] flex-shrink-0 mt-0.5"/><span className="text-sm font-bold text-slate-700">iPhone: <span className="font-medium block">Ajustes &gt; Celular &gt; "Adicionar eSIM"</span></span></li>
+                                <li className="flex items-start gap-2"><Check size={18} className="text-[#00D1FF] flex-shrink-0 mt-0.5"/><span className="text-sm font-bold text-slate-700">Android: <span className="font-medium block">Configurações &gt; Conexões &gt; Gerenciamento de Cartão SIM &gt; "Adicionar eSIM"</span></span></li>
+                            </ul>
+                            <p className="text-sm text-slate-500 mt-4 font-medium italic">Caso encontre esta opção, o celular é compatível.</p>
+                        </div>
+                    </div>
+
+                    <div className="prose prose-slate max-w-none prose-headings:text-[#1A2B6D] prose-headings:font-black prose-p:font-medium prose-p:text-slate-500 prose-li:font-medium prose-li:text-slate-600">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#1A2B6D] mb-6 tracking-tight border-b border-slate-100 pb-4">Lista de Modelos Compatíveis</h2>
+                        <p className="text-sm text-amber-600 bg-amber-50 p-4 rounded-xl mb-8 font-bold border border-amber-100">* Sugerimos que verifique através de um dos métodos acima para garantir a compatibilidade.</p>
+                        
+                        <h3 className="text-xl mt-8 mb-4">Apple</h3>
+                        <ul className="[&>li]:text-justify">
+                            <li><strong>Série iPhone 17:</strong> 17, 17 Plus, 17 Pro, 17 Pro Max.</li>
+                            <li><strong>Série iPhone 16:</strong> 16, 16 Plus, 16 Pro, 16 Pro Max.</li>
+                            <li><strong>Série iPhone 15:</strong> 15, 15 Plus, 15 Pro, 15 Pro Max.</li>
+                            <li><strong>Série iPhone 14:</strong> 14, 14 Plus, 14 Pro, 14 Pro Max.</li>
+                            <li><strong>Série iPhone 13:</strong> 13, 13 mini, 13 Pro, 13 Pro Max.</li>
+                            <li><strong>Série iPhone 12:</strong> 12, 12 mini, 12 Pro, 12 Pro Max.</li>
+                            <li><strong>Série iPhone 11:</strong> 11, 11 Pro, 11 Pro Max.</li>
+                            <li><strong>Modelos Legados:</strong> iPhone XS, XS Max, XR.</li>
+                            <li><strong>iPhone SE:</strong> SE 2 (2020) e SE 3 (2022).</li>
+                        </ul>
+
+                        <h3 className="text-xl mt-8 mb-4">Samsung (Galaxy)</h3>
+                        <ul className="[&>li]:text-justify">
+                            <li><strong>Série S (Flagships):</strong> S26, S26+, S26 Ultra, S25, S25+, S25 Ultra, S24, S24+, S24 Ultra (incluindo S24 FE), S23, S23+, S23 Ultra (incluindo S23 FE), S22, S22+, S22 Ultra, S21, S21+ 5G, S21 Ultra 5G (S21 FE não suporta eSIM), S20, S20+, S20 Ultra.</li>
+                            <li><strong>Série Z (Dobráveis):</strong> Galaxy Z Fold 2, 3, 4, 5, 6 e 7; Galaxy Z Flip (todas as gerações).</li>
+                            <li><strong>Série Note:</strong> Note 20 e Note 20 Ultra 5G.</li>
+                            <li><strong>Série A:</strong> Galaxy A56, A55, A54 e A35 (apenas versões 5G selecionadas. Verifique nas configurações do celular se há a opção de adicionar eSIM).</li>
+                        </ul>
+
+                        <h3 className="text-xl mt-8 mb-4">Google (Pixel)</h3>
+                        <ul className="[&>li]:text-justify">
+                            <li><strong>Gerações Recentes:</strong> Pixel 10, 10 Pro, 10 Pro XL; Pixel 9, 9 Pro, 9 Pro XL, 9 Pro Fold.</li>
+                            <li><strong>Gerações Anteriores:</strong> Pixel 8, 8 Pro, 8a; Pixel 7, 7 Pro, 7a; Pixel 6, 6 Pro, 6a; Pixel 5, 5a; Pixel 4, 4 XL, 4a.</li>
+                        </ul>
+
+                        <h3 className="text-xl mt-8 mb-4">Motorola</h3>
+                        <ul className="[&>li]:text-justify">
+                            <li><strong>Linha Razr:</strong> Razr 50 Ultra/Plus, Razr 50, Razr 40 Ultra, Razr 40, Razr 2022, Razr 5G.</li>
+                            <li><strong>Linha Edge:</strong> Edge 50 Ultra, 50 Pro, 50 Fusion; Edge 40, 40 Pro, 40 Neo; Edge 30 Pro, 30 Fusion.</li>
+                            <li><strong>Linha Moto G:</strong> Moto G85, G84 5G, G55, G54 5G (suporte a eSIM expandido em 2024/2025).</li>
+                        </ul>
+
+                        <h3 className="text-xl mt-8 mb-4">Xiaomi</h3>
+                        <ul className="[&>li]:text-justify">
+                            <li><strong>Série Principal:</strong> Xiaomi 16, 16 Pro, 16 Ultra; Xiaomi 15, 15 Pro; Xiaomi 14, 14 Pro, 14 Ultra; Xiaomi 13, 13 Pro, 13 Ultra, 13 Lite; Xiaomi 12T Pro.</li>
+                            <li><strong>Redmi:</strong> Redmi Note 15 Pro+, Note 14 Pro+, Note 13 Pro 5G, Note 13 Pro+ 5G.</li>
+                        </ul>
+
+                        <h3 className="text-xl mt-8 mb-4">Outras Marcas Relevantes</h3>
+                        <ul className="[&>li]:text-justify">
+                            <li><strong>Sony:</strong> Xperia 1 (IV, V, VI), Xperia 5 (IV, V, VI), Xperia 10 (IV, V, VI).</li>
+                            <li><strong>Oppo:</strong> Find X7 Ultra, Find X6 Pro, Find X5 Pro, Find N3, Find N3 Flip.</li>
+                            <li><strong>Huawei:</strong> P60 Pro, P50 Pro, Mate 50 Pro, Mate 40 Pro.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const TermsPage = ({ setView }) => {
     return (
@@ -465,7 +554,7 @@ export default function App() {
                     <div className="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setView('category-esim'); window.scrollTo(0, 0); }}>Planos eSIM</button>
                         <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setView('category-physical'); window.scrollTo(0, 0); }}>Planos Chip Físico</button>
-                        <a href="#" className="hover:text-[#2E5BFF] transition-colors">Compatibilidade eSIM</a>
+                        <button className="hover:text-[#2E5BFF] transition-colors" onClick={() => { setView('compatibility'); window.scrollTo(0, 0); }}>Compatibilidade eSIM</button>
                         <a href="#" className="hover:text-[#2E5BFF] transition-colors">Blog</a>
                         <div className="h-6 w-px bg-slate-200"></div>
                         <button className="relative p-2 hover:bg-slate-100 rounded-full text-[#1A2B6D]"><ShoppingCart size={22} /><span className="absolute top-0 right-0 w-4 h-4 bg-[#A64DFF] text-white text-[10px] rounded-full flex items-center justify-center font-bold">0</span></button>
@@ -476,7 +565,7 @@ export default function App() {
                     <div className="md:hidden bg-white border-t border-slate-100 absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-2">
                         <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setMobileMenuOpen(false); setView('category-esim'); window.scrollTo(0, 0); }}>Planos eSIM</button>
                         <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setMobileMenuOpen(false); setView('category-physical'); window.scrollTo(0, 0); }}>Planos Chip Físico</button>
-                        <a href="#" className="font-bold text-[#1A2B6D]">Compatibilidade eSIM</a>
+                        <button className="text-left font-bold text-[#1A2B6D]" onClick={() => { setMobileMenuOpen(false); setView('compatibility'); window.scrollTo(0, 0); }}>Compatibilidade eSIM</button>
                         <a href="#" className="font-bold text-[#1A2B6D]">Blog</a>
                     </div>
                 )}
@@ -503,11 +592,12 @@ export default function App() {
 
                                 <h1 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 tracking-tighter">
                                     Sua internet <br /> global <br />
-                                    <span className="text-[#93C5FD]">sem fronteiras.</span>
+                                    <span className="text-[#93C5FD]">sem fronteiras</span>
                                 </h1>
 
                                 <p className="text-lg md:text-xl text-white/90 mb-6 max-w-xl font-medium leading-relaxed">
-                                    Chegue ao seu destino conectado! Internet 5G ilimitada nos EUA, Europa, Ásia e em mais 200 destinos.
+                                    Chegue ao seu destino conectado!<br />
+                                    Internet 5G ilimitada nos EUA, Europa, Ásia e + 200 destinos
                                 </p>
                             </div>
 
@@ -709,6 +799,9 @@ export default function App() {
             {view === 'category-physical' && (
                 <CategoryPage category="Chip Físico" setView={setView} />
             )}
+            {view === 'compatibility' && (
+                <CompatibilityPage setView={setView} />
+            )}
             {view === 'terms' && (
                 <TermsPage setView={setView} />
             )}
@@ -724,7 +817,7 @@ export default function App() {
                         <p className="text-sm leading-relaxed font-medium mb-6 max-w-xs">Conectividade em alta velocidade para viajantes brasileiros. Sem fronteiras, sem complicações.</p>
                         <div className="flex gap-4"><a href="https://facebook.com/plussimtravel" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="https://instagram.com/plussim_travel" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a><a href="https://wa.me/13213104764" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a></div>
                     </div>
-                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setView('category-esim'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setView('category-physical'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Seja Nosso Parceiro</a></li><li><button onClick={() => { setView('terms'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Termos e Condições</button></li><li><button onClick={() => { setView('privacy'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Privacidade</button></li></ul></div>
+                    <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Links</h5><ul className="space-y-3 text-sm font-bold flex flex-col items-center md:items-start"><li><button onClick={() => { setView('category-esim'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos eSIM</button></li><li><button onClick={() => { setView('category-physical'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Planos Chip Físico</button></li><li><button onClick={() => { setView('compatibility'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Compatibilidade eSIM</button></li><li><a href="#" className="hover:text-[#00D1FF]">Blog</a></li><li><a href="#" className="hover:text-[#00D1FF]">Seja Nosso Parceiro</a></li><li><button onClick={() => { setView('terms'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Termos e Condições</button></li><li><button onClick={() => { setView('privacy'); window.scrollTo(0, 0); }} className="hover:text-[#00D1FF] transition-colors">Privacidade</button></li></ul></div>
                     <div><h5 className="text-white font-black mb-6 uppercase text-lg tracking-widest">Contato</h5><ul className="space-y-4 text-sm font-bold"><li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={18} className="text-[#00D1FF]" /> <span>+1(321)310-4764</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Phone size={18} className="text-[#00D1FF] font-bold" /> <span>+55(11)4680-6732</span></li><li className="flex items-center justify-center md:justify-start gap-3"><Mail size={18} className="text-[#00D1FF]" /> <span>info@plussim.com</span></li><li className="flex items-start justify-center md:justify-start gap-3 leading-tight"><MapPin size={18} className="text-[#00D1FF] flex-shrink-0" /> <span className="text-white/70 text-xs text-left">4700 Millenia Blvd, Suite 175<br/>Orlando/FL - 32839</span></li></ul></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-white/5 text-center text-[9px] uppercase tracking-[0.3em] font-black opacity-30">© 2026 PLUS SIM LLC - CONECTANDO VOCÊ AO MUNDO</div>

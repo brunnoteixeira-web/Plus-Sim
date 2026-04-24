@@ -1,0 +1,55 @@
+﻿
+Verifique se seu celular é compatível com eSIM em poucos passos
+Método 1
+Digite *#06# no discador de seu celular. Se aparecer o código EID, o celular é compatível com eSIM
+Método 2
+Confira nas configurações do seu celular se há a opção “adicionar eSIM”
+iPhone:
+Ajustes &gt; Celular &gt; “Adicionar eSIM”
+Android:
+Configurações &gt; Conexões (ou Redes Móveis) &gt; Gerenciamento de Cartão SIM (ou Chip) &gt; “Adicionar eSIM”
+Caso encontre esta opção, o celular é compatível com eSIM
+Lista de modelos que em geral são compatíveis com eSIM
+*Sugerimos que verifique através de um dos métodos acima para garantir a compatibilidade
+Apple 
+Série iPhone 17: 17, 17 Plus, 17 Pro, 17 Pro Max.
+Série iPhone 16: 16, 16 Plus, 16 Pro, 16 Pro Max.
+Série iPhone 15: 15, 15 Plus, 15 Pro, 15 Pro Max.
+Série iPhone 14: 14, 14 Plus, 14 Pro, 14 Pro Max.
+Série iPhone 13: 13, 13 mini, 13 Pro, 13 Pro Max.
+Série iPhone 12: 12, 12 mini, 12 Pro, 12 Pro Max.
+Série iPhone 11: 11, 11 Pro, 11 Pro Max.
+Modelos Legados: iPhone XS, XS Max, XR.
+iPhone SE: SE 2 (2020) e SE 3 (2022).
+Samsung (Galaxy)
+Série S (Flagships):
+S26, S26+, S26 Ultra
+S25, S25+, S25 Ultra.
+S24, S24+, S24 Ultra (incluindo S24 FE).
+S23, S23+, S23 Ultra (incluindo S23 FE).
+S22, S22+, S22 Ultra.
+S21, S21+ 5G, S21 Ultra 5G (S21 FE não suporta eSIM)
+S20, S20+, S20 Ultra.
+Série Z (Dobráveis): Galaxy Z Fold 2, 3, 4, 5, 6 e 7; Galaxy Z Flip (todas as gerações).
+Série Note: Note 20 e Note 20 Ultra 5G.
+Série A: Galaxy A56, A55, A54 e A35 (apenas versões 5G selecionadas. Verifique nas configurações do celular se há a opção de adicionar eSIM). 
+
+Google (Pixel)
+Gerações Recentes: Pixel 10, 10 Pro, 10 Pro XL; Pixel 9, 9 Pro, 9 Pro XL, 9 Pro Fold.
+Gerações Anteriores: Pixel 8, 8 Pro, 8a; Pixel 7, 7 Pro, 7a; Pixel 6, 6 Pro, 6a; Pixel 5, 5a; Pixel 4, 4 XL, 4a.
+Motorola
+Linha Razr: Razr 50 Ultra/Plus, Razr 50, Razr 40 Ultra, Razr 40, Razr 2022, Razr 5G.
+Linha Edge: Edge 50 Ultra, 50 Pro, 50 Fusion; Edge 40, 40 Pro, 40 Neo; Edge 30 Pro, 30 Fusion.
+Linha Moto G: Moto G85, G84 5G, G55, G54 5G (suporte a eSIM expandido em 2024/2025).
+Xiaomi
+Série Principal: Xiaomi 16, 16 Pro, 16 Ultra; Xiaomi 15, 15 Pro; Xiaomi 14, 14 Pro, 14 Ultra; Xiaomi 13, 13 Pro, 13 Ultra, 13 Lite; Xiaomi 12T Pro.
+Redmi: Redmi Note 15 Pro+, Note 14 Pro+, Note 13 Pro 5G, Note 13 Pro+ 5G.
+
+Outras Marcas Relevantes
+Sony: Xperia 1 (IV, V, VI), Xperia 5 (IV, V, VI), Xperia 10 (IV, V, VI).
+Oppo: Find X7 Ultra, Find X6 Pro, Find X5 Pro, Find N3, Find N3 Flip.
+Huawei: P60 Pro, P50 Pro, Mate 50 Pro, Mate 40 Pro.
+
+
+
+
