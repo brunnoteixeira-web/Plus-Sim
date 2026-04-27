@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    
+    <title>{{ page_title | escape }}</title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    <!-- Tailwind CSS -->
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <!-- Global JS -->
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+    <!-- Adicionar fontes do Google se necessário -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+      @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+      .animate-floating {
+        animation: floating 4s ease-in-out infinite;
+      }
+    </style>
+  </head>
+
+  <body class="bg-white min-h-screen flex flex-col font-['Inter']">
+    {% section 'header' %}
+
+    <main id="MainContent" class="flex-grow focus:outline-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+  </body>
+</html>

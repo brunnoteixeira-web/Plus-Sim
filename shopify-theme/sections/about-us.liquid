@@ -1,0 +1,157 @@
+<section class="py-24 bg-white relative overflow-hidden border-t border-slate-100">
+  <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="order-2 lg:order-1">
+              <h2 class="text-4xl md:text-5xl font-black text-[#1A2B6D] mb-8 tracking-tighter">{{ section.settings.heading }}</h2>
+              <div class="space-y-6 text-slate-500 text-lg leading-relaxed font-medium">
+                  <p class="text-[#1A2B6D] font-bold text-xl leading-relaxed">{{ section.settings.paragraph_1 }}</p>
+                  <p>{{ section.settings.paragraph_2 | replace: 'Plus Sim', '<span class="text-[#A64DFF] font-black">Plus Sim</span>' }}</p>
+                  <p>{{ section.settings.paragraph_3 }}</p>
+              </div>
+              
+              <!-- GRID DE ESTATÍSTICAS -->
+              <div class="mt-12 bg-slate-50 p-6 md:p-8 rounded-[32px] border border-slate-100 shadow-sm">
+                  <div class="grid grid-cols-1 sm:grid-cols-3 items-center gap-4 sm:gap-0">
+                      
+                      <!-- Estatística 1 -->
+                      <div class="flex items-center gap-4 text-left px-4">
+                          <div class="w-12 h-12 sm:w-10 sm:h-10 bg-[#F3E8FF] rounded-xl flex items-center justify-center text-[#A64DFF] shadow-sm flex-shrink-0">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                          </div>
+                          <div>
+                              <div class="text-xl sm:text-sm md:text-lg font-black text-[#1A2B6D] leading-tight whitespace-nowrap">{{ section.settings.stat_1_value }}</div>
+                              <div class="text-xs sm:text-[8px] md:text-[10px] font-bold uppercase text-slate-400 tracking-wider">{{ section.settings.stat_1_label }}</div>
+                          </div>
+                      </div>
+                      
+                      <!-- Estatística 2 -->
+                      <div class="flex items-center gap-4 text-left px-4 pt-4 sm:pt-0 border-t sm:border-t-0 sm:border-l border-slate-200">
+                          <div class="w-12 h-12 sm:w-10 sm:h-10 bg-[#DCFCE7] rounded-xl flex items-center justify-center text-green-600 shadow-sm flex-shrink-0">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                          </div>
+                          <div>
+                              <div class="text-xl sm:text-sm md:text-lg font-black text-[#1A2B6D] leading-tight whitespace-nowrap">{{ section.settings.stat_2_value }}</div>
+                              <div class="text-xs sm:text-[8px] md:text-[10px] font-bold uppercase text-slate-400 tracking-wider">{{ section.settings.stat_2_label }}</div>
+                          </div>
+                      </div>
+                      
+                      <!-- Estatística 3 -->
+                      <div class="flex items-center gap-4 text-left px-4 pt-4 sm:pt-0 border-t sm:border-t-0 sm:border-l border-slate-200">
+                          <div class="w-12 h-12 sm:w-10 sm:h-10 bg-[#E0F2FE] rounded-xl flex items-center justify-center text-[#2E5BFF] shadow-sm flex-shrink-0">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                          </div>
+                          <div>
+                              <div class="text-xl sm:text-sm md:text-lg font-black text-[#1A2B6D] leading-tight whitespace-nowrap">{{ section.settings.stat_3_value }}</div>
+                              <div class="text-xs sm:text-[8px] md:text-[10px] font-bold uppercase text-slate-400 tracking-wider">{{ section.settings.stat_3_label }}</div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+          
+          <div class="order-1 lg:order-2">
+              <div class="relative">
+                  <div class="absolute -inset-4 bg-gradient-to-br from-[#00D1FF] to-[#A64DFF] rounded-[50px] blur-2xl opacity-10"></div>
+                  <div class="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
+                      {% if section.settings.image != blank %}
+                          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading }}" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
+                      {% else %}
+                          <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=80&w=1200" alt="Viajantes felizes" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
+                      {% endif %}
+                      <div class="absolute inset-0 bg-gradient-to-t from-[#1A2B6D]/60 to-transparent"></div>
+                      <div class="absolute bottom-8 left-8 right-8 text-white">
+                          <div class="flex items-center gap-2 mb-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                              <span class="text-xs font-black uppercase tracking-[0.2em]">Nossa Missão</span>
+                          </div>
+                          <div class="text-xl font-black text-white">Conectar você à liberdade em qualquer lugar do mundo.</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+{% schema %}
+{
+"name": "Sobre Nós",
+"settings": [
+  {
+    "type": "text",
+    "id": "heading",
+    "label": "Título",
+    "default": "Sobre nós"
+  },
+  {
+    "type": "textarea",
+    "id": "paragraph_1",
+    "label": "Parágrafo Destaque",
+    "default": "Viajar é descobrir o novo; e sabemos que estar conectado traz a segurança necessária para explorar o mundo com liberdade!"
+  },
+  {
+    "type": "textarea",
+    "id": "paragraph_2",
+    "label": "Parágrafo 2",
+    "default": "A Plus Sim está há mais de 8 anos acompanhando e conectando pessoas ao redor do mundo, em mais de 200 destinos, unindo a melhor cobertura de internet a um suporte que fala a sua língua."
+  },
+  {
+    "type": "textarea",
+    "id": "paragraph_3",
+    "label": "Parágrafo 3",
+    "default": "Não entregamos apenas um chip ou um eSIM; entregamos a tranquilidade de saber que desde o primeiro contato e até o fim da sua viagem, a Plus Sim estará ao seu lado."
+  },
+  {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Imagem de Destaque"
+  },
+  {
+    "type": "header",
+    "content": "Estatísticas"
+  },
+  {
+    "type": "text",
+    "id": "stat_1_value",
+    "label": "Valor 1",
+    "default": "8+ Anos"
+  },
+  {
+    "type": "text",
+    "id": "stat_1_label",
+    "label": "Label 1",
+    "default": "Existência"
+  },
+  {
+    "type": "text",
+    "id": "stat_2_value",
+    "label": "Valor 2",
+    "default": "100.000+"
+  },
+  {
+    "type": "text",
+    "id": "stat_2_label",
+    "label": "Label 2",
+    "default": "Clientes"
+  },
+  {
+    "type": "text",
+    "id": "stat_3_value",
+    "label": "Valor 3",
+    "default": "200+"
+  },
+  {
+    "type": "text",
+    "id": "stat_3_label",
+    "label": "Label 3",
+    "default": "Destinos"
+  }
+],
+"presets": [
+  {
+    "name": "Sobre Nós"
+  }
+]
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+{% assign dest_title = title | downcase %}
+{% if dest_title contains 'estados unidos' or dest_title contains 'eua' %}
+  <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="w-6 h-6"><path d="M 12 34 L 28 35 L 36 38 L 48 37 L 62 39 L 78 34 L 88 40 L 85 56 L 81 64 L 79 72 L 85 85 L 80 88 L 74 76 L 62 76 L 50 82 L 40 85 L 35 88 L 25 86 L 15 88 L 10 75 L 12 60 L 8 45 Z" /></svg>
+{% elsif dest_title contains 'europa' %}
+  <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="w-6 h-6"><path d="M 30 85 L 20 70 L 25 50 L 40 45 L 35 30 L 45 25 L 55 10 L 65 10 C 65 10, 60 25, 55 35 L 55 45 L 75 40 L 95 50 L 90 70 C 90 70, 75 75, 70 70 L 80 85 L 75 90 C 75 90, 65 80, 60 80 L 50 95 L 40 95 Z" /><path d="M 20 40 L 28 30 L 30 45 Z" /></svg>
+{% elsif dest_title contains 'sul' %}
+  <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="w-6 h-6"><path d="M 35 15 C 45 10 55 12 65 18 L 85 45 C 80 50 78 65 65 75 L 45 95 C 42 90 38 75 35 60 L 25 40 C 22 30 25 20 35 15 Z" /></svg>
+{% elsif dest_title contains 'norte' %}
+  <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="w-6 h-6"><path d="M 20 25 C 40 10 70 15 80 30 C 90 45 75 65 65 60 C 55 55 45 85 35 85 C 25 85 30 65 25 55 C 15 50 10 35 20 25 Z" /></svg>
+{% elsif dest_title contains 'ásia' or dest_title contains 'asia' %}
+  <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="w-6 h-6"><path d="M 25 20 C 40 15 60 15 75 10 C 85 20 90 40 85 50 C 80 60 75 75 70 70 C 65 65 60 60 55 60 C 50 70 45 85 45 85 C 40 80 40 70 35 60 C 25 65 15 70 15 65 C 10 50 15 45 25 40 C 25 30 20 25 25 20 Z" /><path d="M 88 35 C 92 38 95 45 90 48" stroke-width="3" opacity="0.8" /></svg>
+{% elsif dest_title contains 'mundo' or dest_title contains 'global' %}
+  <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" class="w-6 h-6"><path d="M 12 28 L 22 20 L 32 22 L 35 30 L 28 42 L 18 38 L 12 28 Z" /><path d="M 28 44 L 33 45 L 30 50 L 25 50 Z" /><path d="M 30 53 L 40 53 L 36 78 L 28 65 Z" /><path d="M 42 30 L 52 24 L 58 24 L 56 34 L 46 36 L 42 30 Z" /><path d="M 45 42 L 58 40 L 64 52 L 54 75 L 44 60 L 45 42 Z" /><path d="M 58 22 L 75 18 L 88 28 L 82 45 L 72 45 L 68 35 L 56 32 Z" /><path d="M 78 60 L 92 64 L 88 74 L 75 70 Z" /></svg>
+{% else %}
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+{% endif %}

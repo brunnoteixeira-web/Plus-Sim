@@ -1,0 +1,157 @@
+<section class="py-24 bg-[#F9F5FF] text-center" id="shopify-section-faq">
+  <div class="max-w-4xl mx-auto px-6">
+      <div class="mb-12">
+          <h2 class="text-4xl font-black text-[#1A2B6D] mb-4 tracking-tighter text-center">{{ section.settings.heading }}</h2>
+          <p class="text-slate-500 font-medium">{{ section.settings.subheading }}</p>
+      </div>
+      
+      <div class="grid gap-3 text-left" id="faq-container">
+          {% for block in section.blocks %}
+              <div class="faq-item bg-white p-5 rounded-2xl border border-[#E0D4FF] hover:border-[#A64DFF] transition-all cursor-pointer shadow-sm group {% if forloop.index > 8 %}hidden{% endif %}" data-index="{{ forloop.index }}">
+                  <div class="faq-question flex justify-between items-center">
+                      <span class="font-bold text-[#1A2B6D] text-base md:text-lg leading-tight">{{ block.settings.question }}</span>
+                      <div class="faq-icon w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center transition-all bg-[#F3E8FF] text-[#A64DFF] group-hover:bg-[#A64DFF] group-hover:text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                      </div>
+                  </div>
+                  <div class="faq-answer mt-4 text-slate-500 font-medium leading-relaxed hidden whitespace-pre-line">
+                      {{ block.settings.answer }}
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+      
+      {% if section.blocks.size > 8 %}
+      <div class="mt-8 text-center">
+          <button id="faq-toggle-btn" class="px-8 py-3.5 bg-slate-100 hover:bg-slate-200 text-[#1A2B6D] font-black rounded-xl transition-all uppercase tracking-wider text-sm border border-slate-200">
+              Ver Mais
+          </button>
+      </div>
+      {% endif %}
+      
+      <div class="mt-16 p-10 bg-white rounded-[40px] border border-[#E0D4FF] shadow-xl flex flex-col items-center gap-6">
+          <h3 class="text-2xl font-black text-[#1A2B6D]">{{ section.settings.contact_heading }}</h3>
+          <p class="text-slate-500 font-medium -mt-2 text-center">{{ section.settings.contact_subheading }}</p>
+          <a href="{{ section.settings.whatsapp_link }}" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] hover:bg-[#128C7E] text-white px-10 py-4 rounded-2xl font-black text-lg flex items-center gap-3 shadow-lg transition-all hover:scale-105 active:scale-95">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> 
+              Fale Conosco
+          </a>
+      </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const faqItems = document.querySelectorAll('.faq-item');
+  const toggleBtn = document.getElementById('faq-toggle-btn');
+  let showingAll = false;
+
+  // Accordion Logic
+  faqItems.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+          const answer = item.querySelector('.faq-answer');
+          const icon = item.querySelector('.faq-icon');
+          
+          // Close others
+          faqItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                  otherItem.querySelector('.faq-answer').classList.add('hidden');
+                  otherItem.classList.remove('border-[#A64DFF]');
+                  otherItem.querySelector('.faq-icon').classList.remove('bg-[#A64DFF]', 'text-white', 'rotate-90');
+                  otherItem.querySelector('.faq-icon').classList.add('bg-[#F3E8FF]', 'text-[#A64DFF]');
+              }
+          });
+
+          // Toggle current
+          answer.classList.toggle('hidden');
+          if (!answer.classList.contains('hidden')) {
+              item.classList.add('border-[#A64DFF]');
+              icon.classList.add('bg-[#A64DFF]', 'text-white', 'rotate-90');
+              icon.classList.remove('bg-[#F3E8FF]', 'text-[#A64DFF]');
+          } else {
+              item.classList.remove('border-[#A64DFF]');
+              icon.classList.remove('bg-[#A64DFF]', 'text-white', 'rotate-90');
+              icon.classList.add('bg-[#F3E8FF]', 'text-[#A64DFF]');
+          }
+      });
+  });
+
+  // Ver Mais / Ver Menos Logic
+  if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+          showingAll = !showingAll;
+          faqItems.forEach((item, index) => {
+              if (index >= 8) {
+                  if (showingAll) {
+                      item.classList.remove('hidden');
+                  } else {
+                      item.classList.add('hidden');
+                  }
+              }
+          });
+          toggleBtn.textContent = showingAll ? 'Ver Menos' : 'Ver Mais';
+      });
+  }
+});
+</script>
+
+{% schema %}
+{
+"name": "Dúvidas Frequentes",
+"settings": [
+  {
+    "type": "text",
+    "id": "heading",
+    "label": "Título",
+    "default": "Dúvidas Frequentes"
+  },
+  {
+    "type": "text",
+    "id": "subheading",
+    "label": "Subtítulo",
+    "default": "Tudo o que você precisa saber sobre os planos internacionais da Plus Sim"
+  },
+  {
+    "type": "text",
+    "id": "contact_heading",
+    "label": "Título de Contato",
+    "default": "Ainda com dúvidas?"
+  },
+  {
+    "type": "text",
+    "id": "contact_subheading",
+    "label": "Subtítulo de Contato",
+    "default": "Nossa equipe está pronta para te ajudar."
+  },
+  {
+    "type": "text",
+    "id": "whatsapp_link",
+    "label": "Link do WhatsApp",
+    "default": "https://wa.me/13213104764"
+  }
+],
+"blocks": [
+  {
+    "type": "faq",
+    "name": "Pergunta Frequente",
+    "settings": [
+      {
+        "type": "text",
+        "id": "question",
+        "label": "Pergunta"
+      },
+      {
+        "type": "textarea",
+        "id": "answer",
+        "label": "Resposta"
+      }
+    ]
+  }
+],
+"presets": [
+  {
+    "name": "Dúvidas Frequentes"
+  }
+]
+}
+{% endschema %}

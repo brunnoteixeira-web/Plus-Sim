@@ -1,0 +1,333 @@
+{
+  "name": "Página Inicial",
+  "sections": {
+    "hero": {
+      "type": "hero-banner"
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "message-circle",
+            "title": "Suporte em português",
+            "text": "Atendimento especializado pelo WhatsApp 24h por dia.",
+            "badge": "Atendimento humano"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "smartphone",
+            "title": "eSIM em 2 horas",
+            "text": "Receba o QR Code por WhatsApp e ative diretamente no celular.",
+            "badge": "100% digital"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "globe",
+            "title": "+200 destinos",
+            "text": "Internet de alta velocidade em praticamente todo o mundo.",
+            "badge": "8 anos no mercado"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "zap",
+            "title": "Ativação automática",
+            "text": "Planos programados para o período da viagem.",
+            "badge": "Zero Complicações"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield-check",
+            "title": "Compra Segura",
+            "text": "Pagamento processado em ambiente 100% seguro.",
+            "badge": "Garantia"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "credit-card",
+            "title": "Facilidade",
+            "text": "Parcele em até 12x ou pague com PIX com 5% de desconto.",
+            "badge": "Flexibilidade"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ]
+    },
+    "pricing": {
+      "type": "pricing-tabs",
+      "blocks": {
+        "esim_us": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Estados Unidos",
+            "price": "259",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "esim_eu": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Europa",
+            "price": "329",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 28 Países, Mantenha seu número de WhatsApp"
+          }
+        },
+        "esim_as": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Ásia",
+            "price": "289",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "esim_mu": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Mundo",
+            "price": "389",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 200+ destinos, Ideal para múltiplos países"
+          }
+        },
+        "esim_sa": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "América do Sul",
+            "price": "249",
+            "features": "Plano com Internet Ilimitada, Cobertura em 8 Países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "esim_na": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "América do Norte",
+            "price": "279",
+            "features": "Plano Controle com 10Gb, Cobertura em 3 Países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "phys_us": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Estados Unidos",
+            "price": "299",
+            "features": "Internet Ilimitada, Velocidade 5G/4G, Receba o Chip em casa, Mantenha seu número de WhatsApp"
+          }
+        },
+        "phys_eu": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Europa",
+            "price": "369",
+            "features": "Internet Ilimitada, Cobertura em 42 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "phys_as": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Ásia",
+            "price": "329",
+            "features": "Internet Ilimitada, Cobertura em 18 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "phys_mu": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Mundo",
+            "price": "429",
+            "features": "Internet Ilimitada, Cobertura em 200+ destinos, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        },
+        "phys_sa": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "América do Sul",
+            "price": "279",
+            "features": "Internet Ilimitada, Cobertura em 8 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
+          }
+        }
+      },
+      "block_order": [
+        "esim_us",
+        "esim_eu",
+        "esim_as",
+        "esim_mu",
+        "esim_sa",
+        "esim_na",
+        "phys_us",
+        "phys_eu",
+        "phys_as",
+        "phys_mu",
+        "phys_sa"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "author": "Bárbara Luiza Cardoso",
+            "text": "A melhor de todas as empresas, principalmente no pós venda!!",
+            "location": "Estados Unidos"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "author": "Merinson Scaranello",
+            "text": "Excelente chip... usei nos USA... precisei tirar algumas dúvidas...",
+            "location": "Estados Unidos"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "author": "Luciana",
+            "text": "Excelente suporte via WhatsApp e a internet funcionou super bem.",
+            "location": "Europa"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "author": "Rodrigo Alves",
+            "text": "Ativação instantânea do eSIM. Foi só chegar no aeroporto e usar.",
+            "location": "Ásia"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Meu celular é compatível com eSIM?",
+            "answer": "A maioria dos smartphones fabricados após 2019 possuem suporte a eSIM. Consulte a nossa lista de compatibilidade no menu superior ou digite *#06# no teclado de discagem do seu aparelho; se aparecer um número 'EID', ele é compatível."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Como funciona a internet ilimitada?",
+            "answer": "Nossos planos ilimitados garantem conexão ininterrupta. Caso haja um consumo excessivo em um curto período, a operadora local poderá aplicar uma política de uso justo (Fair Usage Policy - FUP), reduzindo a velocidade temporariamente para 3G/2G, mas você nunca ficará sem conexão."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Posso manter meu número de WhatsApp brasileiro?",
+            "answer": "Sim! A troca de chip (físico ou virtual) afeta apenas o número de chamadas e a conexão de dados do aparelho. O seu WhatsApp continuará funcionando normalmente com o seu número brasileiro sem precisar reconfigurar."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Como e quando receberei meu eSIM?",
+            "answer": "O eSIM é entregue 100% de forma digital através do WhatsApp e E-mail fornecidos no momento da compra. A entrega do QR Code de ativação costuma ocorrer em no máximo 2 horas após a aprovação do pagamento dentro do horário comercial."
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Posso compartilhar internet (Roteador/Hotspot)?",
+            "answer": "O compartilhamento de internet (tethering/hotspot) depende do plano escolhido e da região. Na maioria dos planos da América do Norte o compartilhamento é liberado, porém nos planos Europa e Mundo existem restrições de operadoras. Consulte nosso suporte."
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Quando a validade do plano começa a contar?",
+            "answer": "O seu plano só começará a contar os dias de validade no momento em que ele se conectar às redes de celular do país de destino."
+          }
+        },
+        "faq_7": {
+          "type": "faq",
+          "settings": {
+            "question": "Tenho dificuldades técnicas na viagem. O que faço?",
+            "answer": "Basta nos chamar no WhatsApp! A Plus Sim é conhecida justamente pelo suporte super rápido e em português. Nossa equipe te auxiliará a reconfigurar a rede do seu aparelho em poucos minutos."
+          }
+        },
+        "faq_8": {
+          "type": "faq",
+          "settings": {
+            "question": "Como ativo meu eSIM?",
+            "answer": "Enviaremos um passo a passo completo junto com seu QR Code. Em resumo: nas configurações do seu celular, você buscará a opção 'Adicionar eSIM' ou 'Adicionar Plano Celular' e escaneará o código enviado."
+          }
+        },
+        "faq_9": {
+          "type": "faq",
+          "settings": {
+            "question": "O eSIM expira se eu demorar para ativá-lo?",
+            "answer": "Os QR Codes possuem validade, por isso programamos o envio sempre para uma data próxima da sua viagem, garantindo a integridade da ativação."
+          }
+        },
+        "faq_10": {
+          "type": "faq",
+          "settings": {
+            "question": "E se meu celular não for compatível?",
+            "answer": "Oferecemos os planos de Chip Físico tradicional com a mesma qualidade de conexão para os aparelhos que não suportam a tecnologia eSIM."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10"
+      ]
+    },
+    "about": {
+      "type": "about-us"
+    }
+  },
+  "order": [
+    "hero",
+    "pricing",
+    "benefits",
+    "reviews",
+    "faq",
+    "about"
+  ]
+}

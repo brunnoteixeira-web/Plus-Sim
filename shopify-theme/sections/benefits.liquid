@@ -1,0 +1,110 @@
+<section class="py-24 bg-[#0B1221] text-white text-center">
+  <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-20">
+          <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">{{ section.settings.heading }}</h2>
+          <p class="text-slate-400 text-lg font-medium">
+              {{ section.settings.subheading }}
+          </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+          {% for block in section.blocks %}
+          <div class="bg-[#151F32] p-10 rounded-[40px] border border-white/5 transition-all group hover:border-[#00D1FF]/30 hover:bg-[#1a263a]" {{ block.shopify_attributes }}>
+              <div class="mb-6">
+                  {% if block.settings.icon == 'message-circle' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF]"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  {% elsif block.settings.icon == 'smartphone' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF]"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                  {% elsif block.settings.icon == 'globe' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                  {% elsif block.settings.icon == 'zap' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  {% elsif block.settings.icon == 'shield-check' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#A64DFF]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                  {% elsif block.settings.icon == 'credit-card' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF]"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                  {% endif %}
+              </div>
+              <h4 class="text-2xl font-black mb-4 tracking-tight">{{ block.settings.title }}</h4>
+              <p class="text-slate-400 font-medium leading-relaxed mb-8">{{ block.settings.text }}</p>
+              <div class="inline-block px-4 py-1.5 bg-[#00D1FF]/10 text-[#00D1FF] rounded-full text-[10px] font-black uppercase tracking-widest border border-[#00D1FF]/20">
+                  {{ block.settings.badge }}
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefícios",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Por que escolher a PlusSim?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Não somos apenas um plano de internet. Somos o seu parceiro de viagem!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefício",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "message-circle", "label": "Balão de Mensagem" },
+            { "value": "smartphone", "label": "Celular" },
+            { "value": "globe", "label": "Globo" },
+            { "value": "zap", "label": "Raio" },
+            { "value": "shield-check", "label": "Escudo Seguro" },
+            { "value": "credit-card", "label": "Cartão de Crédito" }
+          ],
+          "default": "message-circle"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Suporte em português"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto",
+          "default": "Atendimento especializado pelo WhatsApp 24h por dia."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Tag/Etiqueta",
+          "default": "Atendimento humano"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefícios",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "message-circle", "title": "Suporte em português", "text": "Atendimento especializado pelo WhatsApp 24h por dia.", "badge": "Atendimento humano" } },
+        { "type": "benefit", "settings": { "icon": "smartphone", "title": "eSIM em 2 horas", "text": "Receba o QR Code por WhatsApp e ative diretamente no celular.", "badge": "100% digital" } },
+        { "type": "benefit", "settings": { "icon": "globe", "title": "+200 destinos", "text": "Internet de alta velocidade em praticamente todo o mundo.", "badge": "8 anos no mercado" } },
+        { "type": "benefit", "settings": { "icon": "zap", "title": "Ativação automática", "text": "Planos programados para o período da viagem.", "badge": "Zero Complicações" } },
+        { "type": "benefit", "settings": { "icon": "shield-check", "title": "Compra Segura", "text": "Pagamento processado em ambiente 100% seguro.", "badge": "Garantia" } },
+        { "type": "benefit", "settings": { "icon": "credit-card", "title": "Facilidade", "text": "Parcele em até 12x ou pague com PIX com 5% de desconto.", "badge": "Flexibilidade" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
