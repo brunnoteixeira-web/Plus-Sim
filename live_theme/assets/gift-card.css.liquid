@@ -1,0 +1,1484 @@
+@charset "UTF-8";
+{%- comment -%}font_heading{%- endcomment -%}
+
+{%- assign fonts_font_heading_display = "swap" | default: 'auto' -%}
+
+  {%- comment -%}Normal{%- endcomment -%}
+
+  {%- assign fonts_font_heading_family = settings.font_heading.family | append: ',' | append: settings.font_heading.fallback_families -%}
+  {%- assign fonts_font_heading_style = settings.font_heading.style -%}
+  {%- assign fonts_font_heading_weight = settings.font_heading.weight | times: 1 -%}
+  {{ settings.font_heading | font_face: font_display: fonts_font_heading_display }}
+
+  {%- comment -%}Italic{%- endcomment -%}
+
+  {%- assign fonts_font_heading_style_italic = settings.font_heading | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
+  {{ settings.font_heading | font_modify: 'style', 'italic' | font_face: font_display: fonts_font_heading_display }}
+
+  {%- comment -%}Bolder{%- endcomment -%}
+
+  {%- assign fonts_weight_adjustment_default = 700 -%}
+  {%- if fonts_font_heading_weight > 700 -%}
+    {%- assign fonts_weight_adjustment_default = fonts_font_heading_weight -%}
+  {%- endif -%}
+  {%- assign fonts_font_heading_bolder = settings.font_heading | font_modify: 'weight', 'bolder' -%}
+  {%- assign fonts_font_heading_weight_bolder = fonts_font_heading_bolder.weight | default: fonts_weight_adjustment_default -%}
+  {{ fonts_font_heading_bolder | font_face: font_display: fonts_font_heading_display }}
+  {{ fonts_font_heading_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_font_heading_display }}
+
+
+{%- comment -%}font_body{%- endcomment -%}
+
+{%- assign fonts_font_body_display = "swap" | default: 'auto' -%}
+
+  {%- comment -%}Normal{%- endcomment -%}
+
+  {%- assign fonts_font_body_family = settings.font_body.family | append: ',' | append: settings.font_body.fallback_families -%}
+  {%- assign fonts_font_body_style = settings.font_body.style -%}
+  {%- assign fonts_font_body_weight = settings.font_body.weight | times: 1 -%}
+  {{ settings.font_body | font_face: font_display: fonts_font_body_display }}
+
+  {%- comment -%}Italic{%- endcomment -%}
+
+  {%- assign fonts_font_body_style_italic = settings.font_body | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
+  {{ settings.font_body | font_modify: 'style', 'italic' | font_face: font_display: fonts_font_body_display }}
+
+  {%- comment -%}Bolder{%- endcomment -%}
+
+  {%- assign fonts_weight_adjustment_default = 700 -%}
+  {%- if fonts_font_body_weight > 700 -%}
+    {%- assign fonts_weight_adjustment_default = fonts_font_body_weight -%}
+  {%- endif -%}
+  {%- assign fonts_font_body_bolder = settings.font_body | font_modify: 'weight', 'bolder' -%}
+  {%- assign fonts_font_body_weight_bolder = fonts_font_body_bolder.weight | default: fonts_weight_adjustment_default -%}
+  {{ fonts_font_body_bolder | font_face: font_display: fonts_font_body_display }}
+  {{ fonts_font_body_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_font_body_display }}
+
+
+{%- comment -%}font_button{%- endcomment -%}
+
+{%- assign fonts_font_button_display = "swap" | default: 'auto' -%}
+
+  {%- comment -%}Normal{%- endcomment -%}
+
+  {%- assign fonts_font_button_family = settings.font_button.family | append: ',' | append: settings.font_button.fallback_families -%}
+  {%- assign fonts_font_button_style = settings.font_button.style -%}
+  {%- assign fonts_font_button_weight = settings.font_button.weight | times: 1 -%}
+  {{ settings.font_button | font_face: font_display: fonts_font_button_display }}
+
+  {%- comment -%}Italic{%- endcomment -%}
+
+  {%- assign fonts_font_button_style_italic = settings.font_button | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
+  {{ settings.font_button | font_modify: 'style', 'italic' | font_face: font_display: fonts_font_button_display }}
+
+
+{%- comment -%}font_logo{%- endcomment -%}
+
+{%- assign fonts_font_logo_display = "swap" | default: 'auto' -%}
+
+  {%- comment -%}Normal{%- endcomment -%}
+
+  {%- assign fonts_font_logo_family = settings.font_logo.family | append: ',' | append: settings.font_logo.fallback_families -%}
+  {%- assign fonts_font_logo_style = settings.font_logo.style -%}
+  {%- assign fonts_font_logo_weight = settings.font_logo.weight | times: 1 -%}
+  {{ settings.font_logo | font_face: font_display: fonts_font_logo_display }}
+
+  {%- comment -%}Italic{%- endcomment -%}
+
+  {%- assign fonts_font_logo_style_italic = settings.font_logo | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
+  {{ settings.font_logo | font_modify: 'style', 'italic' | font_face: font_display: fonts_font_logo_display }}
+/* Abstracted components (ordering is important and can cause compiler errors) */
+/*! normalize.css v1.1.0 | MIT License | git.io/normalize */
+/*! normalize.css v1.1.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[hidden] {
+  display: none;
+}
+
+/*! normalize.css v1.1.0 | Base | MIT License | git.io/normalize */
+html {
+  font-size: 100%;
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+html, button, input, select, textarea {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+/*! normalize.css v1.1.0 | Links | MIT License | git.io/normalize */
+a:focus {
+  outline: thin dotted;
+}
+
+a:active, a:hover {
+  outline: 0;
+}
+
+/*! normalize.css v1.1.0 | Typography | MIT License | git.io/normalize */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+blockquote {
+  margin: 1em 40px;
+}
+
+dfn {
+  font-style: italic;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+p, pre {
+  margin: 1em 0;
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, serif;
+  _font-family: "courier new", monospace;
+  font-size: 1em;
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+q {
+  quotes: "“" "”" "‘" "’";
+}
+
+q {
+  quotes: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+dl, menu, ol, ul {
+  margin: 1em 0;
+}
+
+dd {
+  margin: 0 0 0 40px;
+}
+
+menu, ol, ul {
+  padding: 0 0 0 40px;
+}
+
+nav ul, nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+
+/*! normalize.css v1.1.0 | Embedded Content | MIT License | git.io/normalize */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/*! normalize.css v1.1.0 | Figures | MIT License | git.io/normalize */
+figure {
+  margin: 0;
+}
+
+/*! normalize.css v1.1.0 | Forms | MIT License | git.io/normalize */
+form {
+  margin: 0;
+}
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+  *margin-left: -7px;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+button, input {
+  line-height: normal;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  *overflow: visible;
+}
+
+button[disabled], html input[disabled] {
+  cursor: default;
+}
+
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+  *height: 13px;
+  *width: 13px;
+}
+
+input[type=search] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+
+input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+/*! normalize.css v1.1.0 | Tables | MIT License | git.io/normalize */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  50% {
+    stroke-dashoffset: 75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(450deg);
+  }
+}
+@font-face {
+  font-family: "Single Product Webicons Regular";
+  src: url('{{ "singleproductwebicons-regular.woff" | asset_url }}') format("woff");
+  font-style: normal;
+  font-weight: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "social-icons";
+  src: url({{ 'startup.eot' | asset_url }});
+  src: url({{ 'startup.eot' | asset_url }}) format("embedded-opentype"), url({{ 'startup.woff' | asset_url }}) format("woff"), url({{ 'startup.ttf' | asset_url }}) format("truetype"), url({{ 'startup.svg' | asset_url }}) format("svg");
+  font-style: normal;
+  font-weight: normal;
+  font-display: block;
+}
+.icon {
+  font-family: "Single Product Webicons Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.share-icon:before {
+  font-family: "Single Product Webicons Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 8px;
+}
+
+.icon-tweet:before {
+  content: "\e201";
+}
+
+.icon-like:before {
+  content: "\e202";
+}
+
+.icon-pin:before {
+  content: "\e203";
+}
+
+.icon-plus:before {
+  content: "\e205";
+}
+
+.icon-fancy:before {
+  content: "\e206";
+}
+
+{% assign color_accent_encoded = settings.accent-color | color_to_hex | replace: '#', '' %}
+  {% assign color_heading_encoded = settings.heading-color | color_to_hex | replace: '#', '' %}
+  {% assign color_body_encoded = settings.body-text-color | color_to_hex | replace: '#', '' %}
+
+  {% assign morph_color = settings.background-color %}
+  {% capture color_body_background_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+
+  {% assign morph_color = settings.accent-color %}
+  {% capture color_accent_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+  {% assign color_accent_hover_encoded = color_accent_hover | color_to_hex | replace: '#', '' %}
+
+  {% assign color_input_text_encoded = settings.form-select-color | color_to_hex | replace: '#', '' %}
+{% assign color_button_primary_encoded = settings.primary-button-color | color_to_hex | replace: '#', '' %}
+  {% assign color_button_secondary_background = settings.background-color | color_mix: settings.body-text-color, 40 %}
+  {% assign color_action_links_encoded = color_button_secondary_background | color_to_hex | replace: '#', '' %}
+  {% assign color_form_select_encoded = settings.form-select-color | color_to_hex | replace: '#', '' %}
+
+  {% assign morph_color = color_button_secondary_background %}
+  {% capture color_button_secondary_background_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+
+  {% assign morph_color = settings.primary-button-color %}
+  {% capture color_button_primary_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+{% assign morph_color = color_button_secondary_background %}
+  {% assign morph_adjustment = 3 %}
+  {% capture color_action_icons_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+
+  {% assign morph_color = settings.header-logo-color %}
+  {% assign morph_adjustment = 3 %}
+  {% capture color_header_logo_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+
+  {% assign morph_color = settings.header-link-color %}
+  {% assign morph_adjustment = 3 %}
+  {% capture color_header_navigation_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+
+  {% assign morph_color = settings.transparent-link-color %}
+  {% assign morph_adjustment = 3 %}
+  {% capture color_transparent_links_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+
+  {% assign color_actions_icons_hover_encoded = color_actions_icons_hover | color_to_hex | replace '#', '' %}
+  {% assign color_navigation_encoded = settings.header-link-color | color_to_hex | replace: '#', '' %}
+  {% assign color_navigation_hover_encoded = color_header_navigation_hover | color_to_hex | replace: '#', '' %}
+  {% assign color_transparent_links_encoded = settings.transparent-link-color | color_to_hex | replace: '#', '' %}
+  {% assign color_transparent_links_hover_encoded = color_transparent_links_hover | color_to_hex | replace: '#', '' %}
+{% assign morph_color = settings.header-link-color %}
+  {% capture color_navigation_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+{% assign morph_color = settings.footer-accent-color %}
+  {% capture color_footer_accent_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+{% assign morph_color = settings.primary-button-color %}
+  {% capture color_accent_text_hover %}{% comment %}Inject morph begin{% endcomment %}
+{% comment %}
+  This adjusts the color to give it an appropriate difference from the original color.
+  It is usually used for link hover color, and things where we need to distinguish a change.
+
+  @param morph_color {Color}
+    The origin color to morph
+
+  @param morph_adjustment {Number}
+    The number to multiply the lightness and saturation by. Default 2.
+{% endcomment %}
+
+{% if morph_adjustment == blank %}
+  {% assign morph_adjustment = 2 %}
+{% endif %}
+
+{% assign color_lightness = morph_color | color_extract: 'lightness' %}
+
+{% if color_lightness > 20 %}
+  {% if color_lightness > 50 %}
+    {% assign light_adjustment = color_lightness | divided_by: 25 | times: morph_adjustment %}
+  {% else %}
+    {% assign light_adjustment = color_lightness | divided_by: 15 | times: morph_adjustment %}
+  {% endif %}
+  {% assign new_color = morph_color | color_darken: light_adjustment %}
+{% else %}
+  {% if color_lightness < 7 %}
+    {% assign light_adjustment = 3 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 45 %}
+  {% elsif color_lightness < 12 %}
+    {% assign light_adjustment = 2.25 | times: morph_adjustment %}
+    {% assign new_color = morph_color | color_desaturate: 15 %}
+  {% else %}
+    {% assign light_adjustment = 1.75 | times: morph_adjustment %}
+    {% assign new_color = morph_color %}
+  {% endif %}
+  {% assign new_color = new_color | color_lighten: light_adjustment %}
+{% endif %}
+
+{{ new_color }}
+
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
+{% assign color_contrast_background = settings.body-text-color | color_mix: settings.accent-color, 95 | color_mix: settings.background-color, 7 %}
+{% assign background_lightness = settings.background-color | color_extract: 'lightness' %}
+
+  {% if background_lightness > 50 %}
+    {% assign color_faceted_filter_swatch_border = settings.background-color | color_darken: 15 %}
+  {% else %}
+    {% assign color_faceted_filter_swatch_border = settings.background-color | color_lighten: 30 %}
+  {% endif %}
+{%- if settings.font_heading_capitalize -%}
+{%- endif -%}
+
+{%- if settings.font_heading_capitalize -%}
+
+{%- endif -%}
+
+{%- if settings.font_heading_capitalize -%}
+
+{%- endif -%}
+
+{%- if settings.font_heading_capitalize -%}
+
+{%- endif -%}
+
+{%- if settings.font_heading_capitalize -%}
+
+{%- endif -%}
+
+{%- if settings.font_heading_capitalize -%}
+
+{%- endif -%}
+
+{%- if settings.font_heading_capitalize -%}
+
+{%- endif -%}
+
+/* Templates */
+.template-gift_card {
+  font-family: {{ fonts_font_body_family }};
+  font-style: {{ fonts_font_body_style }};
+  font-weight: {{ fonts_font_body_weight }};
+  margin: 0;
+}
+.template-gift_card a {
+  text-decoration: none;
+}
+.template-gift_card .btn {
+  font-family: {{ fonts_font_button_family }};
+  font-style: {{ fonts_font_button_style }};
+  font-weight: {{ fonts_font_button_weight }};
+  background-color: #58686f;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1.5em;
+  font-size: 0.875em;
+  line-height: 1;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+.template-gift_card .btn:hover {
+  background-color: #414d53;
+}
+.template-gift_card .wrap {
+  width: 95%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.template-gift_card .wrap:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.template-gift_card header {
+  text-align: center;
+  padding: 3em 0;
+  animation: fadein 0.5s ease-in-out both 0.4s;
+}
+.template-gift_card .shop-title {
+  font-family: {{ fonts_font_body_family }};
+  font-style: {{ fonts_font_body_style }};
+  font-weight: {{ fonts_font_body_weight }};
+  font-size: 2.25em;
+  color: #bfbfbf;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+.template-gift_card .shop-title:hover {
+  color: #999999;
+}
+.template-gift_card .shop-title img {
+  max-height: 100%;
+  margin: 0 auto;
+}
+.template-gift_card main {
+  padding-bottom: 3em;
+  animation: slideup 0.8s ease-in-out;
+}
+.template-gift_card .gift-card-outer-container {
+  background-color: #34aadc;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+  padding: 1em;
+  animation: container-slide 0.8s ease-in-out;
+}
+.template-gift_card .gift-card-inner-container {
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  animation: cardslide 0.8s ease-in-out;
+}
+.template-gift_card .gift-card-inner-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.template-gift_card .gift-card-header {
+  border-bottom: 1px solid #f2f2f2;
+  padding: 0.75em;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+.template-gift_card .gift-card-header h2 {
+  float: left;
+  margin: 0.12em 0;
+}
+.template-gift_card .gift-card-header .tag {
+  float: right;
+}
+.template-gift_card .tag {
+  background-color: #bfbfbf;
+  padding: 0.5em;
+  padding-bottom: 0.35em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  line-height: 1;
+}
+.template-gift_card .tag.light {
+  background: transparent;
+  color: #bfbfbf;
+  border: 1px solid #d9d9d9;
+}
+.template-gift_card .gift-card-holder {
+  margin: 0.75em;
+  margin-bottom: 1.25em;
+  margin-top: 1.25em;
+  position: relative;
+}
+.template-gift_card .gift-card-holder .corner {
+  display: block;
+  width: 47px;
+  height: 47px;
+  position: absolute;
+  z-index: 2;
+}
+.template-gift_card .gift-card-holder .corner.top-left {
+  background: url("//cdn.shopify.com/s/assets/gift-card/corner-top-left-1585103bdd46bf1297b88f31bdfce999.png") 0 0 no-repeat;
+  top: -1px;
+  left: -1px;
+}
+.template-gift_card .gift-card-holder .corner.bottom-right {
+  background: url("//cdn.shopify.com/s/assets/gift-card/corner-bottom-right-ba899b18631cb91859e186c2cc1c6970.png") 0 0 no-repeat;
+  bottom: -1px;
+  right: -1px;
+}
+.template-gift_card .gift-card {
+  position: relative;
+  box-sizing: border-box;
+  position: relative;
+}
+.template-gift_card .gift-card:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 1;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  display: block;
+}
+.template-gift_card .gift-card img {
+  border-radius: 10px;
+  max-width: 100%;
+}
+.template-gift_card .gift-card-code-outer {
+  position: absolute;
+  bottom: 1em;
+  text-align: center;
+  width: 100%;
+}
+.template-gift_card .gift-card-code-outer.medium {
+  font-size: 0.875em;
+}
+.template-gift_card .gift-card-code-outer.small {
+  font-size: 0.75em;
+}
+.template-gift_card .gift-card-code-inner {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  background-color: #fff;
+  padding: 0.5em;
+  border-radius: 4px;
+  max-width: 450px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.template-gift_card .gift-card-code-inner strong {
+  font-style: {{ fonts_font_body_style }};
+  font-weight: {{ fonts_font_body_weight }};
+  font-size: 1.875em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px dashed #e5e5e5;
+  padding: 0.4em 0.5em;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  color: #777;
+  line-height: 1;
+}
+.template-gift_card .small .gift-card-code-inner {
+  overflow: auto;
+}
+.template-gift_card .disabled .gift-card-code-inner strong {
+  color: #999;
+  text-decoration: line-through;
+}
+.template-gift_card .gift-card-code-inner span + span {
+  margin-left: 0.25em;
+}
+.template-gift_card .gift-card-amount {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  font-size: 2.75em;
+  padding: 0.4em 0.5em;
+}
+.template-gift_card .gift-card-amount.medium {
+  font-size: 2.25em;
+}
+.template-gift_card .gift-card-amount strong {
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  display: block;
+}
+.template-gift_card .tooltip {
+  position: relative;
+}
+.template-gift_card .tooltip:hover .tooltip-container {
+  display: block;
+}
+.template-gift_card .tooltip-container {
+  display: block;
+  position: absolute;
+  top: -100%;
+  right: 50%;
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  animation: popup 0.5s ease-in-out both 0.7s;
+  top: -50%;
+  margin-top: 0.25em;
+}
+.template-gift_card .tooltip-triangle {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 5px solid #333;
+  border-top: 5px solid rgba(51, 51, 51, 0.9);
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+  margin-left: -5px;
+  margin-bottom: -5px;
+}
+.template-gift_card .tooltip-label {
+  display: block;
+  position: relative;
+  right: -50%;
+  border: none;
+  border-radius: 4px;
+  background: #333;
+  background: rgba(51, 51, 51, 0.9);
+  color: #fff;
+  min-height: 14px;
+  font-style: {{ fonts_font_body_style }};
+  font-weight: {{ fonts_font_body_weight }};
+  font-size: 0.4em;
+  text-decoration: none;
+  line-height: 16px;
+  text-shadow: none;
+  padding: 0.5em 0.75em;
+  margin-left: 0.25em;
+}
+.template-gift_card .gift-card-instructions {
+  font-size: 0.875em;
+  text-align: center;
+  color: #999;
+  margin: 0 0.75em 1.5em;
+}
+.template-gift_card .gift-card-qr-code {
+  display: block;
+}
+.template-gift_card .gift-card-qr-code img {
+  padding: 1.25em;
+  border: 1px solid #f2f2f2;
+  border-radius: 10px;
+  margin: 0 auto 1.25em;
+}
+.template-gift_card .gift-card-actions {
+  border-top: 1px solid #f2f2f2;
+  padding: 1.25em 0.75em;
+  text-align: center;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.template-gift_card .action-link {
+  font-size: 0.875em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #bfbfbf;
+  margin-top: 1.75em;
+  position: absolute;
+  left: 1.25em;
+  top: 1.25em;
+}
+.template-gift_card .action-link:hover {
+  color: #999;
+}
+.template-gift_card .action-link:hover .ico-16 {
+  opacity: 0.4;
+}
+.template-gift_card .ico-16 {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  width: 17px;
+  height: 17px;
+  vertical-align: bottom;
+  margin-bottom: -1px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  margin-right: 0.5em;
+  opacity: 0.25;
+  transition: opacity 0.3s ease-in-out;
+}
+.template-gift_card .ico-16.print {
+  background-image: url("//cdn.shopify.com/s/assets/gift-card/icon-print-164daa1ae32d10d1f9b83ac21b6f2c70.png");
+}
+.template-gift_card footer[role=contentinfo] {
+  padding-bottom: 3em;
+  text-align: center;
+  animation: fadein 0.5s ease-in-out both 0.4s;
+}
+.template-gift_card .gift-card-apple-wallet-badge {
+  display: inline-block;
+}
+.template-gift_card .gift-card-apple-wallet-badge-image {
+  display: block;
+}
+@media screen and (max-width: 580px) {
+  .template-gift_card body {
+    font-size: 12px;
+  }
+  .template-gift_card h2 {
+    font-size: 1.5em;
+  }
+  .template-gift_card .gift-card-outer-container {
+    padding: 0.5em;
+  }
+  .template-gift_card .tooltip-container {
+    top: -65%;
+  }
+  .template-gift_card .gift-card-actions .btn {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.125em;
+  }
+  .template-gift_card .action-link {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    font-size: 1.125em;
+    display: none;
+  }
+  .template-gift_card .action-link + .action-link {
+    margin-left: 1.5em;
+  }
+}
+@media screen and (max-width: 400px) {
+  .template-gift_card h2 {
+    font-size: 1.25em;
+  }
+  .template-gift_card .gift-card {
+    font-size: 10px;
+  }
+  .template-gift_card .gift-card-holder .corner {
+    display: none;
+  }
+  .template-gift_card .gift-card-holder .corner.bottom-right {
+    background-position: bottom right !important;
+  }
+  .template-gift_card .gift-card-amount strong {
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+  .template-gift_card .tooltip-container {
+    top: -75%;
+  }
+}
+@media screen and (max-height: 800px) {
+  .template-gift_card .shop-title {
+    max-height: 100px;
+  }
+}
+@media screen and (max-height: 750px) {
+  .template-gift_card .shop-title {
+    max-height: 80px;
+  }
+  .template-gift_card header {
+    padding: 2em 0;
+  }
+  .template-gift_card footer[role=contentinfo],
+  .template-gift_card main {
+    padding-bottom: 2em;
+  }
+}
+@media print {
+  @page {
+    .template-gift_card {
+      margin: 0.5cm;
+    }
+  }
+  .template-gift_card p,
+  .template-gift_card h2,
+  .template-gift_card h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  .template-gift_card h2,
+  .template-gift_card h3 {
+    page-break-after: avoid;
+  }
+  .template-gift_card body {
+    background-color: #fff;
+  }
+  .template-gift_card .gift-card-actions,
+  .template-gift_card .gift-card-holder .corner,
+  .template-gift_card .tooltip-container,
+  .template-gift_card .gift-card:before {
+    display: none;
+  }
+  .template-gift_card .gift-card-code-inner strong {
+    color: #555;
+  }
+  .template-gift_card .gift-card-amount .tooltip {
+    color: #fff !important;
+  }
+  .template-gift_card .shop-title {
+    color: #58686f;
+  }
+  .template-gift_card .gift-card-outer-container,
+  .template-gift_card .gift-card-inner-container,
+  .template-gift_card .gift-card-code-inner,
+  .template-gift_card .gift-card:before {
+    box-shadow: none;
+  }
+}
+@keyframes slideup {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(2000px) rotate(10deg);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(-30px);
+  }
+  80% {
+    -webkit-transform: translateY(10px);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes popup {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(30px);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(-10px);
+  }
+  80% {
+    -webkit-transform: translateY(2px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+  }
+}
+@keyframes container-slide {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}

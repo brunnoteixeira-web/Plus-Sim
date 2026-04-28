@@ -1,0 +1,273 @@
+{% comment %}
+  @param position {String}
+    Render only blocks matching this position
+  @param product {Product}
+    Current product
+  @param section {Section}
+    Current section
+{% endcomment %}
+
+{% if product == blank %}
+  {% assign onboarding = true %}
+{% endif %}
+
+{% assign first_block_class = 'product__block--first' %}
+{% capture product_blocks %}
+  {% for block in section.blocks %}
+    {% if forloop.first and block.type == '@app' %}
+      {% assign app_block_position = 'top' %}
+    {% elsif block.type != '@app' %}
+      {% assign app_block_position = block.settings.position %}
+    {% endif %}
+
+    {% unless block.settings.position == position or app_block_position == position %}
+      {% continue %}
+    {% endunless %}
+
+    {% case block.type %}
+      {% when '@app' %}
+        <div class="product__app" {{ block.shopify_attributes }}>
+          {% render block %}
+        </div>
+      {% when 'title' %}
+        {% assign heading_element = 'h2' %}
+        {% if template.name == 'product' %}
+          {% assign heading_element = 'h1' %}
+        {% endif %}
+
+        <{{ heading_element }}
+          class="product__title {{ first_block_class }}"
+          {{ block.shopify_attributes }}
+        >
+            {% if onboarding %}
+              {{ 'onboarding.featured_product.title' | t }}
+            {% else %}
+              {{ product.title }}
+            {% endif %}
+        </{{ heading_element }}>
+      {% when 'vendor' %}
+        <p
+          class="
+            meta
+            product__vendor
+            {{ first_block_class }}
+          "
+          {{ block.shopify_attributes }}
+        >
+          {% if onboarding %}
+            {{ 'onboarding.featured_product.vendor' | t }}
+          {% else %}
+            {{ product.vendor }}
+          {% endif %}
+        </p>
+      {% when 'gallery' %}
+        {%
+          render 'product-gallery',
+          product: product,
+          enable_image_zoom: section.settings.enable_zoom,
+          class: first_block_class,
+          block: block,
+        %}
+        
+        <!-- Destination information box -->
+        <div class="destination-info-box">
+          <h2 class="destination-title">{{ product.title }}</h2>
+          <div class="destination-details">
+            <p class="destination-label">TOP DESTINOs</p>
+            <p class="destination-cities">{{ product.metafields.custom.top_destinations | default: "Nova York - Miami - Orlando -<br>  Los Angeles - San Francisco" }}</p>
+          </div>
+        </div>
+      {% when 'form' %}
+        <div class="product__form {{ first_block_class }}" {{ block.shopify_attributes }}>
+          {% comment %} Renderiza o preço com o estilo original do bloco 'price' {% endcomment %}
+          {% render 'product-price',
+            product: product,
+            block: block,
+            class: first_block_class
+          %}
+          {% render 'product-form',
+            position: position,
+            product: product,
+            block: block,
+            class: ''
+          %}
+        </div>
+      {% when 'description' %}
+        {% if product.description != blank or block.settings.description != blank or onboarding %}
+          <div
+            class="
+              product-description
+              rte
+              {{ first_block_class }}
+            "
+            {{ block.shopify_attributes }}
+          >
+            {% if onboarding %}
+              {{ 'onboarding.featured_product.description' | t }}
+            {% else %}
+              {{ block.settings.description | default: product.description }}
+            {% endif %}
+          </div>
+        {% endif %}
+      {% when 'share' %}
+        {% assign class = first_block_class | append: ' product__share' %}
+        {%
+          render 'share-buttons',
+          product: product,
+          block: block,
+          class: class,
+        %}
+      {% when 'text' %}
+        <div
+          class="
+            product__text
+            rte
+            {{ first_block_class }}
+          "
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.text }}
+        </div>
+      {% when 'additional_info' %}
+        {% if block.settings.info_text != blank %}
+          <div class="additional-info-wrapper">
+            <p
+              class="
+                product-info-link
+                {{ block.settings.info_icon }}
+                {{ first_block_class }}
+              "
+              {{ block.shopify_attributes }}
+            >
+              {% if block.settings.info_url != blank %}<a href="{{ block.settings.info_url }}">{% endif %}
+                {{ block.settings.info_text }}
+              {% if block.settings.info_url != blank %}</a>{% endif %}
+            </p>
+          </div>
+        {% endif %}
+      {% when 'rating' %}
+        {% if product.metafields.reviews.rating.value != blank %}
+          <div class="product__rating rating {{ first_block_class }}" {{ block.shopify_attributes }}>
+            {%
+              render 'rating-stars',
+              value: product.metafields.reviews.rating.value.rating,
+              scale_max: product.metafields.reviews.rating.value.scale_max,
+            %}
+            <p class="rating__text">
+              <span aria-hidden="true">{{ product.metafields.reviews.rating.value }} / {{ product.metafields.reviews.rating.value.scale_max }}</span>
+            </p>
+            <p class="rating__count">
+              <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+              <span class="visually-hidden">{{ product.metafields.reviews.rating_count }} {{ "general.accessibility.total_reviews" | t }}</span>
+            </p>
+          </div>
+        {% endif %}
+      {% when 'complementary_products' %}
+        {%
+          render 'product-complementary',
+          product: product,
+          block: block,
+        %}
+      {% when 'price' %}
+        {% comment %} Bloco 'price' não é renderizado separadamente {% endcomment %}
+    {% endcase %}
+    {% assign first_block_class = '' %}
+  {% endfor %}
+{% endcapture %}
+
+{% unless product_blocks == blank %}
+  <div class="product__grid-{{ position }}">
+    {{ product_blocks }}
+  </div>
+{% endunless %}
+
+<style>
+  .spr-badge {
+    display: none;
+  }
+
+  .product-reviews-badge {
+    display: none;
+  }
+  
+  .destination-info-box {
+    position: relative;
+    top: -11px;
+    background-color: white;
+    padding: 7px 15px 3px 15px;
+    margin-top: -10px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    width: 550px;
+    max-width: 100%;
+    display: block;
+  }
+  
+  .destination-title {
+    color: #091B63;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 0 0 5px 0;
+  }
+  
+  .destination-label {
+    color: #666666;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+  }
+  
+  .destination-cities {
+    color: #666;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  span {
+    font-size: 19px !important;
+  }
+
+  .product__form .money {
+    font-family: var(--primary-font) !important;
+    font-weight: 800 !important;
+    color: #091b63;
+    font-size: 18px;
+  }
+  
+  @media screen and (min-width: 769px) {
+    .spr-badge {
+      display: none;
+    }
+    
+    .destination-info-box {
+      position: relative;
+      top: -11px;
+      background-color: white;
+      padding: 7px 15px 3px 15px;
+      margin-top: -10px;
+      border-radius: 0 0 10px 10px;
+      text-align: center;
+      box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.1);
+      z-index: 1;
+      display: block;
+    }
+    
+    .destination-title {
+      font-size: 40px;
+    }
+    
+    .destination-label {
+      font-size: 16px;
+    }
+    
+    .destination-cities {
+      font-size: 14px;
+    }
+  }
+</style>

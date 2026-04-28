@@ -1,0 +1,37 @@
+{%- if section.settings.menu_style != 'drawer' -%}
+  <div
+  class="header-mega-nav"
+  data-header-nav-submenu
+  >
+    <div class="header-mega-nav__scroll-wrapper">
+      <ul class="header-mega-nav__wrapper">
+        {% for parent_link in links.links %}
+          <li class="header-mega-nav__list">
+            <a
+              class="header-mega-nav__parent-link"
+              href="{{ parent_link.url }}"
+            >
+              {{ parent_link.title }}
+            </a>
+
+            {% if parent_link.links.size > 0 %}
+              <ul class="header-mega-nav__child-list">
+                {% for child_link in parent_link.links %}
+                  <li class="header-mega-nav__child-item">
+                    <a
+                      class="header-mega-nav__child-link"
+                      href="{{ child_link.url }}"
+                    >
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+{%- endif -%}

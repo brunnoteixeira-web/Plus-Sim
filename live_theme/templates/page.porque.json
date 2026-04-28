@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "template-pq",
+      "custom_css": [],
+      "settings": {
+        "imagem_destaque": "shopify://shop_images/image_1399.png",
+        "imagem_destaque_mobile": "shopify://shop_images/image_1399_1.png",
+        "texto_destaque": "<p><strong>a Plus Sim oferece os melhores planos de internet em alta velocidade para deixar sua viagem do jeito que a gente gosta: <br/>PERFEITA!</strong></p>",
+        "subtitulo": "<p><strong>AGORA, SE AINDA QUER SABER POR QUE COMPRAR COM A PLUSSIM, CONFIRA AQUI:</strong></p>",
+        "beneficios": "Receba seu chip de viagem em casa; |\nChegue conectado ao seu destino;|\nMelhor cobertura em mais de 200 destinos;|\nCompre em Real;|\nParcele em até 12x (com juros);|\nSem cobrança de IOF (6,38%) no cartão de crédito;|\nUse todos seus aplicativos durante a viagem, como GPS e Redes Sociais;|\nMantenha seu número de WhatsApp;|\nCompartilhamento de internet gratuito;|\nCanais de atendimento em português pelo WhatsApp, telefone ou e-mail;|\nOpções de retirada em SP, RJ e CE.",
+        "texto_botao": "COMPRAR AGORA",
+        "link_botao": "shopify://collections/featured-collection"
+      }
+    },
+    "home_testimonials_4T8JNM": {
+      "type": "home-testimonials",
+      "blocks": {
+        "testimonial_cMq4eH": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Excelente...usei para viagem na america do sul argentina, chegando no aeroporto o chip ja conectou em poucos minutos, consegui compartilhar com cel e notebook...e usei mto para chamar uber e mapas.  Chamei no zap a equipe pra tirar uma dúvida e fui rapidamente atendida. obg ate a próxima viagem!!!<br/><br/></p>",
+            "source": "Naiane Lopes"
+          }
+        },
+        "testimonial_rQdyJQ": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Chip ótimo! Passei por 5 países e funcionou perfeitamente em todos. Recomendo !</p>",
+            "source": "André Maciel"
+          }
+        },
+        "testimonial_mLEwBW": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Comprei para usar no Atacama, Chile. Funcionou muito bem em 3G. Recomendo</p>",
+            "source": "Gilberto"
+          }
+        },
+        "testimonial_aMkJxY": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Super atenciosos. <br/>Sempre que viajo compro com eles, excelente internet e o melhor preço.</p>",
+            "source": "Brenna"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_cMq4eH",
+        "testimonial_rQdyJQ",
+        "testimonial_mLEwBW",
+        "testimonial_aMkJxY"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "title": "Depoimentos",
+        "style": "default-style",
+        "author_image_crop": "circle",
+        "mobile_height": "natural",
+        "desktop_height": "natural",
+        "desktop_image_alignment": "left",
+        "desktop_image_width": "half"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "home_testimonials_4T8JNM"
+  ]
+}

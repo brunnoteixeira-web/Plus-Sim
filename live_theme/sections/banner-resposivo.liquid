@@ -1,0 +1,108 @@
+{% schema %}
+{
+  "name": "Banner Responsivo",
+  "tag": "section",
+  "class": "banner-responsivo-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_desktop",
+      "label": "Imagem para Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile",
+      "label": "Imagem para Mobile"
+    },
+    {
+      "type": "url",
+      "id": "link_banner",
+      "label": "Link do banner (opcional)"
+    },
+    {
+      "type": "text",
+      "id": "alt_text",
+      "label": "Texto alternativo (acessibilidade)",
+      "default": "Banner promocional"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner Responsivo",
+      "category": "Banners"
+    }
+  ]
+}
+{% endschema %}
+
+{% assign banner_desktop = section.settings.banner_desktop %}
+{% assign banner_mobile = section.settings.banner_mobile %}
+{% assign alt_text = section.settings.alt_text | escape %}
+
+<div class="banner-responsivo-wrapper">
+  {% if section.settings.link_banner != blank %}
+    <a href="{{ section.settings.link_banner }}" class="banner-link">
+  {% endif %}
+
+  <picture>
+    {% if banner_mobile != blank %}
+      <source media="(max-width: 749px)" srcset="{{ banner_mobile | image_url: width: 800 }}">
+    {% endif %}
+    {% if banner_desktop != blank %}
+      <img
+        src="{{ banner_desktop | image_url: width: 1600 }}"
+        alt="{{ alt_text }}"
+        class="banner-img img-paizes"
+        loading="lazy"
+        width="100%"
+      >
+    {% endif %}
+  </picture>
+
+  {% if section.settings.link_banner != blank %}
+    </a>
+  {% endif %}
+</div>
+
+<style>
+  .banner-responsivo-wrapper {
+    width: 100%;
+    display: block;
+  }
+
+  .banner-responsivo-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* .img-paizes {
+    width: 100%;
+    height: auto;
+    object-fit: scale-down;
+    display: block;
+  } */
+
+  .banner-link {
+    display: block;
+    text-decoration: none;
+  }
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const images = document.querySelectorAll('.banner-img');
+  images.forEach(img => {
+    if (img.src.includes('PlusSim_-_Banner_Paises_-_oficial.png')) {
+      const wrapper = img.closest('.banner-responsivo-wrapper');
+      if (wrapper) {
+        wrapper.style.paddingRight = '10px';
+        wrapper.style.paddingLeft = '10px';
+        wrapper.style.marginBottom = '20px';
+      }
+    }
+  });
+});
+  
+</script>

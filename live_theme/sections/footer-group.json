@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "general-footer",
+      "disabled": true,
+      "settings": {
+        "show_menu_heading": true,
+        "menu_1": "footer",
+        "menu_2": "",
+        "show_social_buttons": true,
+        "social_heading": "Social links",
+        "show_share_buttons": false,
+        "sharing_heading": "Help us spread the word!",
+        "sharing_description": "Please help us spread the news about our awesome products.",
+        "enable_twitter": false,
+        "enable_facebook": false,
+        "enable_pinterest": false,
+        "enable_fancy": false,
+        "show_follow_on_shop": true,
+        "show_locale_selector": true,
+        "show_currency_selector": true,
+        "show_payment_icons": false
+      }
+    },
+    "general_footer_new_VEAEpQ": {
+      "type": "general-footer-new",
+      "settings": {
+        "address_title": "Endereço",
+        "address_content": "<p>Estamos localizados em Orlando!<br/>4700 Millenia Blvd, Suite 175<br/>Orlando/FL - 32839</p>",
+        "contact_title": "Contato",
+        "whatsapp_phones": "<p>+1 321 310 4764<br/>+1 321 310 2281</p>",
+        "regular_phones": "<p>+55 11 4680 6732<br/>+55 11 4380 7513<br/>+44 203 868 8895</p>",
+        "contact_email": "info@plussim.com",
+        "social_title": "Mídias Sociais",
+        "instagram_url": "https://www.instagram.com/plussim_travel/",
+        "facebook_url": "https://www.facebook.com/plussimtravel?locale=pt_BR"
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "general_footer_new_VEAEpQ"
+  ]
+}

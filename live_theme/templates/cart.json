@@ -1,0 +1,79 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "template-cart",
+      "settings": {
+        "enable_checkout_lock_icon": false,
+        "enable_order_notes": true,
+        "show_shipping_calculator": false,
+        "shipping_calculator_default_country": "United States",
+        "continue_shopping_link": ""
+      }
+    },
+    "home_testimonials_8wCnCk": {
+      "type": "home-testimonials",
+      "blocks": {
+        "testimonial_b3X7MY": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Excelente...usei para viagem na america do sul argentina, chegando no aeroporto o chip ja conectou em poucos minutos, consegui compartilhar com cel e notebook...e usei mto para chamar uber e mapas.  Chamei no zap a equipe pra tirar uma dúvida e fui rapidamente atendida. obg ate a próxima viagem!!!</p>",
+            "source": "Naiane Lopes"
+          }
+        },
+        "testimonial_HHYy3k": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Chip ótimo! Passei por 5 países e funcionou perfeitamente em todos. Recomendo !</p>",
+            "source": "André Maciel"
+          }
+        },
+        "testimonial_GBzxed": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p> Comprei para usar no Atacama, Chile. Funcionou muito bem em 3G. Recomendo</p>",
+            "source": "Gilberto"
+          }
+        },
+        "testimonial_hfPVzN": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Super atenciosos. <br/>Sempre que viajo compro com eles, excelente internet e o melhor preço.</p>",
+            "source": "Brenna"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_b3X7MY",
+        "testimonial_HHYy3k",
+        "testimonial_GBzxed",
+        "testimonial_hfPVzN"
+      ],
+      "settings": {
+        "title": "Depoimentos",
+        "style": "default-style",
+        "author_image_crop": "circle",
+        "mobile_height": "natural",
+        "desktop_height": "natural",
+        "desktop_image_alignment": "left",
+        "desktop_image_width": "half"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "home_testimonials_8wCnCk"
+  ]
+}

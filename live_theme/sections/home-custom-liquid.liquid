@@ -1,0 +1,35 @@
+<section
+  class="module-container {{ section.settings.style }} custom-liquid"
+  data-section-id="{{ section.id }}"
+>
+  <div class="module-inner">
+      {{ section.settings.custom_liquid }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom liquid",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Custom liquid"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom liquid",
+      "category": "Content"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "product"
+    ],
+    "groups": [ "*" ]
+  }
+}
+
+{% endschema %}

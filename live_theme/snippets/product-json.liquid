@@ -1,0 +1,43 @@
+{% comment %}
+  @param product {Product}
+    The Product to model the json after
+
+  @param enable_history {boolean}
+    Used to allow deeplinking on product variants
+{% endcomment %}
+
+{% assign id = section.id %}
+
+{% assign section_onboarding = false %}
+{% if product == blank %}
+  {% assign section_onboarding = true %}
+{% endif %}
+
+{%- capture cart_link -%}
+  <a href="{{ routes.cart_url }}">{{ 'products.product.cart_link' | t }}</a>
+{%- endcapture -%}
+{%- capture continue_link -%}
+  <a href="{{ routes.all_products_collection_url }}">{{ 'products.product.continue_link' | t }}</a>
+{%- endcapture -%}
+{%- capture checkout_link -%}
+  <button class="product-cart-message__checkout-button" type="submit" name="checkout" form="checkout_form">{{ 'products.product.checkout_link' | t }}</button>
+{%- endcapture -%}
+
+<script type="application/json" data-product-settings-{{ id }}>
+  {
+    "addToCartText": {{ 'products.product.add_to_cart' | t | json }},
+    "enableHistory": {{ enable_history | json }},
+    "imageZoom": {{ section.settings.enable_zoom }},
+    "linkedOptions": {{ settings.linked_options }},
+    "processingText": {{ 'products.product.processing' | t | json }},
+    "cartRedirect": {{ settings.enable_cart_redirection }},
+    "setQuantityText": {{ 'products.product.set_quantity' | t | json }},
+    "soldOutText": {{ 'products.product.sold_out' | t | json }},
+    "successMessage": {{ 'products.product.success_html' | t: cart_link: cart_link, continue_link: continue_link, checkout_link: checkout_link | json }},
+    "unavailableText": {{ 'products.product.unavailable' | t | json }}
+  }
+</script>
+
+{% unless section_onboarding %}
+  <script type="application/json" data-product-json-{{ id }}>{{ product | json }}</script>
+{% endunless %}

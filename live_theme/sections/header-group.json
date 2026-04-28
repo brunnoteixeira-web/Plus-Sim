@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement_bar": {
+      "type": "general-announcement-bar",
+      "settings": {
+        "promotion_home_only": false,
+        "promotion_style": "accent-style",
+        "promotion_text": "Pague com PIX ou parcele em até 12x",
+        "promotion_url": ""
+      }
+    },
+    "header": {
+      "type": "general-header",
+      "settings": {
+        "header_sticky": true,
+        "show_cart": true,
+        "show_search": true,
+        "header_logo": "shopify://shop_images/logo.png",
+        "logo_width": 110,
+        "logo_width_mobile": 60,
+        "enable_predictive_search": true,
+        "menu": "main-menu",
+        "menu_style": "drawer",
+        "transparent": false
+      }
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header"
+  ]
+}

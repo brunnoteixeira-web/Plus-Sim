@@ -1,0 +1,34 @@
+{%- if block.settings.heading -%}
+  <div class="faq__heading">
+    <h2 class="faq__heading-title">{{ block.settings.heading | escape }}</h2>
+  </div>
+{%- else -%}
+  {% comment %}Inject @pixelunion/pxs-faq/faq-item begin{% endcomment %}
+  {% comment %}
+    @param block {Object}
+      Block object
+    @param summary {String}
+      The FAQ 'question' which appears above the fold in the accordion
+    @param content {String}
+      The FAQ 'answer' which appears inside the accordion
+    @param index {Number}
+      The current blocks zero-based index
+  {% endcomment %}
+  
+  <details
+    class="faq__details"
+    data-faq-details
+    {{ block.shopify_attributes }}
+  >
+    <summary class="faq__summary" data-faq-summary>{{ summary | escape }}</summary>
+    <div
+      class="faq__answer"
+      data-faq-answer
+      data-faq-answer-index="{{ index }}"
+    >
+      {{ content }}
+    </div>
+  </details>
+  {% comment %}Inject @pixelunion/pxs-faq/faq-item end{% endcomment %}
+
+{%- endif -%}

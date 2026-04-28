@@ -1,0 +1,144 @@
+{% liquid
+  assign onboarding = onboarding | default: false
+  assign onboarding_image = onboarding_image | default: blank
+  assign onboarding_vendor = onboarding_vendor | default: blank
+  assign onboarding_title = onboarding_title | default: blank
+  assign onboarding_price = onboarding_price | default: blank
+  assign sliderclass = sliderclass | default: false
+
+  if settings.product_stock_overlay and product.available
+    assign show_stock_indicator = false
+    assign total = 0
+    assign threshold = settings.product_stock_overlay_show | times: 1
+    for variant in product.variants
+      if variant.inventory_management == "shopify" and variant.inventory_quantity > 0 and variant.inventory_policy != 'continue'
+        assign total = total | plus: variant.inventory_quantity
+        assign show_stock_indicator = true
+      endif
+    endfor
+  endif
+
+  assign product_ratings_reviews = settings.product_ratings_reviews
+  assign product_ratings_star_display = settings.product_ratings_star_display
+
+  if remove_img_anchor == nil
+    assign remove_img_anchor = false
+  endif
+
+  if remove_title_anchor == nil
+    assign remove_title_anchor = false
+  endif
+
+  if show_sale_badge == nil
+    assign show_sale_badge = true
+  endif
+%}
+
+<article class="product-list-item {% if sliderclass %}swiper-slide{% endif %}" {% unless onboarding %}id="product-list-item-{{ product.id }}"{% endunless %}>
+
+  <figure class="product-list-item-thumbnail">
+    {%- if onboarding -%}
+      <a href="#">
+        {{ onboarding_image }}
+      </a>
+    {%- else -%}
+      {%- unless remove_img_anchor -%}<a href="{{ product.url | within: collection }}">{%- endunless -%}
+        {% assign lazy = false %}
+        {% if product.featured_media.preview_image %}
+          {% assign lazy = true %}
+        {% endif %}
+        {%
+          render 'rimg',
+          img: product.featured_media.preview_image,
+          class: 'product-list-item-image',
+          size: '600x600',
+          lazy: lazy
+        %}
+
+        {% if show_stock_indicator and total < threshold %}
+          <span class="stock-overlay meta">{{ 'products.product.stock_level' | t: stock_count: total }}</span>
+        {% endif %}
+
+        {% if product.compare_at_price_min > product.price_min and product.available and show_sale_badge %}
+          <span class="sale-badge"></span>
+        {% endif %}
+      {%- unless remove_img_anchor -%}</a>{%- endunless -%}
+    {%- endif -%}
+  </figure>
+
+  <div class="product-list-item-details">
+    {% if settings.product_show_vendor %}
+      <p class="product-list-item-vendor vendor meta">
+        {% unless onboarding %}
+          {{ product.vendor }}
+        {% else %}
+          {{ onboarding_vendor }}
+        {% endunless %}
+      </p>
+    {% endif %}
+
+    <h1 class="product-list-item-title">
+      {%- unless remove_title_anchor -%}
+        <a href="{% unless onboarding %}{{ product.url | within: collection }}{% endunless %}">
+      {%- endunless -%}
+        {% unless onboarding %}
+          {{ product.title | escape }}
+        {% else %}
+          {{ onboarding_title }}
+        {% endunless %}
+      {%- unless remove_title_anchor -%}
+        </a>
+      {%- endunless -%}
+    </h1>
+
+    <p class="product-list-item-price">
+      {% if onboarding %}
+        {{ onboarding_price | money }}
+      {% elsif product.available %}
+        {% if product.price_varies %}
+          <span class="price">
+            A partir de <span class="money">{{ product.price_min | money }}</span>
+          </span>
+        {% else %}
+          <span class="price">
+            <span class="money"><span>A partir de </span>{{ product.price_min | money }}</span>
+            {% unless product.compare_at_price_min <= product.price_min %}
+              <span class="original money">
+                A partir de {{ product.compare_at_price_min | money }}
+              </span>
+            {% endunless %}
+          </span>
+        {% endif %}
+      {% else %}
+        {{ 'products.product.sold_out' | t }}
+      {% endif %}
+
+      {% assign variant = product.selected_or_first_available_variant %}
+
+      {% if variant.unit_price_measurement %}
+        {% capture total_quantity %}<span class="product--total-quantity" data-total-quantity>{{ variant.unit_price_measurement.quantity_value }}{{ variant.unit_price_measurement.quantity_unit }}</span>{% endcapture %}
+        {% capture unit_price %}<span class="product--unit-price-amount money" data-unit-price-amount>{{ variant.unit_price | money }}</span>{% endcapture %}
+        {% capture unit_measure %}<span class="product--unit-price-measure" data-unit-price-measure>{%- if variant.unit_price_measurement.reference_value != 1 -%}{{ variant.unit_price_measurement.reference_value }}{%- endif %}{{ variant.unit_price_measurement.reference_unit }}</span>{% endcapture %}
+        <span class="product-list-item-unit-price">
+          {{ 'products.product.unit_price_html' | t: total_quantity: total_quantity, unit_price: unit_price, unit_measure: unit_measure | strip_newlines }}
+        </span>
+      {% endif %}
+    </p>
+    {% if product_ratings_reviews and product_ratings_star_display == "all" %}
+      <div class="product-list-item-reviews">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}">
+          <span class="spr-badge">
+            <span class="spr-starrating spr-badge-starrating">
+              <i class="spr-icon spr-icon-star-empty"></i>
+              <i class="spr-icon spr-icon-star-empty"></i>
+              <i class="spr-icon spr-icon-star-empty"></i>
+              <i class="spr-icon spr-icon-star-empty"></i>
+              <i class="spr-icon spr-icon-star-empty"></i>
+            </span>
+          </span>
+        </span>
+      </div>
+    {% endif %}
+  </div>
+
+</article>

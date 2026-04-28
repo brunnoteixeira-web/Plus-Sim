@@ -1,0 +1,14 @@
+{% comment %}
+Renderiza diferentes seções de banner responsivo com base na página atual.
+As seções são criadas via blocks ou instâncias separadas se preferir.
+{% endcomment %}
+
+{% if template == 'cart' %}
+    {% section 'banner-cart' %}
+{% elsif template == 'collection' %}
+    {% section 'banner-collections' %}
+{% elsif template == 'page.porque' %}
+    {% section 'banner-porque' %}
+{% elsif template == 'page.faq' or template == 'page.perguntas-frequentes' or template == 'page.duvidas' %}
+    {% section 'banner-faq' %}
+{% endif %}

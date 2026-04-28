@@ -1,0 +1,586 @@
+{% capture section_classes %}
+  module-container
+  {{ section.settings.style }}
+  dynamic-testimonials
+{% endcapture %}
+
+{% capture wrapper_classes %}
+  module-inner
+  testimonials--desktop-image-width-{{ section.settings.desktop_image_width }}
+  testimonials--desktop-height-{{ section.settings.desktop_height }}
+  testimonials--mobile-height-{{ section.settings.mobile_height }}
+  author-image--crop-{{ section.settings.author_image_crop }}
+  testimonials--image-{{ section.settings.desktop_image_alignment }}
+{% endcapture %}
+
+{% liquid
+  assign section_heading = section.settings.title
+  assign content_id = 'quote'
+  assign author_id = 'source'
+  assign star_rating_id = 'star_rating'
+  assign image_id = 'image'
+  assign author_image_id = 'avatar'
+  assign group_testimonials = false
+  assign use_fade = true
+  assign show_pagination = false
+%}
+
+{% comment %}Inject @pixelunion/pxs-testimonials/testimonials begin{% endcomment %}
+{% comment %}
+  @param section {Object} REQUIRED
+    Section object
+
+  @param order_of_elements {Array} REQUIRED
+    Array of testimonial element names in the order they should appear. Elements must be named as follows:
+    `title`, `star_rating`, `content`, `author_name`. Exclude elements which are not required.
+
+  @param content_id {String} REQUIRED
+    Block level setting ID for testimonial content
+
+  @param section_classes {String}
+    Space-separated classes to apply to the section element
+
+  @param section_attributes {String}
+    Space-separated attributes to apply to the section element
+
+  @param section_heading {String}
+    Section heading
+
+  @param section_subheading {String}
+    Section subheading
+
+  @param wrapper_classes {String}
+    Space-separated classes to apply to the wrapper class
+
+  @param wrapper_attributes {String}
+    Space-separated attributes to apply to the wrapper class
+
+  @param testimonial_title_id {String}
+    Block level setting for individual testimonial titles
+
+  @param star_rating_id {String}
+    Block level setting ID for testimonial star rating
+
+  @param author_id {String}
+    Block level setting ID for testimonial author name
+
+  @param image_id {String}
+    Block levels setting ID for testimonial image
+
+  @param author_image_id {Image}
+    Block level setting ID for 'avatar' image to be included next to the author name
+
+  @param init_slider {Boolean}
+    Whether to initialise the slider. There may be some cases where we only want to initialize the slider under certain conditions, such as a setting or a certain number of blocks.
+    Defaults to `true`
+
+  @param show_pagination {Boolean}
+    Show flickity pagination dots
+
+  @param enable_autoplay {Boolean}
+    Enable flickity autoplay
+
+  @param autoplay_interval (Integer)
+    Number of seconds between slide transitions. Default 5.
+
+  @param use_fade {Boolean}
+    Use flickity fade animation
+
+  @param group_testimonials (Boolean)
+    Whether to group testimonials so that multiple are included on one slide (as many as fit in the slider viewport).
+{% endcomment %}
+
+{% liquid
+  assign default_element_order = 'title|star_rating|content|author_name' | split: '|'
+  assign order_of_elements = order_of_elements | default: default_element_order
+  assign section_classes = section_classes | default: ''
+  assign section_attributes = section_attributes | default: ''
+  assign section_heading = section_heading | default: ''
+  assign section_subheading = section_subheading | default: ''
+  assign wrapper_classes = wrapper_classes | default: ''
+  assign wrapper_attributes = wrapper_attributes | default: ''
+  assign star_rating_id = star_rating_id | default: nil
+  assign testimonial_title_id = testimonial_title_id | default: nil
+  assign content_id = content_id | default: nil
+  assign author_id = author_id | default: nil
+  assign image_id = image_id | default: nil
+  assign author_image_id = author_image_id | default: nil
+  assign show_pagination = show_pagination | default: false
+  assign enable_autoplay = enable_autoplay | default: false
+  assign autoplay_interval = autoplay_interval | default: 5
+  assign use_fade = use_fade | default: false
+
+  if init_slider == nil
+    assign init_slider = true
+  endif
+
+  if group_testimonials == nil
+    assign group_testimonials = true
+  endif
+%}
+
+<script
+  type="application/json"
+  data-section-type="pxs-testimonials"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+  {
+    "init_slider": {{ init_slider | json }},
+    "show_pagination": false,
+    "enable_autoplay": {{ enable_autoplay | json }},
+    "autoplay_interval": {{ autoplay_interval | json }},
+    "use_fade": {{ use_fade | json }},
+    "group_testimonials": {{ group_testimonials | json }}
+  }
+</script>
+
+<section
+  class="testimonials {{ section_classes }}"
+  {{ section_attributes }}
+  aria-label="{{ section_heading }}"
+>
+  {%- if section_heading != blank or section_subheading != blank -%}
+    <div class="section-header testimonials__section-header">
+      {%- if section_heading != blank -%}
+        <h2 class="section-header__heading testimonials__section-heading">
+          {{ section_heading | escape }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section_subheading != blank -%}
+        <div class="section-header__subheading testimonials__section-subheading">
+          {{ section_subheading }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div
+    class="section-wrapper testimonials__section-wrapper {{ wrapper_classes }}"
+    {{ wrapper_attributes }}
+    data-testimonials
+  >
+    <div class="section-content testimonials__section-content" data-testimonials-content>
+      {% for block in section.blocks %}
+        {% assign testimonial = block.settings[content_id] %}
+
+        {% assign content = block.settings[content_id] %}
+
+        {% if testimonial_title_id %}
+          {% assign testimonial_title = block.settings[testimonial_title_id] %}
+        {% endif %}
+
+        {% if star_rating_id %}
+          {% assign star_rating = block.settings[star_rating_id] | times: 1.0 %}
+        {% else %}
+          {% assign star_rating = nil %}
+        {% endif %}
+
+        {% if author_id %}
+          {% assign author = block.settings[author_id] %}
+        {% else %}
+          {% assign author = nil %}
+        {% endif %}
+
+        {% if image_id %}
+          {% assign include_testimonial_image = true %}
+          {% assign image = block.settings[image_id] %}
+        {% else %}
+          {% assign include_testimonial_image = false %}
+        {% endif %}
+
+        {% if author_image_id %}
+          {% assign include_author_image = true %}
+          {% assign author_image = block.settings[author_image_id] %}
+        {% else %}
+          {% assign include_author_image = false %}
+        {% endif %}
+
+        {%
+          render 'testimonial',
+          block: block,
+          index: forloop.index0,
+          order_of_elements: order_of_elements,
+          content: content,
+          testimonial_title: testimonial_title,
+          star_rating: star_rating,
+          author: author,
+          include_author_image: include_author_image,
+          author_image: author_image,
+          include_testimonial_image: include_testimonial_image,
+          testimonial_image: image,
+        %}
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* Estilos base, aplicados a todos os tamanhos de tela */
+  .testimonials {
+    position: relative;
+    overflow: visible;
+  }
+  
+  .testimonials__section-heading {
+    font-family: Rokkitt, serif;
+    font-weight: 900;
+  }
+  
+  .testimonial__author-name {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
+  
+  .testimonials .flickity-prev-next-button {
+    z-index: 5;
+  }
+
+  /* Estilos específicos para desktop */
+  @media (min-width: 720px) {
+    .testimonials {
+      /* Estilos de desktop originais */
+    }
+    
+    .testimonials__section-heading {
+      /* Manter o estilo original do desktop */
+      font-size: inherit;
+      line-height: inherit;
+    }
+    
+    .testimonial__content-wrapper {
+      /* Manter o estilo original do desktop */
+    }
+    
+    .testimonial__quote {
+      /* Manter o estilo original do desktop */
+    }
+  }
+  @media (max-width: 719px) {
+      .testimonials .testimonials__section-wrapper {
+          margin-top: 0;
+          margin-bottom: 0;
+          padding: 0 30px 0 14px;
+      }
+  }
+  /* Estilos específicos para mobile */
+  @media (max-width: 719px) {
+    .section-content {
+      height: 238px;
+      width: 333px;
+    }
+    
+    .testimonials {
+      padding: 0px 15px;
+      height: 262px;
+      position: relative;
+      background-color: #EBEBEA;
+    }
+    
+    .testimonials__section-header {
+      margin-bottom: 0px;
+      text-align: center;
+    }
+    
+    .testimonials__section-heading {
+      font-size: 20px !important;
+      line-height: 30px;
+      letter-spacing: 0%;
+      text-align: center;
+      vertical-align: middle;
+      margin-top: 0;
+      margin-bottom: 5px;
+      color: #091B63 !important;
+    }
+    
+    .testimonial__content-wrapper {
+      text-align: left;
+      padding: 0px 0;
+      max-width: 262px;
+      margin: 0 auto;
+    }
+    
+    .testimonial__quote {
+      font-size: 16px;
+      line-height: 1.3;
+      text-align: left;
+      margin-bottom: 10px;
+      max-height: 167px;
+      width: 328px;
+      overflow: hidden;
+    }
+    
+    .testimonial__author {
+      margin-left: 0;
+      text-align: left;
+      margin-top: 0px;
+    }
+    
+    .testimonial__author-name {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 26px;
+      letter-spacing: 0%;
+      vertical-align: middle;
+      margin-top: 0px;
+    }
+    
+    p {
+      margin: 0px 0px 1em 0px;
+    }
+    
+    .testimonials .flickity-prev-next-button {
+      display: block !important;
+      width: 35px;
+      height: 35px;
+      bottom: 10px;
+      top: auto;
+      background: linear-gradient(44deg, rgba(80, 19, 99, 1) 9%, rgba(193, 40, 148, 1) 54%, rgba(170, 46, 183, 1) 100%);
+      position: absolute;
+    }
+    
+    .testimonials .flickity-prev-next-button.previous {
+      right: 50px;
+      left: auto;
+    }
+    
+    .testimonials .flickity-prev-next-button.next {
+      right: 10px;
+    }
+    
+    .testimonials .flickity-page-dots {
+      display: none;
+    }
+  }
+</style>
+
+{% comment %}Inject @pixelunion/pxs-testimonials/testimonials end{% endcomment %}
+
+
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Testimonials"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "default-style",
+          "label": "Default"
+        },
+        {
+          "value": "accent-style",
+          "label": "Accent"
+        },
+        {
+          "value": "contrast-style",
+          "label": "Contrast"
+        }
+      ],
+      "default": "default-style"
+    },
+    {
+      "type": "select",
+      "id": "author_image_crop",
+      "label": "Author image crop",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "Mobile image height",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "small",
+          "label": "300px"
+        },
+        {
+          "value": "medium",
+          "label": "400px"
+        },
+        {
+          "value": "large",
+          "label": "500px"
+        }
+      ],
+      "default": "natural"
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "Desktop image height",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "small",
+          "label": "400px"
+        },
+        {
+          "value": "medium",
+          "label": "500px"
+        },
+        {
+          "value": "large",
+          "label": "600px"
+        }
+      ],
+      "default": "natural"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_alignment",
+      "label": "Desktop image alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_width",
+      "label": "Desktop image width",
+      "options": [
+        {
+          "value": "half",
+          "label": "Half (1/2)"
+        },
+        {
+          "value": "one-third",
+          "label": "One third (1/3)"
+        }
+      ],
+      "default": "half"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Testimonial image"
+        },
+        {
+          "type": "select",
+          "id": "star_rating",
+          "label": "Star rating",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "4",
+              "label": "4 stars"
+            },
+            {
+              "value": "4.5",
+              "label": "4.5 stars"
+            },
+            {
+              "value": "5",
+              "label": "5 stars"
+            }
+          ],
+          "default": "5"
+        },
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Testimonial",
+          "default": "<p>Include some of your favorite customer quotes and feedback here as social proof, to build credibility and trust for your services and products.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Author's image",
+          "info": "120 x 120px .jpg required"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Author name",
+          "default": "Author's name."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Testimonials",
+      "settings": {
+        "style": "default"
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "source": "Jane"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "source": "John"
+          }
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "product",
+      "collection",
+      "list-collections",
+      "cart",
+      "page"
+    ]
+  }
+}
+
+{% endschema %}

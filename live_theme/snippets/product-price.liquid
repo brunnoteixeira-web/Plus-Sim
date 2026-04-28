@@ -1,0 +1,99 @@
+{% comment %}
+  @param product {Product}
+    The product to display
+{% endcomment %}
+
+{% assign section_onboarding = false %}
+{% if product == blank %}
+  {% assign section_onboarding = true %}
+{% endif %}
+
+{% assign variant = product.selected_or_first_available_variant %}
+
+{% if product.has_only_default_variant %}
+  {% assign price = product.price %}
+{% else %}
+  {% assign price = variant.price %}
+{% endif %}
+
+<div class="product-price {{ class }}" {{ block.shopify_attributes }}>
+  <span class="price">
+    <span class="por-price">Por</span>
+    <span class="money bold_option_price_display">
+      {% if section_onboarding %}
+        {{ 1999 | money }}
+      {% else %}
+        {{ price | money }}
+      {% endif %}
+    </span>
+
+    {% if product.has_only_default_variant and product.compare_at_price >= price %}
+      <span class="original money{% if product.compare_at_price <= price %} hidden{% endif %}">
+        {% if product.compare_at_price > price %}
+          A partir de {{ product.compare_at_price | money }}
+        {% endif %}
+      </span>
+    {% else %}
+      <span class="original money{% if variant.compare_at_price <= price %} hidden{% endif %}">
+        {% if variant.compare_at_price > price %}
+          A partir de {{ variant.compare_at_price | money }}
+        {% endif %}
+      </span>
+    {% endif %}
+  </span>
+
+  {% capture total_quantity %}<span class="product--total-quantity" data-total-quantity>{{ variant.unit_price_measurement.quantity_value }}{{ variant.unit_price_measurement.quantity_unit }}</span>{% endcapture %}
+  {% capture unit_price %}<span class="product--unit-price-amount money" data-unit-price-amount>{{ variant.unit_price | money }}</span>{% endcapture %}
+  {% capture unit_measure %}<span class="product--unit-price-measure" data-unit-price-measure>{%- if variant.unit_price_measurement.reference_value != 1 -%}{{ variant.unit_price_measurement.reference_value }}{%- endif %}{{ variant.unit_price_measurement.reference_unit }}</span>{% endcapture %}
+
+  <span
+    class="
+      unit-price
+      {% unless variant.unit_price_measurement %}hidden{% endunless %}
+    "
+    data-unit-price
+  >
+    {{ 'products.product.unit_price_html' | t: total_quantity: total_quantity, unit_price: unit_price, unit_measure: unit_measure | strip_newlines }}
+  </span>
+
+  {%- capture tax_text -%}
+    {{ 'products.product.tax_line_html' | t }}
+  {%- endcapture -%}
+
+  {%- if tax_text != blank -%}
+    <div class="
+        product-price__tax-label
+        {% unless variant.taxable %}product-price__tax-label--hidden{% endunless %}
+      "
+      data-tax-line
+    >
+      {{ tax_text }}
+    </div>
+  {%- endif -%}
+</div>
+<form data-payment-terms-target style="display: none;"></form>
+{% if settings.product_ratings_reviews %}
+  <div class="product-reviews-badge">
+    <span class="shopify-product-reviews-badge" data-id="{{ product.id }}">
+      <span class="spr-badge">
+        <span class="spr-starrating spr-badge-starrating">
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+        </span>
+      </span>
+    </span>
+  </div>
+{% endif %}
+
+
+<style>
+ .por-price {
+  font-family: var(--primary-font) !important;
+  font-weight: 800 !important;
+  color: #091b63;
+  font-size: 19px;
+ }
+</style>

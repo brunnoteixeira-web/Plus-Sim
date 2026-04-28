@@ -1,0 +1,220 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "module-faq",
+      "blocks": {
+        "faq_pE46qn": {
+          "type": "faq",
+          "settings": {
+            "title": "1. Qual a diferença entre um chip físico e um eSIM?",
+            "content": "<p>O chip físico é um cartão SIM tradicional que você insere no aparelho. Já o eSIM é um chip virtual, ativado por QR Code, sem a necessidade de inserir nenhum item físico no celular.</p>"
+          }
+        },
+        "faq_cHJk7c": {
+          "type": "faq",
+          "settings": {
+            "title": "2. Em quais países o chip funciona?",
+            "content": "<p>Nossos chips funcionam em mais de 200 destinos. Você pode verificar a lista completa de destinos na página de cada produto.</p>"
+          }
+        },
+        "faq_VhJ9cy": {
+          "type": "faq",
+          "settings": {
+            "title": "3. Qual a velocidade da internet oferecida?",
+            "content": "<p>A velocidade varia conforme o país e a rede local, podendo atingir 5G ou 4G. Garantimos conexão rápida e estável com operadoras locais confiáveis.</p>"
+          }
+        },
+        "faq_keUj9Q": {
+          "type": "faq",
+          "settings": {
+            "title": "4. Como ativar o chip quando chegar ao destino?",
+            "content": "<p>Chips físicos: Insira o chip no celular ao chegar ao destino e ative o roaming de dados.<br/>Para eSIMs: escaneie o QR Code antes da viagem para configurar o plano em seu celular. Ative a linha e o roaming de dados assim que chegar ao destino. Instruções detalhadas são enviadas por Whatsapp em até um dia antes da viagem.</p>"
+          }
+        },
+        "faq_RcwNr7": {
+          "type": "faq",
+          "settings": {
+            "title": "5. Posso comprar o eSIM mesmo estando fora do Brasil?",
+            "content": "<p>Sim! Você pode adquirir o eSIM estando em qualquer lugar do mundo!</p>"
+          }
+        },
+        "faq_xWkHV8": {
+          "type": "faq",
+          "settings": {
+            "title": "6. Em quanto tempo recebo o chip ou o eSIM após a compra?",
+            "content": "<p>O prazo de entrega varia conforme sua localidade. Chips físicos geralmente são entregues entre 2 a 7 dias úteis. O eSIM é enviado por Whatsapp até 1 dia antes da viagem</p>"
+          }
+        },
+        "faq_Krizac": {
+          "type": "faq",
+          "settings": {
+            "title": "7. Quais formas de pagamento são aceitas?",
+            "content": "<p>Aceitamos cartões de crédito, Pix e boleto bancário.</p>"
+          }
+        },
+        "faq_JTAhWt": {
+          "type": "faq",
+          "settings": {
+            "title": "8. Posso parcelar minha compra?",
+            "content": "<p>Sim, compras com cartão de crédito podem ser parceladas. As condições variam de acordo com o valor total e o número de parcelas.</p>"
+          }
+        },
+        "faq_4LAKEn": {
+          "type": "faq",
+          "settings": {
+            "title": "9. O chip funciona assim que eu aterrissar no país de destino?",
+            "content": "<p>Sim! Basta inserir o chip (ou ativar o eSIM) e ativar o roaming de dados. A conexão será estabelecida automaticamente.</p>"
+          }
+        },
+        "faq_U4jxAk": {
+          "type": "faq",
+          "settings": {
+            "title": "10. Posso compartilhar internet com outros dispositivos?",
+            "content": "<p>Sim! Nosos planos permitem o compartilhamento de internet.</p>"
+          }
+        },
+        "faq_XQWwtJ": {
+          "type": "faq",
+          "settings": {
+            "title": "11. O chip funciona em cruzeiros ou apenas em terra firme?",
+            "content": "<p>Os chips funcionam em terra firme, conectados às redes móveis locais. Durante a navegação do cruzeiro, em alto mar, não há conexão por não haver infraestrutura de operadoras de telefonia. Em navegação, apenas a rede WIFI do navio, que é por satélite, funciona.</p>"
+          }
+        },
+        "faq_AgYjxD": {
+          "type": "faq",
+          "settings": {
+            "title": "12. O que faço se meu chip não funcionar?",
+            "content": "<p>Entre em contato com nosso suporte por Whatsapp imediatamente: +1(321)310-4764. Estamos disponíveis 24h para te ajudar com qualquer problema técnico ou de ativação.</p>"
+          }
+        },
+        "faq_zeeaEM": {
+          "type": "faq",
+          "settings": {
+            "title": "13. Como entro em contato com o suporte?",
+            "content": "<p>Você pode nos contatar via WhatsApp, através do número: +1(321)310-4764</p>"
+          }
+        },
+        "faq_BLWR9B": {
+          "type": "faq",
+          "settings": {
+            "title": "14. Meu celular é compatível com eSIM?",
+            "content": "<p>Para saber se seu celular é compatível com eSIM, basta digitar *#06# na tela em que você faz ligações (como se fosse ligar para alguém). Algumas informações vão aparecer na tela. Caso tenha o código EID, seu celular é compatível com eSIM. <br/><br/>Em caso de dúvidas, entre em contato conosco que verificamos.</p>"
+          }
+        },
+        "faq_kVMnLk": {
+          "type": "faq",
+          "settings": {
+            "title": "15. Posso manter meu número brasileiro no Whatsapp enquanto uso o chip internacional?",
+            "content": "<p>Sim, seu número de Whatsapp não muda quando você passa a usar o chip internacional. Ao abrir o aplicativo pela primeira vez, basta clica em “Não” quando perguntado se você deseja alterar o número.</p>"
+          }
+        },
+        "faq_Rq3xMA": {
+          "type": "faq",
+          "settings": {
+            "title": "16. É possível transferir o plano do Chip Físico para eSIM caso eu troque de celular na viagem?",
+            "content": "<p>Não é possível. Caso você tenha a intenção de trocar de celular durante a viagem, recomendamos que adquira o eSIM e faça a transferência do eSIM de um celular para o outro durante a troca. (entre em contato que auxiliamos)</p><p>*Somente plano Estados Unidos. Para os demais planos, não é possível transferir o eSIM de celular.</p>"
+          }
+        },
+        "faq_iKjUqw": {
+          "type": "faq",
+          "settings": {
+            "title": "17. É possível transferir o eSIM de um celular para o outro?",
+            "content": "<p>É possível transferir o eSIM de aparelho apenas no plano Estados Unidos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_pE46qn",
+        "faq_cHJk7c",
+        "faq_VhJ9cy",
+        "faq_keUj9Q",
+        "faq_RcwNr7",
+        "faq_xWkHV8",
+        "faq_Krizac",
+        "faq_JTAhWt",
+        "faq_4LAKEn",
+        "faq_U4jxAk",
+        "faq_XQWwtJ",
+        "faq_AgYjxD",
+        "faq_zeeaEM",
+        "faq_BLWR9B",
+        "faq_kVMnLk",
+        "faq_Rq3xMA",
+        "faq_iKjUqw"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 719px) {.section-content {padding: 0px 8px; height: auto; width: auto; }}"
+      ],
+      "settings": {}
+    },
+    "home_testimonials_bJmWhB": {
+      "type": "home-testimonials",
+      "blocks": {
+        "testimonial_eCrfrN": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Excelente...usei para viagem na america do sul argentina, chegando no aeroporto o chip ja conectou em poucos minutos, consegui compartilhar com cel e notebook...e usei mto para chamar uber e mapas.  Chamei no zap a equipe pra tirar uma dúvida e fui rapidamente atendida. obg ate a próxima viagem!!!</p>",
+            "source": "Naiane Lopes"
+          }
+        },
+        "testimonial_U7eDbR": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Chip ótimo! Passei por 5 países e funcionou perfeitamente em todos. Recomendo !</p>",
+            "source": "André Maciel"
+          }
+        },
+        "testimonial_fk8EQy": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Comprei para usar no Atacama, Chile. Funcionou muito bem em 3G. Recomendo</p>",
+            "source": "Gilberto"
+          }
+        },
+        "testimonial_GyQGPV": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "none",
+            "quote": "<p>Super atenciosos. <br/>Sempre que viajo compro com eles, excelente internet e o melhor preço.</p>",
+            "source": "Brenna"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_eCrfrN",
+        "testimonial_U7eDbR",
+        "testimonial_fk8EQy",
+        "testimonial_GyQGPV"
+      ],
+      "custom_css": [
+        "@media (max-width: 719px) {.testimonials {padding: 0px 15px 0px 0px; height: 262px; position: relative; background-color: #ebebea; } .module-inner {padding: 0 30px 0 15px; }}"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "title": "Depoimentos",
+        "style": "default-style",
+        "author_image_crop": "circle",
+        "mobile_height": "natural",
+        "desktop_height": "natural",
+        "desktop_image_alignment": "left",
+        "desktop_image_width": "half"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "home_testimonials_bJmWhB"
+  ]
+}

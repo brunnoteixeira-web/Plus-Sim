@@ -1,0 +1,149 @@
+{%- comment -%}
+  @param menu {Menu} REQUIRED
+    The primary menu to use in the navigation list.
+
+  @param classes {String}
+  Any classes to add to the nav element.
+
+  @param nav_position {String}
+    The position of the navigation in the header, one of "left", "center", "below", or "none". Default is "center".
+
+{%- endcomment -%}
+
+<nav
+  class="header-nav {{ nav_classes }} {{ nav_position }}"
+  data-header-nav
+  aria-label="{{ 'sections.header.main_nav' | t }}"
+>
+  <ul
+    class="header-nav__tier-1"
+    data-header-nav-tier-1
+  >
+    {% for link_tier_1 in linklists[menu].links %}
+      {% assign has_tier_2 = false %}
+      {% if link_tier_1.links.size > 0 %}
+        {% assign has_tier_2 = true %}
+
+        {% if section.blocks.size > 0 %}
+          {% assign has_mega_nav = false %}
+
+          {% for block in section.blocks %}
+            {% if block.type == 'meganav' %}
+              {% assign meganav_trigger = block.settings.title | handle %}
+              {% if link_tier_1.handle == meganav_trigger %}
+                {% assign has_mega_nav = true %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+
+      <li
+        class="
+          header-nav__tier-1-item
+          {% if has_mega_nav %}header-nav__mega-nav-parent{% endif %}
+        "
+        {% if has_tier_2 %}data-header-nav-parent{% endif %}
+      >
+        {% if has_tier_2 %}
+        <details data-header-nav-details>
+          <summary data-href="{{ link_tier_1.url }}"
+        {% else %}
+          <a href="{{ link_tier_1.url }}"
+        {% endif %}
+          class="
+            header-nav__tier-1-link
+            {% if has_tier_2 %}header-nav__tier-1-link--parent{% endif %}
+          "
+          data-header-nav-link
+          {% if has_tier_2 %}
+            aria-expanded="false"
+            aria-controls="nav-tier-2-{{ forloop.index }}"
+            role="button"
+          {% endif %}
+        >
+          <span>{{ link_tier_1.title | escape }}</span>
+        {% if has_tier_2 %}
+          </summary>
+        {% else %}
+          </a>
+        {% endif %}
+
+        {% if has_mega_nav %}
+          {%
+            render 'mega-nav',
+            links: link_tier_1
+          %}
+        {% endif %}
+
+        {% if has_tier_2 %}
+          <ul
+            id="nav-tier-2-{{ forloop.index }}"
+            class="header-nav__tier-2"
+            tabindex="-1"
+            data-header-nav-tier-2
+            data-header-nav-submenu
+          >
+            {% for link_tier_2 in link_tier_1.links %}
+              {% assign has_tier_3 = false %}
+              {% if link_tier_2.links.size > 0 %}
+                {% assign has_tier_3 = true %}
+              {% endif %}
+              <li
+                class="header-nav__tier-2-item"
+                {% if has_tier_3 %}data-header-nav-parent{% endif %}
+              >
+                {% if has_tier_3 %}
+                  <details data-header-nav-details>
+                    <summary data-href="{{ link_tier_2.url }}"
+                {% else %}
+                  <a href="{{ link_tier_2.url }}"
+                {% endif %}
+                  class="
+                    header-nav__tier-2-link
+                    {% if has_tier_3 %}header-nav__tier-2-link--parent{% endif %}
+                  "
+                  data-header-nav-link
+                  {% if has_tier_3 %}
+                    aria-expanded="false"
+                    aria-controls="nav-tier-3-{{ forloop.index }}"
+                    role="button"
+                  {% endif %}
+                >
+                  <span>{{ link_tier_2.title | escape }}</span>
+                {% if has_tier_3 %}
+                  </summary>
+                {% else %}
+                  </a>
+                {% endif %}
+
+                {% if has_tier_3 %}
+                  <ul
+                    id="nav-tier-3-{{ forloop.index }}"
+                    class="header-nav__tier-3"
+                    tabindex="-1"
+                    data-header-nav-tier-3
+                    data-header-nav-submenu
+                  >
+                    {% for link_tier_3 in link_tier_2.links %}
+                      <li class="header-nav__tier-3-item">
+                        <a
+                          href="{{ link_tier_3.url }}"
+                          class="header-nav__tier-3-link"
+                        >
+                          <span>{{ link_tier_3.title | escape }}</span>
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  </details>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+          </details>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

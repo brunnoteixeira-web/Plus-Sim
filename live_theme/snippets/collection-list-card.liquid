@@ -1,0 +1,136 @@
+{% comment %}
+  @param collection {Object}
+    Collection object
+
+  @param collection_card_classes
+    A space separated list of classes to be added to each collection list card.
+
+  @param collection_card_attributes
+    A space separated list of attributes to be added to each collection list card.
+
+  @param collection_card_wrapper_attributes
+    A space separated list of attributes to be added to each collection list card wrapper.
+
+  @param featured_image
+    The image associated with the collection
+
+  @param crop_images {String}
+    The type of cropping to use of 'center', 'top', 'bottom', 'left', 'right', or false.
+
+  @param custom_title
+    Custom title to place under each collection card
+
+  @param custom_url
+    Custom URL to wrap each collection card
+
+  @param custom_description
+    The custom description field for the collection
+
+  @param show_collection_names
+    Will show the collection title if true. Default false.
+
+  @param show_descriptions
+    Will show the collection description on the collection cards. Default false.
+
+  @param show_product_count
+    Adds the number of items in the collection to the card. Default false.
+
+  @param show_buttons
+    Include a button under each collection card
+
+  @param placeholder_image_cycle
+    The current cycle for the placeholder image. Cycles from 1 to 6. Default 1.
+
+  @param add_link_to_description {Boolean}
+    Makes the collection description click-able.
+{% endcomment %}
+
+{% if collection == blank or collection.empty? %}
+  {% assign collection_title = 'sections.collection_list.title' | t  %}
+  {% assign collection_url = '#' %}
+{% else %}
+  {% assign collection_title = collection.title | escape %}
+  {% assign collection_url = collection.url %}
+{% endif %}
+
+{% if custom_title != blank %}
+  {% assign collection_title = custom_title  %}
+{% endif %}
+
+{% if custom_url != blank %}
+  {% assign collection_url = custom_url  %}
+{% endif %}
+
+{% assign placeholder_image_cycle = placeholder_image_cycle | default: 1 %}
+
+<li
+  class="collection-card {{ collection_card_classes }}"
+  data-collection-card
+  {{ collection_card_attributes }}
+>
+  <div class="collection-card__wrapper" {{ collection_card_wrapper_attributes }}>
+    <a
+      href="{{ collection_url }}"
+      class="collection-card__image-link"
+    >
+      {% if featured_image %}
+        {%
+          render 'rimg',
+          img: featured_image,
+          alt: collection_title,
+          class: 'collection-card__image',
+          size: '1400x',
+          crop: crop_images,
+          lazy: true,
+          canvas: true,
+        %}
+      {% else %}
+        {{ 'collection-' | append: placeholder_image_cycle | placeholder_svg_tag: 'collection-card__image collection-card__placeholder placeholder--image placeholder-svg' }}
+      {% endif %}
+    </a>
+
+    <div class="collection-card__info">
+      {% if show_collection_names %}
+        <a class="collection-card__title" href="{{ collection_url }}">
+          {{ collection_title }}
+        </a>
+      {% endif %}
+
+      {% if show_descriptions %}
+        <div class="collection-card__description">
+          {% if add_link_to_description %}
+            <a
+              class="collection-card__description-link"
+              href="{{ collection_url }}"
+            >
+          {% endif %}
+
+          {% if custom_description != blank %}
+            {{ custom_description }}
+          {% elsif collection.description != blank %}
+            {{ collection.description }}
+          {% endif %}
+
+          {% if add_link_to_description %}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if show_product_count and collection != empty and collection.products_count > 0 %}
+        <span class="collection-card__product-count">
+          {{ 'sections.collection_list.product_count' | t: count: collection.products_count }}
+        </span>
+      {% endif %}
+
+      {% if show_buttons %}
+        <a
+          href="{{ collection_url }}"
+          class="collection-card__button"
+        >
+          {{ 'sections.collection_list.button_text' | t: name: collection_title }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</li>

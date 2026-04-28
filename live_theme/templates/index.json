@@ -1,0 +1,145 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner_resposivo_n8eGtd": {
+      "type": "banner-resposivo",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/PlusSim.png",
+        "banner_mobile": "shopify://shop_images/PlusSim_Mobile.png",
+        "link_banner": "",
+        "alt_text": "Banner promocional"
+      }
+    },
+    "tips_bar_CzBpmn": {
+      "type": "tips-bar",
+      "custom_css": [],
+      "settings": {}
+    },
+    "featured_collection_slide_eY4Bxn": {
+      "type": "featured-collection-slide",
+      "settings": {
+        "style": "default-style",
+        "title": "Qual o seu próximo destino?",
+        "button": "",
+        "link": "",
+        "collection": "featured-collection",
+        "products_in_rows": 5,
+        "number_of_rows": 1
+      }
+    },
+    "banner_resposivo_y4hz8G": {
+      "type": "banner-resposivo",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/PlusSim_-_Banner_Paises_-_oficial.png",
+        "banner_mobile": "shopify://shop_images/PlusSim_-_Banner_Paises_-_oficial.png",
+        "link_banner": "",
+        "alt_text": "Banner promocional"
+      }
+    },
+    "home-testimonials-1": {
+      "type": "home-testimonials",
+      "blocks": {
+        "testimonial_AhzVYw": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "5",
+            "quote": "<p>A melhor de todas as empresas, principalmente no pós venda!! Meus pais vem sempre nos visitar e as meninas da PlusSim entregam o chip na casa deles no Brasil e eles chegam aqui nos USA conectados e eu super aliviada de já poder falar com eles desde o primeiro momento</p>",
+            "source": "Bárbara Luiza Cardoso"
+          }
+        },
+        "testimonial_BFzeGG": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "5",
+            "quote": "<p>Excelente chip.... usei nos USA... precisei tirar algumas dúvidas enquanto estava lá e fui prontamente atendido via WhatsApp... Obrigado.. utilizarei novamente com certeza.</p>",
+            "source": "Merinson Scaranello"
+          }
+        },
+        "block-1": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "5",
+            "quote": "<p>Excelente...usei para viagem na america do sul argentina, chegando no aeroporto o chip ja conectou em poucos minutos, consegui compartilhar com cel e notebook...e usei mto para chamar uber e mapas.  Chamei no whats a equipe pra tirar uma dúvida e fui rapidamente atendida. obg ate a próxima viagem!!!</p>",
+            "source": "Naiane Lopes"
+          }
+        },
+        "testimonial_TG7FD3": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "5",
+            "quote": "<p>Chip ótimo! Passei por 5 países e funcionou perfeitamente em todos. Recomendo !</p>",
+            "source": "André Maciel"
+          }
+        },
+        "testimonial_xaqidi": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "5",
+            "quote": "<p>Recomendo muito!Funcionou super bem na Alemanha, Escócia e Islândia!Vou comprar na próxima viagem!</p>",
+            "source": "Marcia Palmer Irffi"
+          }
+        },
+        "block-2": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": "5",
+            "quote": "<p>Super atenciosos. <br/>Sempre que viajo compro com eles, excelente internet e o melhor preço.</p>",
+            "source": "Brenna"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_AhzVYw",
+        "testimonial_BFzeGG",
+        "block-1",
+        "testimonial_TG7FD3",
+        "testimonial_xaqidi",
+        "block-2"
+      ],
+      "settings": {
+        "title": "O que falam sobre a Plus Sim :)",
+        "style": "default-style",
+        "author_image_crop": "original",
+        "mobile_height": "natural",
+        "desktop_height": "small",
+        "desktop_image_alignment": "left",
+        "desktop_image_width": "one-third"
+      }
+    },
+    "home-text-1": {
+      "type": "home-text",
+      "disabled": true,
+      "settings": {
+        "title": "Sobre Nós",
+        "content": "<p>A PlusSim é uma empresa especializada na venda de chip de viagem para turistas internacionais.<br>Unimos a melhor cobertura local de internet e ligações em planos para mais de 200 destinos pelo mundo! Receba seu chip em casa antes da viagem!</p>"
+      }
+    },
+    "home_text_U9FY6X": {
+      "type": "home-text",
+      "custom_css": [
+        ".home-text-feature .rte.home-text-content p {margin: 5px 0; padding: 0; font-size: 19px; font-weight: 450; max-width: 896px;}"
+      ],
+      "settings": {
+        "title": "Sobre Nós",
+        "content": "<p>Viajar é descobrir o novo; e sabemos que estar conectado traz a segurança necessária para explorar o mundo com liberdade! <br/>A<strong> Plus Sim</strong> está há mais de 8 anos acompanhando e conectando pessoas ao redor do mundo, em mais de 200 destinos, unindo a melhor cobertura de internet a um suporte que fala a sua língua.<br/>Não entregamos apenas um chip ou um eSIM; entregamos a tranquilidade de saber que desde o primeiro contato e até o fim da sua viagem, a Plus Sim estará ao seu lado.</p>"
+      }
+    }
+  },
+  "order": [
+    "banner_resposivo_n8eGtd",
+    "tips_bar_CzBpmn",
+    "featured_collection_slide_eY4Bxn",
+    "banner_resposivo_y4hz8G",
+    "home-testimonials-1",
+    "home-text-1",
+    "home_text_U9FY6X"
+  ]
+}

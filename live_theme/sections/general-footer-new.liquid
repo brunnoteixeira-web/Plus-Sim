@@ -1,0 +1,708 @@
+{% schema %}
+{
+  "name": "Rodapé Personalizado",
+  "tag": "section",
+  "class": "custom-footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "address_title",
+      "label": "Título Local",
+      "default": "Endereço"
+    },
+    {
+      "type": "richtext",
+      "id": "address_content",
+      "label": "Endereço",
+      "default": "<p>Estamos localizados em Orlando!<br>4700 Millenia Blvd, Suite 175<br>Orlando/FL - 32839</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Título Contato",
+      "default": "Contato"
+    },
+    {
+      "type": "richtext",
+      "id": "whatsapp_phones",
+      "label": "Telefones WhatsApp",
+      "default": "<p>+1 321 310 4764<br>+1 321 310 2281</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "regular_phones",
+      "label": "Telefones Regulares",
+      "default": "<p>+55 11 4680 6732<br>+55 11 4380 7513<br>+44 203 868 8895</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "E-mail",
+      "default": "info@plussim.com"
+    },
+    {
+      "type": "text",
+      "id": "social_title",
+      "label": "Título Social",
+      "default": "Redes Sociais"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Link Instagram"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Link Facebook"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rodapé Personalizado",
+      "category": "Rodapé"
+    }
+  ]
+}
+{% endschema %}
+
+<footer class="footer-custom-wrapper">
+  <div class="footer-background">
+    <div class="footer-gradient"></div>
+  </div>
+  
+  <div class="footer-columns">
+    <div class="footer-col">
+      <h4>Endereço</h4>
+      <div class="footer-text address">
+        <p>Estamos localizados em Orlando!<br>4700 Millenia Blvd, Suite 175<br>Orlando/FL - 32839</p>
+      </div>
+      <div class="travel-subtitle">
+        <p>VIAJE COM A PLUSSIM<br>E FIQUE CONECTADO<br>EM TODOS OS MOMENTOS!</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 class="contato">Contato</h4>
+      <div class="footer-text">
+        <div class="footer-phones">
+          <div class="phone-group">
+            <i class="bi bi-whatsapp icon-gap"></i>
+            <div class="phone-numbers">
+              +1 321 310 4764
+            </div>
+          </div>
+          <div class="phone-group">
+            <span class="material-symbols-outlined icon-gap">call</span>
+            <div class="phone-numbers">
+              +55 11 4680 6732
+            </div>
+          </div>
+        </div>
+        <p>
+          <span class="material-symbols-outlined icon-gap">mail</span>
+          <span>info@plussim.com</span>
+        </p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Redes Sociais</h4>
+      <ul class="footer-social">
+        <li><a href="#" target="_blank"><i class="bi bi-instagram"></i> @plussim_travel</a></li>
+        <li><a href="#" target="_blank"><i class="bi bi-facebook"></i> /plussimtravel</a></li>
+      </ul>
+    </div>
+    
+    <!-- Airplane decoration -->
+    <div class="airplane-wrapper">
+      <img src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/raphael_plane.svg?v=1746787598" alt="Avião" class="airplane">
+      <img src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/Line_3.svg?v=1746787598" alt="Tracejado" class="dashed-line">
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Base Styles */
+  .footer-custom-wrapper {
+    position: relative;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
+    padding: 40px 20px 0;
+    height: 326px; /* Altura fixa para desktop */
+    box-sizing: border-box;
+  }
+  .icon-gap {
+    padding: 5px;
+  }
+
+  .footer-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .footer-gradient {
+    background: linear-gradient(98deg, #08226C 0%, #4B27BA 35%, #D74AB2 70%, #522070 100%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 1120px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+  }
+
+  .footer-col {
+    flex: 1;
+  }
+
+  .footer-col h4 {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .footer-text {
+    color: #60C2EA;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .footer-text p {
+    margin: 0 0 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-text.address {
+    font-style: normal;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #60C2EA;
+  }
+
+  /* Travel subtitle */
+  .travel-subtitle {
+    margin-top: 30px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.4;
+    font-size: 18px;
+  }
+
+  .travel-subtitle p {
+    margin: 0;
+  }
+
+  /* Contact section */
+  .footer-col:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col:nth-child(2) .footer-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Contact Icons */
+  .footer-phones {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .phone-group {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+    justify-content: flex-start;
+    width: 200px;
+  }
+
+  .phone-group .phone-numbers {
+    color: white;
+    line-height: 1.5;
+    position: relative;
+    text-align: left;
+  }
+
+  .phone-group .bi,
+  .phone-group .material-symbols-outlined,
+  .footer-col:nth-child(2) .footer-text p .material-symbols-outlined {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    flex-shrink: 0;
+  }
+
+  .footer-col:nth-child(2) .footer-text p {
+    margin: 0 0 5px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    color: white;
+    position: relative;
+    justify-content: flex-start;
+    width: 200px;
+  }
+
+  /* Redefine general paragraph style */
+  .footer-text p {
+    margin: 0 0 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-text.address p {
+    color: #60C2EA;
+  }
+
+  /* Material Icons (e-mail e telefone) */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: 25px;
+    color: #60C2EA;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  /* Bootstrap (whatsapp, instagram, facebook) */
+  .bi {
+    font-size: 25px;
+    color: #60C2EA;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  /* Social Media */
+  .footer-social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-social li {
+    margin-bottom: 8px;
+  }
+
+  .footer-social a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Airplane and line styling */
+  .airplane-wrapper {
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    width: 80%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .dashed-line {
+    width: 30%;
+    height: auto;
+    position: relative;
+    top: -20px;
+    left: 12px;
+  }
+
+  .airplane {
+    position: absolute;
+    width: 90px;
+    height: auto;
+    left: -5%;
+    top: 50%;
+    transform: translateY(-130%);
+    z-index: 3;
+  }
+  .contato {
+    margin-right: 110px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-custom-wrapper {
+      height: 509px;
+      min-height: auto;
+      background: linear-gradient(98deg, #08226C 0%, #4B27BA 35%, #D74AB2 70%, #522070 100%);
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .contato {
+      margin-right: 0px;
+    }
+    
+    .footer-columns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 100%;
+      height: auto;
+      gap: 30px;
+      width: 100%;
+    }
+    
+    .footer-col {
+      flex: none;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-col h4 {
+      color: white;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0px;
+      margin-top: 8px;
+    }
+
+    .footer-text.address {
+      text-align: center;
+      color: #60C2EA;
+      font-size: 14px;
+      line-height: 1.5;
+      width: 100%;
+    }
+
+    .footer-text.address p {
+      margin: 0;
+      justify-content: center;
+    }
+
+    .phone-group {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      margin: 0;
+      width: 180px;
+    }
+
+    .phone-numbers {
+      color: white;
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .footer-col:nth-child(2) .footer-text p {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      margin: 0;
+      width: 180px;
+      color: white;
+    }
+
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-social li {
+      margin: 0;
+      padding: 0;
+      width: 150px;
+    }
+
+    .footer-social a {
+      justify-content: flex-start;
+      width: 100%;
+      gap: 10px;
+    }
+
+    /* Remover linhas verticais no mobile */
+    .phone-group .bi::after,
+    .phone-group .material-symbols-outlined::after,
+    .footer-col:nth-child(2) .footer-text p .material-symbols-outlined::after {
+      display: none;
+    }
+
+    /* Esconder o slogan no mobile */
+    .travel-subtitle {
+      display: none;
+    }
+
+    /* Ajustes dos ícones */
+    .bi, .material-symbols-outlined {
+      color: #60C2EA;
+      font-size: 25px;
+    }
+
+    /* Ajustes do avião e linha tracejada */
+    .airplane-wrapper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      bottom: 0;
+      right: 0;
+      z-index: 0;
+    }
+
+    .airplane {
+      position: absolute;
+      width: 26%;
+      height: 30%;
+      top: 117.61px;
+      left: 1px;
+      transform: rotate(64.22deg);
+    }
+
+    .dashed-line {
+      position: absolute;
+      width: 500.39px;
+      height: 402.77px;
+      top: 196px;
+      left: -122.31px;
+      border: 1px;
+      transform: rotate(-283.83deg);
+    }
+  }
+
+  /* Telas menores (375px ou menos) */
+  @media (max-width: 375px) {
+    .footer-custom-wrapper {
+      height: auto;
+      background: linear-gradient(98deg, #08226C 0%, #4B27BA 35%, #D74AB2 70%, #522070 100%);
+      padding-bottom: 40px;
+    }
+    
+    .footer-columns {
+      flex-direction: column;
+      gap: 30px;
+      padding-bottom: 0;
+    }
+    
+    .footer-col {
+      text-align: center;
+    }
+    
+    /* Centralizar endereço */
+    .footer-text.address {
+      text-align: center;
+    }
+    
+    /* Esconder o slogan no mobile */
+    .travel-subtitle {
+      display: none;
+    }
+    
+    /* Remover linhas verticais no mobile */
+    .phone-group .bi::after,
+    .phone-group .material-symbols-outlined::after,
+    .footer-col:nth-child(2) .footer-text p .material-symbols-outlined::after {
+      display: none;
+    }
+    
+    /* Mostrar o avião no mobile com valores específicos para telas pequenas */
+    .airplane-wrapper {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      transform: none;
+    }
+    
+    .airplane {
+      position: absolute;
+      width: 26%;
+      height: 30%;
+      top: 194.61px;
+      left: -18px;
+      transform: rotate(64.22deg);
+    }
+    
+    .dashed-line {
+        position: absolute;
+        width: 318.39px;
+        height: 315.77px;
+        top: 172px;
+        left: -112.31px;
+        border: 1px;
+        transform: rotate(-285.83deg);
+    }
+    
+    /* Ajustar colunas para ficarem visíveis sobre o avião */
+    .footer-col {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .phone-group .bi::after,
+  .phone-group .material-symbols-outlined::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 1px;
+    background-color: #60C2EA;
+    top: 50%;
+    left: 33px;
+    transform: rotate(-90deg);
+  }
+
+  .footer-col:nth-child(2) .footer-text p .material-symbols-outlined::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 1px;
+    background-color: #60C2EA;
+    top: 50%;
+    left: 33px;
+    transform: rotate(-90deg);
+  }
+
+  /* Preservar as configurações específicas para telas menores */
+  @media (max-width: 375px) {
+    .airplane {
+      position: absolute;
+      width: 26%;
+      height: 30%;
+      top: 55.61px;
+      left: -2px !important;
+      transform: rotate(64.22deg);
+    }
+    
+    .dashed-line {
+        position: absolute;
+        width: 318.39px;
+        height: 315.77px;
+        top: 172px;
+        left: -112.31px;
+        border: 1px;
+        transform: rotate(-285.83deg);
+    }
+  }
+
+  @media (max-width: 375px) {
+    .airplane {
+        position: absolute;
+        width: 26%;
+        height: 30%;
+        top: 109.61px;
+        left: 6px;
+        transform: rotate(64.22deg);
+    }
+}
+
+  @media (max-width: 414px) {
+    .airplane {
+        position: absolute;
+        width: 26%;
+        height: 30%;
+        top: 85.61px;
+        left: 14px;
+        transform: rotate(64.22deg);
+    }
+        .dashed-line {
+        position: absolute;
+        width: 500.39px;
+        height: 402.77px;
+        top: 196px;
+        left: -132.31px;
+        border: 1px;
+        transform: rotate(-283.83deg);
+    }
+}
+
+  @media (max-width: 430px) {
+    .airplane {
+        position: absolute;
+        width: 26%;
+        height: 30%;
+        top: 84.61px;
+        left: 22px;
+        transform: rotate(64.22deg);
+    }
+        .dashed-line {
+        position: absolute;
+        width: 500.39px;
+        height: 402.77px;
+        top: 196px;
+        left: -132.31px;
+        border: 1px;
+        transform: rotate(-283.83deg);
+    }
+}
+
+  @media (max-width: 390px) {
+    .airplane {
+        position: absolute;
+        width: 26%;
+        height: 30%;
+        top: 109.61px;
+        left: 7px;
+        transform: rotate(64.22deg);
+    }
+        .dashed-line {
+        position: absolute;
+        width: 500.39px;
+        height: 402.77px;
+        top: 196px;
+        left: -132.31px;
+        border: 1px;
+        transform: rotate(-283.83deg);
+    }
+}
+</style> 

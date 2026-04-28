@@ -1,0 +1,311 @@
+<section
+  data-section-id="{{ section.id }}"
+  data-section-type="static-collection"
+>
+  {% assign collection_image = false %}
+  {% assign enable_filters = section.settings.enable_filtering %}
+  {% assign enable_sorting = section.settings.enable_sorting %}
+  {% if collection.image and section.settings.show_featured_image %}
+    {% assign collection_image = collection.image %}
+  {% endif %}
+
+  <div
+    class="collection-header-wrapper {% if collection_image %}collection-header-has-image{% endif %}"
+    {% if collection_image %}
+      {%
+        render 'rimg',
+        img: collection_image,
+        size: '1024x1024',
+        background: true,
+        lazy: true
+      %}
+    {% endif %}
+  >
+    <div class="collection-header">
+      <h1 class="page-title">
+        {% if collection.handle == 'all' %}
+          {{ 'collections.collection.all_products' | t }}
+        {% else %}
+          {{ collection.title }}
+        {% endif %}
+      </h1>
+
+      {% if collection.description != blank and section.settings.show_description %}
+        <div class="collection-description rte">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% assign products_per_page = section.settings.products_in_rows | times: section.settings.numbers_of_rows %}
+  {% paginate collection.products by products_per_page %}
+    {% if enable_filters or enable_sorting %}
+      <div class="collection__action-wrapper products-per-row-{{ section.settings.products_in_rows }}">
+        {% if enable_filters %}
+          <div class="collection-filter-wrapper" data-faceted-filter>
+
+            {%
+              render 'faceted-filters',
+              filters: collection.filters,
+              class_prefix: 'collection'
+            %}
+
+          </div>
+        {% endif %}
+
+        {% if enable_sorting %}
+          {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
+          {%- for option in collection.sort_options -%}
+            {%- if option.value == current_sort -%}
+              {% assign option_name = option.name %}
+              {% break %}
+            {%- endif -%}
+          {%- endfor -%}
+          <div class="collection-sort">
+            <div class="select-wrapper collection-sort__wrapper">
+              <label
+                class="select-text collection-sort__label"
+                for="sortby"
+                data-select-text
+              >
+                <strong>Sort by:</strong><span class="collection-sort__selected">{{ option_name }}</span>
+              </label>
+              <select
+                id="sortby"
+                class="
+                  {% if collection.current_vendor %}vendor-collection{% endif %}
+                  collection-sort
+                  single-option-selector
+                "
+                data-collection-sort
+              >
+                {%- for option in collection.sort_options -%}
+                  <option
+                    value="{{ option.value }}"
+                    {%- if option.value == current_sort -%}
+                      selected
+                    {%- endif -%}
+                  >
+                    {{ option.name }}
+                  </option>
+                {%-  endfor -%}
+              </select>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+
+    {% for filter in collection.filters %}
+      {% if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value %}
+        <div 
+          class="
+            collection-page__filters-active
+            products-per-row-{{ section.settings.products_in_rows }}
+          "
+        >
+          {%-
+            render 'faceted-filters-active',
+            filters: collection.filters,
+            class_prefix: 'collection',
+            clear_url: collection.url
+          -%}
+        </div>
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    <div class="collection-products products-per-row-{{ section.settings.products_in_rows }}">
+      {% for product in collection.products %}
+        {%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+        {%
+          render 'product-list-item',
+          product: product
+        %}
+      {% else %}
+        <p class="empty">{{ 'collections.collection.no_products' | t }}</p>
+      {% endfor %}
+    </div>
+
+
+    {% if paginate.previous or paginate.next %}
+      {%
+        render 'pagination',
+        paginate: paginate
+      %}
+    {% endif %}
+
+  {% endpaginate %}
+</section>
+
+<style>
+.page-title {
+  font-family: rokkitt;
+  font-size: 40px;
+  font-weight: 900;
+  color: #091B63;
+}
+@media screen and (max-width: 720px) {
+  .page-title {
+    font-family: rokkitt;
+    font-size: 20px;
+    font-weight: 900;
+    color: #091B63;
+  }
+}
+
+.product-list-item {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin: 10px;
+    padding: 0px;
+    border-radius: 10px;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.24);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.24);
+    height: auto; /* Allow height to adjust to content */
+}
+
+.product-list-item-title {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 0 5px; /* Add padding to prevent text from touching edges */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    line-height: 1.2;
+}
+
+.product-list-item-price {
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 0 5px; /* Add padding to prevent text from touching edges */
+}
+
+@media (max-width: 750px) {
+    
+    .collection-products {
+        max-width: 100%; /* Ensure grid takes full width */
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Use minmax to prevent columns from shrinking too much */
+        gap: 10px;
+        padding: 0 10px; /* Add padding to prevent items from touching screen edge */
+    }
+    
+    .product-list-item {
+        width: 100% !important; /* Use full width of grid cell */
+        max-width: 179px; /* Set maximum width */
+        height: auto; /* Allow height to adjust based on content */
+        min-height: 214px; /* Set minimum height */
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    
+    .product-image-container {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%; /* Create a square aspect ratio */
+        position: relative;
+    }
+    
+    .product-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .product-list-item-details {
+        padding: 0px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .product-list-item-title {
+        font-size: 14px;
+        margin-top: 5px;
+        padding-top: 9px;
+        margin-bottom: 0px;
+        line-height: 1.2;
+        max-height: 2.4em; /* 2 lines of text */
+    }
+    
+    .product-list-item-price {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    .product-list-item-thumbnail {
+      position: relative;
+      display: block;
+      max-width: 100%;
+      height: 171px;
+    }
+}
+
+
+</style>
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_featured_image",
+      "label": "Show collection image",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable filtering",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable sorting",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_in_rows",
+      "label": "Products per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "numbers_of_rows",
+      "label": "Rows",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 5
+    }
+  ]
+}
+
+{% endschema %}

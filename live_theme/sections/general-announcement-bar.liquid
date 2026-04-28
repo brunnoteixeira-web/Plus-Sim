@@ -1,0 +1,80 @@
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="static-announcement-bar">
+</script>
+
+{% liquid
+  assign show_promotion = true
+
+  if section.settings.promotion_home_only and template.name != 'index'
+    assign show_promotion = false
+  endif
+
+  if section.settings.promotion_text == blank
+    assign show_promotion = false
+  endif
+%}
+
+{% if show_promotion %}
+  <div
+    class="
+      header-promotion-bar
+      {{ section.settings.promotion_style }}
+    "
+    data-promotion-bar
+  >
+    {% if section.settings.promotion_url != blank %}
+      <a class="header-promotion-text" href="{{ section.settings.promotion_url }}">
+        {{- section.settings.promotion_text -}}
+      </a>
+    {% else %}
+      <span class="header-promotion-text">
+        {{- section.settings.promotion_text -}}
+      </span>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "promotion_home_only",
+      "label": "Show on home page only",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "promotion_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "accent-style",
+          "label": "Accent"
+        },
+        {
+          "value": "standard-style",
+          "label": "Standard"
+        }
+      ],
+      "default": "accent-style"
+    },
+    {
+      "type": "textarea",
+      "id": "promotion_text",
+      "label": "Text",
+      "default": "Call attention to a special discount, feature, or promotion here."
+    },
+    {
+      "type": "url",
+      "id": "promotion_url",
+      "label": "Link URL"
+    }
+  ]
+}
+
+{% endschema %}

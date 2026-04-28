@@ -1,0 +1,254 @@
+{% liquid
+  assign section = section
+  assign content_heading = section.settings.title
+  assign content_text = section.settings.text
+  assign image = section.settings.image
+  assign background_image = false
+  assign desktop_image_alignment = section.settings.desktop_alignment
+  assign mobile_image_alignment = section.settings.mobile_alignment
+%}
+
+{%- capture section_classes -%}
+  default-style
+{%- endcapture -%}
+
+{%- capture wrapper_classes -%}
+  newsletter__desktop-alignment-{{ desktop_image_alignment}}
+  newsletter__mobile-alignment-{{ mobile_image_alignment }}
+  {%- if image == nil -%}
+    newsletter__no-image
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture form_input_classes -%}
+  input-field
+{%- endcapture -%}
+
+{%- capture button_classes -%}
+  inline-field-submit
+  button
+{%- endcapture -%}
+
+{% comment %}Inject @pixelunion/pxs-newsletter/newsletter begin{% endcomment %}
+{% comment %}
+  @param section {Object} REQUIRED
+    Section object with all section data
+
+  @param section_classes {String}
+    String of space-separated classes to apply to the section element
+
+  @param section_attributes {String}
+    String of space-separated attributes to apply to the section element
+
+  @param section_heading {String}
+    Section heading
+
+  @param section_subheading {String}
+    Section subheading
+
+  @param wrapper_classes {String}
+    String of space-separated classes to apply to the content wrapper element
+
+  @param wrapper_attributes {String}
+    String of space-separated attributes to apply to the content wrapper element
+
+  @param image {Image object}
+    Image to include in aligment with or as a background to the newsletter content
+
+  @param content_heading {String}
+    Content heading
+
+  @param content_text {String}
+    Content text
+
+  @param form_input_classes
+    Classes applied to the text input
+
+  @param button_classes
+    Classes applied to the submit button
+{% endcomment %}
+
+{% liquid
+  assign section_classes = section_classes | default: ''
+  assign section_attributes = section_attributes | default: ''
+  assign section_heading = section_heading | default: ''
+  assign section_subheading = section_subheading | default: ''
+  assign wrapper_classes = wrapper_classes | default: ''
+  assign wrapper_attributes = wrapper_attributes | default: ''
+  assign image = image | default: nil
+  assign content_heading = content_heading | default: ''
+  assign content_text = content_text | default: ''
+  assign form_input_classes = form_input_classes | default: ''
+  assign button_classes = button_classes | default: ''
+%}
+
+<script
+  type="application/json"
+  data-section-type="pxs-newsletter"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+<section
+  class="newsletter {{ section_classes }}"
+  {{ section_attributes }}
+>
+  {% if section_heading != blank or section_subheading != blank %}
+    <div class="newsletter__section-header section__header">
+      {% if section_heading != blank %}
+        <h2 class="newsletter__section-heading section__heading">
+          {{ section_heading | escape }}
+        </h2>
+      {% endif %}
+
+      {% if section_subheading != blank %}
+        <div class="newsletter__section-subheading section__subheading">
+          {{ section_subheading }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div
+    class="newsletter__wrapper {{ wrapper_classes }}"
+    {{ wrapper_attributes }}
+  >
+    {% if image %}
+      <div
+        class="
+          newsletter__image-container
+          newsletter__image-container--first
+        "
+      >
+        {%
+          render 'rimg',
+          img: image,
+          class: 'newsletter__image',
+          size: '1200x',
+          canvas: true,
+          lazy: true,
+          focal_point: image.presentation.focal_point,
+        %}
+      </div>
+    {% endif %}
+
+    <div class="newsletter__content">
+      {% if content_heading != blank or content_text != blank %}
+        <div class="newsletter__content-header">
+          {% if content_heading != blank %}
+            <h2 class="newsletter__content-heading">
+              {{ content_heading | escape }}
+            </h2>
+          {% endif %}
+
+          {% if content_text != blank %}
+            <div class="newsletter__content-text">
+              {{ content_text }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {%
+        render 'newsletter-form',
+        section: section,
+        form_input_classes: form_input_classes,
+        button_classes: button_classes
+      %}
+    </div>
+
+    {% if image %}
+      <div
+        class="
+          newsletter__image-container
+          newsletter__image-container--last
+        "
+      >
+        {%
+          render 'rimg',
+          img: image,
+          class: 'newsletter__image',
+          size: '1200x',
+          canvas: true,
+          lazy: true,
+          focal_point: image.presentation.focal_point,
+        %}
+      </div>
+  {% endif %}
+
+  </div>
+</section>
+{% comment %}Inject @pixelunion/pxs-newsletter/newsletter end{% endcomment %}
+
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "pxs-newsletter-section default-style",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Invite customers to join your mailing list.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Desktop image alignment",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile image alignment",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        }
+      ],
+      "default": "top"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Promotional"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "product",
+      "page"
+    ]
+  }
+}
+
+{% endschema %}

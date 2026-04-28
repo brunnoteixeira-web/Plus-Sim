@@ -1,0 +1,584 @@
+{% assign product = all_products[section.settings.product] %}
+
+{% if section.settings.product == blank %}
+  {% assign product = nil %}
+{% endif %}
+
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="dynamic-featured-product"
+  data-section-data
+>
+  {
+    "settings": {
+      "gallery_enable_video_autoplay": {{ section.settings.gallery_enable_video_autoplay | json }},
+      "gallery_enable_video_looping": {{ section.settings.gallery_enable_video_looping | json }},
+      "gallery_enable_zoom": {{ section.settings.enable_zoom | json }}
+    }
+  }
+</script>
+
+<section
+  class="
+    module-container
+    {{ section.settings.style }}
+    product__title-inline
+    section__featured-product
+  "
+>
+  {%
+    render 'product-json',
+    product: product,
+    enable_history: false
+  %}
+
+  <div class="module-inner home-order-now">
+
+    {% if section.settings.title != blank %}
+      <h1 class="section-title">{{ section.settings.title | escape }}</h1>
+    {% endif %}
+
+    {% assign positions = 'top,left,right,bottom' | split: ',' %}
+
+    <section
+      class="product"
+    >
+      {% for position in positions %}
+        {%
+          render 'product-blocks',
+          position: position,
+          product: product,
+          section: section,
+        %}
+      {% endfor %}
+    </section>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "default-style",
+          "label": "Default"
+        },
+        {
+          "value": "accent-style",
+          "label": "Accent"
+        },
+        {
+          "value": "contrast-style",
+          "label": "Contrast"
+        }
+      ],
+      "default": "default-style"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "paragraph",
+      "content": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media/product-media-types)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "label": "Enable image zoom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_enable_video_autoplay",
+      "label": "Enable video autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_enable_video_looping",
+      "label": "Enable video looping",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "top"
+        }
+      ]
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "top"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "top"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "name": "Gallery",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "left"
+        }
+      ]
+    },
+    {
+      "type": "form",
+      "name": "Form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Customize form features for the product in the products portion of the theme settings."
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "info": "Override your long product description with one better suited to the home page."
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Text block</p>"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "additional_info",
+      "name": "Additional info",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "[Learn more about additional info blocks](https://support.pixelunion.net/hc/en-us/articles/360026610653)"
+        },
+        {
+          "type": "text",
+          "id": "info_text",
+          "label": "Text",
+          "default": "Additional info"
+        },
+        {
+          "type": "url",
+          "id": "info_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "select",
+          "id": "info_icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "info",
+              "label": "Information (i)"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "envelope",
+              "label": "Envelope"
+            },
+            {
+              "value": "pencil",
+              "label": "Pencil"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            }
+          ],
+          "default": "info"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Product rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display a rating, add a product rating app. [Learn more](https://apps.shopify.com/product-reviews)"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "alignment",
+      "name": "App block alignment",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Use this block before an app block to set the app block's position. Otherwise, app blocks will inherit the position of the block before them."
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Center (top)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Center (bottom)"
+            }
+          ],
+          "default": "right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Product",
+      "name": "Featured product",
+      "blocks": [
+        {
+          "type": "gallery"
+        },
+        {
+          "type": "title",
+          "settings": {
+            "position": "right"
+          }
+        },
+        {
+          "type": "price",
+          "settings": {
+            "position": "right"
+          }
+        },
+        {
+          "type": "form",
+          "settings": {
+            "position": "right"
+          }
+        },
+        {
+          "type": "description",
+          "settings": {
+            "position": "right"
+          }
+        },
+        {
+          "type": "additional_info",
+          "settings": {
+            "info_text": "Additional info"
+          }
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "page"
+    ]
+  }
+}
+
+{% endschema %}

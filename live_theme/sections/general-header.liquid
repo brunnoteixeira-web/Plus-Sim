@@ -1,0 +1,847 @@
+{% liquid
+  assign menu = section.settings.menu
+  assign logo = section.settings.header_logo
+  assign logo_transparent = section.settings.header_logo_alternate
+  assign logo_width = section.settings.logo_width
+  assign logo_width_mobile = section.settings.logo_width_mobile
+  assign show_country_selector = false
+  assign show_locale_selector = false
+  assign show_logout_link = false
+  assign show_customer_name = false
+  assign is_password_page = false
+  assign enable_predictive_search = section.settings.enable_predictive_search
+
+  if template contains 'password'
+    assign is_password_page = true
+  endif
+
+  assign nav_position = 'center'
+  if is_password_page or section.settings.menu_style == 'drawer'
+    assign nav_position = 'none'
+  elsif section.settings.menu_style == 'below-header'
+    assign nav_position = 'below'
+  endif
+
+  assign shopify_section_classname = 'main-header-section'
+  assign sticky = section.settings.header_sticky
+
+  if template == 'index'
+    assign transparent = section.settings.transparent
+  endif
+
+  assign show_search = section.settings.show_search
+  assign show_cart = section.settings.show_cart
+%}
+
+{% comment %}Inject @pixelunion/pxs-header-standard/header-standard begin{% endcomment %}
+{%- comment -%}
+  @param section {Object} REQUIRED
+    The section object with all section data.
+
+  @param menu {Menu} REQUIRED
+    The primary menu to show in the header.
+
+  @param shopify_section_classname
+    The outer classname given to the shopify section. This is required if you wish to make the header sticky.
+
+  @param section_classes {String}
+    Any classes to add to the site-header header element.
+
+  @param section_attributes {String}
+    Any attributes to add to the site-header header element.
+
+  @param wrapper_classes {String}
+    Any classes to add to the site-header__wrapper element.
+
+  @param nav_position {String}
+    The position of the navigation in the header, one of "left", "center", "below", or "none". Default is "center".
+
+  @param sticky {Boolean}
+    If true, the header will apply a sticky styles to the outer shopify_section_classname. Default false.
+
+  @param transparent {Boolean}
+    If true, the header will apply a `data-transparent-header` attribute to the body element which the header can use. After scrolling, the attribute's value will change. Default false.
+
+  @param logo {Image}
+    The logo to be shown in the header. If no logo is provided, the site name will be used instead.
+
+  @param logo_transparent {Image}
+    The logo to be shown in the header when the header is transparent. If no logo is provided, the header will default to use the normal logo.
+
+  @param logo_mobile {Image}
+    The logo to be shown in the header on smaller devices. If no logo is provided, the mobile header will default to use the normal logo.
+
+  @param logo_width {Number}
+    The width of the logo in the header, the image will use its natural aspect ratio based on this width. This should be provided so that image placeholders have the correct size.
+
+  @param logo_width_mobile
+    The width of the mobile logo for smaller devices. If no width is provided, it will default to using logo_width.
+
+  @param show_search
+    Will show the search button if true in both the first and last header controls blocks. Default false.
+
+  @param show_account
+    Will show the account button if true in the last header controls block. Will only show if accounts are enabled. Default true.
+
+  @param show_cart
+    Will show the cart button if true in the last header controls block. Default true.
+{%- endcomment -%}
+
+{% liquid
+  assign section_classes = section_classes | default: ''
+  assign section_attributes = section_attributes | default: ''
+  assign shopify_section_classname = shopify_section_classname | default: ''
+  assign wrapper_classes = wrapper_classes | default: ''
+  assign nav_position = nav_position | default: 'center'
+  assign sticky = sticky | default: false
+  assign transparent = transparent | default: false
+  assign logo = logo | default: false
+  assign logo_transparent = logo_transparent | default: false
+  assign logo_mobile = logo_mobile | default: false
+  assign logo_width = logo_width | default: '300'
+  assign logo_width_mobile = logo_width_mobile | default: logo_width
+  assign logo_width_size = logo_width | append: 'x'
+  assign logo_width_mobile_size = logo_width_mobile | append: 'x'
+  assign show_search = show_search | default: false
+  assign show_account = show_account | default: true
+%}
+
+<script
+  type="application/json"
+  data-section-type="pxs-header-standard"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+  {
+    "sticky": {{ sticky | json }},
+    "transparent": {{ transparent | json }}
+  }
+</script>
+
+{% if sticky and shopify_section_classname != '' %}
+  <style>
+    .{{ shopify_section_classname }} {
+      position: sticky;
+      top: 0;
+    }
+  </style>
+{% endif %}
+
+
+<header
+  class="
+    site-header
+    site-header--nav-position-{{ nav_position }}
+    {{ section_classes }}
+  "
+  data-site-header
+  {{ section_attributes }}
+>
+  <div
+    class="
+      site-header__wrapper
+      {{ wrapper_classes }}
+    "
+    data-site-header-wrapper
+  >
+    <div
+      class="site-header__controls site-header__controls--first"
+      data-header-controls
+    >
+      <button
+        class="site-header__menu-button site-header__menu-button--first"
+        data-menu-button
+        aria-haspopup="true"
+      >
+        <span class="site-header__menu-text">{{ 'sections.header.menu' | t }}</span>
+      </button>
+      {% if show_search %}
+        <a
+          href="{{ routes.search_url }}"
+          class="site-header__search-button site-header__search-button--first"
+          data-search-button
+        >
+          <span class="site-header__search-text">{{ 'sections.header.search' | t }}</span>
+        </a>
+      {% endif %}
+    </div>
+
+    {% if nav_position == 'left' %}
+      {%
+        render 'header-nav',
+        menu: menu
+      %}
+    {% endif %}
+
+    {% comment %} Only the home page should use an <h1> for the logo. All other pages should use an <h2>{% endcomment %}
+    {% if template contains 'index' %}
+      <h1 class="site-header__title">
+    {% else %}
+      <h2 class="site-header__title">
+    {% endif %}
+      <a
+        href="{{ routes.root_url }}"
+        class="
+          site-header__logo
+          {% if logo %}site-header__logo--has-image{% endif %}
+          {% if logo_transparent %}site-header__logo--has-transparent-image{% endif %}
+          {% if mobile_logo %}site-header__logo--has-mobile-image{% endif %}
+        "
+        style="
+          --logo-width: {{ logo_width }}px;
+          --logo-width-mobile: {{ logo_width_mobile }}px;
+        "
+        aria-label="{{ shop.name }}"
+        data-header-logo
+      >
+        {% if logo %}
+          <div class="site-header__logo-image" data-logo-image>
+            {%
+              render 'rimg',
+              img: logo,
+              size: logo_width_size,
+              lazy: true,
+              canvas: true,
+              focal_point: logo.presentation.focal_point,
+            %}
+          </div>
+        {% endif %}
+
+        {% if logo_transparent %}
+          <div class="site-header__logo-image-transparent" data-logo-image-transparent>
+            {%
+              render 'rimg',
+              img: logo_transparent,
+              size: logo_width_size,
+              lazy: true,
+              canvas: true,
+              focal_point: logo_transparent.presentation.focal_point,
+            %}
+          </div>
+        {% endif %}
+
+        {% if mobile_logo %}
+          <div class="site-header__mobile-image" data-logo-image-mobile>
+            {%
+              render 'rimg',
+              img: mobile_logo,
+              size: mobile_logo_width_size,
+              lazy: true,
+              canvas: true,
+              focal_point: mobile_logo.presentation.focal_point,
+            %}
+          </div>
+        {% endif %}
+
+        <span class="site-header__site-name">{{ shop.name }}</span>
+      </a>
+    {% if template contains 'index' %}
+      </h1>
+    {% else %}
+      </h2>
+    {% endif %}
+
+    {% if nav_position == 'center' %}
+      {%
+        render 'header-nav',
+        menu: menu
+      %}
+    {% endif %}
+
+    {% comment %} When JS is disabled, set standard header with logo left, menu right {% endcomment %}
+    <noscript>
+      {%
+        render 'header-nav',
+        menu: menu,
+        nav_classes: 'header-nav--js-disabled'
+        nav_position: nav_position
+      %}
+    </noscript>
+
+    <div
+      class="site-header__controls site-header__controls--last"
+      data-header-controls
+    >
+      {% if show_search %}
+        <a
+          href="{{ routes.search_url }}"
+          class="site-header__search-button site-header__search-button--last"
+          data-search-button
+        >
+          <span class="site-header__search-text">{{ 'sections.header.search' | t }}</span>
+        </a>
+      {% endif %}
+        <a
+          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+          class="site-header__account-button"
+          data-account-button
+        >
+          <span class="site-header__account-text">{{ 'sections.header.account' | t }}</span>
+        </a>
+      
+      {% if show_cart %}
+        <a
+          href="{{ routes.cart_url }}"
+          class="site-header__cart-button"
+          data-cart-button
+        >
+          <span class="site-header__cart-text">{{ 'sections.header.cart' | t }}</span>
+          <span class="site-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+        </a>
+      {% endif %}
+      <button
+        class="site-header__menu-button site-header__menu-button--last"
+        data-menu-button
+      >
+        <span class="site-header__menu-text">{{ 'sections.header.menu' | t }}</span>
+      </button>
+    </div>
+  </div>
+
+  {% if nav_position == 'below' %}
+    {%
+      render 'header-nav',
+      menu: menu
+    %}
+  {% endif %}
+</header>
+
+<div data-header-scroll-observer></div>
+{% comment %}Inject @pixelunion/pxs-header-standard/header-standard end{% endcomment %}
+
+{% comment %}Inject @pixelunion/pxs-drawer-nav-standard/drawer-nav-standard begin{% endcomment %}
+{%- comment -%}
+  @param menu {Menu} REQUIRED
+    The menu to show in the drawer nav.
+
+  @param show_logout_link { Boolean }
+    If true, a log out link will be shown in the drawer nav.
+
+  @param show_customer_name { Boolean }
+    If true, the customer name will be shown in the drawer nav (replacing the "My account" text).
+
+  @param show_country_selector {Boolean}
+    If true, will create a country/currency selector disclosure element inside of a footer element in the drawer nav.
+
+  @param show_locale_selector {Boolean}
+    If true, will create a locale selector disclosure element inside of a footer element in the drawer nav.
+{%- endcomment -%}
+
+<nav class="drawer-nav" data-drawer-nav tabindex="-1" aria-label="{{ 'components.drawer-nav.drawer-menu' | t }}">
+  <div class="drawer-nav__overlay" data-drawer-overlay></div>
+  <div class="drawer-nav__flyout" data-drawer-main-flyout>
+    <div class="drawer-nav__flyout-header">
+      <div class="drawer-nav__account">
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <a href="{{ routes.account_url }}" class="drawer-nav__account-link">
+              {% if show_customer_name %}
+                {{ customer.name }}
+              {% else %}
+                {{ 'components.drawer-nav.account' | t }}
+              {% endif %}
+            </a>
+            {% if show_logout_link %}
+              <a href="{{ routes.account_logout_url }}" class="drawer-nav__account-link">
+                {{ 'components.drawer-nav.logout' | t }}
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{{ routes.account_login_url }}" class="drawer-nav__account-link">
+              {{ 'components.drawer-nav.login' | t }}
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+      <button
+        class="drawer-nav__close-button"
+        data-drawer-nav-close
+      >
+        <span>{{ 'components.drawer-nav.close' | t }}</span>
+      </button>
+    </div>
+    <ul class="drawer-menu__tier-1-menu">
+      {% for link_tier_1 in linklists[menu].links %}
+        {% assign has_tier_2 = false %}
+        {% if link_tier_1.links.size > 0 %}
+          {% assign has_tier_2 = true %}
+        {% endif %}
+
+        <li
+          class="drawer-menu__tier-1-item"
+        >
+          {% if has_tier_2 == false %}
+            <a
+              href="{{ link_tier_1.url }}"
+              class="drawer-menu__tier-1-link"
+              data-drawer-link-tier-1
+            >
+              {{ link_tier_1.title | escape }}
+            </a>
+          {% else %}
+            <button
+              class="drawer-menu__tier-1-button"
+              aria-haspopup="true"
+              data-drawer-submenu-button="tier-1"
+              data-drawer-link-tier-1
+            >
+              {{ link_tier_1.title | escape }}
+            </button>
+
+            <div
+              class="drawer-menu__tier-2"
+              data-drawer-tier-2-flyout
+              tabindex="-1"
+              aria-label="{{ 'components.drawer-nav.menu' | t: title: link_tier_1.title }}"
+            >
+              <div
+                class="drawer-menu__tier-2-overlay"
+                data-drawer-submenu-overlay
+              ></div>
+              <div
+                class="drawer-menu__tier-2-flyout"
+                data-drawer-submenu-flyout
+              >
+                <div class="drawer-menu__tier-2-header">
+                  <button
+                    class="drawer-menu__back-button"
+                    data-drawer-back-button
+                  >
+                    <span>{{ 'components.drawer-nav.back' | t }}</span>
+                  </button>
+                  <a href="{{ link_tier_1.url }}" class="drawer-menu__heading">{{ link_tier_1.title | escape }}</a>
+                  <button
+                    class="drawer-menu__close-button"
+                    data-drawer-close-button
+                  >
+                    <span>{{ 'components.drawer-nav.close' | t }}</span>
+                  </button>
+                </div>
+                <ul
+                  class="drawer-menu__tier-2-menu"
+                >
+                  {% for link_tier_2 in link_tier_1.links %}
+                    {% assign has_tier_3 = false %}
+                    {% if link_tier_2.links.size > 0 %}
+                      {% assign has_tier_3 = true %}
+                    {% endif %}
+                    <li
+                      class="drawer-menu__tier-2-item"
+                    >
+                      {% if has_tier_3 == false %}
+                        <a
+                          href="{{ link_tier_2.url }}"
+                          class="drawer-menu__tier-2-link"
+                          data-drawer-link-tier-2
+                        >
+                          {{ link_tier_2.title | escape }}
+                        </a>
+                      {% else has_tier_3 %}
+                        <button
+                          class="drawer-menu__tier-2-button"
+                          aria-haspopup="true"
+                          data-drawer-submenu-button="tier-2"
+                          data-drawer-link-tier-2
+                        >
+                          {{ link_tier_2.title | escape }}
+                        </button>
+
+                        <div
+                          class="drawer-menu__tier-3"
+                          data-drawer-tier-3-flyout
+                          tabindex="-1"
+                          aria-label="{{ 'components.drawer-nav.menu' | t: title: link_tier_2.title }}"
+                        >
+                          <div
+                            class="drawer-menu__tier-3-overlay"
+                            data-drawer-submenu-overlay
+                          ></div>
+                          <div
+                            class="drawer-menu__tier-3-flyout"
+                            data-drawer-submenu-flyout
+                          >
+                            <div class="drawer-menu__tier-3-header">
+                              <button
+                                class="drawer-menu__back-button"
+                                data-drawer-back-button
+                              >
+                                <span>{{ 'components.drawer-nav.back' | t }}</span>
+                              </button>
+                              <a href="{{ link_tier_2.url }}" class="drawer-menu__heading">{{ link_tier_2.title | escape }}</a>
+                              <button
+                                class="drawer-menu__close-button"
+                                data-drawer-close-button
+                              >
+                                <span>{{ 'components.drawer-nav.close' | t }}</span>
+                              </button>
+                            </div>
+                            <ul
+                              class="drawer-menu__tier-3-menu"
+                            >
+                              {% for link_tier_3 in link_tier_2.links %}
+                                <li
+                                  class="drawer-menu__tier-3-item"
+                                >
+                                  <a
+                                    href="{{ link_tier_3.url }}"
+                                    class="drawer-menu__tier-3-link"
+                                    data-drawer-link-tier-3
+                                  >
+                                    {{ link_tier_3.title | escape }}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% if show_country_selector or show_locale_selector %}
+      <div class="drawer-nav__footer">
+        {% if show_country_selector or show_locale_selector %}
+          {%- assign country_selector = show_country_selector -%}
+          {%- assign locale_selector = show_locale_selector -%}
+          <div class="drawer-nav__cross-border">
+            {% comment %}Inject @pixelunion/shopify-cross-border/cross-border begin{% endcomment %}
+            <div class="shopify-cross-border">
+              {% if locale_selector and localization.available_languages.size > 1 %}
+                {% comment %}Inject @pixelunion/shopify-cross-border/multi-language begin{% endcomment %}
+                {% comment %} Generate a "random" number so ids are unique {% endcomment %}
+                {% assign unique_id = "now" | date: "%N" | modulo: 1000 %}
+                <noscript>
+                  {%- form 'localization' -%}
+                    <details class="disclosure">
+                      <summary>
+                        <span class="disclosure__toggle">
+                          {{ form.current_locale.endonym_name | capitalize }}
+                        </span>
+                      </summary>
+                      <div class="disclosure-list disclosure-list--visible">
+                        {% for locale in form.available_locales %}
+                          <div class="disclosure-list__item-wrapper disclosure-list__item">
+                            <input
+                              type="radio"
+                              id="{{ locale.iso_code }}"
+                              name="locale_code"
+                              value="{{ locale.iso_code }}"
+                              {% if locale.iso_code == form.current_locale.iso_code %}checked{% endif %}
+                            >
+                            <label class="disclosure-list__item--label" for="{{ locale.iso_code }}">{{ locale.endonym_name | capitalize }}</label>
+                          </div>
+                        {% endfor %}
+                        <button class="disclosure__submit" type="submit">{{ 'general.language.submit_button_label' | t }}</button>
+                      </div>
+                    </details>
+                  {%- endform -%}
+                </noscript>
+                
+                {%- form 'localization' -%}
+                  <div class="selectors-form__item selectors-form--no-js-hidden">
+                    <div class="disclosure" data-disclosure-locale>
+                      <h2 class="visually-hidden" id="lang-heading-{{ unique_id }}">
+                        {{ 'general.language.dropdown_label' | t }}
+                      </h2>
+                
+                      <button
+                        type="button"
+                        class="disclosure__toggle"
+                        aria-expanded="false"
+                        aria-controls="lang-list-{{ unique_id }}"
+                        aria-describedby="lang-heading-{{ unique_id }}"
+                        data-disclosure-toggle
+                      >
+                        {{ form.current_locale.endonym_name | capitalize }}
+                      </button>
+                      <ul id="lang-list-{{ unique_id }}" class="disclosure-list" data-disclosure-list>
+                        {% for locale in form.available_locales %}
+                          <li>
+                            <a class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
+                              <span class="disclosure-list__option">{{ locale.endonym_name | capitalize }}</span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      <input type="hidden" name="locale_code" id="LocaleSelector-{{ unique_id }}" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
+                    </div>
+                  </div>
+                {%- endform -%}
+                {% comment %}Inject @pixelunion/shopify-cross-border/multi-language end{% endcomment %}
+            
+              {% endif %}
+            
+              {% if country_selector and localization.available_countries.size > 1 %}
+                {% comment %}Inject @pixelunion/shopify-cross-border/multi-country begin{% endcomment %}
+                {% comment %} Generate a "random" number so ids are unique {% endcomment %}
+                {% assign unique_id = "now" | date: "%N" | modulo: 1000 %}
+                <noscript>
+                  {%- form 'localization' -%}
+                    <details class="disclosure">
+                      <summary>
+                        <span class="disclosure__toggle">
+                          {{ localization.country.name }} ({{ localization.country.currency.iso_code }}{% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{% endif %})
+                        </span>
+                      </summary>
+                      <div class="disclosure-list disclosure-list--visible">
+                        {% for country in localization.available_countries %}
+                          <div class="disclosure-list__item-wrapper disclosure-list__item">
+                            <input
+                              type="radio"
+                              id="{{ country.iso_code }}"
+                              name="country_code"
+                              value="{{ country.iso_code }}"
+                              {% if country.iso_code == localization.country.iso_code %}checked{% endif %}
+                            >
+                            <label class="disclosure-list__item--label" for="{{ country.iso_code }}">{{ country.name }} ({{ country.currency.iso_code }}{%- if country.currency.symbol -%} {{ country.currency.symbol }}{%- endif -%})</label>
+                          </div>
+                        {% endfor %}
+                        <button class="disclosure__submit" type="submit">{{ 'general.country.submit_button_label' | t }}</button>
+                      </div>
+                    </details>
+                  {%- endform -%}
+                </noscript>
+                
+                {%- form 'localization' -%}
+                  <div class="selectors-form__item selectors-form--no-js-hidden">
+                    <div class="disclosure" data-disclosure-country>
+                      <h2 class="visually-hidden" id="country-heading-{{ unique_id }}">
+                        {{ 'general.country.dropdown_label' | t }}
+                      </h2>
+                
+                      <button
+                        type="button"
+                        class="disclosure__toggle"
+                        aria-expanded="false"
+                        aria-controls="country-list-{{ unique_id }}"
+                        aria-describedby="country-heading-{{ unique_id }}"
+                        data-disclosure-toggle
+                      >
+                        {{ localization.country.name }}
+                        <span class="disclosure-list__option-code"> 
+                          ({{ localization.country.currency.iso_code }}
+                          {% if localization.country.currency.symbol %} {{ localization.country.currency.symbol }}{% endif %})
+                        </span>
+                      </button>
+                      <ul id="country-list-{{ unique_id }}" class="disclosure-list" data-disclosure-list>
+                        {% for country in localization.available_countries %}
+                          <li>
+                            <a class="disclosure-list__item {% if country.iso_code == localization.country.iso_code %}disclosure-list__item--current{% endif %}" href="#" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %} data-value="{{ country.iso_code }}" data-disclosure-option>
+                              <span class="disclosure-list__option">{{ country.name }}</span>
+                              <span class="disclosure-list__option-code">
+                                ({{ country.currency.iso_code }}
+                                {% if country.currency.symbol %} {{ country.currency.symbol }}{%- endif -%})
+                              </span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      <input type="hidden" name="country_code" id="CountrySelector-{{ unique_id }}" value="{{ localization.country.iso_code }}" data-disclosure-input/>
+                    </div>
+                  </div>
+                {%- endform -%}
+                {% comment %}Inject @pixelunion/shopify-cross-border/multi-country end{% endcomment %}
+            
+              {% endif %}
+            </div>
+            {% comment %}Inject @pixelunion/shopify-cross-border/cross-border end{% endcomment %}
+
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</nav>
+{% comment %}Inject @pixelunion/pxs-drawer-nav-standard/drawer-nav-standard end{% endcomment %}
+
+
+<div
+  class="header-search-container"
+  data-header-search
+  {% if enable_predictive_search %}data-enable-predictive-search{% endif %}
+  data-header-search-state="hidden"
+>
+  <form
+    class="
+      header-search__form
+      header-search__form--nav-position-{{ nav_position }}
+    "
+    data-header-search-form
+    data-header-nav-position="{{ nav_position }}"
+    action="{{ routes.search_url }}"
+  >
+    <input
+      class="header-search__input"
+      data-header-search-input
+      aria-label="{{ 'general.search.header' | t }}"
+      type="text"
+      placeholder="{{ 'general.general.search_placeholder' | t }}"
+      name="q"
+      autocomplete="off"
+    >
+    <button
+      type="submit"
+      class="header-search__button-submit"
+      aria-label="{{ 'general.general.submit' | t }}"
+      data-search-submit
+    >
+    </button>
+    <button
+      class="header-search__button-close"
+      aria-label="{{ 'general.accessibility.close_button' | t }}"
+      data-search-close
+    >
+    </button>
+
+    {%- if enable_predictive_search -%}
+      <div
+        class="header-search__predictive-search-container"
+        data-predictive-search-container
+        data-loading="false"
+      >
+        {%
+          render 'icon-library',
+          id: 'icon-spinner',
+        %}
+        <div data-predictive-search-results-container></div>
+      </div>
+    {%- endif -%}
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "main-header-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "header_sticky",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Logo image",
+      "info": "300 x 90x .png recommended"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo max width",
+      "step": 5,
+      "min": 80,
+      "max": 350,
+      "default": 300,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Mobile logo max width",
+      "step": 5,
+      "min": 50,
+      "max": 200,
+      "default": 130,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Search behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_predictive_search",
+      "label": "Enable predictive search",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_style",
+      "label": "Menu style",
+      "options": [
+        {
+          "value": "drawer",
+          "label": "Logo center, menu drawer"
+        },
+        {
+          "value": "header",
+          "label": "Logo left, menu right"
+        },
+        {
+          "value": "below-header",
+          "label": "Logo left, menu below"
+        }
+      ],
+      "default": "drawer"
+    },
+    {
+      "type": "header",
+      "content": "Transparent header"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent",
+      "label": "Enable on home page",
+      "default": false,
+      "info": "Will only work if the first section is a full width slideshow, video, or image with text overlay."
+    },
+    {
+      "type": "image_picker",
+      "id": "header_logo_alternate",
+      "label": "Transparent header logo image",
+      "info": "Optional logo used when header is transparent."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "meganav",
+      "name": "Mega navigation",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Mega navigation trigger",
+          "default": "Mega navigation",
+          "info": "Add the menu item that you want to turn into a mega-nav."
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

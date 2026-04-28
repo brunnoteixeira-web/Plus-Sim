@@ -1,0 +1,310 @@
+{% liquid
+  assign section = section
+  assign collection_id = 'collection'
+  assign section_heading = section.settings.title
+  assign show_collection_names = true
+  assign show_product_count = section.settings.show_product_count
+
+  assign section_style = section.settings.style
+
+  assign grid_size = section.blocks.size
+  if section.blocks.size > 4
+    assign grid_size = 3
+  elsif section.blocks.size == 4
+    assign grid_size = 2
+  endif
+%}
+
+{%- capture section_classes -%}
+  {{ section_style }}
+  row-of-{{ grid_size }}
+{%- endcapture -%}
+
+{%- capture section_attributes -%}
+  data-section-id="{{ section.id }}"
+  data-section-type="dynamic-collection-list"
+{%- endcapture -%}
+
+{% comment %}Inject @pixelunion/pxs-collection-list/collection-list begin{% endcomment %}
+{%- comment -%}
+  @param section {Object} REQUIRED
+    The section object with all section data.
+
+  @param collection_id {String} REQUIRED
+    The setting name for the collection field in the block object
+
+  @param section_heading {String} Optional
+    Section heading
+
+  @param section_subheading {String} Optional
+    Section subheading
+
+  @param show_collection_names {Boolean}
+    Will show the collection title if true. Default false.
+
+  @param show_descriptions {Boolean}
+    Will show the collection description on the collection cards. Default false.
+
+  @param custom_description_id {String}
+    The setting name for the custom description field on the section blocks
+
+  @param show_product_count {Boolean}
+    Adds the number of items in the collection to the card. Default false.
+
+  @param section_classes {String}
+    A space separated list of classnames to add to the collection list section element.
+
+  @param section_attributes {String}
+    A space separated list of attributes to add to the section element
+
+  @param collection_list_classes {String}
+    A space separated list of classnames to add to the collection list's UL element.
+
+  @param collection_list_attributes {String}
+    A space separated list of attributes to add to the UL element
+
+  @param collection_card_classes {String}
+    A space separated list of classes to be added to each collection list card.
+
+  @param collection_card_attributes {String}
+    A space separated list of attributes to be added to each collection list card.
+
+  @param collection_image_id {String}
+    The setting name for a custom image in the collection block
+
+  @param collection_custom_title_id {String}
+    Setting name for the custom title to place under each collection card (block setting)
+
+  @param collection_custom_url_id {String}
+    Setting name for the custom URL to wrap collection cards (block setting)
+
+  @param show_buttons {Boolean}
+    Include a button under each collection card
+
+  @param show_cta {Boolean}
+    Show a call-to-action button under the colleciotns
+
+  @param cta_classes {String}
+    Classes applied to the CTA below the collections
+
+  @param cta_content {String}
+  Text appearing on the CTA
+
+  @param cta_link {String}
+    Link applied to the CTA
+{%- endcomment -%}
+
+{% liquid
+  assign section_heading = section_heading | default: ''
+  assign section_subheading = section_subheading | default: ''
+  assign show_collection_names = show_collection_names | default:false
+  assign show_descriptions = show_descriptions | default: false
+  assign custom_description_id = custom_description_id | default: false
+  assign show_product_count = show_product_count | default: false
+  assign section_classes = section_classes | default: ''
+  assign section_attributes = section_attributes | default: ''
+  assign collection_list_classes = collection_list_classes | default: ''
+  assign collection_list_attributes = collection_list_attributes | default: ''
+  assign collection_card_classes = collection_card_classes | default: ''
+  assign collection_card_attributes = collection_card_attributes | default: ''
+  assign collection_image_id = collection_image_id | default: false
+  assign collection_image_classes = collection_image_classes | default: ''
+  assign collection_image_attributes = collection_image_attributes | default: ''
+  assign collection_custom_title_id = collection_custom_title_id | default: false
+  assign show_buttons = show_buttons | default: false
+  assign show_cta = show_cta | default: false
+  assign cta_classes = cta_classes | default: ''
+  assign cta_content = cta_content | default: ''
+  assign cta_link = cta_link | default: ''
+%}
+
+<script
+  type="application/json"
+  data-section-type="pxs-collection-list"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+<section
+  class="
+    collection-list
+    {{ section_classes }}
+  "
+  {{ section_attributes }}
+  aria-label="{{ section_heading }}"
+>
+  {%- if section_heading != blank or section_subheading != blank -%}
+    <div class="section__header collection-list__section-header">
+      {%- if section_heading != blank -%}
+        <h2 class="section__heading collection-list__section-heading">
+          {{ section_heading | escape }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section_subheading != blank -%}
+        <div class="section__subheading collection-list__section-subheading">
+          {{ section_subheading }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <ul
+    class="
+      collection-list__wrapper
+      {{ collection_list_classes }}
+    "
+    {{ collection_list_attributes }}
+    data-collection-list-wrapper
+  >
+    {%- for block in section.blocks -%}
+      {% assign collection_name = block.settings[collection_id] %}
+      {% assign collection = collections[collection_name] %}
+
+      {% if custom_description_id %}
+        {% assign custom_description = block.settings[custom_description_id] %}
+      {% else %}
+        {% assign custom_description = '' %}
+      {% endif %}
+
+      {% if collection_custom_title_id %}
+        {% assign custom_title = block.settings[collection_custom_title_id] %}
+      {% else %}
+        {% assign custom_title = '' %}
+      {% endif %}
+
+
+      {% if collection_custom_url_id %}
+        {% assign custom_url = block.settings[collection_custom_url_id] %}
+      {% else %}
+        {% assign custom_url = '' %}
+      {% endif %}
+
+      {% assign featured_image = false %}
+      {% if collection_image_id and block.settings[collection_image_id] != blank %}
+        {% assign featured_image = block.settings[collection_image_id] %}
+      {% elsif collection != blank and collection.image %}
+        {% assign featured_image = collection.image %}
+      {% else %}
+        {% assign featured_image = collection.products.first.featured_media.preview_image %}
+      {% endif %}
+
+      {%- capture placeholder_image_cycle -%}
+        {%- cycle '1', '2', '3', '4', '5', '6' -%}
+      {%- endcapture -%}
+
+      {%
+        render 'collection-list-card',
+        block: block,
+        collection: collection,
+        custom_title: custom_title,
+        custom_url: custom_url,
+        featured_image: featured_image,
+        custom_description: custom_description,
+        collection_card_classes: collection_card_classes,
+        collection_card_attributes: collection_card_attributes,
+        collection_card_wrapper_attributes: block.shopify_attributes,
+        show_collection_names: show_collection_names,
+        show_descriptions: show_descriptions,
+        show_product_count: show_product_count,
+        show_buttons: show_buttons,
+        placeholder_image_cycle: placeholder_image_cycle,
+      %}
+
+    {%- endfor -%}
+  </ul>
+  {% if show_cta %}
+    <a
+      class="collection-list__cta {{ cta_classes }}"
+      href="{{ cta_link }}"
+      data-collection-list-cta
+    >
+      {% if cta_content != blank %}
+        {{ cta_content | escape }}
+      {% else %}
+        {{ 'sections.collection_list.cta_text' | t }}
+      {% endif %}
+    </a>
+  {% endif %}
+</section>
+{% comment %}Inject @pixelunion/pxs-collection-list/collection-list end{% endcomment %}
+
+
+{% schema %}
+{
+  "name": "Collection list",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "default-style",
+          "label": "Default"
+        },
+        {
+          "value": "accent-style",
+          "label": "Accent"
+        },
+        {
+          "value": "contrast-style",
+          "label": "Contrast"
+        }
+      ],
+      "default": "default-style"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Show product count",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Collection list",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "product",
+      "page"
+    ]
+  }
+}
+
+{% endschema %}

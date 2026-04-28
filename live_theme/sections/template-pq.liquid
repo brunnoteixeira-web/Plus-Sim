@@ -1,0 +1,92 @@
+{% schema %}
+{
+  "name": "template-pq",
+  "tag": "section",
+  "class": "benefit-banner-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "imagem_destaque",
+      "label": "Imagem de destaque"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagem_destaque_mobile",
+      "label": "Imagem de destaque para mobile"
+    },
+    {
+      "type": "richtext",
+      "id": "texto_destaque",
+      "label": "Texto principal (negrito azul escuro)",
+      "default": "<p><strong>Nós oferecemos os melhores produtos e serviços para deixar sua viagem do jeito que a gente gosta: <br>PERFEITA!</strong></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitulo",
+      "label": "Subtítulo (azul claro)",
+      "default": "<p><strong>AGORA, SE AINDA QUER SABER PORQUE COMPRAR O CHIP PLUSSIM, CONFIRA AQUI:</strong></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "beneficios",
+      "label": "Lista de Benefícios (um por linha)",
+      "default": "✔ Receba seu chip de viagem em casa;\n✔ Compre em Real;\n✔ Parcele em até 12x (com juros);\n✔ Sem cobrança extra de 6,38% do IOF no cartão de crédito;\n✔ Melhor cobertura em mais de 200 destinos;\n✔ Chegue conectado ao seu destino;\n✔ Use o GPS do celular;\n✔ Mantenha seu número de WhatsApp;\n✔ Compartilhamento de internet gratuito;\n✔ Canais de atendimento em português via WhatsApp, telefone ou e-mail;\n✔ Opções de retirada em SP, RJ e CE."
+    },
+    {
+      "type": "text",
+      "id": "texto_botao",
+      "label": "Texto do botão",
+      "default": "COMPRAR AGORA"
+    },
+    {
+      "type": "url",
+      "id": "link_botao",
+      "label": "Link do botão"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner de Benefícios com Imagem",
+      "category": "Seções Personalizadas"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="benefit-banner-wrapper">
+  <div class="benefit-banner-content">
+    <div class="benefit-text">
+      <div class="benefit-headline">
+        {{ section.settings.texto_destaque }}
+      </div>
+      {% if section.settings.imagem_destaque_mobile != blank %}
+        <div class="benefit-image-mobile">
+          <img src="{{ section.settings.imagem_destaque_mobile | image_url }}" alt="Imagem de benefícios" loading="lazy">
+        </div>
+      {% endif %}
+      <div class="benefit-subtitle">
+        {{ section.settings.subtitulo }}
+      </div>
+      <ul class="benefit-list">
+        {% assign linhas = section.settings.beneficios | split: "|" %}
+        {% for item in linhas %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% if section.settings.link_botao != blank %}
+        <a class="benefit-button" href="{{ section.settings.link_botao }}">
+          {{ section.settings.texto_botao }}
+        </a>
+      {% endif %}
+    </div>
+    {% if section.settings.imagem_destaque != blank %}
+      <div class="benefit-image">
+        <img src="{{ section.settings.imagem_destaque | image_url: width: 900 }}" alt="Imagem de benefícios" loading="lazy">
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  
+</style>

@@ -1,0 +1,112 @@
+<style>
+.tips-bar-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Ensure centering */
+    gap: 10px; /* Space between image and text */
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+}
+
+.tips-bar-list li img {
+    width: 35px; /* Set to 35x35 */
+    height: 35px;
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+/* Hide non-active items */
+.tips-bar-list li[style*="display: none"] {
+    opacity: 0; /* Fade out hidden items */
+}
+
+/* Desktop: Show 2 items */
+@media (min-width: 768px) {
+    .tips-bar-list {
+        display: flex;
+        justify-content: center; /* Center the two items */
+        gap: 210px; /* Space between two items on desktop */
+    }
+}
+</style>
+
+<section class="texto-simples">
+    <div class="container">
+        <div class="tips-bar">
+            <ul class="tips-bar-list">
+                <li><img src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/Group_3862.svg?v=1748709452" alt="Connected icon"/>Chegue conectado ao seu destino</li>
+                <li><img src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/tips-bar-call.png?v=1744658736" alt="WhatsApp icon"/>Mantenha seu número de Whatsapp</li>
+                <li><img src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/Group_2.svg?v=1748713074" alt="Payment icon"/>Parcele em até 12x</li>
+                <li><img src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/Group_1.png?v=1748713134" alt="Currency icon" style="fill: #666666;"/>Compre em Real</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const list = document.querySelector('.tips-bar-list');
+    const items = list.querySelectorAll('li');
+    let currentIndex = 0;
+    const intervalTime = 3000; // 3 seconds
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const itemsToShow = isMobile ? 1 : 2; // Show 1 item on mobile, 2 on desktop
+
+    // Set initial visibility
+    function updateCarousel() {
+        items.forEach((item, index) => {
+            item.style.display = (index >= currentIndex && index < currentIndex + itemsToShow) ? 'flex' : 'none';
+        });
+    }
+
+    // Move to next set of items with delay for fade
+    function moveToNext() {
+        // Fade out current items
+        items.forEach((item, index) => {
+            if (index >= currentIndex && index < currentIndex + itemsToShow) {
+                item.style.opacity = '0';
+            }
+        });
+
+        // Wait for fade-out, then update
+        setTimeout(() => {
+            currentIndex += itemsToShow;
+            if (currentIndex >= items.length) {
+                currentIndex = 0; // Loop back to start
+            }
+            updateCarousel();
+            // Fade in new items
+            items.forEach((item, index) => {
+                if (index >= currentIndex && index < currentIndex + itemsToShow) {
+                    item.style.opacity = '1';
+                }
+            });
+        }, 500); // Match transition duration
+    }
+
+    // Initial setup
+    updateCarousel();
+
+    // Set interval for automatic sliding
+    setInterval(moveToNext, intervalTime);
+
+    // Update carousel on window resize
+    window.addEventListener('resize', () => {
+        const newIsMobile = window.matchMedia("(max-width: 767px)").matches;
+        if (newIsMobile !== isMobile) {
+            location.reload(); // Reload to adjust itemsToShow
+        }
+    });
+});
+</script>
+
+{% schema %}
+{
+    "name": "Tips Bar",
+    "settings": [],
+    "presets": [
+        {
+            "name": "Tips Bar"
+        }
+    ]
+}
+{% endschema %}

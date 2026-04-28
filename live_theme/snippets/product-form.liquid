@@ -1,0 +1,762 @@
+{% comment %}
+  @param product {object}
+    (Required) Contains product information
+{% endcomment %}
+
+{% liquid
+  assign section_onboarding = false
+  if product == blank
+    assign section_onboarding = true
+  endif
+
+  assign form_id = section.id
+  assign product_form_id = 'product-form-' | append: form_id | strip_newlines
+
+  assign selected_variant = product.selected_or_first_available_variant
+
+  assign show_spb = settings.show_payment_button | default: false
+  if product.selling_plan_groups.size > 0
+    assign show_spb = false
+  endif
+
+  assign show_recipient_form = block.settings.show_gift_card_recipient_form
+  assign recipient_form_input_classes = 'input-field'
+  assign recipient_form_textarea_classes = 'input-field-textarea'
+  assign recipient_form_textarea_rows = 6
+  assign recipient_form_checkbox_size = 14
+  assign recipient_form_checkbox_stroke_size = 2
+
+  assign min_days = product.metafields.custom.min_days | default: 5
+%}
+
+<div
+  class="product-form product-form--recipient-form-{{ show_recipient_form }} {% if show_spb %}product-form-has-spb{% endif %} {% if selected_variant.available == false %}product-form-outofstock{% endif %} {{ class }}"
+  {{ block.shopify_attributes }}
+>
+  {% if product != blank %}
+    {% form 'product', product, id: product_form_id, data-product-form: form_id %}
+      <div class="data-viagem-wrapper">
+        <p class="cart-attribute__field data-viagem">
+          <label for="dataVisivel">
+            Data de Ativação <span class="recipient-form__required">*</span>
+          </label>
+        </p>
+        <div class="message-error">
+        <div class="data-viagem__container">
+          <input
+            type="date"
+            name="date"
+            id="dataVisivel"
+            class="data-visivel"
+            required
+            pattern="\d{4}-\d{2}-\d{2}"
+          >
+          <span class="data-viagem__icon">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0046/8847/8306/files/Group.svg"
+              alt="Ícone de Calendário"
+              width="24"
+              height="24"
+            >
+          </span>
+          <input
+            type="hidden"
+            id="dataHidden"
+            name="properties[Data]"
+            class="data-oculta"
+          >
+          <span class="data-error-message" style="display: none; color: #ff0000; font-size: 14px; margin-top: 5px;">Por favor, preencha a Data de Ativação.</span>
+        </div>
+        </div>
+      </div>
+
+      {% if product.variants.size > 1 %}
+        <div class="product-options">
+          {% if settings.variants_style == 'select' %}
+            {% render 'product-options-dropdown', product: product, form_id: form_id %}
+          {% else %}
+            {% render 'product-options-radio', product: product, form_id: form_id %}
+          {% endif %}
+
+          <div class="selector-wrapper no-js-required">
+            <label for="product-select-{{ form_id }}" class="visually-hidden">Selecione a variante</label>
+            <select
+              class="product-select"
+              name="id"
+              id="product-select-{{ form_id }}"
+            >
+              {% for variant in product.variants %}
+                <option
+                  value="{{ variant.id }}"
+                  {% if variant.id == selected_variant.id %}selected="selected"{% endif %}
+                  data-variant-id="{{ variant.id }}"
+                  {% unless variant.available %}disabled="disabled"{% endunless %}
+                >
+                  {% if variant.available %}
+                    {{ variant.title }} - {{ variant.price | money }}
+                  {% else %}
+                    {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                  {% endif %}
+                </option>
+              {% endfor %}
+            </select>
+            <div class="bold_options">
+              <label for="days">Dias</label>
+              <button type="button" class="qty-btn minus" aria-label="Diminuir dias">-</button>
+              <input type="number" id="days" name="properties[days]" value="{{ min_days }}" min="{{ min_days }}" class="qty-input" readonly>
+              <button type="button" class="qty-btn plus" aria-label="Aumentar dias">+</button>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <input
+          class="product-select"
+          name="id"
+          value="{{ product.variants.first.id }}"
+          type="hidden"
+          data-variant-title="{{ product.variants.first.title }}"
+        >
+      {% endif %}
+
+      {% if show_spb == false or position == 'top' or position == 'bottom' %}
+        {% if show_recipient_form and product.gift_card? %}
+          <details class="recipient-disclosure" data-recipient-disclosure>
+            <summary class="recipient-disclosure__summary">
+              <label class="recipient-disclosure__checkbox-label" for="recipient-disclosure__checkbox-{{ section.id }}">
+                <input
+                  class="recipient-disclosure__checkbox"
+                  id="recipient-disclosure__checkbox-{{ section.id }}"
+                  type="checkbox"
+                  name="properties[__shopify_send_gift_card_to_recipient]"
+                  tabindex="-1"
+                  data-recipient-disclosure-checkbox
+                >
+                {% render 'recipient-form-disclosure-icon' %}
+                <span class="recipient-disclosure__checkbox-label-text">
+                  {{ 'recipient.form.checkbox_label' | t }}
+                </span>
+              </label>
+            </summary>
+
+            <div class="recipient-form" data-recipient-form>
+              <div class="recipient-form__field">
+                {% if show_recipient_form_labels %}
+                  <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-email-{{ section.id }}">
+                    {{ 'recipient.form.email_label' | t }}
+                    <span class="recipient-form__required">*</span>
+                  </label>
+                {% endif %}
+                <div class="recipient-form__input-wrapper">
+                  <input
+                    class="recipient-form__input recipient-form__input--email {{ recipient_form_input_classes }}"
+                    id="recipient-email-{{ section.id }}"
+                    type="email"
+                    {% if show_recipient_form_placeholders %}
+                      placeholder="{{ 'recipient.form.email_placeholder' | t }}"
+                    {% endif %}
+                    name="properties[Recipient email]"
+                    value="{{ form.email }}"
+                    data-recipient-form-input
+                    data-recipient-form-email-input
+                  >
+                  <span class="recipient-form__error-message" data-receiver-form-error-message>
+                    {{ 'recipient.form.error_message' | t }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="recipient-form__field">
+                <div class="recipient-form__input-wrapper">
+                  {% if show_recipient_form_labels %}
+                    <labelacalhost:8888
+                    class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-name-{{ section.id }}">
+                      {{ 'recipient.form.name_label' | t }}
+                    </label>
+                  {% endif %}
+                  <input
+                    class="recipient-form__input recipient-form__input--name {{ recipient_form_input_classes }}"
+                    id="recipient-name-{{ section.id }}"
+                    type="text"
+                    {% if show_recipient_form_placeholders %}
+                      placeholder="{{ 'recipient.form.name_placeholder' | t }}"
+                    {% endif %}
+                    name="properties[Recipient name]"
+                    value="{{ form.name }}"
+                    data-recipient-form-input
+                  >
+                </div>
+              </div>
+
+              <div class="recipient-form__field">
+                <div class="recipient-form__input-wrapper">
+                  {% liquid
+                    assign max_characters_length = 200
+                    if show_recipient_form_max_characters_message
+                      assign max_characters_message = 'recipient.form.max_characters' | t: max_characters: max_characters_length
+                    endif
+                  %}
+                  {% if show_recipient_form_labels %}
+                    <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-message-{{ section.id }}">
+                      {{ 'recipient.form.message_label' | t }}
+                    </label>
+                  {% endif %}
+                  <textarea
+                    class="recipient-form__input recipient-form__input--message {{ recipient_form_input_classes }} {{ recipient_form_textarea_classes }}"
+                    id="recipient-message-{{ section.id }}"
+                    {% if show_recipient_form_placeholders %}
+                      placeholder="{{ 'recipient.form.message_placeholder' | t }}"
+                    {% endif %}
+                    name="properties[Message]"
+                    rows="{{ recipient_form_textarea_rows }}"
+                    maxlength="{{ max_characters_length }}"
+                    data-recipient-form-input
+                  >{{ form.message }}</textarea>
+                  {% if show_recipient_form_max_characters_message %}
+                    <span class="recipient-form__max-characters-message">
+                      <small>{{ max_characters_message }}</small>
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="recipient-form__field">
+                <div class="recipient-form__input-wrapper">
+                  {% if show_recipient_form_labels %}
+                    <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-date-{{ section.id }}">
+                      {{ 'recipient.form.send_on_label' | t }}
+                    </label>
+                  {% endif %}
+                  <input
+                    class="recipient-form__input recipient-form__input--date {{ recipient_form_input_classes }}"
+                    id="recipient-date-{{ section.id }}"
+                    {% if show_recipient_form_placeholders %}
+                      placeholder="{{ 'recipient.form.send_on_placeholder' | t }}"
+                    {% endif %}
+                    type="date"
+                    name="properties[Send on]"
+                    autocomplete="send_on"
+                    pattern="\d{4}-\d{2}-\d{2}"
+                    value="{{ form.send_on }}"
+                    data-recipient-form-input
+                  >
+                </div>
+              </div>
+            </div>
+          </details>
+        {% endif %}
+      {% endif %}
+
+      <div class="product__quantity-atc-container {% if show_spb %}smart-payments{% endif %}">
+        {% unless section_onboarding %}
+          <div class="product__quantity-wrapper">
+            <label class="product-quantity-label" for="quantity">
+              {{ 'general.general.quantity' | t }}
+            </label>
+            <button type="button" class="qty-btn minus" aria-label="Diminuir quantidade">-</button>
+            <input
+              class="input-field product-quantity-input"
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              readonly
+            >
+            <button type="button" class="qty-btn plus" aria-label="Aumentar quantidade">+</button>
+          </div>
+        {% endunless %}
+
+        <div class="add-to-cart">
+          {% if show_spb and position == 'left' or position == 'right' %}
+            {% if show_recipient_form and product.gift_card? %}
+              <details class="recipient-disclosure" data-recipient-disclosure>
+                <summary class="recipient-disclosure__summary">
+                  <label class="recipient-disclosure__checkbox-label" for="recipient-disclosure__checkbox-{{ section.id }}">
+                    <input
+                      class="recipient-disclosure__checkbox"
+                      id="recipient-disclosure__checkbox-{{ section.id }}"
+                      type="checkbox"
+                      name="properties[__shopify_send_gift_card_to_recipient]"
+                      tabindex="-1"
+                      data-recipient-disclosure-checkbox
+                    >
+                    {% render 'recipient-form-disclosure-icon' %}
+                    <span class="recipient-disclosure__checkbox-label-text">
+                      {{ 'recipient.form.checkbox_label' | t }}
+                    </span>
+                  </label>
+                </summary>
+
+                <div class="recipient-form" data-recipient-form>
+                  <div class="recipient-form__field">
+                    {% if show_recipient_form_labels %}
+                      <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-email-{{ section.id }}">
+                        {{ 'recipient.form.email_label' | t }}
+                        <span class="recipient-form__required">*</span>
+                      </label>
+                    {% endif %}
+                    <div class="recipient-form__input-wrapper">
+                      <input
+                        class="recipient-form__input recipient-form__input--email {{ recipient_form_input_classes }}"
+                        id="recipient-email-{{ section.id }}"
+                        type="email"
+                        {% if show_recipient_form_placeholders %}
+                          placeholder="{{ 'recipient.form.email_placeholder' | t }}"
+                        {% endif %}
+                        name="properties[Recipient email]"
+                        value="{{ form.email }}"
+                        data-recipient-form-input
+                        data-recipient-form-email-input
+                      >
+                      <span class="recipient-form__error-message" data-receiver-form-error-message>
+                        {{ 'recipient.form.error_message' | t }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="recipient-form__field">
+                    <div class="recipient-form__input-wrapper">
+                      {% if show_recipient_form_labels %}
+                        <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-name-{{ section.id }}">
+                          {{ 'recipient.form.name_label' | t }}
+                        </label>
+                      {% endif %}
+                      <input
+                        class="recipient-form__input recipient-form__input--name {{ recipient_form_input_classes }}"
+                        id="recipient-name-{{ section.id }}"
+                        type="text"
+                        {% if show_recipient_form_placeholders %}
+                          placeholder="{{ 'recipient.form.name_placeholder' | t }}"
+                        {% endif %}
+                        name="properties[Recipient name]"
+                        value="{{ form.name }}"
+                        data-recipient-form-input
+                      >
+                    </div>
+                  </div>
+
+                  <div class="recipient-form__field">
+                    <div class="recipient-form__input-wrapper">
+                      {% liquid
+                        assign max_characters_length = 200
+                        if show_recipient_form_max_characters_message
+                          assign max_characters_message = 'recipient.form.max_characters' | t: max_characters: max_characters_length
+                        endif
+                      %}
+                      {% if show_recipient_form_labels %}
+                        <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-message-{{ section.id }}">
+                          {{ 'recipient.form.message_label' | t }}
+                        </label>
+                      {% endif %}
+                      <textarea
+                        class="recipient-form__input recipient-form__input--message {{ recipient_form_input_classes }} {{ recipient_form_textarea_classes }}"
+                        id="recipient-message-{{ section.id }}"
+                        {% if show_recipient_form_placeholders %}
+                          placeholder="{{ 'recipient.form.message_placeholder' | t }}"
+                        {% endif %}
+                        name="properties[Message]"
+                        rows="{{ recipient_form_textarea_rows }}"
+                        maxlength="{{ max_characters_length }}"
+                        data-recipient-form-input
+                      >{{ form.message }}</textarea>
+                      {% if show_recipient_form_max_characters_message %}
+                        <span class="recipient-form__max-characters-message">
+                          <small>{{ max_characters_message }}</small>
+                        </span>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <div class="recipient-form__field">
+                    <div class="recipient-form__input-wrapper">
+                      {% if show_recipient_form_labels %}
+                        <label class="recipient-form__label {{ recipient_form_label_classes }}" for="recipient-date-{{ section.id }}">
+                          {{ 'recipient.form.send_on_label' | t }}
+                        </label>
+                      {% endif %}
+                      <input
+                        class="recipient-form__input recipient-form__input--date {{ recipient_form_input_classes }}"
+                        id="recipient-date-{{ section.id }}"
+                        {% if show_recipient_form_placeholders %}
+                          placeholder="{{ 'recipient.form.send_on_placeholder' | t }}"
+                        {% endif %}
+                        type="date"
+                        name="properties[Send on]"
+                        autocomplete="send_on"
+                        pattern="\d{4}-\d{2}-\d{2}"
+                        value="{{ form.send_on }}"
+                        data-recipient-form-input
+                      >
+                    </div>
+                  </div>
+                </div>
+              </details>
+            {% endif %}
+          {% endif %}
+
+          {% if product.available %}
+            <div class="product-form-submit-wrap">
+              <input
+                class="add-to-cart__button button"
+                type="submit"
+                value="{{ 'products.product.add_to_cart' | t }}"
+              >
+              <div class="add-to-cart-loader"></div>
+            </div>
+            {% if show_spb %}
+              {{ form | payment_button }}
+            {% endif %}
+          {% else %}
+            <input
+              class="button disabled"
+              type="button"
+              disabled="disabled"
+              value="{{ 'products.product.sold_out' | t }}"
+            >
+          {% endif %}
+        </div>
+      </div>
+      <div data-payment-terms-reference style="display: none;">
+        {{ form | payment_terms }}
+      </div>
+    {% endform %}
+    <div class="product-cart-message" data-product-message></div>
+    <div class="surface-pick-up" data-surface-pick-up></div>
+  {% endif %}
+</div>
+
+<style>
+  span.bold_option_element select {
+    width: 143px;
+    background: #f0ecec;
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+  p.cart-attribute__field.data-viagem {
+    margin: 0;
+    padding: 0;
+    width: 160px;
+  }
+
+  .shopify-product-form .bold_option_title,
+  .product-quantity-label {
+    font-family: var(--primary-font);
+    font-weight: 800;
+    color: #091b63;
+    font-size: 18px;
+    margin-right: 12px;
+  }
+
+  .product-quantity-input.input-field {
+    font-family: var(--primary-font);
+    font-weight: unset !important;
+    font-size: 19px !important;
+    padding-left: 15px;
+    height: auto;
+    margin: 0;
+    border: none;
+    width: 10%;
+  }
+
+  @media screen and (max-width: 780px) {
+    .product-quantity-input.input-field {
+      font-family: var(--primary-font);
+      font-weight: unset !important;
+      font-size: 19px !important;
+      padding-left: 0px;
+      height: auto;
+      margin: 0;
+      border: none;
+      width: 10%;
+    }
+  }
+
+  .product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cart-attribute__field,
+  .product-options,
+  .bold_options,
+  .product__quantity-atc-container,
+  .add-to-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .bold_options {
+    align-items: flex-start;
+  }
+
+  .bold_options .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .product__quantity-wrapper {
+    align-items: flex-start;
+  }
+
+  .product__quantity-wrapper .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .qty-btn:hover {
+    background-color: #e0e0e0;
+  }
+
+  .qty-input,
+  .product-quantity-input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .data-visivel {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: var(--primary-font);
+    background: transparent;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .data-visivel::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+
+  .data-oculta {
+    display: none;
+  }
+
+  .add-to-cart__button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .data-viagem-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .data-viagem__container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .data-viagem__icon img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
+
+  .data-visivel:invalid {
+    border-color: #ff0000;
+  }
+
+  .data-error-message {
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+  }
+
+  @media screen and (min-width: 769px) {
+    .product-form {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateVisible = document.getElementById('dataVisivel');
+    const dateHidden = document.getElementById('dataHidden');
+    const form = document.querySelector('#{{ product_form_id }}');
+    const errorMessage = document.querySelector('.data-error-message');
+    const submitButton = form.querySelector('.add-to-cart__button');
+    const daysInput = document.getElementById('days');
+    const daysMinusBtn = daysInput?.closest('.bold_options')?.querySelector('.minus');
+    const daysPlusBtn = daysInput?.closest('.bold_options')?.querySelector('.plus');
+    const minDays = parseInt(daysInput?.min || 5);
+    const priceElement = document.querySelector('.bold_option_price_display');
+    const basePrice = parseInt('{{ product.price | divided_by: 100 }}'); // Preço base em reais
+    const variantSelect = document.querySelector('.product-select');
+
+    // Função para atualizar o preço com "Por" e a classe "money"
+    function updatePrice(days) {
+      if (priceElement) {
+        const newPrice = basePrice * days;
+        priceElement.textContent = `por ${Shopify.formatMoney(newPrice * 100)}`; // Multiplica por 100 para centavos
+        priceElement.classList.add('money'); // Garante que a classe "money" esteja presente
+      }
+    }
+
+    if (dateVisible && dateHidden && form && errorMessage && submitButton) {
+      form.noValidate = true;
+
+      dateVisible.addEventListener('click', function() {
+        try {
+          dateVisible.showPicker();
+        } catch (e) {
+          dateVisible.focus();
+        }
+      });
+
+      dateVisible.addEventListener('change', function() {
+        if (dateVisible.value) {
+          dateHidden.value = dateVisible.value;
+          errorMessage.style.display = 'none';
+          dateVisible.setCustomValidity('');
+        } else {
+          dateHidden.value = '';
+          errorMessage.style.display = 'block';
+          dateVisible.setCustomValidity('Por favor, preencha a Data de Ativação.');
+        }
+      });
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!dateVisible.value) {
+          errorMessage.style.display = 'block';
+          dateVisible.setCustomValidity('Por favor, preencha a Data de Ativação.');
+          dateVisible.focus();
+          return;
+        }
+
+        const requiredFields = form.querySelectorAll('[required]');
+        let isValid = true;
+        requiredFields.forEach(field => {
+          if (!field.value) {
+            isValid = false;
+            field.setCustomValidity('Este campo é obrigatório.');
+          } else {
+            field.setCustomValidity('');
+          }
+        });
+
+        if (!isValid) {
+          errorMessage.style.display = 'block';
+          dateVisible.focus();
+          return;
+        }
+
+        errorMessage.style.display = 'none';
+        form.removeAttribute('novalidate');
+
+        // Envio manual para suportar AJAX do Shopify
+        const formData = new FormData(form);
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 422 || data.status === 'bad_request') {
+              errorMessage.textContent = data.description || 'Erro ao adicionar ao carrinho.';
+              errorMessage.style.display = 'block';
+            } else {
+              window.location.href = '/cart';
+            }
+          })
+          .catch(error => {
+            errorMessage.textContent = 'Erro ao adicionar ao carrinho.';
+            errorMessage.style.display = 'block';
+          });
+      });
+
+      submitButton.addEventListener('click', function(event) {
+        if (!dateVisible.value) {
+          event.preventDefault();
+          errorMessage.style.display = 'block';
+          dateVisible.setCustomValidity('Por favor, preencha a Data de Ativação.');
+          dateVisible.focus();
+        }
+      });
+    }
+
+    // Eventos para botões de mais/menos
+    daysMinusBtn?.addEventListener('click', function() {
+      let value = parseInt(daysInput.value);
+      if (value > minDays) {
+        daysInput.value = value - 1;
+        updatePrice(value - 1);
+      }
+    });
+
+    daysPlusBtn?.addEventListener('click', function() {
+      let value = parseInt(daysInput.value);
+      daysInput.value = value + 1;
+      updatePrice(value + 1);
+    });
+
+    // Evento para o dropdown de variantes
+    variantSelect?.addEventListener('change', function() {
+      const days = parseInt(daysInput.value); // Usa o valor do input de dias
+      updatePrice(days);
+    });
+
+    // Inicializa o preço com o valor inicial de dias
+    if (daysInput && priceElement) {
+      updatePrice(parseInt(daysInput.value));
+    }
+
+    // Eventos para botões de quantidade
+    const qtyInput = document.querySelector('.product-quantity-input');
+    const qtyMinusBtn = qtyInput?.closest('.product__quantity-wrapper')?.querySelector('.minus');
+    const qtyPlusBtn = qtyInput?.closest('.product__quantity-wrapper')?.querySelector('.plus');
+    const minQty = parseInt(qtyInput?.min || 1);
+
+    qtyMinusBtn?.addEventListener('click', function() {
+      let value = parseInt(qtyInput.value);
+      if (value > minQty) qtyInput.value = value - 1;
+    });
+
+    qtyPlusBtn?.addEventListener('click', function() {
+      let value = parseInt(qtyInput.value);
+      qtyInput.value = value + 1;
+    });
+  });
+</script>

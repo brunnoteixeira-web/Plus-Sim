@@ -1,0 +1,148 @@
+{% assign per_row = section.settings.products_in_rows %}
+{% assign product_rows = section.settings.number_of_rows %}
+{% assign collection = section.settings.collection %}
+{% assign product_limit = 5 %}
+
+<section
+  class="module-container {{ section.settings.style }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="dynamic-featured-collection"
+>
+  <div class="module-inner dynamic-featured-collection {{ section.id }}" style="max-width: 100%; overflow: hidden;">
+
+    {% if section.settings.title != blank %}
+      <h1 class="section-title" style="text-align: center; margin-bottom: 20px; font-size: 24px; color: #333;">{{ section.settings.title | escape }}</h1>
+    {% endif %}
+
+    <!-- Swiper Container -->
+    <div class="swiper featured-collection-swiper">
+      <div class="swiper-wrapper">
+        {% for product in collections[collection].products limit: product_limit %}
+          <div class="swiper-slide" style="width: 450px;">
+            <a href="{{ product.url }}" class="product-link">
+              <div class="plan-card">
+                <div class="product-image-container">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title }}" class="product-list-item-image">
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'product-list-item-image' }}
+                  {% endif %}
+                </div>
+                <div class="plan-info">
+                  <h3 class="plan-title">{{ product.title }}</h3>
+                  <div class="plan-price">A partir de {{ product.price | money | replace: "R$ ", "R$" }}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% else %}
+          {% for i in (1..3) %}
+            <div class="swiper-slide" style="width: 450px;">
+              <div class="plan-card">
+                <div class="product-image-container">
+                  {{ 'product-' | append: i | placeholder_svg_tag: 'product-list-item-image' }}
+                </div>
+                <div class="plan-info">
+                  <h3 class="plan-title">Plano América do Norte</h3>
+                  <div class="plan-price">R$289,99</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+
+    {% if section.settings.button != blank and section.settings.link != blank %}
+      <div class="home-module-cta">
+        <a class="button" href="{{ section.settings.link }}">
+          {{ section.settings.button | escape }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "collection slider",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "default-style",
+          "label": "Default"
+        },
+        {
+          "value": "accent-style",
+          "label": "Accent"
+        },
+        {
+          "value": "contrast-style",
+          "label": "Contrast"
+        }
+      ],
+      "default": "default-style"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link URL"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_in_rows",
+      "label": "Products per row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "number_of_rows",
+      "label": "Rows",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Featured collection slider"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "product",
+      "page"
+    ]
+  }
+}
+
+{% endschema %}

@@ -1,0 +1,89 @@
+{% liquid
+  assign show_descriptions = section.settings.show_description
+  assign crop_images = 'center'
+
+  assign using_linklist = false
+  if linklists['all-collections'] and linklists['all-collections'].links.size > 0
+    assign using_linklist = true
+  endif
+%}
+
+<script
+  type="application/json"
+  data-section-type="static-list-collections"
+  data-section-id="{{ section.id }}"
+></script>
+
+<h1 class="page-title">
+  {{ 'collections.listing.header' | t }}
+</h1>
+
+{% paginate collections by 15 %}
+  <div class="collections-list">
+    {% if using_linklist %}
+      {% for link in linklists['all-collections'].links %}
+        {% liquid
+          assign collection_item = collections[link.handle]
+          assign featured_image = collection_item.image
+          assign custom_description = collection_item.description | strip_html | truncate: 100
+
+          unless featured_image
+            assign featured_image = collection_item.products.first.featured_media.preview_image
+          endunless
+        %}
+        {%
+          render 'collection-list-card',
+          collection: collection_item,
+          featured_image: featured_image,
+          show_collection_names: true,
+          show_descriptions: show_descriptions,
+          custom_description: custom_description,
+          crop_images: crop_images,
+          add_link_to_description: true
+        %}
+      {% endfor %}
+    {% else %}
+      {% for collection_item in collections %}
+        {% liquid
+          assign featured_image = collection_item.image
+          assign custom_description = collection_item.description | strip_html | truncate: 100
+
+          unless featured_image
+            assign featured_image = collection_item.products.first.featured_media.preview_image
+          endunless
+        %}
+        {%
+          render 'collection-list-card',
+          collection: collection_item,
+          featured_image: featured_image
+          show_collection_names: true,
+          show_descriptions: show_descriptions,
+          custom_description: custom_description,
+          crop_images: crop_images,
+          add_link_to_description: true
+        %}
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {% if paginate.previous or paginate.next and using_linklist == false %}
+    {%
+      render 'pagination',
+      paginate: paginate
+    %}
+  {% endif %}
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection list page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection descriptions",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

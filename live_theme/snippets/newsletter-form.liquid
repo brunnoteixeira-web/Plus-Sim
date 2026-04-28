@@ -1,0 +1,81 @@
+{% comment %}
+  @param section
+    Section object with all section data
+
+  @param form_input_classes
+    Classes applied to the text input
+
+  @param button_classes
+    Classes applied to the submit button
+{% endcomment %}
+
+{% assign newsletter_form_success = 'sections.newsletter.success' | t %}
+{% assign newsletter_form_placeholder = 'sections.newsletter.placeholder' | t %}
+{% assign newsletter_form_submit = 'sections.newsletter.subscribe' | t %}
+{% assign newsletter_form_id = 'newsletter-' | append: section.id %}
+
+{% assign newsletter_tags = 'prospect' %}
+
+{%- if template contains 'password' %}
+  {% assign newsletter_tags = newsletter_tags | append: ', password page' %}
+{%- else -%}
+  {% assign newsletter_tags = newsletter_tags | append: ', newsletter' %}
+{%- endif -%}
+
+<div class="newsletter-form">
+  {% form 'customer', id: newsletter_form_id %}
+    {% if form.posted_successfully? %}
+      <p class="newsletter-form__snippet newsletter-form__snippet--success">
+        {{ newsletter_form_success }}
+      </p>
+    {% elsif form.errors %}
+      {% for field in form.errors %}
+        <p class="newsletter-form__snippet newsletter-form__snippet--error">
+          {% if field == 'form' %}
+            {{ form.errors.messages[field] }}
+          {% else %}
+            {{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}
+          {% endif %}
+        </p>
+      {% endfor %}
+    {% endif %}
+    <input
+      type="hidden"
+      name="contact[tags]"
+      value="{{ newsletter_tags }}"
+    />
+
+    <div class="newsletter-form__fields">
+      <div class="newsletter-form__field {% if form.errors %}newsletter-form__field--error{% endif %}">
+        <label
+          class="newsletter-form__label"
+          for="{{ section.id }}-newsletter-form__email"
+        >
+          {{ newsletter_form_placeholder }}
+        </label>
+
+        <input
+          class="newsletter-form__input {{ form_input_classes }}"
+          name="contact[email]"
+          id="{{ section.id }}-newsletter-form__email"
+          type="email"
+          placeholder="{{ newsletter_form_placeholder }}"
+          aria-label="{{ newsletter_form_placeholder }}"
+          required
+          data-newsletter-input
+        />
+      </div>
+
+      <div class="newsletter-form__field">
+        <button
+          class="newsletter-form__button {{ button_classes }}"
+          name="subscribe"
+          type="submit"
+          data-newsletter-submit
+        >
+          {{ newsletter_form_submit }}
+        </button>
+      </div>
+    </div>
+  {% endform %}
+</div>

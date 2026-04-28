@@ -1,0 +1,150 @@
+{% assign order_of_elements = 'title|star_rating|content|author_name' %}
+{% assign order_of_elements = order_of_elements | split: '|' %}
+
+{% if block.settings.avatar == blank %}
+  {% assign include_author_image = false  %}
+{% endif %}
+
+{% if block.settings.image == blank %}
+  {% assign include_testimonial_image = false  %}
+{% endif %}
+
+{% comment %}Inject @pixelunion/pxs-testimonials/testimonial begin{% endcomment %}
+{% comment %}
+  @param block {Object}
+    Block object
+
+  @param order_of_elements {Array}
+    Array of element names in the order in which they should be displayed
+
+  @param testimonial_title {String}
+    Individual testimonial title
+
+  @param content {Richtext}
+    Testimonial content
+
+  @param star_rating {Number}
+    Star rating value
+
+  @param author {String}
+    Author name
+
+  @param include_testimonial_image {Boolean}
+    Whether to include an image before/after the testimonial content
+
+  @param testimonial_image {Image}
+    Testimonial image
+
+  @param include_author_image {Boolean}
+    Whether to include an 'avatar' image next to the author name
+
+  @param author_image {Image}
+    'Avatar' image next to place next to the author name
+
+  @param index (Integer)
+    Zero-based block index
+{% endcomment %}
+
+<div class="testimonial" data-testimonial data-index="{{ index }}" {{ block.shopify_attributes }}>
+  {% if include_testimonial_image %}
+    <div class="testimonial__image-wrapper testimonial__image-wrapper--first">
+      {% if testimonial_image %}
+        {%
+          render 'rimg',
+          img: testimonial_image,
+          class: 'testimonial__image',
+          size: '1400x',
+          lazy: true,
+          canvas: true,
+          focal_point: testimonial_image.presentation.focal_point,
+        %}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'testimonial__image testimonial__placeholder-image placeholder--image placeholder-svg' }}
+      {% endif %}
+    </div>
+  {% endif %}
+  <div class="testimonial__content-wrapper" data-testimonial-content-wrapper>
+    {% for element in order_of_elements %}
+      {% case element %}
+        {% when 'title' %}
+          {% if testimonial_title != blank %}
+            <div class="testimonial__title">
+              {{ testimonial_title | escape }}
+            </div>
+          {% endif %}
+        {% when 'star_rating' %}
+          {% if star_rating and star_rating != 0.0 %}
+            {% assign rounded_star_rating = star_rating | round %}
+
+            {% if star_rating == rounded_star_rating %}
+              {% assign include_half_star = false %}
+            {% else %}
+              {% assign include_half_star = true %}
+            {% endif %}
+            <div class="testimonial__star-rating"  aria-label="{{ star_rating }} stars" data-testimonial-star-rating>
+              {% for i in (1..rounded_star_rating) %}
+                <span
+                  class="
+                    testimonial__star
+                    {% if forloop.last and include_half_star %}
+                      testimonial__star--half
+                    {% endif %}
+                  "
+                  data-testimonial-star
+                ></span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% when 'content' %}
+          <div class="testimonial__quote" data-testimonial-quote>
+            {{ content }}
+          </div>
+        {% when 'author_name' %}
+          {% if author %}
+            <div class="testimonial__author {% if include_author_image %}testimonial__author--with-image{% endif %}" data-testimonial-author>
+              {% if include_author_image %}
+                <div class="testimonial__author-image-wrapper">
+                  {% if author_image %}
+                    {%
+                      render 'rimg',
+                      img: author_image,
+                      class: 'testimonial__author-image',
+                      size: '500x',
+                      lazy: true,
+                      canvas: true,
+                      focal_point: author_image.presentation.focal_point,
+                    %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'testimonial__author-image testimonial__placeholder-image placeholder--image placeholder-svg' }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if author != blank %}
+                <div class="testimonial__author-name">
+                  {{ author | escape }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+  {% if include_testimonial_image %}
+    <div class="testimonial__image-wrapper testimonial__image-wrapper--last">
+      {% if testimonial_image %}
+        {%
+          render 'rimg',
+          img: testimonial_image,
+          class: 'testimonial__image',
+          size: '1400x',
+          lazy: true,
+          canvas: true,
+          focal_point: testimonial_image.presentation.focal_point,
+        %}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'testimonial__image testimonial__placeholder-image placeholder--image placeholder-svg' }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% comment %}Inject @pixelunion/pxs-testimonials/testimonial end{% endcomment %}

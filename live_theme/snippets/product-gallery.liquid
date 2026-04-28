@@ -1,0 +1,158 @@
+{% comment %}
+  @param product {Product}
+    The product object in question
+
+  @param enable_image_zoom {bool}
+    Whether to use image zoom
+{% endcomment %}
+
+
+
+{% assign selected_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media %}
+
+<div
+  class="product-gallery {{ class }}"
+  data-product-gallery
+  {% if enable_image_zoom %}data-product-gallery-image-zoom{% endif %}
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="
+      product-gallery--viewport
+      {% if product.media.size > 1 %}product-gallery--viewport--has-navigation{% endif %}
+    "
+    data-product-gallery-viewport
+  >
+    {% assign models = product.media | where: 'media_type', 'model' %}
+    {%- if models.size > 0 -%}
+      <script>
+        window.ShopifyXR=window.ShopifyXR||function(){(ShopifyXR.q=ShopifyXR.q||[]).push(arguments)}
+        ShopifyXR('addModels', {{ models | json }});
+      </script>
+    {%- endif -%}
+    {% assign first_model = models | first %}
+    {% for media in product.media %}
+      <figure
+        class="product-gallery--viewport--figure"
+        tabindex="-1"
+        {% if selected_media.id != media.id %}
+          aria-hidden="true"
+        {% else %}
+          aria-hidden="false"
+        {% endif %}
+        data-product-gallery-figure="{{ forloop.index0 }}"
+        data-product-gallery-selected="{%- if selected_media.id == media.id -%}true{%- else -%}false{%- endif -%}"
+        data-media="{{ media.id }}"
+        data-media-type="{{ media.media_type }}"
+        {% if media.media_type == 'image' %}
+          data-image-zoom-src="{{ media.preview_image | img_url: '2048x2048' }}"
+        {% endif %}
+      >
+        <div class="product-gallery--media-wrapper">
+          {% case media.media_type %}
+          {% when 'image' %}
+            {%
+              render 'rimg'
+              img: media.preview_image,
+              size: '1024x1024',
+              lazy: true,
+            %}
+            {% if enable_image_zoom %}<div class="product-gallery--image-zoom-container"></div>{% endif %}
+          {% when 'model' %}
+            {{ media | model_viewer_tag: image_size: '1024x', reveal: 'interaction' , toggleable: true, interaction-prompt-threshold: 0 }}
+          {% when 'video' %}
+            {{ media | media_tag: image_size: '1024x' }}
+          {% when 'external_video' %}
+            {{ media | media_tag: image_size: '1024x' }}
+          {% else %}
+            {{ media | media_tag }}
+          {% endcase %}
+        </div>
+      {% if media.media_type == 'model' %}
+        {% assign model = media %}
+      {% else %}
+        {% assign model = first_model %}
+      {% endif %}
+      {% if model %}
+        <button
+          class="product-gallery--viewinyourspace"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ model.id }}"
+          data-shopify-title="{{ product.title }}"
+          data-shopify-xr-hidden
+        >
+          {% render 'icon-library', id: 'icon-ar' %}
+          {{ 'products.media.view_in_your_space' | t }}
+        </button>
+      {% endif %}
+      </figure>
+    {% else %}
+      {% comment %} Onboarding Image {% endcomment %}
+      <figure
+          class="product-gallery--viewport--figure"
+          data-product-gallery-selected="true"
+        >
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </figure>
+    {% endfor %}
+    {% if product.metafields.custom.pais-ou-regiao %}
+    <div class="destinos">
+      <h2> {{ product.metafields.custom.pais-ou-regiao }} </h2>
+      <h3> Top Destinos</h3>
+      <ul></ul>
+    </div>
+    {% endif %}
+  </div>
+  <script>
+    let destinos = {{ product.metafields.custom.top_destinos }};
+    destinos.forEach(function(destino) {
+      if (destino == "") {
+        return;
+      }
+      let destinoElement = document.createElement('li');
+      destinoElement.className = 'destino';
+      destinoElement.innerHTML = `${destino}`;
+      document.querySelector('.destinos ul').appendChild(destinoElement);
+    });
+  </script>
+
+  {% if product.media.size > 1 %}
+    <div
+      class="product-gallery--navigation"
+      data-product-gallery-navigation
+    >
+      {% for media in product.media %}
+        <button
+          class="
+            product-gallery--media-thumbnail
+            product-gallery--{{ media.media_type }}-thumbnail
+          "
+          type="button"
+          tab-index="0"
+          aria-label="{{ media.alt }} {{ 'general.accessibility.nav_product_thumbnail' | t }}"
+          data-product-gallery-thumbnail="{{ forloop.index0 }}"
+          data-product-gallery-selected="{%- if selected_media.id == media.id -%}true{%- else -%}false{%- endif -%}"
+          data-media="{{ media.id }}"
+          data-media-type="{{ media.media_type }}"
+        >
+          {%
+            render 'rimg'
+            img: media.preview_image,
+            size: '100x100',
+            lazy: true
+          %}
+
+          {% case media.media_type %}
+          {% when 'model' %}
+            {% render 'icon-library', id: 'icon-model-thumb' %}
+          {% when 'video' %}
+            {% render 'icon-library', id: 'icon-play-thumb' %}
+          {% when 'external_video' %}
+            {% render 'icon-library', id: 'icon-play-thumb' %}
+          {% endcase %}
+        </button>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+

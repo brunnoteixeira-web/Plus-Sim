@@ -1,0 +1,154 @@
+<style>
+  /* Reset completo e forçado da seção */
+  [data-section-id="{{ section.id }}"],
+  [data-section-id="{{ section.id }}"] .module-container,
+  [data-section-id="{{ section.id }}"] .module-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 10px 0px 5px 0px !important;
+    box-sizing: border-box !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  /* Estilo principal do container */
+  [data-section-id="{{ section.id }}"] .module-inner {
+    background: linear-gradient(135deg, #6672E0, #7350A7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px; /* aumentamos para suportar 3 linhas */
+    text-align: center;
+  }
+
+  /* Container do conteúdo (centralizado) */
+  [data-section-id="{{ section.id }}"] .home-text-feature {
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center; /* garante centralização do texto */
+  }
+
+  /* Estilo do título */
+  [data-section-id="{{ section.id }}"] .home-text-feature h1.feature-title {
+    color: #ffffff;
+    font-family: 'Rokkitt', serif;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: 0;
+    margin: 0 0 20px 0;
+    max-width: 900px;
+    padding-left: 41px;
+  }
+
+  /* Estilo do conteúdo */
+  [data-section-id="{{ section.id }}"] .home-text-feature .rte.home-text-content {
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0;
+    opacity: 0.95;
+  }
+
+  [data-section-id="{{ section.id }}"] .home-text-feature .rte.home-text-content p {
+    margin: 5px 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+    max-width: 856px;
+  }
+
+  /* ============ MOBILE ============ */
+  @media screen and (max-width: 767px) {
+    [data-section-id="{{ section.id }}"] .home-text-feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    [data-section-id="{{ section.id }}"] .home-text-feature .rte.home-text-content {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    [data-section-id="{{ section.id }}"] .home-text-feature h1.feature-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      padding-left: 0px;
+    }
+
+    [data-section-id="{{ section.id }}"] .home-text-feature .rte.home-text-content {
+      font-size: 15px;
+    }
+  }
+
+  /* ============ DESKTOP ============ */
+  @media screen and (min-width: 768px) {
+    [data-section-id="{{ section.id }}"] .home-text-feature .rte.home-text-content p {
+      margin: 5px 0;
+      padding: 0;
+      font-size: 18px;
+      font-weight: 600;
+      max-width: 832px;
+    }
+
+    [data-section-id="{{ section.id }}"] .home-text-feature h1.feature-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    [data-section-id="{{ section.id }}"] .home-text-feature .rte.home-text-content {
+      font-size: 18px;
+    }
+  }
+</style>
+
+
+<!-- Estrutura HTML (inalterada) -->
+<div data-section-id="{{ section.id }}" class="shopify-section full-width-section">
+  <div class="module-container" data-section-type="text">
+    <div class="module-inner">
+      <div class="home-text-feature">
+        {% if section.settings.title != blank %}
+          <h1 class="feature-title">{{ section.settings.title | escape }}</h1>
+        {% endif %}
+        
+        {% if section.settings.content != blank %}
+          <div class="rte home-text-content">{{ section.settings.content }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Schema (inalterado) -->
+{% schema %}
+{
+  "name": "Sobre Nós",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Sobre Nós"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Conteúdo",
+      "default": "<p>A PlusSim é uma empresa especializada na venda de chip de viagem para turistas internacionais.<br>Unimos a melhor cobertura local de internet e ligações em planos para mais de 200 destinos pelo mundo! Receba seu chip em casa antes da viagem!</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sobre Nós",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

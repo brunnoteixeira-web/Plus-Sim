@@ -1,0 +1,164 @@
+<section
+ data-section-id="{{ section.id }}"
+ data-section-type="static-search"
+>
+  <h1 class="page-title">
+    {% if search.performed %}
+      {{ 'general.search.header_results' | t }}
+    {% else %}
+      {{ 'general.search.header' | t }}
+    {% endif %}
+  </h1>
+
+  <form class="search-form" action="{{ routes.search_url }}" method="get">
+    <input class="input-field search-input" name="q" type="text" placeholder="{{ 'general.general.search_placeholder' | t }}" value="{{ search.terms }}" />
+
+    <div class="search-submit">
+      <input class="button" type="submit" value="{{ 'general.search.submit' | t }}" />
+    </div>
+  </form>
+
+  <div class="search-results-count">
+    {% capture results %}
+      {{ 'general.search.results' | t: count: search.results_count }}
+    {% endcapture %}
+    {% if search.results.size > 0 %}
+      <p>
+        {{ 'general.search.results_text' | t: search_terms: search.terms, results_count: search.results_count, results: results }}
+      </p>
+    {% else %}
+      <div class="rte">
+        <p>
+          {{ 'general.search.no_results_text' | t: search_terms: search.terms, results_count: search.results_count, results: results }}
+        </p>
+
+        <ul>
+          <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+          <li><a href="{{ routes.collections_url }}">{{ 'general.breadcrumbs.collections' | t }}</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.breadcrumbs.all_products' | t }}</a></li>
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.enable_filtering %}
+    <div class="collection-filter-wrapper" data-faceted-filter>
+      {%
+        render 'faceted-filters',
+        filters: search.filters,
+        class_prefix: 'search'
+      %}
+    </div>
+
+    {%- capture clear_url -%}
+      {{ routes.search_url }}?q={{ search.terms | url_encode }}
+    {%- endcapture -%}
+
+    {% for filter in search.filters %}
+      {% if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value %}
+        <div class="search-page__filters-active">
+          {%-
+            render 'faceted-filters-active',
+            filters: search.filters,
+            class_prefix: 'search',
+            clear_url: clear_url
+          -%}
+        </div>
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% paginate search.results by 12 %}
+    {%- liquid
+      assign product_count = 0
+      assign page_count = 0
+      assign article_count = 0
+
+      for item in search.results
+        if item.object_type == 'product'
+          assign product_count = product_count | plus: 1
+        endif
+
+        if item.object_type == 'page'
+          assign page_count = page_count | plus: 1
+        endif
+
+        if item.object_type == 'article'
+          assign article_count = article_count | plus: 1
+        endif
+      endfor
+    -%}
+
+    <div class="search-results-wrapper">
+      {% if search.performed %}
+        {% if search.results.size > 0 %}
+          <div class="search-results">
+            {%- if product_count > 0 -%}
+              <div class="search-results-products">
+                <h3>{{ 'general.search.products' | t }}</h3>
+                {% for item in search.results %}
+                  {%- if item.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+                  {% if item.object_type == 'product' %}
+                    {% render 'product-list-item', product: item %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {%- if page_count > 0 or article_count > 0 -%}
+              <div class="search-results-pages-posts">
+                <h3>
+                  {%- if page_count > 0 and article_count == 0 -%}
+                    {{ 'general.search.pages' | t }}
+                  {%- elsif page_count == 0 and article_count > 0 -%}
+                    {{ 'general.search.posts' | t }}
+                  {%- else -%}
+                    {{ 'general.search.pages_and_posts' | t }}
+                  {%- endif -%}
+                </h3>
+                {% for item in search.results %}
+                  {% if item.object_type != 'product' %}
+                    <div class="search-result clearfix">
+                      <h4><a class="search-result-link" href="{{ item.url }}">{{ item.title }}</a></h4>
+                      {% if item.object_type == 'article' %}
+                        <time class="meta">{{ item.published_at | date: format: 'short_month' }}</time>
+                        <div class="rte">{{ item.excerpt_or_content | strip_html | truncate: 140 }}</div>
+                      {% else %}
+                        <div class="rte">{{ item.content | strip_html | truncate: 140 }}</div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if paginate.previous or paginate.next %}
+          {%
+            render 'pagination',
+            paginate: paginate
+          %}
+        {% endif %}
+      {% endif %}
+    </div>
+{% endpaginate %}
+</section>
+
+{% schema %}
+{
+  "name": "Search pages",
+  "class": "section-search",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable filtering",
+      "default": true
+    }
+  ]
+}
+
+
+{% endschema %}

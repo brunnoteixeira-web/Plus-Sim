@@ -1,0 +1,195 @@
+{% liquid
+  assign section = section
+  assign summary_id = 'title'
+  assign content_id = 'content'
+  assign section_heading = section.settings.title
+%}
+
+{% comment %}Inject @pixelunion/pxs-faq/faq begin{% endcomment %}
+{% comment %}
+@param section {Object}
+  Section object
+@param section_classes {String}
+  Space-separated classes to apply to the section element
+@param section_attributes {String}
+  Space-separated attributes to apply to the section element
+@param section_heading {String}
+  Section heading
+@param section_subheading {String}
+  Section subheading
+@param wrapper_classes {String}
+  Space-separated classes to apply to the wrapper class
+@param wrapper_attributes {String}
+  Space-separated attributes to apply to the wrapper class
+@param summary_id {String}
+  Block setting ID for the question/summary content
+@param content_id {String}
+  Block setting ID for the answer/accordion content field
+{% endcomment %}
+
+{% liquid
+  assign section_classes = section_classes | default: ''
+  assign section_attributes = section_attributes | default: ''
+  assign section_heading = section_heading | default: ''
+  assign section_subheading = section_subheading | default: ''
+  assign wrapper_classes = wrapper_classes | default: ''
+  assign wrapper_attributes = wrapper_attributes | default: ''
+  assign summary_id = summary_id | default: nil
+  assign content_id = content_id | default: nil
+%}
+
+<script
+  type="application/json"
+  data-section-type="pxs-faq"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+<section
+  class="faq {{ section_classes }}"
+  {{ section_attributes }}
+  aria-label="{{ section_heading }}"
+>
+  {%- if section_heading != blank or section_subheading != blank -%}
+    <div class="section-header faq__section-header">
+      {%- if section_heading != blank -%}
+        <h2 class="section-header__heading faq__section-heading">
+          {{ section_heading | escape }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section_subheading != blank -%}
+        <div class="section-header__subheading faq__section-subheading">
+          {{ section_subheading }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div
+    class="section-wrapper faq__section-wrapper {{ wrapper_classes }}"
+    {{ wrapper_attributes }}
+    data-faq
+  >
+    <div class="section-content faq__section-content">
+      {%- for block in section.blocks -%}
+        {% if block.settings[summary_id] %}
+          {% assign summary = block.settings[summary_id] %}
+        {% else %}
+          {% capture summary %}
+            {{ 'sections.faq.summary' | t }}
+          {% endcapture %}
+        {% endif %}
+
+        {% if block.settings[content_id] %}
+          {% assign content = block.settings[content_id] %}
+        {% else %}
+          {% capture content %}
+            {{ 'sections.faq.content' | t }}
+          {% endcapture %}
+        {% endif %}
+
+        {%
+          render 'faq-item',
+          block: block,
+          content: content,
+          summary: summary,
+          index: forloop.index0
+        %}
+
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% comment %}Inject @pixelunion/pxs-faq/faq end{% endcomment %}
+
+
+{% schema %}
+{
+  "name": "FAQ",
+  "class": "pxs-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAQ"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "Want to know anything else?"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Answer",
+          "default": "<p>Save yourself the time and trouble of writing the same email over and over again by listing your most commonly asked questions and answers here. A dedicated FAQ section should help address the basic needs of your customers, cutting down on customer service emails, increasing conversions, and creating a more satisfying shopping experience!</p>"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Section heading"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "FAQ",
+      "settings": {
+        "title": "FAQ"
+      },
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Orders"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "When will my order arrive?"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "Can I return an item if I'm dissatisfied?"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "Can I change or cancel my order?"
+          }
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "index",
+      "product",
+      "page"
+    ]
+  }
+}
+
+{% endschema %}
