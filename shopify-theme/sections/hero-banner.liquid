@@ -1,11 +1,11 @@
 <section class="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden">
   <div class="absolute inset-0 z-0">
       {% if section.settings.background_image %}
-        <img src="{{ section.settings.background_image | image_url: width: 1920 }}" alt="{{ section.settings.background_image.alt | escape }}" class="w-full h-full object-cover" />
+        <img src="{{ section.settings.background_image | image_url: width: section.settings.background_image.width }}" alt="{{ section.settings.background_image.alt | escape }}" class="w-full h-full object-cover" />
       {% else %}
         <img src="{{ 'airplane background.jpg' | asset_url }}" alt="Airplane Background" class="w-full h-full object-cover" />
       {% endif %}
-      <div class="absolute inset-0 bg-gradient-to-r from-[#4b209c] via-[#5A2B99]/80 to-[#6E3BB2]/20 backdrop-blur-[2px]"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#4b209c] via-[#5A2B99]/80 to-[#6E3BB2]/20"></div>
   </div>
 
   <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-10 text-white w-full">

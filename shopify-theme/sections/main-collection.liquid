@@ -1,0 +1,59 @@
+<div class="pt-8 pb-20 bg-slate-50 animate-in fade-in duration-500 min-h-screen">
+    <div class="max-w-7xl mx-auto px-6">
+        <nav class="flex items-center gap-2 text-xs font-bold text-slate-400 mb-12">
+            <a href="{{ routes.root_url }}" class="cursor-pointer hover:text-[#2E5BFF]">Início</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <span class="text-[#1A2B6D]">{{ collection.title }}</span>
+        </nav>
+
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-[#1A2B6D] mb-6 tracking-tighter">
+                {{ collection.title }}
+            </h1>
+            <div class="text-slate-500 font-medium text-lg max-w-2xl mx-auto">
+                {{ collection.description }}
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for product in collection.products %}
+                <a href="{{ product.url }}" class="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)] block">
+                    <div class="flex justify-between items-start mb-6">
+                        {% render 'destination-icon', title: product.title %}
+                        {% if product.tags contains 'Mais vendido' or product.tags contains 'Popular' %}
+                            {% assign is_promo = false %}
+                            {% if product.tags contains 'Mais vendido' %}{% assign is_promo = true %}{% endif %}
+                            <div class="px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm {% if is_promo %}bg-[#00D1FF]/10 text-[#00D1FF]{% else %}bg-[#A64DFF]/10 text-[#A64DFF]{% endif %}">
+                                {% if is_promo %}Mais vendido{% else %}Popular{% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{{ product.title }}</h3>
+                        <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">{{ product.price_min | money }}</span></p>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-grow prose-li:flex prose-li:items-start prose-li:gap-3 prose-li:text-slate-600 prose-li:text-sm prose-li:font-medium">
+                        {% if product.description != blank %}
+                            {{ product.description }}
+                        {% else %}
+                            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="text-slate-600 text-sm font-medium">Internet de Alta Velocidade</span></li>
+                        {% endif %}
+                    </ul>
+                    <button class="w-full py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] group-hover:bg-[#1A2B6D] group-hover:text-white transition-all">Ver Detalhes</button>
+                </a>
+            {% endfor %}
+            {% if collection.products.size == 0 %}
+                <div class="col-span-full text-center py-12">
+                    <p class="text-slate-500 font-medium">Nenhum plano encontrado nesta categoria. Acesse o painel Admin para cadastrar os produtos.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Coleção Principal",
+  "settings": []
+}
+{% endschema %}
