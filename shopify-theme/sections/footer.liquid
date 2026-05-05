@@ -10,7 +10,7 @@
           <div class="mb-6 mt-3">
               <a href="{{ routes.root_url }}">
                   {% if section.settings.logo != blank %}
-                      <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-16 md:h-20 w-auto object-contain" />
+                      <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-14 md:h-16 w-auto object-contain" />
                   {% else %}
                       <span class="text-2xl font-black text-white">{{ shop.name }}</span>
                   {% endif %}
