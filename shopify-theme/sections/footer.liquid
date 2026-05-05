@@ -7,10 +7,10 @@
       
       <!-- LOGO E REDES SOCIAIS -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left">
-          <div class="mb-1">
+          <div class="mb-6 mt-3">
               <a href="{{ routes.root_url }}">
                   {% if section.settings.logo != blank %}
-                      <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-12 w-auto object-contain brightness-0 invert" />
+                      <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-16 md:h-20 w-auto object-contain" />
                   {% else %}
                       <span class="text-2xl font-black text-white">{{ shop.name }}</span>
                   {% endif %}

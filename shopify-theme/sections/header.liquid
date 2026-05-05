@@ -23,7 +23,7 @@
           <!-- Logo -->
           <a href="{{ routes.root_url }}" class="flex items-center cursor-pointer">
               {% if section.settings.logo != blank %}
-                  <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-10 md:h-12 w-auto object-contain" />
+                  <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-12 md:h-16 w-auto object-contain" />
               {% else %}
                   <span class="text-2xl font-black text-[#1A2B6D]">{{ shop.name }}</span>
               {% endif %}
