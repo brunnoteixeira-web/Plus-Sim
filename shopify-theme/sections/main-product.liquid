@@ -120,8 +120,25 @@
                         <span class="w-7 h-7 bg-[#1A2B6D] text-white rounded-full flex items-center justify-center text-xs font-black shadow-sm flex-shrink-0">3</span>
                         <h3 class="font-black text-lg uppercase tracking-tight">{{ option2.name | default: 'Duração da Viagem' }}</h3>
                     </div>
-                    <div class="relative max-w-sm">
+                    
+                    <!-- UI do Cadeado (Mostrado via JS para planos com franquia) -->
+                    <div id="duration-locked-ui" class="hidden">
+                        <div class="relative max-w-sm">
+                            <div class="w-full bg-slate-100 border-2 border-slate-200 rounded-2xl py-4 pl-6 pr-6 font-black text-slate-400 cursor-not-allowed flex items-center justify-between shadow-inner">
+                                <span>30 Dias</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-[11px] font-bold text-slate-500 mt-3 flex items-center gap-1.5 ml-1">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                           Plano com Franquia de Dados Válido por até 30 dias
+                        </p>
+                    </div>
+
+                    <!-- UI do Select Normal (Mostrado via JS para plano Ilimitado) -->
+                    <div id="duration-select-ui" class="relative max-w-sm">
                         <select 
+                            id="duration-select-element"
                             name="options[{{ option2.name | escape }}]"
                             class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl py-4 pl-4 pr-12 font-black text-[#1A2B6D] focus:border-[#2E5BFF] focus:bg-white outline-none appearance-none transition-all cursor-pointer shadow-sm variant-select"
                         >
@@ -232,12 +249,38 @@
     const priceDisplay = document.getElementById('product-price');
     const variants = {{ product.variants | json }};
     
+    // Elementos da UI de Duração
+    const durationLockedUI = document.getElementById('duration-locked-ui');
+    const durationSelectUI = document.getElementById('duration-select-ui');
+    const durationSelectElement = document.getElementById('duration-select-element');
+    
     function updateVariant() {
       let selectedOptions = [];
       
       const checkedRadios = document.querySelectorAll('.variant-radio:checked');
-      checkedRadios.forEach(r => selectedOptions.push(r.value));
+      let isFixedPlan = false;
+
+      checkedRadios.forEach(r => {
+        selectedOptions.push(r.value);
+        const val = r.value.toLowerCase();
+        if(val.includes('10gb') || val.includes('20gb') || val.includes('30gb') || val.includes('50gb')) {
+           isFixedPlan = true;
+        }
+      });
       
+      // Toggle dinâmico da UI de duração
+      if(durationLockedUI && durationSelectUI && durationSelectElement) {
+         if(isFixedPlan) {
+            durationSelectUI.classList.add('hidden');
+            durationLockedUI.classList.remove('hidden');
+            // Força o valor para 30 Dias no carrinho
+            durationSelectElement.value = "30 Dias"; 
+         } else {
+            durationLockedUI.classList.add('hidden');
+            durationSelectUI.classList.remove('hidden');
+         }
+      }
+
       selects.forEach(s => selectedOptions.push(s.value));
       
       const matchedVariant = variants.find(variant => {
@@ -253,6 +296,9 @@
     
     radios.forEach(radio => radio.addEventListener('change', updateVariant));
     selects.forEach(select => select.addEventListener('change', updateVariant));
+    
+    // Executa uma vez no load para garantir o estado inicial correto
+    updateVariant();
   });
 </script>
 
