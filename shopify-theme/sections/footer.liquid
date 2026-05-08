@@ -8,7 +8,7 @@
       <!-- LOGO E REDES SOCIAIS -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <div class="mb-6 mt-3">
-              <a href="{{ routes.root_url }}">
+              <a href="{{ routes.root_url }}" class="text-[#1A2B6D]">
                   {% if section.settings.logo != blank %}
                       <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" class="h-14 md:h-16 w-auto object-contain" />
                   {% else %}
