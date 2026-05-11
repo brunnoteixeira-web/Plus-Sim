@@ -31,10 +31,9 @@
 
           <!-- Desktop Menu -->
           <div class="hidden md:flex items-center gap-8 font-bold text-[#1A2B6D]">
-              <a href="/collections/esim" class="hover:text-[#2E5BFF] transition-colors">Planos eSIM</a>
-              <a href="/collections/chip-fisico" class="hover:text-[#2E5BFF] transition-colors">Planos Chip Físico</a>
-              <a href="/pages/compatibilidade" class="hover:text-[#2E5BFF] transition-colors">Compatibilidade eSIM</a>
-              <a href="/blogs/news" class="hover:text-[#2E5BFF] transition-colors">Blog</a>
+              {% for link in linklists[section.settings.menu].links %}
+                  <a href="{{ link.url }}" class="hover:text-[#2E5BFF] transition-colors">{{ link.title }}</a>
+              {% endfor %}
               
               <div class="h-6 w-px bg-slate-200"></div>
               
@@ -54,10 +53,9 @@
 
       <!-- Mobile Menu Dropdown -->
       <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl">
-          <a href="/collections/esim" class="text-left font-bold text-[#1A2B6D]">Planos eSIM</a>
-          <a href="/collections/chip-fisico" class="text-left font-bold text-[#1A2B6D]">Planos Chip Físico</a>
-          <a href="/pages/compatibilidade" class="text-left font-bold text-[#1A2B6D]">Compatibilidade eSIM</a>
-          <a href="/blogs/news" class="font-bold text-[#1A2B6D]">Blog</a>
+          {% for link in linklists[section.settings.menu].links %}
+              <a href="{{ link.url }}" class="text-left font-bold text-[#1A2B6D]">{{ link.title }}</a>
+          {% endfor %}
       </div>
   </nav>
 </div>
@@ -70,6 +68,12 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo Principal"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu do Cabeçalho",
+      "default": "main-menu"
     }
   ]
 }
