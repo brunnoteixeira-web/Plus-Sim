@@ -67,10 +67,18 @@
                 </h1>
                 
                 <div class="flex gap-3 max-w-sm">
+                    {% assign lower_title = product.title | downcase %}
+                    {% if lower_title contains 'físico' or lower_title contains 'fisico' %}
+                    <div class="bg-cyan-50/50 border border-cyan-100 rounded-2xl py-2.5 px-4 flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF]"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><path d="M6 4v4"></path><path d="M10 4v4"></path><path d="M14 4v4"></path><path d="M18 4v4"></path></svg>
+                        <span class="font-black text-sm text-[#00D1FF] leading-none uppercase">Chip Físico</span>
+                    </div>
+                    {% else %}
                     <div class="bg-purple-50/50 border border-purple-100 rounded-2xl py-2.5 px-4 flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#A64DFF]"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="3"></rect><rect x="14" y="7" width="3" height="3"></rect><rect x="7" y="14" width="3" height="3"></rect><rect x="14" y="14" width="3" height="3"></rect></svg>
                         <span class="font-black text-sm text-[#A64DFF] leading-none uppercase">eSIM</span>
                     </div>
+                    {% endif %}
                 </div>
             </div>
 
