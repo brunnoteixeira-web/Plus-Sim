@@ -1,8 +1,165 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "Página Inicial",
   "sections": {
     "hero": {
-      "type": "hero-banner"
+      "type": "hero-banner",
+      "settings": {
+        "background_image": "shopify://shop_images/airplane_background.jpg",
+        "badge_text": "Viaje Conectado",
+        "headline_part1": "Sua internet global",
+        "headline_highlight": "sem fronteiras",
+        "subheading": "Chegue ao seu destino conectado!\nInternet 5G ilimitada nos EUA, Europa, Ásia e + 200 destinos"
+      }
+    },
+    "pricing": {
+      "type": "pricing-tabs",
+      "blocks": {
+        "esim_us": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Estados Unidos",
+            "price": "239",
+            "promo": "",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-estados-unidos-esim"
+          }
+        },
+        "esim_eu": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "União Européia + Reino Unido",
+            "price": "239",
+            "promo": "",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 28 Países, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-uniao-europeia-reino-unido-esim-1"
+          }
+        },
+        "esim_na": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Europa Total",
+            "price": "269",
+            "promo": "",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 42 Países, Inclui Suiça e Turquia",
+            "link": "shopify://products/plano-uniao-europeia-reino-unido-esim"
+          }
+        },
+        "esim_as": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Ásia",
+            "price": "279",
+            "promo": "",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 18 Países, VPN Incluído",
+            "link": "shopify://products/plano-asia-esim"
+          }
+        },
+        "esim_sa": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "América do Sul",
+            "price": "259",
+            "promo": "",
+            "features": "Plano com Internet Ilimitada, Cobertura em 8 Países, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-america-do-sul"
+          }
+        },
+        "esim_mu": {
+          "type": "product_card",
+          "settings": {
+            "category": "esim",
+            "title": "Mundo",
+            "price": "319",
+            "promo": "",
+            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 200+ destinos, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-mundo-esim"
+          }
+        },
+        "phys_us": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Estados Unidos",
+            "price": "249",
+            "promo": "",
+            "features": "Internet Ilimitada, Velocidade 5G/4G, Receba o Chip em casa, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-estados-unidos-chip-fisico"
+          }
+        },
+        "phys_eu": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Europa",
+            "price": "299",
+            "promo": "",
+            "features": "Internet Ilimitada, Cobertura em 42 países, Inclui Suiça e Turquia, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-europa-chip-fisico"
+          }
+        },
+        "phys_as": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Ásia",
+            "price": "279",
+            "promo": "",
+            "features": "Internet Ilimitada, Cobertura em 18 países, VPN Incluído, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-asia-chip-fisico"
+          }
+        },
+        "phys_mu": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "Mundo",
+            "price": "349",
+            "promo": "",
+            "features": "Internet Ilimitada, Cobertura em 147 destinos, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-mundo-chip-fisico"
+          }
+        },
+        "phys_sa": {
+          "type": "product_card",
+          "settings": {
+            "category": "physical",
+            "title": "América do Sul",
+            "price": "259",
+            "promo": "",
+            "features": "Internet Ilimitada, Cobertura em 8 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
+            "link": "shopify://products/plano-america-do-sul-chip-fisico"
+          }
+        }
+      },
+      "block_order": [
+        "esim_us",
+        "esim_eu",
+        "esim_na",
+        "esim_as",
+        "esim_sa",
+        "esim_mu",
+        "phys_us",
+        "phys_eu",
+        "phys_as",
+        "phys_mu",
+        "phys_sa"
+      ],
+      "settings": {
+        "heading": "Escolha o seu Destino"
+      }
     },
     "benefits": {
       "type": "benefits",
@@ -69,124 +226,11 @@
         "benefit_4",
         "benefit_5",
         "benefit_6"
-      ]
-    },
-    "pricing": {
-      "type": "pricing-tabs",
-      "blocks": {
-        "esim_us": {
-          "type": "product_card",
-          "settings": {
-            "category": "esim",
-            "title": "Estados Unidos",
-            "price": "259",
-            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "esim_eu": {
-          "type": "product_card",
-          "settings": {
-            "category": "esim",
-            "title": "Europa",
-            "price": "329",
-            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 28 Países, Mantenha seu número de WhatsApp"
-          }
-        },
-        "esim_as": {
-          "type": "product_card",
-          "settings": {
-            "category": "esim",
-            "title": "Ásia",
-            "price": "289",
-            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "esim_mu": {
-          "type": "product_card",
-          "settings": {
-            "category": "esim",
-            "title": "Mundo",
-            "price": "389",
-            "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 200+ destinos, Ideal para múltiplos países"
-          }
-        },
-        "esim_sa": {
-          "type": "product_card",
-          "settings": {
-            "category": "esim",
-            "title": "América do Sul",
-            "price": "249",
-            "features": "Plano com Internet Ilimitada, Cobertura em 8 Países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "esim_na": {
-          "type": "product_card",
-          "settings": {
-            "category": "esim",
-            "title": "América do Norte",
-            "price": "279",
-            "features": "Plano Controle com 10Gb, Cobertura em 3 Países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "phys_us": {
-          "type": "product_card",
-          "settings": {
-            "category": "physical",
-            "title": "Estados Unidos",
-            "price": "299",
-            "features": "Internet Ilimitada, Velocidade 5G/4G, Receba o Chip em casa, Mantenha seu número de WhatsApp"
-          }
-        },
-        "phys_eu": {
-          "type": "product_card",
-          "settings": {
-            "category": "physical",
-            "title": "Europa",
-            "price": "369",
-            "features": "Internet Ilimitada, Cobertura em 42 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "phys_as": {
-          "type": "product_card",
-          "settings": {
-            "category": "physical",
-            "title": "Ásia",
-            "price": "329",
-            "features": "Internet Ilimitada, Cobertura em 18 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "phys_mu": {
-          "type": "product_card",
-          "settings": {
-            "category": "physical",
-            "title": "Mundo",
-            "price": "429",
-            "features": "Internet Ilimitada, Cobertura em 200+ destinos, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        },
-        "phys_sa": {
-          "type": "product_card",
-          "settings": {
-            "category": "physical",
-            "title": "América do Sul",
-            "price": "279",
-            "features": "Internet Ilimitada, Cobertura em 8 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp"
-          }
-        }
-      },
-      "block_order": [
-        "esim_us",
-        "esim_eu",
-        "esim_as",
-        "esim_mu",
-        "esim_sa",
-        "esim_na",
-        "phys_us",
-        "phys_eu",
-        "phys_as",
-        "phys_mu",
-        "phys_sa"
-      ]
+      ],
+      "settings": {
+        "heading": "Por que escolher a PlusSim?",
+        "subheading": "Não somos apenas um plano de internet. Somos o seu parceiro de viagem!"
+      }
     },
     "reviews": {
       "type": "reviews",
@@ -229,7 +273,11 @@
         "review_2",
         "review_3",
         "review_4"
-      ]
+      ],
+      "settings": {
+        "heading": "O que nossos clientes dizem",
+        "subheading": "Mais de 8 anos conectando brasileiros ao redor do mundo"
+      }
     },
     "faq": {
       "type": "faq",
@@ -316,10 +364,29 @@
         "faq_8",
         "faq_9",
         "faq_10"
-      ]
+      ],
+      "settings": {
+        "heading": "Dúvidas Frequentes",
+        "subheading": "Tudo o que você precisa saber sobre os planos internacionais da Plus Sim",
+        "contact_heading": "Ainda com dúvidas?",
+        "contact_subheading": "Nossa equipe está pronta para te ajudar.",
+        "whatsapp_link": "https://wa.me/13213104764"
+      }
     },
     "about": {
-      "type": "about-us"
+      "type": "about-us",
+      "settings": {
+        "heading": "Sobre nós",
+        "paragraph_1": "Viajar é descobrir o novo; e sabemos que estar conectado traz a segurança necessária para explorar o mundo com liberdade!",
+        "paragraph_2": "A Plus Sim está há mais de 8 anos acompanhando e conectando pessoas ao redor do mundo, em mais de 200 destinos, unindo a melhor cobertura de internet a um suporte que fala a sua língua.",
+        "paragraph_3": "Não entregamos apenas um chip ou um eSIM; entregamos a tranquilidade de saber que desde o primeiro contato e até o fim da sua viagem, a Plus Sim estará ao seu lado.",
+        "stat_1_value": "8+ Anos",
+        "stat_1_label": "Existência",
+        "stat_2_value": "100.000+",
+        "stat_2_label": "Clientes",
+        "stat_3_value": "200+",
+        "stat_3_label": "Destinos"
+      }
     }
   },
   "order": [

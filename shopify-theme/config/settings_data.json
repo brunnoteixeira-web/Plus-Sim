@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/logo.png"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "logo": "shopify://shop_images/logo.png",
+          "facebook_link": "https://facebook.com/plussimtravel",
+          "instagram_link": "https://instagram.com/plussim_travel",
+          "whatsapp_link": "https://wa.me/13213104764",
+          "phone_us": "+1(321)310-4764",
+          "phone_br": "+55(11)4680-6732",
+          "email": "info@plussim.com",
+          "address": "4700 Millenia Blvd, Suite 175\nOrlando/FL - 32839"
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}

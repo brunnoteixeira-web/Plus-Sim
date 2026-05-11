@@ -203,9 +203,29 @@
            </div>
            
            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-3 relative z-10">
+              {% assign has_paises = false %}
+              {% assign paises_array = "" | split: "," %}
+              
               {% if product.metafields.custom.paises_cobertos != blank %}
-                {% assign paises = product.metafields.custom.paises_cobertos.value %}
-                {% for pais in paises %}
+                {% assign has_paises = true %}
+                {% assign paises_array = product.metafields.custom.paises_cobertos.value %}
+              {% endif %}
+              
+              {% if product.metafields.custom.paises_cobertos_texto != blank %}
+                {% assign has_paises = true %}
+                {% assign texto_cru = product.metafields.custom.paises_cobertos_texto.value | replace: '
+', ',' | replace: '\n', ',' %}
+                {% assign texto_array = texto_cru | split: ',' %}
+                {% if paises_array.size > 0 %}
+                   {% assign paises_array = paises_array | concat: texto_array %}
+                {% else %}
+                   {% assign paises_array = texto_array %}
+                {% endif %}
+              {% endif %}
+
+              {% if has_paises %}
+                {% for pais in paises_array %}
+                  {% if pais == blank %}{% continue %}{% endif %}
                   {% assign parts = pais | split: ':' %}
                   {% assign code = parts[0] | downcase | strip %}
                   {% assign name = parts[1] | default: pais | strip %}
