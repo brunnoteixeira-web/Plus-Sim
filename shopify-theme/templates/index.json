@@ -27,6 +27,7 @@
           "settings": {
             "category": "esim",
             "title": "Estados Unidos",
+            "product_ref": "plano-estados-unidos-esim",
             "price": "239",
             "promo": "",
             "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
@@ -38,6 +39,7 @@
           "settings": {
             "category": "esim",
             "title": "União Européia + Reino Unido",
+            "product_ref": "plano-uniao-europeia-reino-unido-esim-1",
             "price": "239",
             "promo": "",
             "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 28 Países, Mantenha seu número de WhatsApp",
@@ -49,6 +51,7 @@
           "settings": {
             "category": "esim",
             "title": "Europa Total",
+            "product_ref": "plano-uniao-europeia-reino-unido-esim",
             "price": "269",
             "promo": "",
             "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 42 Países, Inclui Suiça e Turquia",
@@ -60,6 +63,7 @@
           "settings": {
             "category": "esim",
             "title": "Ásia",
+            "product_ref": "plano-asia-esim",
             "price": "279",
             "promo": "",
             "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 18 Países, VPN Incluído",
@@ -71,6 +75,7 @@
           "settings": {
             "category": "esim",
             "title": "América do Sul",
+            "product_ref": "plano-america-do-sul",
             "price": "259",
             "promo": "",
             "features": "Plano com Internet Ilimitada, Cobertura em 8 Países, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
@@ -82,6 +87,7 @@
           "settings": {
             "category": "esim",
             "title": "Mundo",
+            "product_ref": "plano-mundo-esim",
             "price": "319",
             "promo": "",
             "features": "Plano com Internet Ilimitada, Plano Controle com 10Gb ou 20Gb, Cobertura em 200+ destinos, Mantenha seu número de WhatsApp",
@@ -93,6 +99,7 @@
           "settings": {
             "category": "physical",
             "title": "Estados Unidos",
+            "product_ref": "plano-estados-unidos-chip-fisico",
             "price": "249",
             "promo": "",
             "features": "Internet Ilimitada, Velocidade 5G/4G, Receba o Chip em casa, Mantenha seu número de WhatsApp",
@@ -104,6 +111,7 @@
           "settings": {
             "category": "physical",
             "title": "Europa",
+            "product_ref": "plano-europa-chip-fisico",
             "price": "299",
             "promo": "",
             "features": "Internet Ilimitada, Cobertura em 42 países, Inclui Suiça e Turquia, Mantenha seu número de WhatsApp",
@@ -115,6 +123,7 @@
           "settings": {
             "category": "physical",
             "title": "Ásia",
+            "product_ref": "plano-asia-chip-fisico",
             "price": "279",
             "promo": "",
             "features": "Internet Ilimitada, Cobertura em 18 países, VPN Incluído, Mantenha seu número de WhatsApp",
@@ -126,6 +135,7 @@
           "settings": {
             "category": "physical",
             "title": "Mundo",
+            "product_ref": "plano-mundo-chip-fisico",
             "price": "349",
             "promo": "",
             "features": "Internet Ilimitada, Cobertura em 147 destinos, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
@@ -137,6 +147,7 @@
           "settings": {
             "category": "physical",
             "title": "América do Sul",
+            "product_ref": "plano-america-do-sul-chip-fisico",
             "price": "259",
             "promo": "",
             "features": "Internet Ilimitada, Cobertura em 8 países, Velocidade 5G/4G, Mantenha seu número de WhatsApp",
