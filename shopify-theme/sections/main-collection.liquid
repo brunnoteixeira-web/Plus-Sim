@@ -19,7 +19,17 @@
             {% for product in collection.products %}
                 <a href="{{ product.url }}" class="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)] block">
                     <div class="flex justify-between items-start mb-6">
-                        {% render 'destination-icon', title: product.title %}
+                        {% assign card_title = product.metafields.custom.titulo_card.value | default: product.metafields.custom.titulo_card | default: product.title %}
+                        {% assign lower_title = product.title | downcase %}
+                        {% if lower_title contains 'físico' or lower_title contains 'fisico' %}
+                            <div class="w-12 h-12 rounded-2xl bg-[#00D1FF]/10 text-[#00D1FF] flex items-center justify-center">
+                                {% render 'destination-icon', title: card_title %}
+                            </div>
+                        {% else %}
+                            <div class="w-12 h-12 rounded-2xl bg-[#F3E8FF] text-[#A64DFF] flex items-center justify-center">
+                                {% render 'destination-icon', title: card_title %}
+                            </div>
+                        {% endif %}
                         {% if product.tags contains 'Mais vendido' or product.tags contains 'Popular' %}
                             {% assign is_promo = false %}
                             {% if product.tags contains 'Mais vendido' %}{% assign is_promo = true %}{% endif %}
@@ -29,17 +39,36 @@
                         {% endif %}
                     </div>
                     <div class="mb-6">
-                        <h3 class="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{{ product.title }}</h3>
+                        <h3 class="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{{ card_title }}</h3>
                         <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">{{ product.price_min | money }}</span></p>
                     </div>
-                    <ul class="space-y-4 mb-10 flex-grow prose-li:flex prose-li:items-start prose-li:gap-3 prose-li:text-slate-600 prose-li:text-sm prose-li:font-medium">
-                        {% if product.description != blank %}
-                            {{ product.description }}
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        {% if product.metafields.custom.beneficios_card != blank %}
+                            {% assign features_raw = product.metafields.custom.beneficios_card.value | default: product.metafields.custom.beneficios_card %}
+                            {% assign features_text = features_raw | replace: '<br>', '
+' %}
+                            {% assign features = features_text | split: '
+' %}
+                            {% for feature in features %}
+                                {% assign feature_clean = feature | strip %}
+                                {% if feature_clean != blank %}
+                                <li class="flex items-start gap-3">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span class="text-slate-600 text-sm font-medium">{{ feature_clean }}</span>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
                         {% else %}
-                            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="text-slate-600 text-sm font-medium">Internet de Alta Velocidade</span></li>
+                            {% if product.description != blank %}
+                                <div class="prose-li:flex prose-li:items-start prose-li:gap-3 prose-li:text-slate-600 prose-li:text-sm prose-li:font-medium">
+                                    {{ product.description }}
+                                </div>
+                            {% else %}
+                                <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="text-slate-600 text-sm font-medium">Internet de Alta Velocidade</span></li>
+                            {% endif %}
                         {% endif %}
                     </ul>
-                    <button class="w-full py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] group-hover:bg-[#1A2B6D] group-hover:text-white transition-all">Ver Detalhes</button>
+                    <div class="w-full text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] group-hover:bg-[#1A2B6D] group-hover:text-white transition-all">Ver Detalhes</div>
                 </a>
             {% endfor %}
             {% if collection.products.size == 0 %}

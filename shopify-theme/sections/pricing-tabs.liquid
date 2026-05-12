@@ -29,18 +29,34 @@
                   </div>
                   <div class="mb-6">
                       <h3 class="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{{ block.settings.title }}</h3>
-                      <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">R${{ block.settings.price }}</span></p>
+                      {% if block.settings.product_ref != blank %}
+                          <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">{{ block.settings.product_ref.price_min | money }}</span></p>
+                      {% else %}
+                          <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">R${{ block.settings.price }}</span></p>
+                      {% endif %}
                   </div>
                   <ul class="space-y-4 mb-10 flex-grow">
-                      {% assign features = block.settings.features | split: "," %}
+                      {% if block.settings.product_ref != blank and block.settings.product_ref.metafields.custom.beneficios_card != blank %}
+                          {% assign features_raw = block.settings.product_ref.metafields.custom.beneficios_card.value | default: block.settings.product_ref.metafields.custom.beneficios_card %}
+                          {% assign features_text = features_raw | replace: '<br>', '
+' %}
+                          {% assign features = features_text | split: '
+' %}
+                      {% else %}
+                          {% assign features = block.settings.features | split: "," %}
+                      {% endif %}
+
                       {% for feature in features %}
+                          {% assign feature_clean = feature | strip %}
+                          {% if feature_clean != blank %}
                           <li class="flex items-start gap-3">
                               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
                               <span class="text-slate-600 text-sm font-medium">{{ feature | strip }}</span>
                           </li>
+                          {% endif %}
                       {% endfor %}
                   </ul>
-                  <a href="{{ block.settings.link }}" class="w-full block text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</a>
+                  <a href="{{ block.settings.product_ref.url | default: block.settings.link }}" class="w-full block text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</a>
               </div>
               {% endif %}
           {% endfor %}
@@ -61,18 +77,34 @@
                   </div>
                   <div class="mb-6">
                       <h3 class="text-2xl font-black text-[#1A2B6D] mb-2 leading-tight">{{ block.settings.title }}</h3>
-                      <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">R${{ block.settings.price }}</span></p>
+                      {% if block.settings.product_ref != blank %}
+                          <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">{{ block.settings.product_ref.price_min | money }}</span></p>
+                      {% else %}
+                          <p class="text-slate-500 font-medium flex items-baseline gap-1">a partir de <span class="text-[#1A2B6D] font-black text-xl">R${{ block.settings.price }}</span></p>
+                      {% endif %}
                   </div>
                   <ul class="space-y-4 mb-10 flex-grow">
-                      {% assign features = block.settings.features | split: "," %}
+                      {% if block.settings.product_ref != blank and block.settings.product_ref.metafields.custom.beneficios_card != blank %}
+                          {% assign features_raw = block.settings.product_ref.metafields.custom.beneficios_card.value | default: block.settings.product_ref.metafields.custom.beneficios_card %}
+                          {% assign features_text = features_raw | replace: '<br>', '
+' %}
+                          {% assign features = features_text | split: '
+' %}
+                      {% else %}
+                          {% assign features = block.settings.features | split: "," %}
+                      {% endif %}
+
                       {% for feature in features %}
+                          {% assign feature_clean = feature | strip %}
+                          {% if feature_clean != blank %}
                           <li class="flex items-start gap-3">
                               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#00D1FF] flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
                               <span class="text-slate-600 text-sm font-medium">{{ feature | strip }}</span>
                           </li>
+                          {% endif %}
                       {% endfor %}
                   </ul>
-                  <a href="{{ block.settings.link }}" class="w-full block text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</a>
+                  <a href="{{ block.settings.product_ref.url | default: block.settings.link }}" class="w-full block text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</a>
               </div>
               {% endif %}
           {% endfor %}
@@ -139,6 +171,11 @@
           "id": "title",
           "label": "Destino (Ex: Estados Unidos)",
           "default": "Estados Unidos"
+        },
+        {
+          "type": "product",
+          "id": "product_ref",
+          "label": "Produto Vinculado (Sincroniza Preço e Benefícios automaticamente)"
         },
         {
           "type": "text",
