@@ -129,7 +129,8 @@
                           id="activation-date-input"
                           name="properties[Data de Ativação]"
                           required
-                          class="w-full h-12 bg-slate-50 border-2 border-slate-100 rounded-2xl py-0 pl-12 pr-4 font-bold text-[#1A2B6D] focus:border-[#2E5BFF] focus:bg-white outline-none transition-all text-sm md:text-base cursor-pointer"
+                          min="{{ 'now' | date: '%Y-%m-%d' }}"
+                          class="w-full h-12 bg-slate-50 border-2 border-slate-100 rounded-2xl py-0 pl-12 pr-4 font-black text-[#1A2B6D] focus:border-[#2E5BFF] focus:bg-white outline-none appearance-none transition-all cursor-pointer shadow-sm text-sm md:text-base"
                       />
                   </div>
               </div>
