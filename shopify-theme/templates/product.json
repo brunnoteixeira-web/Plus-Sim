@@ -13,7 +13,8 @@
       "type": "main-product",
       "settings": {
         "show_top_choice": false,
-        "top_choice_text": "Top Choice em 2026"
+        "top_choice_text": "Top Choice em 2026",
+        "compatibility_page": "compatibilidade-esim"
       }
     }
   },
