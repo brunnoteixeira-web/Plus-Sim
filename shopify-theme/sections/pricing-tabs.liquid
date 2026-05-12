@@ -18,7 +18,7 @@
       <div id="grid-esim" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {% for block in section.blocks %}
               {% if block.settings.category == 'esim' %}
-              <div class="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)]">
+              <a href="{{ block.settings.product_ref.url | default: block.settings.link }}" class="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)] block">
                   <div class="flex justify-between items-start mb-6">
                       <div class="w-12 h-12 rounded-2xl bg-[#F3E8FF] text-[#A64DFF] flex items-center justify-center">
                           {% render 'destination-icon', title: block.settings.title %}
@@ -56,8 +56,8 @@
                           {% endif %}
                       {% endfor %}
                   </ul>
-                  <a href="{{ block.settings.product_ref.url | default: block.settings.link }}" class="w-full block text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</a>
-              </div>
+                  <div class="w-full text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] group-hover:bg-[#1A2B6D] group-hover:text-white transition-all">Ver Detalhes</div>
+              </a>
               {% endif %}
           {% endfor %}
       </div>
@@ -66,7 +66,7 @@
       <div id="grid-physical" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
           {% for block in section.blocks %}
               {% if block.settings.category == 'physical' %}
-              <div class="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)]">
+              <a href="{{ block.settings.product_ref.url | default: block.settings.link }}" class="group bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 relative flex flex-col cursor-pointer border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)] block">
                   <div class="flex justify-between items-start mb-6">
                       <div class="w-12 h-12 rounded-2xl bg-[#00D1FF]/10 text-[#00D1FF] flex items-center justify-center">
                           {% render 'destination-icon', title: block.settings.title %}
@@ -104,8 +104,8 @@
                           {% endif %}
                       {% endfor %}
                   </ul>
-                  <a href="{{ block.settings.product_ref.url | default: block.settings.link }}" class="w-full block text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] hover:bg-[#1A2B6D] hover:text-white transition-all">Ver Detalhes</a>
-              </div>
+                  <div class="w-full text-center py-4 rounded-xl font-black text-xs uppercase border-2 border-[#1A2B6D] text-[#1A2B6D] group-hover:bg-[#1A2B6D] group-hover:text-white transition-all">Ver Detalhes</div>
+              </a>
               {% endif %}
           {% endfor %}
       </div>
