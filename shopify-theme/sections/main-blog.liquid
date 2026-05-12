@@ -1,0 +1,137 @@
+{% paginate blog.articles by section.settings.articles_per_page %}
+
+<div class="min-h-screen bg-[#F8FAFC] pb-24 pt-12 animate-in fade-in duration-500">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Hero do Blog -->
+    <div class="mb-16 text-center">
+      <h1 class="text-4xl md:text-6xl font-black text-[#1A2B6D] tracking-tighter mb-4">{{ blog.title }}</h1>
+      {% if section.settings.subtitle != blank %}
+        <p class="text-slate-500 font-medium text-lg md:text-xl max-w-2xl mx-auto">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    {% if blog.articles_count > 0 %}
+      <!-- Grid de Artigos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for article in blog.articles %}
+          <a href="{{ article.url }}" class="group bg-white rounded-[32px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)] transition-all duration-500 hover:-translate-y-2 flex flex-col overflow-hidden">
+            
+            <!-- Imagem de Capa -->
+            <div class="w-full h-56 md:h-64 bg-slate-100 relative overflow-hidden">
+              {% if article.image %}
+                <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center bg-blue-50 text-[#2E5BFF]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                </div>
+              {% endif %}
+              
+              <!-- Tags Flutuantes -->
+              {% if article.tags.size > 0 %}
+                <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+                  {% for tag in article.tags limit: 2 %}
+                    <span class="bg-white/90 backdrop-blur-sm text-[#1A2B6D] text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="p-8 flex flex-col flex-grow">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-400 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                {{ article.published_at | date: "%d/%m/%Y" }}
+              </div>
+              
+              <h3 class="text-xl font-black text-[#1A2B6D] group-hover:text-[#2E5BFF] transition-colors leading-snug mb-3">
+                {{ article.title }}
+              </h3>
+              
+              <p class="text-slate-500 font-medium text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html }}
+                {% else %}
+                  {{ article.content | strip_html | truncatewords: 25 }}
+                {% endif %}
+              </p>
+
+              <div class="flex items-center gap-2 text-[#2E5BFF] font-black text-xs uppercase tracking-widest mt-auto group-hover:gap-3 transition-all">
+                Ler Artigo 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
+            </div>
+            
+          </a>
+        {% endfor %}
+      </div>
+
+      <!-- Paginação -->
+      {% if paginate.pages > 1 %}
+        <div class="mt-16 flex justify-center">
+          <div class="flex bg-white rounded-full p-2 border border-slate-100 shadow-sm gap-2">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" class="w-10 h-10 flex items-center justify-center rounded-full text-slate-400 hover:bg-[#F8FAFC] hover:text-[#1A2B6D] transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </a>
+            {% endif %}
+
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}" class="w-10 h-10 flex items-center justify-center rounded-full font-bold text-slate-500 hover:bg-[#F8FAFC] hover:text-[#1A2B6D] transition-colors">{{ part.title }}</a>
+              {% else %}
+                {% if part.title == paginate.current_page %}
+                  <span class="w-10 h-10 flex items-center justify-center rounded-full font-black bg-[#1A2B6D] text-white shadow-md">{{ part.title }}</span>
+                {% else %}
+                  <span class="w-10 h-10 flex items-center justify-center rounded-full font-bold text-slate-300">{{ part.title }}</span>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="w-10 h-10 flex items-center justify-center rounded-full text-slate-400 hover:bg-[#F8FAFC] hover:text-[#1A2B6D] transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- Sem artigos -->
+      <div class="text-center py-20 bg-white rounded-[40px] shadow-sm border border-slate-100">
+        <div class="w-20 h-20 bg-blue-50 text-[#2E5BFF] rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <h2 class="text-2xl font-black text-[#1A2B6D] mb-3">Nenhum artigo publicado ainda</h2>
+        <p class="text-slate-500 font-medium">Em breve teremos muito conteúdo incrível por aqui.</p>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Página Principal do Blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo do Blog",
+      "default": "Dicas, guias e novidades para sua próxima viagem internacional."
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 12,
+      "label": "Artigos por página"
+    }
+  ]
+}
+{% endschema %}
