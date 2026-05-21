@@ -1,12 +1,8 @@
 <div class="pt-8 pb-20 bg-slate-50 animate-in fade-in duration-500 min-h-screen">
     <div class="max-w-7xl mx-auto px-6">
-        <nav class="flex items-center gap-2 text-xs font-bold text-slate-400 mb-12">
-            <a href="{{ routes.root_url }}" class="cursor-pointer hover:text-[#2E5BFF]">Início</a>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            <span class="text-[#1A2B6D]">{{ collection.title }}</span>
-        </nav>
-
-        <div class="text-center mb-16">
+        {% render 'breadcrumbs' %}
+        
+        <div class="mb-16 text-center mt-4">
             <h1 class="text-4xl md:text-6xl font-black text-[#1A2B6D] mb-6 tracking-tighter">
                 {{ collection.title }}
             </h1>

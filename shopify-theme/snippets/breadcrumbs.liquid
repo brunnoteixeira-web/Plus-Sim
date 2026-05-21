@@ -1,0 +1,39 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+<nav class="breadcrumb text-sm text-slate-500 mb-8 pt-4 flex flex-wrap items-center gap-2" aria-label="breadcrumbs">
+  <a href="/" title="Home" class="hover:text-[#2E5BFF] transition-colors flex items-center gap-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    Início
+  </a>
+  
+  {% if template contains 'product' %}
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    {% if collection.url %}
+      <a href="{{ collection.url }}" class="hover:text-[#2E5BFF] transition-colors">{{ collection.title }}</a>
+      <span aria-hidden="true" class="text-slate-300">/</span>
+    {% endif %}
+    <span class="text-slate-800 font-bold">{{ product.title }}</span>
+    
+  {% elsif template contains 'collection' and collection.handle %}
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    <span class="text-slate-800 font-bold">{{ collection.title }}</span>
+    
+  {% elsif template == 'blog' %}
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    <span class="text-slate-800 font-bold">{{ blog.title }}</span>
+    
+  {% elsif template == 'article' %}
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    <a href="{{ blog.url }}" class="hover:text-[#2E5BFF] transition-colors">{{ blog.title }}</a>
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    <span class="text-slate-800 font-bold">{{ article.title }}</span>
+    
+  {% elsif template contains 'page' %}
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    <span class="text-slate-800 font-bold">{{ page.title }}</span>
+    
+  {% else %}
+    <span aria-hidden="true" class="text-slate-300">/</span>
+    <span class="text-slate-800 font-bold">{{ page_title }}</span>
+  {% endif %}
+</nav>
+{% endunless %}

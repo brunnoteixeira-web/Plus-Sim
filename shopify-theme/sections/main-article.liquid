@@ -6,8 +6,11 @@
     
     <div class="max-w-6xl mx-auto px-6 relative z-10 text-center">
       <!-- Tags -->
+      <div class="text-left w-full">
+        {% render 'breadcrumbs' %}
+      </div>
       {% if article.tags.size > 0 %}
-        <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-6 mt-4">
           {% for tag in article.tags %}
             <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="bg-blue-50 text-[#2E5BFF] hover:bg-[#2E5BFF] hover:text-white transition-colors text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-sm">{{ tag }}</a>
           {% endfor %}
