@@ -18,7 +18,7 @@
           <a href="{{ article.url }}" class="group bg-white rounded-[32px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(46,91,255,0.12)] transition-all duration-500 hover:-translate-y-2 flex flex-col overflow-hidden">
             
             <!-- Imagem de Capa -->
-            <div class="w-full h-56 md:h-64 bg-slate-100 relative overflow-hidden">
+            <div class="w-full aspect-square bg-slate-100 relative overflow-hidden">
               {% if article.image %}
                 <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
               {% else %}
