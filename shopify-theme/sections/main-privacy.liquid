@@ -1,10 +1,6 @@
 <div class="pt-8 pb-20 bg-white animate-in fade-in duration-500">
   <div class="max-w-4xl mx-auto px-6">
-      <nav class="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8">
-          <a href="{{ routes.root_url }}" class="cursor-pointer hover:text-[#2E5BFF]">Início</a>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          <span class="text-[#1A2B6D]">{{ page.title | default: 'Política de Privacidade' }}</span>
-      </nav>
+      {% render 'breadcrumbs' %}
       <div class="bg-white rounded-[32px] p-8 md:p-12 border border-slate-100 shadow-xl prose prose-slate max-w-none prose-headings:text-[#1A2B6D] prose-headings:font-black prose-p:font-medium prose-p:text-slate-500 prose-p:leading-relaxed prose-li:font-medium prose-li:text-slate-500">
           <h1 class="text-3xl md:text-5xl font-black text-[#1A2B6D] mb-8 tracking-tighter border-b border-slate-100 pb-8 text-center">{{ page.title | default: 'Política de Privacidade' }}</h1>
           
