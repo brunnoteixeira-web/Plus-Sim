@@ -6,5 +6,16 @@
     "theme_version": "1.0.0",
     "theme_support_url": "https://plussim.com",
     "theme_documentation_url": "https://plussim.com/docs"
+  },
+  {
+    "name": "Identidade Visual",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Recomendado: Imagem quadrada (ex: 32x32px)"
+      }
+    ]
   }
 ]
