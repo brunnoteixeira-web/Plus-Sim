@@ -293,92 +293,148 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "faq_1": {
+        "faq_block_0": {
+          "type": "faq",
+          "settings": {
+            "question": "Qual a diferença entre o chip físico e o eSIM?",
+            "answer": "O chip físico é um cartão SIM tradicional que você insere no aparelho. Já o eSIM é um chip virtual, ativado por QR Code, sem a necessidade de inserir nenhum item físico no celular."
+          }
+        },
+        "faq_block_1": {
           "type": "faq",
           "settings": {
             "question": "Meu celular é compatível com eSIM?",
-            "answer": "A maioria dos smartphones fabricados após 2019 possuem suporte a eSIM. Consulte a nossa lista de compatibilidade no menu superior ou digite *#06# no teclado de discagem do seu aparelho; se aparecer um número 'EID', ele é compatível."
+            "answer": "Para saber se seu celular é compatível com eSIM, basta digitar *#06# na tela em que você faz ligações (como se fosse ligar para alguém). Algumas informações vão aparecer na tela. Caso tenha o código EID, seu celular é compatível com eSIM. \n\nEm caso de dúvidas, entre em contato conosco que auxiliamos na verificação."
           }
         },
-        "faq_2": {
+        "faq_block_2": {
           "type": "faq",
           "settings": {
-            "question": "Como funciona a internet ilimitada?",
-            "answer": "Nossos planos ilimitados garantem conexão ininterrupta. Caso haja um consumo excessivo em um curto período, a operadora local poderá aplicar uma política de uso justo (Fair Usage Policy - FUP), reduzindo a velocidade temporariamente para 3G/2G, mas você nunca ficará sem conexão."
+            "question": "Em quais países a internet funciona?",
+            "answer": "Nossos chips internacionais funcionam em mais de 200 destinos. Você pode verificar a lista completa de destinos na página de cada produto."
           }
         },
-        "faq_3": {
+        "faq_block_3": {
           "type": "faq",
           "settings": {
-            "question": "Posso manter meu número de WhatsApp brasileiro?",
-            "answer": "Sim! A troca de chip (físico ou virtual) afeta apenas o número de chamadas e a conexão de dados do aparelho. O seu WhatsApp continuará funcionando normalmente com o seu número brasileiro sem precisar reconfigurar."
+            "question": "Qual a velocidade da internet?",
+            "answer": "A velocidade varia conforme o país e a rede local, podendo atingir 5G ou 4G. Garantimos conexão rápida e estável com operadoras locais confiáveis."
           }
         },
-        "faq_4": {
+        "faq_block_4": {
           "type": "faq",
           "settings": {
-            "question": "Como e quando receberei meu eSIM?",
-            "answer": "O eSIM é entregue 100% de forma digital através do WhatsApp e E-mail fornecidos no momento da compra. A entrega do QR Code de ativação costuma ocorrer em no máximo 2 horas após a aprovação do pagamento dentro do horário comercial."
+            "question": "Como ativar o chip quando chegar ao destino?",
+            "answer": "Chips físicos: Insira o chip no celular ao chegar ao destino e ative o roaming de dados.\neSIMs: escaneie o QR Code antes da viagem para configurar o plano em seu celular. Ative a linha e o roaming de dados assim que chegar ao destino. Instruções detalhadas são enviadas por Whatsapp até um dia antes da viagem."
           }
         },
-        "faq_5": {
+        "faq_block_5": {
           "type": "faq",
           "settings": {
-            "question": "Posso compartilhar internet (Roteador/Hotspot)?",
-            "answer": "O compartilhamento de internet (tethering/hotspot) depende do plano escolhido e da região. Na maioria dos planos da América do Norte o compartilhamento é liberado, porém nos planos Europa e Mundo existem restrições de operadoras. Consulte nosso suporte."
+            "question": "Posso compartilhar internet com outros dispositivos?",
+            "answer": "Sim! Nosos planos permitem o compartilhamento de internet."
           }
         },
-        "faq_6": {
+        "faq_block_6": {
           "type": "faq",
           "settings": {
-            "question": "Quando a validade do plano começa a contar?",
-            "answer": "O seu plano só começará a contar os dias de validade no momento em que ele se conectar às redes de celular do país de destino."
+            "question": "Posso comprar o eSIM mesmo estando fora do Brasil?",
+            "answer": "Sim! Você pode adquirir o eSIM estando em qualquer lugar do mundo!"
           }
         },
-        "faq_7": {
+        "faq_block_7": {
           "type": "faq",
           "settings": {
-            "question": "Tenho dificuldades técnicas na viagem. O que faço?",
-            "answer": "Basta nos chamar no WhatsApp! A Plus Sim é conhecida justamente pelo suporte super rápido e em português. Nossa equipe te auxiliará a reconfigurar a rede do seu aparelho em poucos minutos."
+            "question": "Em quanto tempo recebo o chip ou o eSIM após a compra?",
+            "answer": "O prazo de entrega varia conforme sua localidade. \n\nChips físicos são entregues em até 7 dias úteis gratuitamente. Caso precise de uma entrega mais rápida, o envio pode ser feito por SEDEX.\n\n O eSIM é enviado por Whatsapp até 2 horas após a compra."
           }
         },
-        "faq_8": {
+        "faq_block_8": {
           "type": "faq",
           "settings": {
-            "question": "Como ativo meu eSIM?",
-            "answer": "Enviaremos um passo a passo completo junto com seu QR Code. Em resumo: nas configurações do seu celular, você buscará a opção 'Adicionar eSIM' ou 'Adicionar Plano Celular' e escaneará o código enviado."
+            "question": "O chip funciona assim que eu aterrissar no país de destino?",
+            "answer": "Sim! Basta inserir o chip ou ativar o eSIM e habilitar o roaming de dados. A conexão será estabelecida automaticamente."
           }
         },
-        "faq_9": {
+        "faq_block_9": {
           "type": "faq",
           "settings": {
-            "question": "O eSIM expira se eu demorar para ativá-lo?",
-            "answer": "Os QR Codes possuem validade, por isso programamos o envio sempre para uma data próxima da sua viagem, garantindo a integridade da ativação."
+            "question": "O chip funciona em cruzeiros ou apenas em terra firme?",
+            "answer": "Os chips funcionam em terra firme, conectados às redes móveis locais. Durante a navegação do cruzeiro, em alto mar, não há conexão por não haver infraestrutura de operadoras de telefonia. Em navegação, apenas a rede WIFI do navio, que é por satélite, funciona."
           }
         },
-        "faq_10": {
+        "faq_block_10": {
           "type": "faq",
           "settings": {
-            "question": "E se meu celular não for compatível?",
-            "answer": "Oferecemos os planos de Chip Físico tradicional com a mesma qualidade de conexão para os aparelhos que não suportam a tecnologia eSIM."
+            "question": "Posso manter meu número brasileiro no Whatsapp enquanto uso o chip internacional?",
+            "answer": "Sim, seu número de Whatsapp não muda. Você Consegue utilizar o WhatsApp normalmente para mensagens, ligações e chamadas de vídeos."
+          }
+        },
+        "faq_block_11": {
+          "type": "faq",
+          "settings": {
+            "question": "É possível transferir o plano do Chip Físico para eSIM caso eu troque de celular na viagem?",
+            "answer": "Não é possível. Caso você tenha a intenção de trocar de celular durante a viagem, recomendamos que verifique a compatibilidade para chip físico e eSIM do novo celular, e adquira o plano diretamente para o celular novo."
+          }
+        },
+        "faq_block_12": {
+          "type": "faq",
+          "settings": {
+            "question": "É possível transferir o eSIM de um celular para o outro?",
+            "answer": "Não é possível. Uma vez que o eSIM é instalado em um celular, não há como transferir para um novo aparelho."
+          }
+        },
+        "faq_block_13": {
+          "type": "faq",
+          "settings": {
+            "question": "O que faço se meu chip não funcionar?",
+            "answer": "Entre em contato com nosso suporte por Whatsapp imediatamente: +1(321)310-4764. \n\nEstamos disponíveis 24h para te ajudar com qualquer dúvida ou problema técnico."
+          }
+        },
+        "faq_block_14": {
+          "type": "faq",
+          "settings": {
+            "question": "Como entro em contato com o suporte?",
+            "answer": "Você pode nos contatar via WhatsApp, através do número: +1(321)310-4764"
+          }
+        },
+        "faq_block_15": {
+          "type": "faq",
+          "settings": {
+            "question": "Quais formas de pagamento são aceitas?",
+            "answer": "Aceitamos cartões de débito e crédito e PIX."
+          }
+        },
+        "faq_block_16": {
+          "type": "faq",
+          "settings": {
+            "question": "Posso parcelar minha compra?",
+            "answer": "Sim, compras com cartão de crédito podem ser parceladas em até 12x. O parcelamento possui juros, que podem ser visualizados no momento da compra."
           }
         }
       },
       "block_order": [
-        "faq_1",
-        "faq_2",
-        "faq_3",
-        "faq_4",
-        "faq_5",
-        "faq_6",
-        "faq_7",
-        "faq_8",
-        "faq_9",
-        "faq_10"
+        "faq_block_0",
+        "faq_block_1",
+        "faq_block_2",
+        "faq_block_3",
+        "faq_block_4",
+        "faq_block_5",
+        "faq_block_6",
+        "faq_block_7",
+        "faq_block_8",
+        "faq_block_9",
+        "faq_block_10",
+        "faq_block_11",
+        "faq_block_12",
+        "faq_block_13",
+        "faq_block_14",
+        "faq_block_15",
+        "faq_block_16"
       ],
       "settings": {
         "heading": "Dúvidas Frequentes",
-        "subheading": "Tudo o que você precisa saber sobre os planos internacionais da Plus Sim",
+        "subheading": "Tudo o que você precisa saber sobre os nossos Chips e eSIMS internacionais",
         "contact_heading": "Ainda com dúvidas?",
         "contact_subheading": "Nossa equipe está pronta para te ajudar.",
         "whatsapp_link": "https://wa.me/13213104764"

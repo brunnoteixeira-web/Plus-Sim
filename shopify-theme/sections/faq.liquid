@@ -7,7 +7,7 @@
       
       <div class="grid gap-3 text-left" id="faq-container">
           {% for block in section.blocks %}
-              <div class="faq-item bg-white p-5 rounded-2xl border border-[#E0D4FF] hover:border-[#A64DFF] transition-all cursor-pointer shadow-sm group {% if forloop.index > 8 %}hidden{% endif %}" data-index="{{ forloop.index }}">
+              <div class="faq-item bg-white p-5 rounded-2xl border border-[#E0D4FF] hover:border-[#A64DFF] transition-all cursor-pointer shadow-sm group {% if forloop.index > 10 %}hidden{% endif %}" data-index="{{ forloop.index }}">
                   <div class="faq-question flex justify-between items-center">
                       <span class="font-bold text-[#1A2B6D] text-base md:text-lg leading-tight">{{ block.settings.question }}</span>
                       <div class="faq-icon w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center transition-all bg-[#F3E8FF] text-[#A64DFF] group-hover:bg-[#A64DFF] group-hover:text-white">
@@ -21,7 +21,7 @@
           {% endfor %}
       </div>
       
-      {% if section.blocks.size > 8 %}
+      {% if section.blocks.size > 10 %}
       <div class="mt-8 text-center">
           <button id="faq-toggle-btn" class="px-8 py-3.5 bg-slate-100 hover:bg-slate-200 text-[#1A2B6D] font-black rounded-xl transition-all uppercase tracking-wider text-sm border border-slate-200">
               Ver Mais
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleBtn.addEventListener('click', () => {
           showingAll = !showingAll;
           faqItems.forEach((item, index) => {
-              if (index >= 8) {
+              if (index >= 10) {
                   if (showingAll) {
                       item.classList.remove('hidden');
                   } else {
