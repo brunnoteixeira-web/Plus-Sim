@@ -16,7 +16,7 @@
            <h4 class="font-black text-base uppercase tracking-widest border-b border-slate-50 pb-4">Detalhes do Plano</h4>
            
            {% if product.description != blank %}
-             <div class="space-y-3 mb-6 prose-p:text-base prose-p:font-medium prose-p:text-slate-600 prose-ul:space-y-3 prose-li:flex prose-li:items-center prose-li:gap-3 prose-li:text-base prose-li:font-medium prose-li:text-slate-600">
+             <div class="product-desc-custom">
                {{ product.description }}
              </div>
            {% else %}
