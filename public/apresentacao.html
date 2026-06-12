@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Apresentação B2B - Plus Sim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --primary: #1A2B6D;
+      --accent: #A64DFF;
+      --secondary: #8B5CF6;
+      --light: #F3E8FF;
+    }
+
+    body {
+      background-image: url('Fundo claro.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .reveal {
+      font-family: 'Rokkitt', Georgia, serif;
+      color: var(--primary);
+    }
+    
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+      font-family: 'Rokkitt', Georgia, serif;
+      color: var(--primary);
+      text-transform: none;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* Garantir que o fundo do body apareça nos slides sem background definido */
+    .reveal {
+      background-color: transparent !important;
+    }
+
+    /* Utilitários */
+    .text-primary { color: var(--primary); }
+    .text-accent { color: var(--accent); }
+    .text-white { color: #ffffff !important; }
+    
+    .logo-header {
+      width: 180px;
+      margin-bottom: 2rem !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Capa */
+    .cover-slide h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+    .cover-slide h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #00D1FF;
+    }
+
+    /* Padrão para slides normais */
+    .slide-title {
+      font-size: 2.5rem !important;
+      font-weight: 900 !important;
+      border-bottom: 4px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 20px !important;
+    }
+
+    /* Layout dos Destinos (Novo Formato Panorâmico) */
+    .destination-section {
+      height: 100%;
+      padding-bottom: 200px; /* espaço para a imagem crop no fundo */
+    }
+    
+    .price-cards-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .price-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-top: 6px solid var(--accent);
+      min-width: 300px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+    }
+    .price-card h4 {
+      font-size: 1.3rem;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    .price-row.unlimited {
+      background: var(--light);
+      padding: 15px;
+      border-radius: 10px;
+      border-bottom: none;
+      color: var(--primary);
+      justify-content: center;
+      gap: 15px;
+      font-size: 1.4rem;
+    }
+
+    /* Grade de Bandeiras */
+    .country-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      font-size: 1.1rem;
+      text-align: left;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.85);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .country-grid-6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      font-size: 1.1rem;
+      text-align: left;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.85);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .country-grid-8 {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 4px;
+      font-size: 1.1rem;
+      text-align: left;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.85);
+      padding: 10px;
+      border-radius: 15px;
+    }
+    .flag-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .world-countries {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      text-align: justify;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 15px;
+      height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+    }
+
+    /* Grid do "Por que a Plus Sim" */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      text-align: left;
+    }
+    .feature-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+    }
+    .feature-icon {
+      background: var(--light);
+      color: var(--accent);
+      padding: 12px;
+      border-radius: 12px;
+    }
+    .feature-text h4 {
+      margin: 0 0 5px 0;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+    .feature-text p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      color: #64748b;
+    }
+
+    /* Vantagens Representante */
+    .rep-list {
+      list-style: none !important;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .rep-list li {
+      list-style-type: none !important;
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 15px;
+      border-left: 5px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    /* Highlight de Comissão REDUZIDO */
+    .commission-box {
+      background: var(--primary);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 30px;
+      margin-top: 10px;
+      box-shadow: 0 10px 30px rgba(26,43,109,0.3);
+    }
+    .commission-box h1 {
+      color: #00D1FF;
+      font-size: 4.5rem;
+      margin: 0;
+      line-height: 1;
+    }
+    .commission-box h3 {
+      color: white;
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.5rem;
+      text-align: left;
+    }
+    .commission-rules {
+      list-style: none !important;
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-top: 30px;
+      background: rgba(255,255,255,0.9);
+      padding: 30px 40px;
+      border-radius: 20px;
+    }
+    .commission-rules li {
+      list-style-type: none !important;
+      margin-bottom: 12px;
+    }
+  
+    .world-countries-grid {
+      column-count: 5;
+      column-gap: 15px;
+      font-size: 0.9rem;
+      text-align: left;
+      background: rgba(255,255,255,0.9);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      height: 350px;
+      overflow-y: auto;
+      border: 1px solid #eee;
+    }
+</style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: CAPA -->
+      <section class="cover-slide" data-background-image="Fundo claro.jpg" data-background-size="cover">
+        <img src="logo_cropped.png" alt="Plus Sim Logo" class="logo-header" style="width: 250px; margin-bottom: 0 !important; display: block; margin-left: auto; margin-right: auto;">
+        <h4 style="color: #A267F5; font-family: 'Courier New', Courier, monospace; font-weight: 400; font-size: 1.6rem; margin-top: 5px; margin-bottom: 40px; letter-spacing: 2px;">chip de viagem</h4>
+        <h1 style="color: #1A2B6D;">Conectando o Mundo</h1>
+        <h3 style="color: #1A2B6D;">Proposta de Parceria B2B</h3>
+        <p style="margin-top: 150px; color: #64748b; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Pressione ESPAÇO ou as SETAS para navegar</p>
+      </section>
+
+      <!-- SLIDE 2: QUEM SOMOS -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <h2 class="slide-title">Quem Somos?</h2>
+        <div style="text-align: justify; font-size: 1.4rem; line-height: 1.6; padding: 0 100px; background: rgba(255,255,255,0.8); padding: 40px; border-radius: 20px;">
+          <p>Viajar é descobrir o novo; e sabemos que estar conectado traz a segurança necessária para explorar o mundo com liberdade!</p>
+          <p>A <strong class="text-primary">Plus Sim</strong> está há mais de 8 anos acompanhando e conectando pessoas ao redor do mundo, em mais de <strong>200 destinos</strong>, unindo a melhor cobertura de internet em cada país a um suporte que fala a língua do cliente.</p>
+          <p>Não entregamos apenas um chip ou um eSIM; entregamos a <strong class="text-accent">tranquilidade</strong> de saber que desde o primeiro contato e até o fim da viagem, a Plus Sim estará presente.</p>
+        </div>
+      </section>
+
+      <!-- SLIDE DE TRANSIÇÃO: DESTINOS -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <div style="background: white; width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--accent);">
+          <i data-lucide="plane" style="width: 80px; height: 80px; color: var(--accent);"></i>
+        </div>
+        <h1 style="font-size: 5.5rem; color: var(--primary); font-weight: 900; margin-bottom: 10px;">Destinos</h1>
+        <div style="width: 100px; height: 6px; background: #00D1FF; margin: 0 auto; border-radius: 3px;"></div>
+      </section>
+
+      <!-- SLIDE 3: EUA -->
+      <section data-background-color="#E8F7FE" data-background-image="EUA-crop.jpg" data-background-size="100% auto" data-background-position="bottom center" data-background-repeat="no-repeat">
+        <div class="destination-section">
+          <h2 class="slide-title">Estados Unidos</h2>
+          
+          <div class="price-cards-container">
+            <div class="price-card">
+              <h4>Planos com Franquia</h4>
+              <div class="price-row"><span>10 Gb</span> <span>R$ 239</span></div>
+              <div class="price-row" style="border:none;"><span>20 Gb</span> <span>R$ 299</span></div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Duração de 30 dias.</p>
+            </div>
+            <div class="price-card">
+              <h4>Plano Ilimitado</h4>
+              <div class="price-row unlimited">
+                <span>A partir de</span> <span>R$ 249</span>
+              </div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$7 o dia adicional, até 30 dias.</p>
+            </div>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 15px; border-radius: 15px; width: fit-content; margin: 0 auto;">
+            <div style="font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center; width: 100%;">Cobertura nos países:</div>
+            <div class="flag-item" style="font-size: 1.5rem; font-weight: bold;">Estados Unidos</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EUROPA (UNIÃO EUROPEIA) -->
+      <section data-background-color="#E8F7FE" data-background-image="EUROPE-crop.jpg" data-background-size="100% auto" data-background-position="bottom center" data-background-repeat="no-repeat">
+        <div class="destination-section">
+          <h2 class="slide-title">Europa <span style="font-size: 1.2rem; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; vertical-align: middle;">UE + Reino Unido</span></h2>
+          
+          <div class="price-cards-container">
+            <div class="price-card">
+              <h4>Planos com Franquia</h4>
+              <div class="price-row"><span>10 Gb</span> <span>R$ 239</span></div>
+              <div class="price-row" style="border:none;"><span>20 Gb</span> <span>R$ 289</span></div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Duração de 30 dias.</p>
+            </div>
+            <div class="price-card">
+              <h4>Plano Ilimitado</h4>
+              <div class="price-row unlimited">
+                <span>A partir de</span> <span>R$ 259</span>
+              </div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$7 o dia adicional, até 30 dias.</p>
+            </div>
+          </div>
+
+          <div class="country-grid-6">
+            <div style="grid-column: 1 / -1; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center;">Cobertura nos países:</div>
+            
+            <span class="flag-item">Alemanha</span><span class="flag-item">Áustria</span><span class="flag-item">Bélgica</span><span class="flag-item">Bulgária</span><span class="flag-item">Chipre</span><span class="flag-item">Croácia</span>
+            <span class="flag-item">Dinamarca</span><span class="flag-item">Eslováquia</span><span class="flag-item">Eslovênia</span><span class="flag-item">Espanha</span><span class="flag-item">Estônia</span><span class="flag-item">Finlândia</span>
+            <span class="flag-item">França</span><span class="flag-item">Grécia</span><span class="flag-item">Hungria</span><span class="flag-item">Itália</span><span class="flag-item">Letônia</span><span class="flag-item">Lituânia</span>
+            <span class="flag-item">Luxemburgo</span><span class="flag-item">Malta</span><span class="flag-item">P. Baixos</span><span class="flag-item">Polônia</span><span class="flag-item">Portugal</span><span class="flag-item">Reino Unido</span>
+            <span class="flag-item">Rep. Checa</span><span class="flag-item">Irlanda</span><span class="flag-item">Romênia</span><span class="flag-item">Suécia</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EUROPA TOTAL -->
+      <section data-background-color="#E8F7FE" data-background-image="EUROPE-crop.jpg" data-background-size="100% auto" data-background-position="bottom center" data-background-repeat="no-repeat">
+        <div class="destination-section">
+          <h2 class="slide-title">Europa <span style="font-size: 1.2rem; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; vertical-align: middle;">Total (42 Países)</span></h2>
+          
+          <div class="price-cards-container">
+            <div class="price-card">
+              <h4>Planos com Franquia</h4>
+              <div class="price-row"><span>10 Gb</span> <span>R$ 269</span></div>
+              <div class="price-row" style="border:none;"><span>20 Gb</span> <span>R$ 319</span></div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Duração de 30 dias.</p>
+            </div>
+            <div class="price-card">
+              <h4>Plano Ilimitado</h4>
+              <div class="price-row unlimited">
+                <span>A partir de</span> <span>R$ 299</span>
+              </div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$7 o dia adicional, até 30 dias.</p>
+            </div>
+          </div>
+
+          <div class="country-grid-8">
+            <div style="grid-column: 1 / -1; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center;">Cobertura nos países:</div>
+            
+            <span class="flag-item">Albânia</span><span class="flag-item">Andorra</span><span class="flag-item">Alemanha</span><span class="flag-item">Áustria</span><span class="flag-item">Bélgica</span><span class="flag-item">Bósnia</span><span class="flag-item">Bulgária</span><span class="flag-item">Chipre</span>
+            <span class="flag-item">Croácia</span><span class="flag-item">Dinamarca</span><span class="flag-item">Eslováquia</span><span class="flag-item">Eslovênia</span><span class="flag-item">Espanha</span><span class="flag-item">Estônia</span><span class="flag-item">Finlândia</span><span class="flag-item">França</span>
+            <span class="flag-item">Gibraltar</span><span class="flag-item">Geórgia</span><span class="flag-item">Grécia</span><span class="flag-item">Hungria</span><span class="flag-item">Islândia</span><span class="flag-item">Itália</span><span class="flag-item">Letônia</span><span class="flag-item">Liechten.</span>
+            <span class="flag-item">Lituânia</span><span class="flag-item">Luxemburgo</span><span class="flag-item">Macedônia</span><span class="flag-item">Malta</span><span class="flag-item">Montenegro</span><span class="flag-item">Noruega</span><span class="flag-item">P. Baixos</span><span class="flag-item">Polônia</span>
+            <span class="flag-item">Portugal</span><span class="flag-item">R. Unido</span><span class="flag-item">Rep. Checa</span><span class="flag-item">Irlanda</span><span class="flag-item">Romênia</span><span class="flag-item">Sérvia</span><span class="flag-item">Suécia</span><span class="flag-item">Suíça</span>
+            <span class="flag-item" style="grid-column: span 4;">Turquia</span><span class="flag-item" style="grid-column: span 4;">Ucrânia</span>
+          </div>
+        </div>
+      </section>
+      
+      <!-- SLIDE 6: AMÉRICA DO SUL -->
+      <section data-background-color="#E8F7FE" data-background-image="America do sul-crop.jpg" data-background-size="120% auto" data-background-position="bottom center" data-background-repeat="no-repeat">
+        <div class="destination-section">
+          <h2 class="slide-title">América do Sul</h2>
+          
+          <div class="price-cards-container">
+            <div class="price-card">
+              <h4>Plano Ilimitado</h4>
+              <div class="price-row unlimited">
+                <span>A partir de</span> <span>R$ 259</span>
+              </div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$7 o dia adicional, até 30 dias.</p>
+            </div>
+          </div>
+
+          <div class="country-grid-5" style="width: 80%; margin: 15px auto 0 auto;">
+            <div style="grid-column: 1 / -1; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center;">Cobertura nos países:</div>
+            
+            <span class="flag-item">Argentina</span><span class="flag-item">Brasil</span><span class="flag-item">Chile</span><span class="flag-item">Colômbia</span><span class="flag-item">Equador</span>
+            <span class="flag-item">Paraguai</span><span class="flag-item">Peru</span><span class="flag-item">Uruguai</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: ASIA -->
+      <section data-background-color="#EEF7FE" data-background-image="ASIA-crop.jpg" data-background-size="100% auto" data-background-position="bottom center" data-background-repeat="no-repeat">
+        <div class="destination-section">
+          <h2 class="slide-title">Ásia <span style="font-size: 1.2rem; background: #00D1FF; color: var(--primary); padding: 5px 15px; border-radius: 20px; vertical-align: middle;">VPN Incluído</span></h2>
+          
+          <div class="price-cards-container">
+            <div class="price-card">
+              <h4>Planos com Franquia</h4>
+              <div class="price-row"><span>10 Gb</span> <span>R$ 289</span></div>
+              <div class="price-row" style="border:none;"><span>20 Gb</span> <span>R$ 329</span></div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Duração de 30 dias.</p>
+            </div>
+            <div class="price-card">
+              <h4>Plano Ilimitado</h4>
+              <div class="price-row unlimited">
+                <span>A partir de</span> <span>R$ 279</span>
+              </div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$7 o dia adicional, até 30 dias.</p>
+            </div>
+          </div>
+
+          <div class="country-grid-6">
+            <div style="grid-column: 1 / -1; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center;">Cobertura nos países:</div>
+            
+            <span class="flag-item">China</span><span class="flag-item">Japão</span><span class="flag-item">Coreia do Sul</span><span class="flag-item">Tailândia</span><span class="flag-item">Vietnã</span><span class="flag-item">Singapura</span>
+            <span class="flag-item">Hong Kong</span><span class="flag-item">Taiwan</span><span class="flag-item">Indonésia</span><span class="flag-item">Malásia</span><span class="flag-item">Filipinas</span><span class="flag-item">Camboja</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: MUNDO -->
+      <section data-background-color="#EEF7FE" data-background-image="Mundo-crop.jpg" data-background-size="120% auto" data-background-position="bottom center" data-background-repeat="no-repeat">
+        <div class="destination-section">
+          <h2 class="slide-title">Mundo</h2>
+          
+          <div class="price-cards-container">
+            <div class="price-card">
+              <h4>Planos com Franquia</h4>
+              <div class="price-row"><span>10 Gb</span> <span>R$ 319</span></div>
+              <div class="price-row" style="border:none;"><span>20 Gb</span> <span>R$ 389</span></div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Duração de 30 dias.</p>
+            </div>
+            <div class="price-card">
+              <h4>Plano Ilimitado 5G/4G</h4>
+              <div class="price-row unlimited">
+                <span>A partir de</span> <span>R$ 349</span>
+              </div>
+              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$12 o dia adicional, até 30 dias.</p>
+            </div>
+          </div>
+
+          
+          <div class="world-countries-grid">
+            <div style="column-span: all; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center;">Cobertura nos países:</div>
+            <span class="flag-item">Açores</span>
+            <span class="flag-item">Afeganistão</span>
+            <span class="flag-item">África do Sul</span>
+            <span class="flag-item">Albânia</span>
+            <span class="flag-item">Alemanha</span>
+            <span class="flag-item">Andorra</span>
+            <span class="flag-item">Anguila</span>
+            <span class="flag-item">Antígua e Barbuda</span>
+            <span class="flag-item">Antilhas Francesas</span>
+            <span class="flag-item">Arábia Saudita</span>
+            <span class="flag-item">Argélia</span>
+            <span class="flag-item">Argentina</span>
+            <span class="flag-item">Armênia</span>
+            <span class="flag-item">Aruba</span>
+            <span class="flag-item">Austrália</span>
+            <span class="flag-item">Áustria</span>
+            <span class="flag-item">Azerbaijão</span>
+            <span class="flag-item">Bahamas</span>
+            <span class="flag-item">Bangladesh</span>
+            <span class="flag-item">Barbados</span>
+            <span class="flag-item">Barein</span>
+            <span class="flag-item">Bélgica</span>
+            <span class="flag-item">Belize</span>
+            <span class="flag-item">Benin</span>
+            <span class="flag-item">Bermudas</span>
+            <span class="flag-item">Bielorrússia</span>
+            <span class="flag-item">Bolívia</span>
+            <span class="flag-item">Bósnia e Herzegovina</span>
+            <span class="flag-item">Botsuana</span>
+            <span class="flag-item">Brasil</span>
+            <span class="flag-item">Brunei</span>
+            <span class="flag-item">Burquina Faso</span>
+            <span class="flag-item">Cabo Verde</span>
+            <span class="flag-item">Camarões</span>
+            <span class="flag-item">Camboja</span>
+            <span class="flag-item">Canadá</span>
+            <span class="flag-item">Catar</span>
+            <span class="flag-item">Cazaquistão</span>
+            <span class="flag-item">Chade</span>
+            <span class="flag-item">Chile</span>
+            <span class="flag-item">China</span>
+            <span class="flag-item">Chipre</span>
+            <span class="flag-item">Chipre do Norte</span>
+            <span class="flag-item">Cidade do Vaticano</span>
+            <span class="flag-item">Colômbia</span>
+            <span class="flag-item">Congo - Kinshasa</span>
+            <span class="flag-item">Coreia do Sul</span>
+            <span class="flag-item">Costa do Marfim</span>
+            <span class="flag-item">Costa Rica</span>
+            <span class="flag-item">Croácia</span>
+            <span class="flag-item">Curaçao</span>
+            <span class="flag-item">Dinamarca</span>
+            <span class="flag-item">Dominica</span>
+            <span class="flag-item">Egito</span>
+            <span class="flag-item">El Salvador</span>
+            <span class="flag-item">Emirados Árabes Unidos</span>
+            <span class="flag-item">Equador</span>
+            <span class="flag-item">Eslováquia</span>
+            <span class="flag-item">Eslovênia</span>
+            <span class="flag-item">Espanha</span>
+            <span class="flag-item">Essuatíni</span>
+            <span class="flag-item">Estados Unidos</span>
+            <span class="flag-item">Estônia</span>
+            <span class="flag-item">Etiópia</span>
+            <span class="flag-item">Fiji</span>
+            <span class="flag-item">Filipinas</span>
+            <span class="flag-item">Finlândia</span>
+            <span class="flag-item">França</span>
+            <span class="flag-item">Gabão</span>
+            <span class="flag-item">Gâmbia</span>
+            <span class="flag-item">Gana</span>
+            <span class="flag-item">Geórgia</span>
+            <span class="flag-item">Gibraltar</span>
+            <span class="flag-item">Granada</span>
+            <span class="flag-item">Grécia</span>
+            <span class="flag-item">Groenlândia</span>
+            <span class="flag-item">Guadalupe</span>
+            <span class="flag-item">Guatemala</span>
+            <span class="flag-item">Guernsey</span>
+            <span class="flag-item">Guiana</span>
+            <span class="flag-item">Guiana Francesa</span>
+            <span class="flag-item">Guiné</span>
+            <span class="flag-item">Guiné-Bissau</span>
+            <span class="flag-item">Haiti</span>
+            <span class="flag-item">Honduras</span>
+            <span class="flag-item">Hong Kong</span>
+            <span class="flag-item">Hungria</span>
+            <span class="flag-item">Ilha de Man</span>
+            <span class="flag-item">Ilhas Aland</span>
+            <span class="flag-item">Ilhas Canárias</span>
+            <span class="flag-item">Ilhas Cayman</span>
+            <span class="flag-item">Ilhas Faroé</span>
+            <span class="flag-item">Ilhas Turcas e Caicos</span>
+            <span class="flag-item">Ilhas Virgens Britânicas</span>
+            <span class="flag-item">Índia</span>
+            <span class="flag-item">Indonésia</span>
+            <span class="flag-item">Irã</span>
+            <span class="flag-item">Iraque</span>
+            <span class="flag-item">Irlanda</span>
+            <span class="flag-item">Islândia</span>
+            <span class="flag-item">Israel</span>
+            <span class="flag-item">Itália</span>
+            <span class="flag-item">Jamaica</span>
+            <span class="flag-item">Japão</span>
+            <span class="flag-item">Jersey</span>
+            <span class="flag-item">Jordânia</span>
+            <span class="flag-item">Kosovo</span>
+            <span class="flag-item">Kuwait</span>
+            <span class="flag-item">Laos</span>
+            <span class="flag-item">Letônia</span>
+            <span class="flag-item">Líbano</span>
+            <span class="flag-item">Libéria</span>
+            <span class="flag-item">Liechtenstein</span>
+            <span class="flag-item">Lituânia</span>
+            <span class="flag-item">Luxemburgo</span>
+            <span class="flag-item">Macau</span>
+            <span class="flag-item">Macedônia do Norte</span>
+            <span class="flag-item">Madagascar</span>
+            <span class="flag-item">Madeira</span>
+            <span class="flag-item">Malásia</span>
+            <span class="flag-item">Malaui</span>
+            <span class="flag-item">Mali</span>
+            <span class="flag-item">Malta</span>
+            <span class="flag-item">Marie-Galante</span>
+            <span class="flag-item">Marrocos</span>
+            <span class="flag-item">Martinica</span>
+            <span class="flag-item">Maurício</span>
+            <span class="flag-item">Mayotte</span>
+            <span class="flag-item">México</span>
+            <span class="flag-item">Moçambique</span>
+            <span class="flag-item">Moldávia</span>
+            <span class="flag-item">Mônaco</span>
+            <span class="flag-item">Mongólia</span>
+            <span class="flag-item">Montenegro</span>
+            <span class="flag-item">Montserrat</span>
+            <span class="flag-item">Nauru</span>
+            <span class="flag-item">Nepal</span>
+            <span class="flag-item">Nicarágua</span>
+            <span class="flag-item">Nigéria</span>
+            <span class="flag-item">Noruega</span>
+            <span class="flag-item">Nova Zelândia</span>
+            <span class="flag-item">Omã</span>
+            <span class="flag-item">Países Baixos</span>
+            <span class="flag-item">Países Baixos Caribenhos</span>
+            <span class="flag-item">Panamá</span>
+            <span class="flag-item">Papua-Nova Guiné</span>
+            <span class="flag-item">Paquistão</span>
+            <span class="flag-item">Paraguai</span>
+            <span class="flag-item">Peru</span>
+            <span class="flag-item">Polinésia Francesa</span>
+            <span class="flag-item">Polônia</span>
+            <span class="flag-item">Porto Rico</span>
+            <span class="flag-item">Portugal</span>
+            <span class="flag-item">Quênia</span>
+            <span class="flag-item">Quirguistão</span>
+            <span class="flag-item">Reino Unido</span>
+            <span class="flag-item">República Centro-Africana</span>
+            <span class="flag-item">República Dominicana</span>
+            <span class="flag-item">Reunião</span>
+            <span class="flag-item">Romênia</span>
+            <span class="flag-item">Ruanda</span>
+            <span class="flag-item">Rússia</span>
+            <span class="flag-item">Saba</span>
+            <span class="flag-item">Samoa</span>
+            <span class="flag-item">San Marino</span>
+            <span class="flag-item">Santa Lúcia</span>
+            <span class="flag-item">Santo Eustáquio</span>
+            <span class="flag-item">São Bartolomeu</span>
+            <span class="flag-item">São Cristóvão e Névis</span>
+            <span class="flag-item">São Martinho</span>
+            <span class="flag-item">São Vicente e Granadinas</span>
+            <span class="flag-item">Seicheles</span>
+            <span class="flag-item">Senegal</span>
+            <span class="flag-item">Serra Leoa</span>
+            <span class="flag-item">Sérvia</span>
+            <span class="flag-item">Singapura</span>
+            <span class="flag-item">Sint Maarten</span>
+            <span class="flag-item">Sri Lanka</span>
+            <span class="flag-item">Suécia</span>
+            <span class="flag-item">Suíça</span>
+            <span class="flag-item">Suriname</span>
+            <span class="flag-item">Tadjiquistão</span>
+            <span class="flag-item">Tailândia</span>
+            <span class="flag-item">Taiwan</span>
+            <span class="flag-item">Tanzânia</span>
+            <span class="flag-item">Tchéquia</span>
+            <span class="flag-item">Territórios palestinos</span>
+            <span class="flag-item">Timor-Leste</span>
+            <span class="flag-item">Togo</span>
+            <span class="flag-item">Tonga</span>
+            <span class="flag-item">Trinidad e Tobago</span>
+            <span class="flag-item">Tunísia</span>
+            <span class="flag-item">Turquia</span>
+            <span class="flag-item">Ucrânia</span>
+            <span class="flag-item">Uganda</span>
+            <span class="flag-item">Uruguai</span>
+            <span class="flag-item">Uzbequistão</span>
+            <span class="flag-item">Vietnã</span>
+            <span class="flag-item">Zâmbia</span>
+            <span class="flag-item">Zimbábue</span>
+          </div>
+        
+        </div>
+      </section>
+
+      <!-- SLIDE 9: POR QUE A PLUS SIM? -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <h2 class="slide-title" style="margin-bottom: 20px !important;">Por que a Plus Sim? =)</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="headset"></i></div>
+            <div class="feature-text">
+              <h4>Suporte Especializado 24h</h4>
+              <p>Atendimento humanizado pelo WhatsApp durante toda a viagem. Foco na satisfação do seu cliente.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="credit-card"></i></div>
+            <div class="feature-text">
+              <h4>Facilidade no Pagamento</h4>
+              <p>PIX, Cartão de Débito ou de Crédito em até 12x</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="smartphone"></i></div>
+            <div class="feature-text">
+              <h4>eSIM em 2 horas</h4>
+              <p>Envio do eSIM ao cliente em até 2h.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="wifi"></i></div>
+            <div class="feature-text">
+              <h4>Roteamento de Internet</h4>
+              <p>Compartilhamento da internet permitido em todos os nossos planos.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="package-check"></i></div>
+            <div class="feature-text">
+              <h4>Entrega para todo o Brasil</h4>
+              <p>Envio do Chip Físico para qualquer estado, com prazo de entrega de 1 a 7 dias úteis.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="calendar-check"></i></div>
+            <div class="feature-text">
+              <h4>Ativação Inteligente</h4>
+              <p>A ativação do plano é programada para o período da viagem.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: REPRESENTAÇÃO COMERCIAL -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <h2 class="slide-title">Representação Comercial</h2>
+        <h3 style="color: var(--accent); margin-bottom: 30px;">Zero custo e aumento do valor agregado!</h3>
+        
+        <ul class="rep-list">
+          <li><i data-lucide="box" style="vertical-align: middle; margin-right:10px; color:var(--primary);"></i> <strong>Estoque:</strong> Consignado em sua agência.</li>
+          <li><i data-lucide="shopping-cart" style="vertical-align: middle; margin-right:10px; color:var(--primary);"></i> <strong>Vendas:</strong> Através do nosso site ou pelo WhatsApp.</li>
+          <li><i data-lucide="dollar-sign" style="vertical-align: middle; margin-right:10px; color:var(--primary);"></i> <strong>Pagamento:</strong> Direto pelo cliente (Valor Final) ou pela agência (Valor NET).</li>
+          <li><i data-lucide="life-buoy" style="vertical-align: middle; margin-right:10px; color:var(--primary);"></i> <strong>Suporte:</strong> Pré e Pós Venda, diretamente pelo WhatsApp.</li>
+          <li><i data-lucide="monitor-play" style="vertical-align: middle; margin-right:10px; color:var(--primary);"></i> <strong>Treinamento:</strong> Esclarecimento de dúvidas a todos os colaboradores da agência.</li>
+        </ul>
+      </section>
+
+      <!-- SLIDE 11: COMISSIONAMENTO -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <div class="commission-box">
+          <div>
+            <h3>Comissão de</h3>
+          </div>
+          <h1>15%</h1>
+        </div>
+        
+        <div style="width: 95%; max-width: 1100px; margin: 0 auto;">
+          <ul class="commission-rules">
+            <li><i data-lucide="calendar-clock" style="vertical-align: middle; margin-right:8px; color:var(--accent);"></i> <strong>Pagamento:</strong> Comissão paga até o quinto dia útil do mês subsequente à venda.</li>
+            <li><i data-lucide="file-text" style="vertical-align: middle; margin-right:8px; color:var(--accent);"></i> <strong>Transparência:</strong> Envio de relatório mensal com todas as vendas vinculadas à sua agência.</li>
+            <li><i data-lucide="landmark" style="vertical-align: middle; margin-right:8px; color:var(--accent);"></i> <strong>Facilidade:</strong> Depósito realizado em conta corrente via PIX.</li>
+            <li><i data-lucide="calculator" style="vertical-align: middle; margin-right:8px; color:var(--accent);"></i> <strong>Cálculo:</strong> A comissão é calculada sobre o valor total do pedido.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE FINAL -->
+      <section data-background-image="Fundo claro.jpg" data-background-size="cover">
+        <img src="logo_cropped.png" alt="Plus Sim Logo" class="logo-header" style="width: 250px; margin-bottom: 0 !important; display: block; margin-left: auto; margin-right: auto;">
+        <h4 style="color: #A267F5; font-family: 'Courier New', Courier, monospace; font-weight: 400; font-size: 1.6rem; margin-top: 5px; margin-bottom: 20px; letter-spacing: 2px;">chip de viagem</h4>
+        <h1 style="font-size: 4rem; margin-top: 20px; color: #1A2B6D;">Vamos crescer juntos?</h1>
+        <p style="font-size: 1.5rem; color: #A64DFF; font-weight: bold; margin-top: 30px;">Obrigado pela atenção!</p>
+        <div style="margin-top: 50px; font-size: 1.2rem; font-weight: 600; color: #1A2B6D;">
+          www.plussim.com<br>
+          <i data-lucide="instagram" style="vertical-align: middle; margin-top:10px;"></i> @plussim_travel
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide', 
+      backgroundTransition: 'fade',
+      controls: true,
+      progress: true,
+      center: true
+    });
+    lucide.createIcons();
+  </script>
+</body>
+</html>
