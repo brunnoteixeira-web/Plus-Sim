@@ -89,6 +89,13 @@
       padding-bottom: 200px; /* espaço para a imagem crop no fundo */
     }
     
+    @media print {
+      .destination-section {
+        padding-bottom: 20px !important;
+        height: auto !important;
+      }
+    }
+    
     .price-cards-container {
       display: flex;
       justify-content: center;
@@ -566,13 +573,17 @@
               <div class="price-row unlimited">
                 <span>A partir de</span> <span>R$ 349</span>
               </div>
-              <p style="font-size: 0.8rem; color: #64748b; margin-top:5px;">Período inicial de 5 dias.<br>R$12 o dia adicional, até 30 dias.</p>
-            </div>
+              <p style="font-size: 0.8rem; color: #64748b;          <div style="background: rgba(255,255,255,0.9); padding: 15px; border-radius: 15px; text-align: center; font-weight: bold; font-size: 1.2rem; color: var(--primary); margin-top: 20px;">
+            Cobertura em mais de 140 países!<br>
+            <span style="font-size: 0.9rem; color: #64748b; font-weight: normal;">(Veja a lista completa nos próximos slides)</span>
           </div>
+        </div>
+      </section>
 
-          
-          <div class="world-countries-grid">
-            <div style="column-span: all; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: center;">Cobertura nos países:</div>
+      <!-- SLIDE 8.1: MUNDO PAÍSES PARTE 1 -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <h2 class="slide-title">Mundo (Países de A - I)</h2>
+        <div class="world-countries-grid" style="height: auto; overflow: hidden; column-count: 5;">
             <span class="flag-item">Açores</span>
             <span class="flag-item">Afeganistão</span>
             <span class="flag-item">África do Sul</span>
@@ -679,6 +690,13 @@
             <span class="flag-item">Japão</span>
             <span class="flag-item">Jersey</span>
             <span class="flag-item">Jordânia</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 8.2: MUNDO PAÍSES PARTE 2 -->
+      <section data-background-image="Fundo claro - v1.jpg" data-background-size="cover">
+        <h2 class="slide-title">Mundo (Países de K - Z)</h2>
+        <div class="world-countries-grid" style="height: auto; overflow: hidden; column-count: 5;">
             <span class="flag-item">Kosovo</span>
             <span class="flag-item">Kuwait</span>
             <span class="flag-item">Laos</span>
@@ -773,8 +791,6 @@
             <span class="flag-item">Vietnã</span>
             <span class="flag-item">Zâmbia</span>
             <span class="flag-item">Zimbábue</span>
-          </div>
-        
         </div>
       </section>
 
